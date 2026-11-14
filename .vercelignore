@@ -1,0 +1,15 @@
+# Upload only the static app and Vercel configuration.
+/data/**
+scripts/
+specs/
+tests/
+docs/
+submission/
+.github/
+.venv/
+.env*
+README.md
+AGENTS.md
+data-availability.csv
+.gitattributes
+.gitignore
