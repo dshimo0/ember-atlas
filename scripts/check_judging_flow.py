@@ -10,7 +10,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 ROOT=Path(__file__).resolve().parents[1]
-BASE=os.environ.get('BASE_URL','http://127.0.0.1:8910').rstrip('/')
+BASE=os.environ.get('BASE_URL','http://127.0.0.1:8000').rstrip('/')
 index=json.loads((ROOT/'web/data/latest.json').read_text())
 payload=gzip.decompress((ROOT/'web/data'/index['file']).read_bytes())
 assert hashlib.sha256(payload).hexdigest()==index['sha256']

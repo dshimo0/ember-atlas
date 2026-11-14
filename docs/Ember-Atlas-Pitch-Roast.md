@@ -41,6 +41,6 @@ Open https://ember-atlas-opal.vercel.app/ in a signed-out browser. The actual la
 
 This three-minute script is for a local pitch only if permitted. The official Project Demonstration portal format is a separate requirement. A proposed 30-second cut or up-to-seven-slide fallback from the addendum is not confirmed compliant until the Team Owner checks the current official guide and São Paulo instructions. Do not substitute the three-minute pitch for that verification.
 
-The existing public screen recording is real but may show the preceding interface. Before submitting media, capture the refreshed verified flow, confirm the actual runtime/format, keep all text in English, and inspect for people under 18 or unreviewed audio. Final terms and submission for judging remain the Team Owner's responsibility. If the live network fails, show a capture of the same pinned release and state the issue.
+The public screen recording was refreshed from the actual production interface: 30 seconds, silent, English application text, no people or audio. Before submitting media, confirm the official runtime/format requirements and inspect the final player/thumbnail. Final terms and submission for judging remain the Team Owner's responsibility. If the live network fails, show a capture of the same pinned release and state the issue.
 
 Rehearse with a timer and an independent listener if available. Match the screen, CSV and narration to the same frozen artifacts; do not claim that the engineering self-review establishes independent usability or event eligibility.
