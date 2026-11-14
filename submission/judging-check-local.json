@@ -1,6 +1,6 @@
 {
-  "url": "http://127.0.0.1:8910",
-  "checked_utc": "2026-11-14T21:19:29.548104+00:00",
+  "url": "http://127.0.0.1:8920",
+  "checked_utc": "2026-11-14T22:55:02.322141+00:00",
   "snapshot": {
     "file": "snapshot-19621fa88d40.json.gz",
     "sha256": "19621fa88d408fb5d9aa87482de1bb219e8dd7ed67128c1147d1a63fb087e677"
@@ -22,11 +22,19 @@
       "manual_partial_dates": true,
       "sensor_filter": true,
       "north_modis_rows": 18038,
-      "map_subregion_keyboard": true,
+      "map_zoom_pan_scale_fit": true,
+      "map_filter_synchronization": true,
       "subregion_transfer_withheld": true,
       "zero_day": "2020-01-08",
       "missing_counts_blank": true,
       "javascript_errors": []
+    },
+    {
+      "viewport": "desktop",
+      "basemap_failure_fallback": true,
+      "local_settlements": 27,
+      "local_rivers": 23,
+      "fallback_north_modis_csv_rows": 18038
     },
     {
       "viewport": "mobile",
@@ -43,13 +51,21 @@
       "manual_partial_dates": true,
       "sensor_filter": true,
       "north_modis_rows": 18038,
-      "map_subregion_keyboard": true,
+      "map_zoom_pan_scale_fit": true,
+      "map_filter_synchronization": true,
       "subregion_transfer_withheld": true,
       "zero_day": "2020-01-08",
       "missing_counts_blank": true,
       "javascript_errors": []
+    },
+    {
+      "viewport": "mobile",
+      "basemap_failure_fallback": true,
+      "local_settlements": 27,
+      "local_rivers": 23,
+      "fallback_north_modis_csv_rows": 18038
     }
   ],
   "public_https_verified": false,
-  "browser_uses_system_validated_leaf_pin": false
+  "browser_uses_system_validated_leaf_pin": true
 }

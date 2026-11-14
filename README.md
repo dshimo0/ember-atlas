@@ -1,50 +1,55 @@
 # Ember Atlas
 
-**[Open Ember Atlas](https://ember-atlas-opal.vercel.app/)** · NASA Space Apps 2026 · Harmonization of MODIS and VIIRS Hot Spots
+[Public dashboard](https://ember-atlas-opal.vercel.app/) · NASA Space Apps 2026 · Harmonization of MODIS and VIIRS Hot Spots
 
-“Fire season, or sensor change?” Ember Atlas lets a regional land-management analyst compare NASA FIRMS observations across sensors before prioritizing an unusually active month for seasonal review. The English application opens on September 2024 in the full Pantanal study rectangle, with the holdout result, historical finding and downloadable evidence.
+Ember Atlas displays NASA FIRMS fire activity for the Pantanal study area from January 2020 through December 2024. The dashboard opens on September 2024 with an interactive map, a sensor comparison and the historical baseline. The full monthly calendar follows the map and comparison.
 
-## Shortest judge walkthrough
+## Dashboard
 
-1. Read the opening result: **80.5% lower monthly MAE against MODIS**, from **1,021.7 to 199.7 occupied cell-days/month**, over 24 paired holdout months in 2023–2024. Factors were fit only on 2020–2022.
-2. In September 2024, compare **MODIS 5,819**, **VIIRS common-grid 8,809**, and **adjusted VIIRS 4,879.1 cell-days**. The adjusted value is still **16.2% below MODIS**; MODIS is a reference, not ground truth.
-3. Both sensors recorded activity above their own prior September medians: MODIS **2,532**, VIIRS **4,782**, from **2020–2023 (n=4)**. Expand either baseline to inspect its years and values. Native detections remain separate: **23,396 MODIS / 101,659 VIIRS**.
-4. Select any of the 60 released months. Training and holdout years are labeled. Select a subregion to see why its adjustment and historical anomaly are unavailable. Country boundaries orient the map; the rectangle is a study window, not the biome boundary.
-5. Download the selected month's observations, then the selected-period aggregates. Reconcile the figures using the validation and provenance links, available without a login.
+- The OpenStreetMap basemap includes rivers, settlements and boundaries. Zoom, pan, metric scale and **Fit study area** operate on the map view. The study rectangle and sampled FIRMS observations are separate overlays.
+- A locally served Natural Earth map supplies country boundaries, rivers and settlements if tiles fail. It supports the same navigation and observations. No Pantanal biome geometry is included.
+- The selected month, area and sensor determine the observations on the map and in the observation CSV. Map pan and zoom do not change the export scope.
+- The observation download is beside the map. The aggregate download is beside the calendar and covers the selected date range.
 
-## Released coverage and export scopes
+## Data and validation
 
-Both aggregate history and observation exports cover **2020-01-01–2024-12-31 UTC** for MODIS C6.1 SP (Terra/Aqua pooled) and VIIRS NOAA-20 375 m SP: **1,213,587 deduplicated observations**, 737 canonical raw window manifests, 60 complete paired months. Retrieval is complete; actual swath/cloud observation coverage is unknown.
+The release contains **1,213,587 deduplicated observations**, 737 canonical raw window manifests and 60 complete paired months for MODIS C6.1 SP (Terra/Aqua) and NOAA-20 VIIRS 375 m SP. Both aggregate and observation coverage are **2020-01-01–2024-12-31 UTC**.
 
-| Control or export | Actual scope |
+Quarterly adjustment factors were fit on **2020–2022** and evaluated on **24 complete paired months in 2023–2024**. Monthly MAE against MODIS decreased from **1,021.7 to 199.7 occupied cell-days/month**, an **80.5% reduction** calculated from the unrounded artifact values. Mean signed bias after adjustment is **−124.0 cell-days/month**. The factors apply only to complete months in the full study rectangle; subregion and partial-month adjustments are unavailable.
+
+September 2024 recorded activity above both sensors' prior September medians (2020–2023, n=4):
+
+| Product | Occupied cell-days | Historical median | Native detections |
+| --- | ---: | ---: | ---: |
+| MODIS | 5,819 | 2,532 | 23,396 |
+| NOAA-20 VIIRS | 8,809 | 4,782 | 101,659 |
+| Adjusted VIIRS | 4,879.1 | — | — |
+
+The adjusted September value remains 16.2% below MODIS. MODIS is a reference for sensor agreement, not ground truth. Detections and cell-days do not measure unique fires or burned area. Retrieval completeness is distinct from swath/cloud observation coverage, which remains unknown. Missing numeric values stay blank; retrieved zero detections remain zero.
+
+## Exports and provenance
+
+| Export | Scope |
 | --- | --- |
-| Available calendar range | Changes visible months and the aggregate export period. Default is the full released history. |
-| Calendar month | Changes the selected comparison, map and observation export. September 2024 is preselected. |
-| Area / sensor | Applies to every view and both exports. Northern and southern halves never receive the full-area adjustment. |
-| Observations CSV | Selected month intersected with the UTC date range, chosen area and sensors. Includes source references, original confidence, FRP, UTC acquisition time and snapshot SHA-256. Default September export: 125,055 records. |
-| Selected-period aggregates CSV | One row per visible month and chosen product, with native counts, occupied cell-days, exact date scope, retrieval status, method and supported adjustment. Default full-history export: 120 rows. |
+| Observations | Selected month intersected with the date range, area and sensors. Includes coordinates, UTC date/time, product, platform, confidence, FRP, original source reference and snapshot SHA-256. Default September export: 125,055 records. |
+| Aggregates | Each month/product in the chosen date range, with native detections, occupied cell-days, clipped dates, retrieval status, method and eligible adjustment. Default full-history export: 120 rows. |
 
-Partial months retain their actual selected dates, with no full-month adjustment or anomaly. Unretrieved periods have blank aggregate counts and disabled observation exports. A successfully retrieved zero-detection selection is labeled separately. Neither thermal anomalies nor cell-days identify unique fires or burned area.
+- [Immutable validation](https://ember-atlas-opal.vercel.app/data/validation-ba55acfc7909.json)
+- [Snapshot and derivative index](https://ember-atlas-opal.vercel.app/data/dashboard.json)
+- [Original observation snapshot](https://ember-atlas-opal.vercel.app/data/snapshot-19621fa88d40.json.gz)
+- [Monthly reference evidence](https://ember-atlas-opal.vercel.app/data/monthly_comparison.csv)
+- [Sensitivity diagnostics](https://ember-atlas-opal.vercel.app/data/diagnostics.json)
+- [Resources and attribution](submission/RESOURCES.md)
 
-## Evidence and provenance
+## Run and reproduce
 
-- [Versioned validation JSON](https://ember-atlas-opal.vercel.app/data/validation-ba55acfc7909.json): frozen split, factors, acceptance rule, overall and quarterly error/bias.
-- [UI provenance index](https://ember-atlas-opal.vercel.app/data/dashboard.json): immutable derived summary, validation and original snapshot hashes.
-- [Original observation snapshot](https://ember-atlas-opal.vercel.app/data/snapshot-19621fa88d40.json.gz): normalized records and original extract manifests.
-- [Monthly full-area evidence](https://ember-atlas-opal.vercel.app/data/monthly_comparison.csv) and [sensitivity diagnostics](https://ember-atlas-opal.vercel.app/data/diagnostics.json).
-- [Judging review](docs/Ember-Atlas-Judging-Review.md), [pitch and walkthrough](docs/Ember-Atlas-Pitch-Roast.md), [submission package](submission/PROJECT-PAGE.md), [resources](submission/RESOURCES.md) and [owner checklist](submission/RELEASE-CHECKLIST.md).
-
-The adjustment passes the unchanged frozen rule but retains mean signed bias of **−124.0 cell-days/month** against MODIS in holdout. It is supported only for complete months in the full study rectangle and evaluated 2020–2024 domain. Timing, clouds, sensitivity and latitude-dependent grid area remain limitations. There is no calibrated earlier legacy handoff or defensible uncertainty interval from only two independent holdout years.
-
-## Run and rebuild
-
-The web app is static, requires no credentials and uses native ES modules and gzip `DecompressionStream`. Python 3.10+ standard library rebuilds the published data. Serve locally:
+The static frontend uses locally vendored Leaflet 1.9.4, native ES modules and gzip `DecompressionStream`. Live FIRMS access is not required. Python 3.10+ standard library rebuilds the scientific inputs and presentation derivatives.
 
 ```sh
 python -m http.server 8000 --directory web
 ```
 
-Reproduce the pipeline from committed raw extracts, preserving the frozen split:
+From the committed raw inputs:
 
 ```sh
 python scripts/merge_pilot.py
@@ -53,18 +58,13 @@ python scripts/harmonize.py data/calendar.csv web/data/validation.json --train 2
 python scripts/snapshot.py data/matched
 python scripts/diagnostics.py
 python scripts/build_dashboard.py
+python scripts/build_geography.py
 python -m unittest discover -s tests
 node tests/test_model.mjs
 ```
 
-`build_dashboard.py` verifies the pinned snapshot checksum, creates daily UI aggregates and versioned monthly observation shards, and reconciles every full-area monthly native/grid value with the frozen validation artifact. The browser verifies derivative checksums and loads only the selected month's observations. The original whole snapshot is retained; no new observations or calibration fits are introduced by this UI step. Rebuilding the original snapshot updates its build timestamp and identity while preserving scientific values; rebuilding derivatives from the same pinned input is deterministic.
+The original versioned snapshot and frozen acceptance rules are unchanged. The derivative builder verifies the snapshot hash and reconciles all full-area monthly native/grid totals with validation before publishing summaries and monthly observation shards. Rebuilding from the same pinned input is deterministic; recreating the original snapshot updates its build timestamp and identity.
 
-For acquisition, configure `FIRMS_MAP_KEY` only in the ingestion environment, then run `python scripts/firms.py availability` before bounded fetches or `python scripts/resume_matched.py`. NASA places this credential in keyed URLs; never print, commit or add it to Vercel. Original source files and SHA-256 manifests remain under `data/`. See [data methodology](specs/002-data.md) and [deployment runbook](docs/DEPLOYMENT.md).
+Browser checks require Playwright and Chromium. With a local server running, use `BASE_URL=http://localhost:8000 python scripts/check_judging_flow.py`. The suite checks desktop and mobile layouts, map navigation, tile-failure fallback, filter synchronization and CSV contents against the pinned observations. Public results are recorded in [judging-check-public.json](submission/judging-check-public.json).
 
-Browser verification uses Playwright and Chromium available in the execution environment. With the site served locally, run `BASE_URL=http://localhost:8000 python scripts/check_judging_flow.py`. It checks both desktop and mobile against the original snapshot, including zero versus missing and CSV contents. See `submission/judging-check-public.json` for the executed public release checks after deployment.
-
-## Operating and submission limits
-
-The first buyer hypothesis is a regional fire or land-management organization preparing recurring seasonal reviews. A pilot should measure review preparation time and reproducibility before making impact, demand or willingness-to-pay claims. Monitored areas and scheduled reports are potential services; NASA data remain publicly sourced.
-
-The public app and source are available independently of PR merge status. Production uses the authorized explicit Vercel CLI workflow; Git auto-deployment is not enabled. A refreshed actual 30-second silent screen recording is hosted at https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4 . Its official Project Demonstration format, local pitch duration, roster, eligibility, terms and final submission remain separate Team Owner checks. No final judging submission is claimed.
+Ingestion credentials belong only in `FIRMS_MAP_KEY` in the ingestion environment. Never add them to the frontend or Vercel. See [data methodology](specs/002-data.md), [deployment](docs/DEPLOYMENT.md), [verification review](docs/Ember-Atlas-Judging-Review.md) and [presentation script](docs/Ember-Atlas-Pitch-Roast.md).

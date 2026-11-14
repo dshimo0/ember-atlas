@@ -79,3 +79,7 @@ Both aggregate and observation exports cover exactly 2020-01-01–2024-12-31. Ob
 Retrieval completeness means all requested daily FIRMS files were retrieved; it does not establish continuous swath or cloud-free observation. Observation coverage remains unknown without usable-observation masks. Native detections are thermal anomalies; cell-days are activity measures, not burned area or unique fires.
 
 Local map geography uses Natural Earth Admin 0 countries at 1:110m, public domain, with original file/checksum provenance under `data/reference/` and a lightweight attributed subset in `web/assets/geography.json`. It supplies country context only. The study rectangle remains visible and is explicitly not a biome boundary.
+
+## Interactive map presentation
+
+The map uses Leaflet 1.9.4 and an attributed OpenStreetMap tile basemap. Local Natural Earth country boundaries (1:110m), rivers and settlements (1:50m) provide a fallback. Geographic sources and checksums are stored under data/reference and web/assets/local-geography.json. Map navigation uses Web Mercator; observation inputs and the scientific grid remain WGS84. Pan and zoom change only the view, not the selected area or exported records. No verified Pantanal biome geometry is included. No scientific inputs, factors, acceptance rules or export calculations changed for this presentation update.

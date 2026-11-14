@@ -42,7 +42,7 @@ def dates(page,start,end):
 
 def set_default(page):
     page.select_option('#area','all');page.select_option('#sensor','both');dates(page,'2020-01-01','2024-12-31')
-    page.locator('[data-month="2024-09"]').click();stable(page)
+    page.locator('#calendar [data-month="2024-09"]').click();stable(page)
 
 report={'url':BASE,'checked_utc':datetime.now(timezone.utc).isoformat(),'snapshot':index,'validation_sha256':hashlib.sha256((ROOT/'web/data/validation.json').read_bytes()).hexdigest(),'checks':[],'public_https_verified':BASE.startswith('https://'),'browser_uses_system_validated_leaf_pin':bool(os.environ.get('EMBER_BROWSER_CA_SPKI'))}
 args=['--no-sandbox']
@@ -50,25 +50,48 @@ if os.environ.get('EMBER_BROWSER_CA_SPKI'):args+=['--ignore-certificate-errors-s
 with sync_playwright() as p:
     browser=p.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=args)
     for name,width,height in [('desktop',1440,1000),('mobile',390,844)]:
-        context=browser.new_context(viewport={'width':width,'height':height},accept_downloads=True)
+        context=browser.new_context(viewport={'width':width,'height':height},is_mobile=name=='mobile',has_touch=name=='mobile',accept_downloads=True)
         page=context.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
         response=page.goto(BASE);assert response.status==200;stable(page)
-        assert page.locator('[data-month]').count()==60
-        for bounds in page.locator('[data-month]').evaluate_all('(buttons)=>buttons.map(b=>({w:b.getBoundingClientRect().width,h:b.getBoundingClientRect().height}))'):
+        assert page.locator('#calendar [data-month]').count()==60
+        for bounds in page.locator('#calendar [data-month]').evaluate_all('(buttons)=>buttons.map(b=>({w:b.getBoundingClientRect().width,h:b.getBoundingClientRect().height}))'):
             assert bounds['w']>=44 and bounds['h']>=44
         assert not page.evaluate("performance.getEntriesByType('resource').some(r=>r.name.includes('/snapshot-'))")
-        assert page.locator('[data-month="2024-09"]').get_attribute('aria-pressed')=='true'
+        assert page.locator('#calendar [data-month="2024-09"]').get_attribute('aria-pressed')=='true'
         expected_reduction=100*(1-validation['adjusted']['mae']/validation['unadjusted']['mae'])
         assert page.locator('#improvement').inner_text()==f'{expected_reduction:.1f}%'
         assert page.locator('#improvement').bounding_box()['y']<height
-        assert 'Both products recorded activity above' in page.locator('#takeaway').inner_text()
+        assert 'both sensors recorded activity above' in page.locator('#takeaway').inner_text()
         assert '2,532' in page.locator('#baseline').inner_text() and '4,782' in page.locator('#baseline').inner_text()
         assert page.locator('#baseline summary').count()==2
         assert all('n = 4' in text for text in page.locator('#baseline summary').all_text_contents())
         m=next(m for m in validation['monthly'] if m['month']=='2024-09')
         for series,key in [('modis','modis'),('viirs','viirs'),('adjusted','adjusted')]:assert abs(float(page.locator(f'[data-series="{series}"]').get_attribute('data-value'))-m[key])<1e-8
         assert '16.2%' in page.locator('#adjusted').inner_text()
+        assert page.locator('h1').inner_text()=='Pantanal fire activity, 2020–2024'
         assert page.locator('#takeaway').bounding_box()['y']<page.locator('#map').bounding_box()['y']
+        map_box=page.locator('.map-panel').bounding_box();comparison_box=page.locator('.comparison-panel').bounding_box()
+        if name=='desktop':assert abs(map_box['y']-comparison_box['y'])<2 and map_box['x']<comparison_box['x']
+        else:assert map_box['y']+map_box['height']<=comparison_box['y']
+        assert page.locator('#history').bounding_box()['y']>=comparison_box['y']+comparison_box['height']-.5
+        page.wait_for_function("document.querySelector('#map').dataset.basemap==='street'",timeout=20000)
+        page.wait_for_function("[...document.querySelectorAll('#map img.leaflet-tile')].every(i=>i.complete&&i.naturalWidth>0)",timeout=20000)
+        assert page.locator('#map .leaflet-control-attribution').inner_text().find('OpenStreetMap')>=0
+        assert page.locator('#map .leaflet-control-scale-line').count()==1
+        assert int(page.locator('#map').get_attribute('data-observations'))==125055
+        assert 0<int(page.locator('#map').get_attribute('data-points'))<=4000
+        point=json.loads(page.locator('#map').get_attribute('data-sample'))
+        assert any(r['latitude']==point['latitude'] and r['longitude']==point['longitude'] and r['product']==point['product'] for r in oracle('2024-09'))
+        zoom=float(page.locator('#map').get_attribute('data-zoom'))
+        page.locator('#map .leaflet-control-zoom-in').click()
+        page.wait_for_function('(z)=>+document.querySelector("#map").dataset.zoom>z',arg=zoom)
+        center=page.locator('#map').get_attribute('data-center');page.locator('#map').focus();page.keyboard.press('ArrowRight')
+        page.wait_for_function('(c)=>document.querySelector("#map").dataset.center!==c',arg=center)
+        page.locator('#fitStudyArea').click()
+        bounds=json.loads(page.locator('#map').get_attribute('data-bounds'))
+        assert bounds[0][0]<=-23 and bounds[0][1]<=-59 and bounds[1][0]>=-15 and bounds[1][1]>=-54
+        assert int(page.locator('#map').get_attribute('data-observations'))==125055
+
         assert not page.evaluate('document.documentElement.scrollWidth > innerWidth')
         observations,filename,digest=read_download(page,'#download');expected=oracle('2024-09')
         assert len(observations)==len(expected)==125055
@@ -86,9 +109,10 @@ with sync_playwright() as p:
         page.screenshot(path=str(ROOT/f'submission/judging-{name}.png'),full_page=True)
         if name=='desktop':page.screenshot(path=str(ROOT/'submission/judging-first-viewport.png'))
         # Calendar and keyboard selection synchronize chart, map, and observations.
-        button=page.locator('[data-month="2024-08"]');button.focus();page.keyboard.press('Enter');stable(page)
+        button=page.locator('#calendar [data-month="2024-08"]');button.focus();page.keyboard.press('Enter');stable(page)
+        assert page.locator('#map').get_attribute('data-month')=='2024-08'
         assert 'August 2024' in page.locator('#monthTitle').inner_text() and 'August 2024' in page.locator('#mapMonth').inner_text()
-        assert page.locator('[data-month="2024-08"]').get_attribute('aria-pressed')=='true'
+        assert page.locator('#calendar [data-month="2024-08"]').get_attribute('aria-pressed')=='true'
         assert float(page.locator('[data-series="modis"]').get_attribute('data-value'))==5880
         page.keyboard.press('ArrowRight');assert page.evaluate('document.activeElement.dataset.month')=='2024-09'
         page.keyboard.press('Enter');stable(page)
@@ -102,16 +126,21 @@ with sync_playwright() as p:
         assert sum(int(r['native_detections']) for r in ag)==len(partial)
         dates(page,'2024-09-01','2024-09-30');stable(page)
         page.select_option('#sensor','VIIRS_NOAA20_SP');stable(page)
+        assert page.locator('#map').get_attribute('data-sensor')=='VIIRS_NOAA20_SP'
+        assert json.loads(page.locator('#map').get_attribute('data-sample'))['product']=='VIIRS_NOAA20_SP'
         sensor_rows,_,_=read_download(page,'#download');assert len(sensor_rows)==101659 and all(r['product']=='VIIRS_NOAA20_SP' for r in sensor_rows)
         page.select_option('#area','north');stable(page)
         assert page.locator('[data-series="adjusted"]').count()==0
         assert 'validated only for the full' in page.locator('#scopeNotice').inner_text()
         page.select_option('#sensor','MODIS_SP');stable(page)
+        assert page.locator('#map').get_attribute('data-area')=='north'
+        assert int(page.locator('#map').get_attribute('data-observations'))==18038
+        assert json.loads(page.locator('#map').get_attribute('data-sample'))['latitude']>=-19
         north,_,_=read_download(page,'#download');assert len(north)==len(oracle('2024-09','north','MODIS_SP'))==18038
         assert all(-19<=float(r['latitude'])<=-15 and r['product']=='MODIS_SP' for r in north)
         ag,_,_=read_download(page,'#aggregateDownload');assert len(ag)==1 and ag[0]['factor']=='' and ag[0]['adjusted_modis_reference_cell_days']=='' and int(ag[0]['native_detections'])==len(north)
-        # The map's keyboard-operable south selector also withholds calibration.
-        page.locator('#map [data-area="south"]').focus();page.keyboard.press('Enter');stable(page)
+        # Both subregions withhold full-area calibration.
+        page.select_option('#area','south');stable(page)
         assert page.locator('#area').input_value()=='south' and page.locator('[data-series="adjusted"]').count()==0
         # A real retrieved zero-detection day is distinct from missing retrieval.
         page.select_option('#area','all')
@@ -126,8 +155,27 @@ with sync_playwright() as p:
         assert page.locator('[data-series="modis"]').get_attribute('data-value')==''
         missing,_,_=read_download(page,'#aggregateDownload');assert len(missing)==1 and missing[0]['native_detections']=='' and missing[0]['occupied_cell_days']=='' and missing[0]['retrieval_status']=='Data unavailable'
         assert not errors,errors
-        report['checks'].append({'viewport':name,'month_keyboard_selection':True,'manual_partial_dates':True,'sensor_filter':True,'north_modis_rows':len(north),'map_subregion_keyboard':True,'subregion_transfer_withheld':True,'zero_day':zero['day'],'missing_counts_blank':True,'javascript_errors':errors})
+        report['checks'].append({'viewport':name,'month_keyboard_selection':True,'manual_partial_dates':True,'sensor_filter':True,'north_modis_rows':len(north),'map_zoom_pan_scale_fit':True,'map_filter_synchronization':True,'subregion_transfer_withheld':True,'zero_day':zero['day'],'missing_counts_blank':True,'javascript_errors':errors})
         context.close()
+        fallback=browser.new_context(viewport={'width':width,'height':height},accept_downloads=True)
+        failures=[]
+        def block_tiles(route):failures.append(route.request.url);route.abort()
+        fallback.route('**/tile.openstreetmap.org/**',block_tiles)
+        page=fallback.new_page();fallback_errors=[];page.on('pageerror',lambda e:fallback_errors.append(str(e)));page.goto(BASE);stable(page)
+        page.wait_for_function("document.querySelector('#map').dataset.basemap==='local'",timeout=15000)
+        assert failures and 'unavailable' in page.locator('#basemapStatus').inner_text()
+        assert page.locator('.local-place-label').count()==27
+        assert 'Corumbá' in page.locator('.local-place-label').all_text_contents()
+        assert page.locator('#map .leaflet-local-geography-pane canvas').count()>0
+        assert int(page.locator('#map').get_attribute('data-observations'))==125055
+        page.locator('.map-panel').screenshot(path=str(ROOT/f'submission/map-fallback-{name}.png'))
+        page.select_option('#area','north');page.select_option('#sensor','MODIS_SP');stable(page)
+        exported,_,_=read_download(page,'#download');assert len(exported)==18038
+        assert page.locator('[data-series="adjusted"]').count()==0
+        assert int(page.locator('#map').get_attribute('data-observations'))==len(exported)
+        assert not fallback_errors,fallback_errors
+        report['checks'].append({'viewport':name,'basemap_failure_fallback':True,'local_settlements':27,'local_rivers':23,'fallback_north_modis_csv_rows':len(exported)})
+        fallback.close()
     browser.close()
 suffix='public' if BASE.startswith('https://') else 'local'
 (ROOT/f'submission/judging-check-{suffix}.json').write_text(json.dumps(report,indent=2))

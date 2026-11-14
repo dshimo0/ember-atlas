@@ -3,3 +3,5 @@
 *.gz binary
 *.mp4 binary
 *.png binary
+# Retain upstream dependency bytes and its license line endings.
+web/vendor/leaflet/** -text whitespace=cr-at-eol

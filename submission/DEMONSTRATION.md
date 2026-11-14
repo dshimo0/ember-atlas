@@ -1,20 +1,18 @@
-# Project Demonstration and pitch
+# Project demonstration
 
-Format acceptance is pending: official resources and challenge URLs returned HTTP errors from this runtime on 2026-11-14. The proposed 30-second video / seven-slide limit is a fallback from the supplied addendum, not independently verified. Team Owner must check the current Project tab guide and São Paulo instructions. The three-minute pitch is separate.
+Application: https://ember-atlas-opal.vercel.app/
 
-Screen-only 30-second storyboard, English on-screen text, no people/audio:
+Screen recording: https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4
 
-| Time | Actual application action | Caption |
-| --- | --- | --- |
-| 0–5 | Open the dashboard | Fire season, or sensor change? |
-| 5–13 | Choose September 2024 | Compare the same calendar month in prior years. |
-| 13–23 | Read native counts, cell-days and holdout evidence | Different detection sensitivity requires common support and independent evaluation. |
-| 23–30 | Download observations | Reproduce the selected month from NASA FIRMS. |
+The current demonstration format and local pitch duration require confirmation from the official portal and São Paulo instructions. The three-minute presentation in `docs/Ember-Atlas-Pitch-Roast.md` is a separate script.
 
-Three-minute pitch: 30 seconds on the sensor discontinuity problem; 60 seconds selecting area and month, reading both sensor traces and historical baseline; 45 seconds explaining the frozen split and actual measured holdout result; 30 seconds exporting evidence; 15 seconds on limits and a pilot with regional land managers. A pilot should measure seasonal review preparation time and evidence reproducibility. Demand and willingness to pay remain hypotheses.
+## Thirty-second screen sequence
 
-Executed asset: `workflow-capture.mp4` is an actual local Chromium screen recording of the implemented flow, trimmed to at most 30 seconds, silent and screen-only. `dashboard.png`, `methodology.png` and `mobile.png` are actual captures. The raw capture is engineering evidence; the final portal edit/caption requirements and official format compliance remain pending. The 30-second asset is hosted at https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4 .
+| Time | Screen |
+| --- | --- |
+| 0–8 s | Pantanal map, September 2024 observations, study rectangle and sensor comparison. |
+| 8–13 s | Validation summary: 80.5% lower monthly error against MODIS over 24 holdout months, with full-area scope. |
+| 13–21 s | Map zoom, pan, scale and fit; full monthly calendar. |
+| 21–30 s | Selected-month observation export and selected-period aggregate export. |
 
-Access-recovery update: screen captures and workflow-capture.mp4 were refreshed from the complete 2020–2024 snapshot. The real dashboard now displays the supported full-area seasonal adjustment alongside the sensor-specific observations. RESULTS.md reports the complete 24-month holdout; public media hosting is complete; official format checks remain pending.
-
-Judging refresh: workflow-capture.mp4 was replaced with a new actual 30-second silent recording of the public interface. It shows the opening holdout result, September common-unit chart and baseline breakdowns, calendar selection, subregion withholding, then the verified observation download. It contains only the English application screen, no people and no audio. Formal portal format acceptance remains pending.
+The recording contains the English application screen and no people or audio. Runtime and public playback verification are recorded in `submission/media-check.json`.

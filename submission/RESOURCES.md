@@ -13,6 +13,12 @@
 | Other | Vercel — https://vercel.com/ | Static app and media hosting on the existing Hobby team | Actual provider; no Vercel client library or imagery bundled |
 | Other | OpenAI Codex — https://openai.com/codex/ | Coding, tests, documentation assistance | AI disclosure belongs in portal materials |
 
-Map: project-authored WGS84 coordinate plot with NASA points and rectangular bounds, now with locally served Natural Earth country context. No biome boundary dataset, external tile service, imagery, music, fonts or JavaScript libraries. No NASA insignia is used. Linked official terms: https://www.spaceappschallenge.org/legal/ (owner verification pending).
+## Map resources
 
-Natural Earth Admin 0 countries, 1:110m: https://www.naturalearthdata.com/ . Public-domain terms https://www.naturalearthdata.com/about/terms-of-use/ were fetched and verified on 2026-11-14. Original country GeoJSON and its SHA-256 are preserved under data/reference and web/assets/geography.json. Used only for generalized geographic context; the rectangle is not labeled as a biome boundary.
+| Resource | Version/use | Attribution and source |
+| --- | --- | --- |
+| OpenStreetMap | Standard raster basemap with rivers, settlements and boundaries | © OpenStreetMap contributors. https://www.openstreetmap.org/copyright . Tile usage policy: https://operations.osmfoundation.org/policies/tiles/ . Normal interactive requests only; no bulk tile download or offline tile cache. |
+| Leaflet | 1.9.4, locally vendored JavaScript/CSS and navigation controls | BSD-2-Clause license preserved at web/vendor/leaflet/LICENSE; source checksums in web/vendor/leaflet/SOURCE.json. https://leafletjs.com/ |
+| Natural Earth | Admin 0 countries 1:110m; rivers and populated places 1:50m; local geographic fallback | Public domain: https://www.naturalearthdata.com/about/terms-of-use/ . Raw inputs under data/reference; URLs and SHA-256 values in web/assets/local-geography.json. |
+
+Map credits remain visible in the map control and Methods & data. The study rectangle is an analysis extent; no Pantanal biome geometry is included. No external imagery, music, font service or NASA insignia is used.

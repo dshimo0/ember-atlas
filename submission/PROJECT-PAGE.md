@@ -14,7 +14,7 @@ This is an actual 30-second silent screen recording. The Team Owner must confirm
 
 Project Details:
 
-Was a season unusually active, or did a different satellite detect more? Ember Atlas puts both products on the same globally anchored 0.05-degree WGS84 grid, counting each occupied cell once per UTC day. Analysts select the full Pantanal study rectangle or its northern/southern halves, choose dates and a month, inspect both products and export matching observations with provenance. Complete prior same-month years support sensor-specific medians; unsupported baselines are withheld.
+Ember Atlas displays Pantanal fire activity from NASA FIRMS on an interactive geographic map and monthly calendar. Both products use the same globally anchored 0.05-degree WGS84 grid, counting each occupied cell once per UTC day. Analysts select the full Pantanal study rectangle or its northern/southern halves, choose dates and a month, inspect both products and export matching observations with provenance. Complete prior same-month years support sensor-specific medians; unsupported baselines are withheld.
 
 The release uses real MODIS C6.1 SP and VIIRS NOAA-20 SP observations. Training was frozen at 2020–2022 and holdout at 2023–2024. All 24 paired holdout months are now retrieved. Common-grid monthly MAE was 1021.71 cell-days, versus 199.70 after the frozen seasonal adjustment. Adjustment publication is supported within the full study rectangle and evaluated 2020–2024 domain. Exact periods, sample sizes and errors are in RESULTS.md and the machine-readable validation output. Hotspots are thermal anomalies, not burned area or independent fires. Clouds and overpass sampling remain unmeasured without usable-observation masks.
 
