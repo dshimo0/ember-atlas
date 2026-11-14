@@ -20,4 +20,4 @@ Checked 2026-11-14 UTC in Codex Cloud. No final submission was performed.
 
 Local browser verification evidence is recorded separately in browser-check.json after execution; it does not verify public hosting. No public deployment or media URL is claimed.
 
-Verified local browser checks: month buttons, September 2024 primary grid value (5,819 MODIS cell-days), north/MODIS/month observation export (18,037 rows), mobile width and no JavaScript exceptions. Nine Python tests pass, JavaScript syntax check passes, and raw-source credential scan passes. Actual screen captures and a silent video are included; public URL checks remain pending.
+Verified local browser checks: month buttons, September 2024 primary grid value (5,819 MODIS cell-days), north/MODIS/month observation export (18,038 rows), mobile width and no JavaScript exceptions. Nine Python tests pass, JavaScript syntax check passes, and raw-source credential scan passes. Actual screen captures and a silent video are included; public URL checks remain pending.
