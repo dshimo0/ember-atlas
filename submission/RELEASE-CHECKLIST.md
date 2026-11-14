@@ -22,3 +22,11 @@ Checked 2026-11-14 UTC. Status is evidence-based; no final submission was attemp
 | Deadline and local pitch cutoff | Pending | Addendum states Nov 15 2026 23:59 São Paulo; owner must independently confirm |
 | AI disclosure | Verified | Draft identifies Codex assistance and fixture-only synthetic data |
 | Save portal, preview links and submit | Pending | Team Owner accepts terms and explicitly selects Submit for Judging; capture private confirmation |
+
+## Executed verification update
+
+- Nine unit tests pass; JavaScript syntax check passes.
+- Local Chromium verified unavailable-data state, disabled download, area/sensor/month controls and 1440px/390px layouts without page errors or horizontal overflow. Actual captures: `interface-desktop.png`, `interface-mobile.png`. These show the current unavailable-data interface, not a scientific demonstration.
+- Vercel creation request returned HTTP 403: “You don't have permission to create a project.” No live URL exists. No CLI fallback is installed. Owner must provide an existing accessible project or project-creation permission.
+- Official resources and challenge pages returned HTTP 503 on 2026-11-14. Demo format and current portal fields remain unverified.
+- Draft pull request: https://github.com/dshimo0/ember-atlas/pull/1 ; main has not been merged or changed.

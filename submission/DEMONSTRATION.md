@@ -12,3 +12,5 @@ Record the actual app only after the real-data gate passes. Use silent English c
 | 23–30 s | Download selected observations. Show CSV fields, NASA provenance and Ember Atlas. |
 
 For a separate three-minute pitch: 30 s problem/audience, 60 s actual workflow, 45 s method and measured evidence, 30 s limits, 15 s pilot hypothesis. Never fill missing results with invented numbers. Upload the screen recording to an authorized public media host; test anonymously, measure runtime and review every frame before supplying its URL to the portal.
+
+Local browser captures of the actual current interface are available in [desktop](interface-desktop.png) and [mobile](interface-mobile.png). They document unavailable-data behavior and are not a substitute for the required real-data demonstration video.
