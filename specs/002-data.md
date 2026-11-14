@@ -46,3 +46,7 @@ Sources
 - [NASA FIRMS Area API](https://firms.modaps.eosdis.nasa.gov/api/area/)
 - [NASA FIRMS availability](https://firms.modaps.eosdis.nasa.gov/api/data_availability/)
 - [NASA FIRMS archive and temporal coverage](https://firms.modaps.eosdis.nasa.gov/download/)
+
+## Release ember-1 frozen evaluation
+
+Before holdout examination: training 2020–2022, holdout 2023–2024, calendar quarters (Jan–Mar etc.). Seasonal ratios require six complete training months and 100 VIIRS cell-days, otherwise pooled training ratio. Overall requires at least three training and two holdout years. Accept only lower holdout monthly MAE and no increase in absolute signed bias on identical complete paired months. No uncertainty interval with only two holdout years. Derived native counts deduplicate identical product/platform/time/coordinates; raw files retain delivered counts. Calibration is limited to the study rectangle. Subarea medians and transfer are withheld. Alternate grid/confidence and platform diagnostics are required before treating transfer as robust outside this release domain.

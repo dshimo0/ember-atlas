@@ -1,0 +1,9 @@
+{
+  "source": "VIIRS_NOAA20_SP",
+  "bbox": "-59.0,-23.0,-54.0,-15.0",
+  "start": "2022-08-24",
+  "end": "2022-08-28",
+  "retrieved_at": "2026-11-14T18:11:14.893954+00:00",
+  "sha256": "9cae5bfe356a0a13fef0d2948027eeb9f7ece886d21c1dfa9e016c1e3e41c0cc",
+  "rows": 1279
+}

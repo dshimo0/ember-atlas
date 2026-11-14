@@ -95,11 +95,18 @@ def fetch(key, source, bbox, start, end, output):
             raise ValueError("FIRMS response contains an incomplete row")
         if not start <= date.fromisoformat(row["acq_date"]) <= end:
             raise ValueError("FIRMS returned a detection outside the requested window")
+        latitude, longitude = float(row["latitude"]), float(row["longitude"])
+        west, south, east, north = map(float, bbox.split(","))
+        if not (south <= latitude <= north and west <= longitude <= east):
+            raise ValueError("Detection outside requested bounding box")
+        if not re.fullmatch(r"[0-9]{1,4}", row["acq_time"]) or int(row["acq_time"].zfill(4)[:2]) > 23 or int(row["acq_time"].zfill(4)[2:]) > 59:
+            raise ValueError("Invalid UTC acquisition time")
         rows += 1
     meta = {
         "source": source, "bbox": bbox, "start": str(start), "end": str(end),
         "retrieved_at": datetime.now(timezone.utc).isoformat(),
         "sha256": hashlib.sha256(payload).hexdigest(), "rows": rows,
+        "pipeline_version": "ember-1", "processing_class": source.rsplit("_", 1)[-1],
     }
     atomic_write(target, payload)
     atomic_write(manifest, json.dumps(meta, indent=2).encode("utf-8"))

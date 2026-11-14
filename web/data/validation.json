@@ -1,0 +1,516 @@
+{
+  "method": "ember-1",
+  "grid_degrees": 0.05,
+  "train_years": [
+    2020,
+    2021,
+    2022
+  ],
+  "holdout_years": [
+    2023,
+    2024
+  ],
+  "minimum_support": "36 training months in 3 years, 24 holdout months in 2 years; seasonal >=6 months and 100 VIIRS cell-days, otherwise pooled",
+  "acceptance_rule": "lower monthly holdout MAE and no worse absolute bias; identical months",
+  "factors": {
+    "0": 0.509355297945902,
+    "1": 0.48254785266205563,
+    "2": 0.5538713805791073,
+    "3": 0.4888941868319625
+  },
+  "unadjusted": {
+    "n": 5,
+    "mae": 1382.2,
+    "bias": 1382.2
+  },
+  "adjusted": {
+    "n": 5,
+    "mae": 388.02473044866,
+    "bias": -340.53040464024025
+  },
+  "accepted": false,
+  "reason": "Insufficient overlap or holdout criterion failed",
+  "excluded_months": [
+    "2023-04",
+    "2023-05",
+    "2023-06",
+    "2023-07",
+    "2023-08",
+    "2023-09",
+    "2023-10",
+    "2023-11",
+    "2023-12",
+    "2024-01",
+    "2024-02",
+    "2024-03",
+    "2024-04",
+    "2024-05",
+    "2024-06",
+    "2024-07",
+    "2024-10",
+    "2024-11",
+    "2024-12"
+  ],
+  "seasonal_holdout": {
+    "0": {
+      "n": 3,
+      "unadjusted": {
+        "mae": 184.66666666666666,
+        "bias": 184.66666666666666
+      },
+      "adjusted": {
+        "mae": 80.60843332655413,
+        "bias": -1.451223645854526
+      }
+    },
+    "1": {
+      "n": 0,
+      "unadjusted": {
+        "mae": null,
+        "bias": null
+      },
+      "adjusted": {
+        "mae": null,
+        "bias": null
+      }
+    },
+    "2": {
+      "n": 2,
+      "unadjusted": {
+        "mae": 3178.5,
+        "bias": 3178.5
+      },
+      "adjusted": {
+        "mae": 849.1491761318189,
+        "bias": -849.1491761318189
+      }
+    },
+    "3": {
+      "n": 0,
+      "unadjusted": {
+        "mae": null,
+        "bias": null
+      },
+      "adjusted": {
+        "mae": null,
+        "bias": null
+      }
+    }
+  },
+  "paired_months": 41,
+  "monthly": [
+    {
+      "month": "2020-01",
+      "year": 2020,
+      "season": 0,
+      "modis": 831,
+      "viirs": 1660,
+      "modis_native": 1649,
+      "viirs_native": 7097,
+      "adjusted": null
+    },
+    {
+      "month": "2020-02",
+      "year": 2020,
+      "season": 0,
+      "modis": 456,
+      "viirs": 791,
+      "modis_native": 676,
+      "viirs_native": 2305,
+      "adjusted": null
+    },
+    {
+      "month": "2020-03",
+      "year": 2020,
+      "season": 0,
+      "modis": 1421,
+      "viirs": 2588,
+      "modis_native": 2902,
+      "viirs_native": 9672,
+      "adjusted": null
+    },
+    {
+      "month": "2020-04",
+      "year": 2020,
+      "season": 1,
+      "modis": 1305,
+      "viirs": 2487,
+      "modis_native": 2585,
+      "viirs_native": 9107,
+      "adjusted": null
+    },
+    {
+      "month": "2020-05",
+      "year": 2020,
+      "season": 1,
+      "modis": 679,
+      "viirs": 1615,
+      "modis_native": 1266,
+      "viirs_native": 4487,
+      "adjusted": null
+    },
+    {
+      "month": "2020-06",
+      "year": 2020,
+      "season": 1,
+      "modis": 753,
+      "viirs": 1377,
+      "modis_native": 1480,
+      "viirs_native": 3990,
+      "adjusted": null
+    },
+    {
+      "month": "2020-07",
+      "year": 2020,
+      "season": 2,
+      "modis": 2309,
+      "viirs": 4522,
+      "modis_native": 6434,
+      "viirs_native": 23822,
+      "adjusted": null
+    },
+    {
+      "month": "2020-08",
+      "year": 2020,
+      "season": 2,
+      "modis": 5485,
+      "viirs": 9608,
+      "modis_native": 17858,
+      "viirs_native": 70670,
+      "adjusted": null
+    },
+    {
+      "month": "2020-09",
+      "year": 2020,
+      "season": 2,
+      "modis": 7220,
+      "viirs": 12781,
+      "modis_native": 26922,
+      "viirs_native": 107513,
+      "adjusted": null
+    },
+    {
+      "month": "2020-10",
+      "year": 2020,
+      "season": 3,
+      "modis": 3978,
+      "viirs": 7669,
+      "modis_native": 12489,
+      "viirs_native": 52838,
+      "adjusted": null
+    },
+    {
+      "month": "2020-11",
+      "year": 2020,
+      "season": 3,
+      "modis": 1640,
+      "viirs": 3604,
+      "modis_native": 3689,
+      "viirs_native": 15203,
+      "adjusted": null
+    },
+    {
+      "month": "2020-12",
+      "year": 2020,
+      "season": 3,
+      "modis": 835,
+      "viirs": 1602,
+      "modis_native": 1306,
+      "viirs_native": 4436,
+      "adjusted": null
+    },
+    {
+      "month": "2021-01",
+      "year": 2021,
+      "season": 0,
+      "modis": 176,
+      "viirs": 343,
+      "modis_native": 252,
+      "viirs_native": 877,
+      "adjusted": null
+    },
+    {
+      "month": "2021-02",
+      "year": 2021,
+      "season": 0,
+      "modis": 373,
+      "viirs": 806,
+      "modis_native": 493,
+      "viirs_native": 1476,
+      "adjusted": null
+    },
+    {
+      "month": "2021-03",
+      "year": 2021,
+      "season": 0,
+      "modis": 377,
+      "viirs": 850,
+      "modis_native": 558,
+      "viirs_native": 1722,
+      "adjusted": null
+    },
+    {
+      "month": "2021-04",
+      "year": 2021,
+      "season": 1,
+      "modis": 513,
+      "viirs": 1107,
+      "modis_native": 870,
+      "viirs_native": 2541,
+      "adjusted": null
+    },
+    {
+      "month": "2021-05",
+      "year": 2021,
+      "season": 1,
+      "modis": 688,
+      "viirs": 1412,
+      "modis_native": 1196,
+      "viirs_native": 3980,
+      "adjusted": null
+    },
+    {
+      "month": "2021-06",
+      "year": 2021,
+      "season": 1,
+      "modis": 658,
+      "viirs": 1391,
+      "modis_native": 1275,
+      "viirs_native": 4045,
+      "adjusted": null
+    },
+    {
+      "month": "2021-07",
+      "year": 2021,
+      "season": 2,
+      "modis": 2155,
+      "viirs": 4125,
+      "modis_native": 4960,
+      "viirs_native": 17945,
+      "adjusted": null
+    },
+    {
+      "month": "2021-08",
+      "year": 2021,
+      "season": 2,
+      "modis": 4335,
+      "viirs": 6908,
+      "modis_native": 14264,
+      "viirs_native": 62394,
+      "adjusted": null
+    },
+    {
+      "month": "2021-09",
+      "year": 2021,
+      "season": 2,
+      "modis": 3791,
+      "viirs": 6893,
+      "modis_native": 12572,
+      "viirs_native": 49551,
+      "adjusted": null
+    },
+    {
+      "month": "2021-10",
+      "year": 2021,
+      "season": 3,
+      "modis": 2305,
+      "viirs": 3940,
+      "modis_native": 7787,
+      "viirs_native": 27088,
+      "adjusted": null
+    },
+    {
+      "month": "2021-11",
+      "year": 2021,
+      "season": 3,
+      "modis": 770,
+      "viirs": 1611,
+      "modis_native": 1379,
+      "viirs_native": 4707,
+      "adjusted": null
+    },
+    {
+      "month": "2021-12",
+      "year": 2021,
+      "season": 3,
+      "modis": 711,
+      "viirs": 1724,
+      "modis_native": 1221,
+      "viirs_native": 4579,
+      "adjusted": null
+    },
+    {
+      "month": "2022-01",
+      "year": 2022,
+      "season": 0,
+      "modis": 605,
+      "viirs": 1367,
+      "modis_native": 1082,
+      "viirs_native": 3708,
+      "adjusted": null
+    },
+    {
+      "month": "2022-02",
+      "year": 2022,
+      "season": 0,
+      "modis": 448,
+      "viirs": 834,
+      "modis_native": 674,
+      "viirs_native": 1864,
+      "adjusted": null
+    },
+    {
+      "month": "2022-03",
+      "year": 2022,
+      "season": 0,
+      "modis": 322,
+      "viirs": 595,
+      "modis_native": 519,
+      "viirs_native": 1365,
+      "adjusted": null
+    },
+    {
+      "month": "2022-04",
+      "year": 2022,
+      "season": 1,
+      "modis": 426,
+      "viirs": 905,
+      "modis_native": 736,
+      "viirs_native": 2290,
+      "adjusted": null
+    },
+    {
+      "month": "2022-05",
+      "year": 2022,
+      "season": 1,
+      "modis": 520,
+      "viirs": 1108,
+      "modis_native": 1279,
+      "viirs_native": 4253,
+      "adjusted": null
+    },
+    {
+      "month": "2022-06",
+      "year": 2022,
+      "season": 1,
+      "modis": 458,
+      "viirs": 1032,
+      "modis_native": 1013,
+      "viirs_native": 3516,
+      "adjusted": null
+    },
+    {
+      "month": "2022-07",
+      "year": 2022,
+      "season": 2,
+      "modis": 850,
+      "viirs": 1878,
+      "modis_native": 1904,
+      "viirs_native": 6519,
+      "adjusted": null
+    },
+    {
+      "month": "2022-08",
+      "year": 2022,
+      "season": 2,
+      "modis": 697,
+      "viirs": 1580,
+      "modis_native": 1278,
+      "viirs_native": 4882,
+      "adjusted": null
+    },
+    {
+      "month": "2022-09",
+      "year": 2022,
+      "season": 2,
+      "modis": 856,
+      "viirs": 1713,
+      "modis_native": 2054,
+      "viirs_native": 8070,
+      "adjusted": null
+    },
+    {
+      "month": "2022-10",
+      "year": 2022,
+      "season": 3,
+      "modis": 407,
+      "viirs": 1192,
+      "modis_native": 772,
+      "viirs_native": 2869,
+      "adjusted": null
+    },
+    {
+      "month": "2022-11",
+      "year": 2022,
+      "season": 3,
+      "modis": 1003,
+      "viirs": 2470,
+      "modis_native": 2072,
+      "viirs_native": 8055,
+      "adjusted": null
+    },
+    {
+      "month": "2022-12",
+      "year": 2022,
+      "season": 3,
+      "modis": 655,
+      "viirs": 1355,
+      "modis_native": 1238,
+      "viirs_native": 4669,
+      "adjusted": null
+    },
+    {
+      "month": "2023-01",
+      "year": 2023,
+      "season": 0,
+      "modis": 248,
+      "viirs": 720,
+      "modis_native": 357,
+      "viirs_native": 1583,
+      "adjusted": null
+    },
+    {
+      "month": "2023-02",
+      "year": 2023,
+      "season": 0,
+      "modis": 135,
+      "viirs": 167,
+      "modis_native": 147,
+      "viirs_native": 256,
+      "adjusted": null
+    },
+    {
+      "month": "2023-03",
+      "year": 2023,
+      "season": 0,
+      "modis": 201,
+      "viirs": 251,
+      "modis_native": 239,
+      "viirs_native": 448,
+      "adjusted": null
+    },
+    {
+      "month": "2024-08",
+      "year": 2024,
+      "season": 2,
+      "modis": 5880,
+      "viirs": 9247,
+      "modis_native": 24224,
+      "viirs_native": 105056,
+      "adjusted": null
+    },
+    {
+      "month": "2024-09",
+      "year": 2024,
+      "season": 2,
+      "modis": 5819,
+      "viirs": 8809,
+      "modis_native": 23396,
+      "viirs_native": 101659,
+      "adjusted": null
+    }
+  ],
+  "unit": "occupied cell-days",
+  "observation_coverage": "unknown; no swath or usable-observation masks",
+  "input_sha256": "80a2b8023ca1f2e663fb0afc2c4422c5ce2122f7ca653c572383ddda0926f215"
+}

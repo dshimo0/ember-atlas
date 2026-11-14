@@ -12,3 +12,7 @@ An environmental analyst selects an area and date range, sees burning activity b
 | P6 | The historical view aims to extend from the early 2000s to the latest available standard product. Recent NRT observations are provisional and labeled separately. |
 
 Hotspots represent satellite detections of thermal anomalies. A detection can come from agricultural burns and other heat sources. Coverage and cloud limitations must be visible where relevant.
+
+## Release ember-1
+
+The supported extent is the Pantanal study area rectangle, with northern and southern filters. The selected month, area, date range and sensor determine the observation export. The calendar reports each sensor separately. Complete prior same-month years (minimum three) support sensor-specific historical medians. All published inputs are real FIRMS SP records. A coordinate map avoids external tile services and shows study bounds with sensor colors. Calibration evidence is accessible independently; unsupported or failed adjusted series remain withheld.

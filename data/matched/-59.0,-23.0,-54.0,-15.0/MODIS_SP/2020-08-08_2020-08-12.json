@@ -1,0 +1,9 @@
+{
+  "source": "MODIS_SP",
+  "bbox": "-59.0,-23.0,-54.0,-15.0",
+  "start": "2020-08-08",
+  "end": "2020-08-12",
+  "retrieved_at": "2026-11-14T18:09:46.889958+00:00",
+  "sha256": "a95abf3d99db8024b45adacddcbc7e98178d7ebd0c14ec78bc5ed5ea21b4f3ab",
+  "rows": 3647
+}
