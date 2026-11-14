@@ -46,3 +46,23 @@ class PipelineTest(unittest.TestCase):
             with patch("firms.download", return_value=b"Invalid MAP_KEY"), self.assertRaises(ValueError):
                 fetch("fixture", "MODIS_SP", "-59,-23,-54,-15", day, day, output)
             self.assertEqual(list(output.iterdir()), [])
+
+class ValidationTest(unittest.TestCase):
+    def test_duplicate_rows_count_once(self):
+        payload=b'latitude,longitude,acq_date,acq_time,satellite\n'+b'-19,-57,2024-08-01,0030,Terra\n'*2
+        with tempfile.TemporaryDirectory() as directory:
+            d=Path(directory); day=date(2024,8,1)
+            with patch('firms.download',return_value=payload):fetch('fixture','MODIS_SP','-59,-23,-54,-15',day,day,d)
+            self.assertEqual(next(iter(aggregate(d).values())),(1,1))
+    def test_invalid_coordinates_and_time_rejected(self):
+        for record in [b'0,0,2024-08-01,0030,Terra', b'-19,-57,2024-08-01,2460,Terra']:
+            with tempfile.TemporaryDirectory() as directory:
+                with patch('firms.download',return_value=b'latitude,longitude,acq_date,acq_time,satellite\n'+record+b'\n'),self.assertRaises(ValueError):
+                    fetch('fixture','MODIS_SP','-59,-23,-54,-15',date(2024,8,1),date(2024,8,1),Path(directory))
+    def test_network_failures_sanitized(self):
+        from firms import download
+        from urllib.error import URLError,HTTPError
+        with patch('firms.urlopen',side_effect=URLError('secret-url')),patch('firms.time.sleep'):
+            with self.assertRaisesRegex(ValueError,'^FIRMS connection failed$'): download('fixture')
+        with patch('firms.urlopen',side_effect=HTTPError('secret-url',403,'secret-url',{},None)):
+            with self.assertRaisesRegex(ValueError,'^FIRMS returned HTTP 403$'): download('fixture')

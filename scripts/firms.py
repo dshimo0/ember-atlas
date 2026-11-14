@@ -95,8 +95,18 @@ def fetch(key, source, bbox, start, end, output):
             raise ValueError("FIRMS response contains an incomplete row")
         if not start <= date.fromisoformat(row["acq_date"]) <= end:
             raise ValueError("FIRMS returned a detection outside the requested window")
+        west, south, east, north = map(float, bbox.split(","))
+        lat, lon = float(row["latitude"]), float(row["longitude"])
+        if not (south <= lat <= north and west <= lon <= east):
+            raise ValueError("Detection outside requested bounds")
+        acquisition = row["acq_time"].zfill(4)
+        if not re.fullmatch(r"[0-9]{4}", acquisition) or int(acquisition[:2]) > 23 or int(acquisition[2:]) > 59:
+            raise ValueError("Invalid UTC acquisition time")
         rows += 1
     meta = {
+        "pipeline_version": "ember-ingest-v1",
+        "processing_class": source.rsplit("_", 1)[-1],
+        "platforms": sorted({r["satellite"] for r in read_csv(payload)}),
         "source": source, "bbox": bbox, "start": str(start), "end": str(end),
         "retrieved_at": datetime.now(timezone.utc).isoformat(),
         "sha256": hashlib.sha256(payload).hexdigest(), "rows": rows,

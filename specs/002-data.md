@@ -46,3 +46,9 @@ Sources
 - [NASA FIRMS Area API](https://firms.modaps.eosdis.nasa.gov/api/area/)
 - [NASA FIRMS availability](https://firms.modaps.eosdis.nasa.gov/api/data_availability/)
 - [NASA FIRMS archive and temporal coverage](https://firms.modaps.eosdis.nasa.gov/download/)
+
+## Implemented frozen evaluation v1
+
+`scripts/harmonize.py` requires disjoint explicit year lists, one AOI and complete paired months. Seasons are DJF/MAM/JJA/SON. Minimum support: three training and two holdout years; seasonal ratio requires six months across three years and 100 VIIRS cell-days; otherwise pooled training ratio. Acceptance requires strictly smaller monthly holdout MAE and no larger absolute signed bias. Unsupported or rejected adjusted monthly values are null. No empirical performance is claimed yet. Same-year bootstrap intervals and tuning against holdout are prohibited. Sensitivity diagnostics, Terra/Aqua stratification and transition analysis are still pending.
+
+`scripts/snapshot.py` publishes verified raw provenance and daily support to SHA-256 named JSON plus an atomic pointer. Exact duplicate rows are audited by retaining original files and counted once in aggregation. Native counts refer to exact-row deduplication only; broader coordinate/time duplicate diagnostics remain pending.

@@ -12,3 +12,7 @@ An environmental analyst selects an area and date range, sees burning activity b
 | P6 | The historical view aims to extend from the early 2000s to the latest available standard product. Recent NRT observations are provisional and labeled separately. |
 
 Hotspots represent satellite detections of thermal anomalies. A detection can come from agricultural burns and other heat sources. Coverage and cloud limitations must be visible where relevant.
+
+## Snapshot UI acceptance (2026-11-14)
+
+Use the name Pantanal study area for the approximate rectangle. A static English dashboard provides north/south subwindows, UTC range and month selection, sensor comparison and selected-month observation export. Require three complete prior same-month years for an unadjusted sensor-specific median. With no snapshot, show Data unavailable and disable export. No synthetic observations enter the public build. Calibration display remains gated pending real evidence and full diagnostics. Aggregate export, calibrated view, and real-data browser acceptance remain open.
