@@ -2,7 +2,7 @@
 
 Public application: https://ember-atlas-opal.vercel.app
 
-Verified on 2026-11-14 UTC. Vercel reports deployment `dpl_AQoVqaG99GE7HFp3PpuqcgfY3Ejg` READY in production. Application source commit: `3dd5426f98d9c04f2dd7f6dffef6f3606219d719`, branch `work`. Subsequent evidence/documentation commits do not change the hosted application. The PR remains open; no merge was performed.
+Verified on 2026-11-14 UTC. Vercel reports deployment `dpl_62Ng6iCCLSvKpBQyYEt4PjHY5ZBg` READY in production. Application source commit: `26f646a3da5c5e3757ec41e1a9d7aee3b2f307ff`, branch `work`. Subsequent evidence/documentation commits do not change the hosted application. The PR remains open; no merge was performed.
 
 ## Architecture and account
 
@@ -31,7 +31,7 @@ Anonymous HTTPS returned HTTP 200 with the expected application. Fresh headless 
 
 Public media: https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4 . A downloaded copy matches the committed media checksum. Browser playback evidence is in `submission/media-check.json`; official portal format compliance remains an owner gate.
 
-The deployment used a basic build machine, with a six-second build and five-second post-build stage. There are no server functions or ingestion jobs in this Vercel project. No paid observability add-on was configured.
+The deployment uses the existing Hobby team and basic build machine. There are no server functions or ingestion jobs in this Vercel project. No paid observability add-on was configured.
 
 ## Ingestion recovery
 

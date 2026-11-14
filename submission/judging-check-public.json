@@ -1,6 +1,6 @@
 {
   "url": "https://ember-atlas-opal.vercel.app",
-  "checked_utc": "2026-11-14T21:29:04.445949+00:00",
+  "checked_utc": "2026-11-14T21:38:23.487316+00:00",
   "snapshot": {
     "file": "snapshot-19621fa88d40.json.gz",
     "sha256": "19621fa88d408fb5d9aa87482de1bb219e8dd7ed67128c1147d1a63fb087e677"
@@ -51,5 +51,7 @@
     }
   ],
   "public_https_verified": true,
-  "browser_uses_system_validated_leaf_pin": true
+  "browser_uses_system_validated_leaf_pin": true,
+  "deployment_source_commit": "26f646a3da5c5e3757ec41e1a9d7aee3b2f307ff",
+  "deployment_id": "dpl_62Ng6iCCLSvKpBQyYEt4PjHY5ZBg"
 }

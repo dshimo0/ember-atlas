@@ -10,7 +10,7 @@ Checked 2026-11-14 UTC in Codex Cloud. No final submission was performed.
 | Verified | Engineering | English app, CSV fields and package authored; no people or audio in authored media. |
 | Verified | Engineering | Anonymous production HTTPS https://ember-atlas-opal.vercel.app; complete public browser workflow and matching CSV exports passed. docs/DEPLOYMENT.md and judging-check-public.json record evidence. |
 | Pending | Owner | Current official Project Demonstration duration/slide limit and separate local pitch limit. Resources/challenge fetch returned 503. Proposed fallback is not verified compliant. |
-| Verified / Pending | Engineering / Owner | Actual silent English-screen recording is public at https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4 (20.24 s), with no people/audio. Anonymous playback is recorded in media-check.json. Owner must confirm official format acceptance and any final edit/caption requirements. |
+| Verified / Pending | Engineering / Owner | Actual silent English-screen recording is public at https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4 (30 s), with no people/audio. Anonymous playback is recorded in media-check.json. Owner must confirm official format acceptance and any final edit/caption requirements. |
 | Pending | Owner | Verify NASA product documentation links, third-party rights and required portal credits. RESOURCES.md distinguishes observations actually used. |
 | Pending | Owner | Challenge, São Paulo Local Event, actual member count, registration, Members tab, same event and no waitlist. No private roster accessed. |
 | Pending | Owner / Local Lead | Eligibility of pre-existing scaffolding and actual development dates; retain original history and obtain ruling if unclear. |
