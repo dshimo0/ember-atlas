@@ -1,0 +1,5 @@
+# Preserve NASA CSV payload bytes for SHA-256 verification.
+*.csv -text whitespace=cr-at-eol
+*.gz binary
+*.mp4 binary
+*.png binary
