@@ -1,9 +1,10 @@
 {
-  "url": "http://127.0.0.1:8765",
+  "url": "https://ember-atlas-opal.vercel.app",
   "calendar_months": 2,
   "filtered_csv_rows": 18038,
   "csv_area_sensor_month_verified": true,
   "mobile_no_horizontal_overflow": true,
   "javascript_errors": [],
-  "public_https_verified": false
+  "public_https_verified": true,
+  "browser_uses_system_validated_leaf_pin": true
 }

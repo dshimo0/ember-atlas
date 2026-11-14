@@ -10,6 +10,7 @@
 | Other | Python — https://www.python.org/ | Standard-library pipeline and local server | Python Software Foundation license; runtime not bundled |
 | Other | Playwright — https://playwright.dev/python/ | Verification and screen capture only | Apache-2.0; not shipped in browser |
 | Other | Chromium — https://www.chromium.org/ | Automated screen capture | Tool only; screenshots contain project UI, no people/audio |
+| Other | Vercel — https://vercel.com/ | Static app and media hosting on the existing Hobby team | Actual provider; no Vercel client library or imagery bundled |
 | Other | OpenAI Codex — https://openai.com/codex/ | Coding, tests, documentation assistance | AI disclosure belongs in portal materials |
 
 Map: project-authored WGS84 coordinate plot with NASA points and rectangular bounds. No external basemap, biome boundary dataset, imagery, icons, music, fonts or JavaScript libraries. No NASA insignia is used. Linked official terms: https://www.spaceappschallenge.org/legal/ (owner verification pending).

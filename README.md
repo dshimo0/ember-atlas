@@ -44,3 +44,7 @@ See [measured release evidence](submission/RESULTS.md), [portal copy](submission
 The beachhead is a regional fire or land-management organization preparing seasonal reviews. The open product links sensor comparisons to reproducible evidence. Monitored AOIs and scheduled reporting are potential service offerings, subject to pilot validation of review time, reproducibility, demand and willingness to pay. NASA observations remain publicly sourced.
 
 Access-recovery release: the paired 2020–2024 daily domain is now complete. The frozen 24-month holdout passes the adjustment rule; numerical evidence and limits are in submission/RESULTS.md. Use `python scripts/resume_matched.py` to resume only missing days before rebuilding. A prior versioned snapshot remains available for audit.
+
+## Live application
+
+Open https://ember-atlas-opal.vercel.app without an account. Production uses the complete paired 2020–2024 snapshot. Public browser checks confirm month/area/sensor selection, observation and aggregate exports, supported adjustment and mobile width. Actual screen recording: https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4 . See docs/DEPLOYMENT.md for the verified release and repeat-deployment commands. The PR remains open; CLI deployment is independent of merge status.

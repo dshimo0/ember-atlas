@@ -31,4 +31,4 @@ Native-unit differences are diagnostics, not common-grid errors. The prior-year 
 
 Descriptive diagnostics include 0.025/0.05/0.1-degree grids, high confidence using sensor-specific thresholds, platform mix and day/night. These are not independent validation for another AOI. Physical cell area varies with latitude. Swath/cloud observation coverage remains unknown even though daily retrieval is complete. Raw extracts and checksum manifests remain committed; the public app requires no FIRMS key.
 
-Anonymous HTTPS hosting remains pending: Vercel create-project returned 403 and no DO SSH credential is available. Official Space Apps resources still return HTTP 503; portal demonstration format must be verified by the Team Owner.
+Anonymous production HTTPS is verified at https://ember-atlas-opal.vercel.app after CLI authentication resolved the earlier Vercel creation blocker. The full public browser flow and CSV exports passed; see browser-check.json and docs/DEPLOYMENT.md. Official Space Apps resources still return HTTP 503; portal demonstration format must be verified by the Team Owner.

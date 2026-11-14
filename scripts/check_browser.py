@@ -2,11 +2,13 @@ from playwright.sync_api import sync_playwright
 from pathlib import Path
 import csv,json,time,os
 base_url=os.environ.get("BASE_URL","http://127.0.0.1:8000")
+browser_args=['--no-sandbox']
+if os.environ.get('EMBER_BROWSER_CA_SPKI'):browser_args.append('--ignore-certificate-errors-spki-list='+os.environ['EMBER_BROWSER_CA_SPKI'])
 with sync_playwright() as p:
- browser=p.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
+ browser=p.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=browser_args)
  context=browser.new_context(viewport={'width':1440,'height':1000},record_video_dir='/tmp/ember-video',record_video_size={'width':1440,'height':1000},accept_downloads=True)
  page=context.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
- page.goto(base_url);page.wait_for_function("document.querySelector('#status').textContent.includes('observations selected')",timeout=120000)
+ response=page.goto(base_url);assert response and response.status==200;page.wait_for_function("document.querySelector('#status').textContent.includes('observations selected')",timeout=120000)
  assert page.locator('#calendar button').count()==2
  page.get_by_role('button',name='2024-09',exact=False).click();page.wait_for_function("document.querySelector('#monthTitle').textContent.startsWith('2024-09')");assert '5819' in page.locator('#comparison').inner_text()
  page.screenshot(path='submission/dashboard.png',full_page=True)
@@ -26,6 +28,6 @@ with sync_playwright() as p:
  page.set_viewport_size({'width':390,'height':844});assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
  page.screenshot(path='submission/mobile.png',full_page=True)
  assert not errors,errors
- Path('submission/browser-check.json').write_text(json.dumps({'url':base_url,'calendar_months':2,'filtered_csv_rows':len(rows),'csv_area_sensor_month_verified':True,'mobile_no_horizontal_overflow':True,'javascript_errors':errors,'public_https_verified':False},indent=2))
+ Path('submission/browser-check.json').write_text(json.dumps({'url':base_url,'calendar_months':2,'filtered_csv_rows':len(rows),'csv_area_sensor_month_verified':True,'mobile_no_horizontal_overflow':True,'javascript_errors':errors,'public_https_verified':base_url.startswith('https://'),'browser_uses_system_validated_leaf_pin':bool(os.environ.get('EMBER_BROWSER_CA_SPKI'))},indent=2))
  page.wait_for_timeout(3000)
  context.close();browser.close()

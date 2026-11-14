@@ -4,11 +4,13 @@ Project name: Ember Atlas
 
 Summary: Ember Atlas helps regional fire and land managers inspect sensor changes in NASA FIRMS observations. A Pantanal study-area calendar links native MODIS and NOAA-20 VIIRS detections, common-grid activity, historical same-month comparisons and downloadable evidence.
 
-Project URL: Pending public deployment. Do not paste a local address.
+Project URL: https://ember-atlas-opal.vercel.app
 
 Source: https://github.com/dshimo0/ember-atlas
 
-Project Demonstration URL: Pending media upload and anonymous playback verification. See DEMONSTRATION.md; the separate three-minute pitch does not establish portal format compliance.
+Project Demonstration URL: https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4
+
+This is an actual 20.24-second silent screen recording. The Team Owner must confirm acceptance under the current official guide before using it in the portal; the separate three-minute pitch does not establish compliance.
 
 Project Details:
 
@@ -16,7 +18,7 @@ Was a season unusually active, or did a different satellite detect more? Ember A
 
 The release uses real MODIS C6.1 SP and VIIRS NOAA-20 SP observations. Training was frozen at 2020–2022 and holdout at 2023–2024. All 24 paired holdout months are now retrieved. Common-grid monthly MAE was 1021.71 cell-days, versus 199.70 after the frozen seasonal adjustment. Adjustment publication is supported within the full study rectangle and evaluated 2020–2024 domain. Exact periods, sample sizes and errors are in RESULTS.md and the machine-readable validation output. Hotspots are thermal anomalies, not burned area or independent fires. Clouds and overpass sampling remain unmeasured without usable-observation masks.
 
-Reproduce: serve the pinned web directory, select September 2024, inspect native detections and occupied cell-days, then download the selected month's observations. Public HTTPS verification is pending.
+Reproduce: serve the pinned web directory, select September 2024, inspect native detections and occupied cell-days, then download the selected month's observations. The complete flow was verified on the anonymous public HTTPS application.
 
 Use of Artificial Intelligence:
 

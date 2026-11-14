@@ -18,3 +18,7 @@ Real pilot complete; canonical historical extracts and compressed public snapsho
 ## Access recovery follow-up
 
 After the environment configuration was published, FIRMS availability and bounded downloads worked again. Resume fills only uncovered UTC days, preserving prior manifests. The full 2020–2024 paired domain is required before the updated release report is generated; the frozen 2020–2022 training / 2023–2024 holdout and acceptance rule remain unchanged. The Vercel team still has no Ember Atlas project, and no CLI credential is present.
+
+## Production hosting closeout
+
+After user-completed CLI authentication, project creation and static production deployment succeeded in the existing Vercel Hobby team. https://ember-atlas-opal.vercel.app serves the pinned observations anonymously. Deployment inputs were checked to exclude ingestion and raw data. Complete public browser flow, CSV downloads and mobile checks passed; official portal guide verification and final owner submission remain separate pending gates.
