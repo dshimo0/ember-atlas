@@ -29,7 +29,7 @@ Before changing the interface, the deployed `data/latest.json` and `data/validat
 
 ## Verification protocol and artifacts
 
-`python -m unittest discover -s tests`: nine pipeline/science tests. `node tests/test_model.mjs`: seven selection, baseline, missingness, scope and CSV tests. `scripts/check_judging_flow.py` uses the original pinned observations as its independent export oracle in fresh desktop (1440×1000) and mobile (390×844) contexts. Mobile checks are viewport emulation, not a physical-device usability study.
+`python -m unittest discover -s tests`: nine pipeline/science tests. `node tests/test_model.mjs`: eight selection, baseline, missingness, scope and CSV tests. `scripts/check_judging_flow.py` uses the original pinned observations as its independent export oracle in fresh desktop (1440×1000) and mobile (390×844) contexts. Mobile checks are viewport emulation, not a physical-device usability study.
 
 The flow checks initial load, month change by keyboard, manual UTC date changes, sensor filter, both subregions, both CSVs, zero retrieval versus missing, native/grid reconciliation and JavaScript exceptions. Northern MODIS September export is 18,038 records. Every default observation row is compared by product, UTC date/time, coordinates and source reference with the original snapshot; common-grid totals and all 120 aggregate rows are checked. [Local machine-readable report](../submission/judging-check-local.json); [Public signed-out report](../submission/judging-check-public.json) passed on both viewports at 2026-11-14T21:29:04.445949+00:00. HTTPS/hostname were independently checked with the system CA store; Chromium used that validated leaf key to accommodate the Cloud proxy.
 

@@ -80,7 +80,7 @@ function baselineView(s, values) {
   }
   $('baseline').innerHTML = baselines.map(v => {
     const b = v.baseline, name = SENSOR_NAMES[v.product], mark = v.product === 'MODIS_SP' ? 'modis' : 'viirs';
-    return `<div class="baseline-row"><div><span><i class="mark ${mark}" aria-hidden="true"></i>${name}</span><strong>${b ? signed(b.percent, 1) + '%' : '—'}</strong></div>${b ? `<p>${number(v.cells)} cell-days vs median <b>${number(b.median, b.median % 1 ? 1 : 0)}</b> · ${signed(b.difference, 0)} cell-days</p><details><summary>Baseline ${yearsLabel(b.entries.map(e => e.year))} · n = ${b.n} prior years</summary><div class="baseline-values">${b.entries.map(e => `${e.year}: ${number(e.value)} cell-days`).join('<br>')}<br>Selected year excluded.</div></details>` : `<p>${v.status}; ${v.retrieved}/${v.expected} selected UTC days retrieved. Baseline unavailable.</p>`}</div>`;
+    return `<div class="baseline-row"><div><span><i class="mark ${mark}" aria-hidden="true"></i>${name}</span><strong>${b && b.percent !== null ? signed(b.percent, 1) + '%' : '—'}</strong></div>${b ? `<p>${number(v.cells)} cell-days vs median <b>${number(b.median, b.median % 1 ? 1 : 0)}</b> · ${signed(b.difference, 0)} cell-days</p><details><summary>Baseline ${yearsLabel(b.entries.map(e => e.year))} · n = ${b.n} prior years</summary><div class="baseline-values">${b.entries.map(e => `${e.year}: ${number(e.value)} cell-days`).join('<br>')}<br>Selected year excluded.</div></details>` : `<p>${v.status}; ${v.retrieved}/${v.expected} selected UTC days retrieved. Baseline unavailable.</p>`}</div>`;
   }).join('');
 }
 function comparison(s, values) {

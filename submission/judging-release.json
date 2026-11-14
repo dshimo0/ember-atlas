@@ -1,0 +1,54 @@
+{
+  "url": "https://ember-atlas-opal.vercel.app",
+  "tested_ui_commit": "3dd5426f98d9c04f2dd7f6dffef6f3606219d719",
+  "deployment_source_commit": "e2435ac7514e469d76f2b0fd0832712fcfe98837",
+  "deployment_id": "dpl_HqkhL5hJUJ8Ek4VXXAsH8r6BAQvx",
+  "application_bytes_unchanged_since_full_public_flow_test": true,
+  "checks": [
+    {
+      "path": "index.html",
+      "sha256": "c80ce57bd26290efda456ff755524a1e9f751a1ee3a5f27cd17e1f7f23d16e42",
+      "http_status": 200
+    },
+    {
+      "path": "app.js",
+      "sha256": "9143b0d22a30ee720cffd909f44940b551a82a11a923fffe75d50cd2f3e3cec3",
+      "http_status": 200
+    },
+    {
+      "path": "model.mjs",
+      "sha256": "254167bf86db81cccfa1f3ccd9268bf06cf10be1409f398fee549afb71129c5b",
+      "http_status": 200
+    },
+    {
+      "path": "style.css",
+      "sha256": "e83547677ded4770b796b308ca27c25120dfc39d67873ddf208981c526f5bf80",
+      "http_status": 200
+    },
+    {
+      "path": "data/dashboard.json",
+      "sha256": "c33186c9e00a10836173a0b5eead3e0a1a5b52f6340094b838437f8dd44414c6",
+      "http_status": 200
+    },
+    {
+      "path": "data/latest.json",
+      "sha256": "24f68494cf0d1315b310685f881ce3ec5022c0725e093024e9e18fc7928f57d4",
+      "http_status": 200
+    },
+    {
+      "path": "data/validation.json",
+      "sha256": "e17b5f4c9e90e163104aa0acbac9bfac5035999aa0db1c86e87e7ca00ec0d2fe",
+      "http_status": 200
+    },
+    {
+      "path": "assets/geography.json",
+      "sha256": "301e337a11429359e3ce3793fddc043440535e0ec06806d5f775ac5021c49d01",
+      "http_status": 200
+    },
+    {
+      "path": "assets/workflow-capture.mp4",
+      "sha256": "8e4a6d59d153daa141fc1567dc39261e60a965550cf679447022daba1cbb1b05",
+      "http_status": 200
+    }
+  ]
+}

@@ -48,3 +48,9 @@ test('observation export keeps provenance and correctly escapes CSV',()=>{
   assert(text.includes('"0030"'));assert(text.includes('"file,""quoted"""'));assert(text.includes(summary.snapshot.sha256));
   assert.equal(monthsBetween(state.start,state.end).length,60);
 });
+
+test('a zero historical median keeps absolute difference and omits percentage',()=>{
+  const daily=[];for(const year of [2020,2021,2022,2023])for(let day=1;day<=31;day++)daily.push({day:`${year}-01-${String(day).padStart(2,'0')}`,area:'all',product:'MODIS_SP',native:year===2023&&day===1?1:0,cells:year===2023&&day===1?1:0});
+  const fake={monthly:[2020,2021,2022,2023].map(year=>({year}))};
+  const b=historicalBaseline(makeIndex({daily}),'2023-01','MODIS_SP',state,fake);assert.equal(b.median,0);assert.equal(b.difference,1);assert.equal(b.percent,null);
+});
