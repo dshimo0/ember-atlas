@@ -14,3 +14,7 @@ Start with an analyst selecting the Pantanal, spotting an unusual month and expo
 ## 2026-11-14 execution evidence
 
 Real pilot complete; canonical historical extracts and compressed public snapshot acquired. Common-grid and frozen seasonal candidate evaluated, but only five holdout months are complete, so adjusted publication is blocked by the minimum support rule. Static dashboard, subarea/date/sensor filtering, month selection, prior same-month sensor baselines and observation CSV implemented. Vercel create-project denied (403); no authorized DO SSH access. Official Space Apps resources returned 503. Submission package distinguishes these pending gates and does not claim public deployment or final submission.
+
+## Access recovery follow-up
+
+After the environment configuration was published, FIRMS availability and bounded downloads worked again. Resume fills only uncovered UTC days, preserving prior manifests. The full 2020–2024 paired domain is required before the updated release report is generated; the frozen 2020–2022 training / 2023–2024 holdout and acceptance rule remain unchanged. The Vercel team still has no Ember Atlas project, and no CLI credential is present.

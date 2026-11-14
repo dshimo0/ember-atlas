@@ -1,26 +1,34 @@
-# Measured evidence — ember-1
+# Measured evidence — completed overlap
 
-NASA availability was successfully queried on 2026-11-14. The first paired 2024-08-01–2024-09-30 extract completed. Subsequent historical acquisition obtained 514 canonical window manifests and 945,163 deduplicated observations spanning requested windows between 2020-01-01 and 2024-12-31, with substantial gaps. This is not five complete years. See the snapshot manifests for exact successfully retrieved dates. Standard processing only: MODIS_SP (C6.1 Terra/Aqua pooled) and VIIRS_NOAA20_SP (375 m).
+NASA FIRMS acquisition resumed successfully after the environment configuration was published. All UTC days from 2020-01-01 through 2024-12-31 are retrieved for MODIS_SP (MODIS C6.1 Terra/Aqua pooled) and VIIRS_NOAA20_SP (375 m). The canonical snapshot contains 1,213,587 deduplicated observations and 737 original window manifests. Earlier invalid-key responses are recorded as a recovered access interruption; their cause is unconfirmed.
 
-Frozen fit: 36 complete paired training months, January 2020–December 2022. Frozen holdout: 2023–2024, of which only January–March 2023 and August–September 2024 are complete paired months. Nineteen holdout months are excluded (missing or partial retrieval). Training seasonal factors (MODIS / VIIRS cell-day totals): Q1 0.5093553, Q2 0.4825479, Q3 0.5538714, Q4 0.4888942.
+## Frozen evaluation
 
-| Metric, identical five holdout months | Unadjusted common grid | Candidate adjustment |
+Training: 36 complete paired months, 2020–2022. Holdout: 24 complete paired months, 2023–2024. Grid: globally anchored 0.05° WGS84 per UTC day. Factors were fit only to training data; no thresholds or seasonal settings were tuned on the expanded holdout. Publication is supported within the full study rectangle and evaluated 2020–2024 domain.
+
+| Monthly metric, same 24 holdout months | Unadjusted grid | Candidate adjustment |
 | --- | ---: | ---: |
-| Monthly MAE, occupied cell-days | 1382.20 | 388.02 |
-| Signed bias, VIIRS minus MODIS cell-days/month | +1382.20 | −340.53 |
+| MAE, occupied cell-days | 1021.71 | 199.70 |
+| Signed bias, VIIRS minus MODIS cell-days/month | +1021.71 | -123.97 |
 
-**Calibration unavailable for publication:** numerical improvement does not satisfy the predeclared requirement of 24 matched holdout months across two years. Candidate errors are exploratory partial-holdout evidence. Public adjusted series are null. No confidence interval is supported with two incomplete independent holdout years. There is no measured legacy/VIIRS handoff because no harmonized transition is published.
+## Seasonal holdout results
 
-| Holdout month | MODIS native | NOAA-20 native | MODIS cell-days | NOAA-20 cell-days |
-| --- | ---: | ---: | ---: | ---: |
-| 2023-01 | 357 | 1583 | 248 | 720 |
-| 2023-02 | 147 | 256 | 135 | 167 |
-| 2023-03 | 239 | 448 | 201 | 251 |
-| 2024-08 | 24224 | 105056 | 5880 | 9247 |
-| 2024-09 | 23396 | 101659 | 5819 | 8809 |
+| Quarter | n | Baseline MAE | Adjusted MAE | Baseline bias | Adjusted bias |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Q1 | 6 | 374.50 | 75.45 | +374.50 | -30.69 |
+| Q2 | 6 | 724.50 | 118.97 | +724.50 | -32.10 |
+| Q3 | 6 | 1801.33 | 365.44 | +1801.33 | -232.27 |
+| Q4 | 6 | 1186.50 | 238.94 | +1186.50 | -200.81 |
 
-Native-unit differences diagnose sensitivity; they are not errors on the common-grid scale. MODIS is a comparison reference, not ground truth. The 0.05-degree grid has latitude-dependent area. Diagnostics JSON includes 0.025/0.05/0.1-degree grids, sensor-specific high confidence, platform and day/night counts. These are descriptive checks, not independent transfer validation. Swath/cloud coverage is unknown; successful empty retrieval means no detections recorded, never proof of no fire.
+## September 2024
 
-Acquisition blocker: NASA later returned `Invalid MAP_KEY.` No credential appeared in logs, artifacts or public code. Replacing/reactivating the scoped ingestion secret is required for the remaining holdout windows. Existing downloads are checksum verified and resumable. Public deployment and official portal rule checks are separately pending; see RELEASE-CHECKLIST.md.
+| Product | Native detections | Occupied cell-days | Prior September median | Prior years (n) | Difference |
+| --- | ---: | ---: | ---: | --- | ---: |
+| MODIS_SP | 23396 | 5819 | 2532.0 | 2020–2023 (4) | +129.82% |
+| VIIRS_NOAA20_SP | 101659 | 8809 | 4782.0 | 2020–2023 (4) | +84.21% |
 
-September 2024 compared with the three complete prior September values (2020–2022): MODIS median 3,791 cell-days, observed 5,819 (+53.50%); NOAA-20 median 6,893, observed 8,809 (+27.80%). These small, sensor-specific baselines support a descriptive comparison, not a climate trend or causal attribution. The difference between sensor anomalies itself illustrates why native counts should not be spliced.
+Native-unit differences are diagnostics, not common-grid errors. The prior-year median is sensor-specific; the adjusted estimate is a MODIS-reference comparability measure. Neither identifies unique fires, burned area or ground truth. Two independent holdout years do not support a precise uncertainty interval; none is published. The release presents overlap and does not claim a validated legacy-to-VIIRS transition outside 2020–2024.
+
+Descriptive diagnostics include 0.025/0.05/0.1-degree grids, high confidence using sensor-specific thresholds, platform mix and day/night. These are not independent validation for another AOI. Physical cell area varies with latitude. Swath/cloud observation coverage remains unknown even though daily retrieval is complete. Raw extracts and checksum manifests remain committed; the public app requires no FIRMS key.
+
+Anonymous HTTPS hosting remains pending: Vercel create-project returned 403 and no DO SSH credential is available. Official Space Apps resources still return HTTP 503; portal demonstration format must be verified by the Team Owner.

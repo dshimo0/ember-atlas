@@ -2197,21 +2197,21 @@
       "product": "MODIS_SP",
       "grid": "0.025",
       "confidence": "all",
-      "cell_days": 164
+      "cell_days": 174
     },
     {
       "month": "2023-04",
       "product": "MODIS_SP",
       "grid": "0.05",
       "confidence": "all",
-      "cell_days": 155
+      "cell_days": 165
     },
     {
       "month": "2023-04",
       "product": "MODIS_SP",
       "grid": "0.1",
       "confidence": "all",
-      "cell_days": 153
+      "cell_days": 163
     },
     {
       "month": "2023-04",
@@ -2225,49 +2225,861 @@
       "product": "VIIRS_NOAA20_SP",
       "grid": "0.025",
       "confidence": "all",
-      "cell_days": 257
+      "cell_days": 274
     },
     {
       "month": "2023-04",
       "product": "VIIRS_NOAA20_SP",
       "grid": "0.05",
       "confidence": "all",
-      "cell_days": 244
+      "cell_days": 261
     },
     {
       "month": "2023-04",
       "product": "VIIRS_NOAA20_SP",
       "grid": "0.1",
       "confidence": "all",
-      "cell_days": 234
+      "cell_days": 251
+    },
+    {
+      "month": "2023-05",
+      "product": "MODIS_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 56
+    },
+    {
+      "month": "2023-05",
+      "product": "MODIS_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 328
+    },
+    {
+      "month": "2023-05",
+      "product": "MODIS_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 286
+    },
+    {
+      "month": "2023-05",
+      "product": "MODIS_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 273
+    },
+    {
+      "month": "2023-05",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 32
+    },
+    {
+      "month": "2023-05",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 898
+    },
+    {
+      "month": "2023-05",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 838
+    },
+    {
+      "month": "2023-05",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 782
+    },
+    {
+      "month": "2023-06",
+      "product": "MODIS_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 145
+    },
+    {
+      "month": "2023-06",
+      "product": "MODIS_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 552
+    },
+    {
+      "month": "2023-06",
+      "product": "MODIS_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 470
+    },
+    {
+      "month": "2023-06",
+      "product": "MODIS_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 393
+    },
+    {
+      "month": "2023-06",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 59
+    },
+    {
+      "month": "2023-06",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 1333
+    },
+    {
+      "month": "2023-06",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 1190
+    },
+    {
+      "month": "2023-06",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 1060
+    },
+    {
+      "month": "2023-07",
+      "product": "MODIS_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 226
+    },
+    {
+      "month": "2023-07",
+      "product": "MODIS_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 898
+    },
+    {
+      "month": "2023-07",
+      "product": "MODIS_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 730
+    },
+    {
+      "month": "2023-07",
+      "product": "MODIS_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 619
+    },
+    {
+      "month": "2023-07",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 104
+    },
+    {
+      "month": "2023-07",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 1471
+    },
+    {
+      "month": "2023-07",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 1249
+    },
+    {
+      "month": "2023-07",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 1102
+    },
+    {
+      "month": "2023-08",
+      "product": "MODIS_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 354
+    },
+    {
+      "month": "2023-08",
+      "product": "MODIS_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 1256
+    },
+    {
+      "month": "2023-08",
+      "product": "MODIS_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 1006
+    },
+    {
+      "month": "2023-08",
+      "product": "MODIS_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 842
+    },
+    {
+      "month": "2023-08",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 165
+    },
+    {
+      "month": "2023-08",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 2646
+    },
+    {
+      "month": "2023-08",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 2165
+    },
+    {
+      "month": "2023-08",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 1849
+    },
+    {
+      "month": "2023-09",
+      "product": "MODIS_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 560
+    },
+    {
+      "month": "2023-09",
+      "product": "MODIS_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 1650
+    },
+    {
+      "month": "2023-09",
+      "product": "MODIS_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 1273
+    },
+    {
+      "month": "2023-09",
+      "product": "MODIS_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 1038
+    },
+    {
+      "month": "2023-09",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 309
+    },
+    {
+      "month": "2023-09",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 3376
+    },
+    {
+      "month": "2023-09",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 2671
+    },
+    {
+      "month": "2023-09",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 2190
+    },
+    {
+      "month": "2023-10",
+      "product": "MODIS_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 896
+    },
+    {
+      "month": "2023-10",
+      "product": "MODIS_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 2539
+    },
+    {
+      "month": "2023-10",
+      "product": "MODIS_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 1793
+    },
+    {
+      "month": "2023-10",
+      "product": "MODIS_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 1344
+    },
+    {
+      "month": "2023-10",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 556
+    },
+    {
+      "month": "2023-10",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 4684
+    },
+    {
+      "month": "2023-10",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 3383
+    },
+    {
+      "month": "2023-10",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 2538
     },
     {
       "month": "2023-11",
       "product": "MODIS_SP",
       "grid": ".05",
       "confidence": "high",
-      "cell_days": 412
+      "cell_days": 1884
     },
     {
       "month": "2023-11",
       "product": "MODIS_SP",
       "grid": "0.025",
       "confidence": "all",
-      "cell_days": 1075
+      "cell_days": 5066
     },
     {
       "month": "2023-11",
       "product": "MODIS_SP",
       "grid": "0.05",
       "confidence": "all",
-      "cell_days": 696
+      "cell_days": 3108
     },
     {
       "month": "2023-11",
       "product": "MODIS_SP",
       "grid": "0.1",
       "confidence": "all",
-      "cell_days": 475
+      "cell_days": 2043
+    },
+    {
+      "month": "2023-11",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 1137
+    },
+    {
+      "month": "2023-11",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 8207
+    },
+    {
+      "month": "2023-11",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 4996
+    },
+    {
+      "month": "2023-11",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 3252
+    },
+    {
+      "month": "2023-12",
+      "product": "MODIS_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 278
+    },
+    {
+      "month": "2023-12",
+      "product": "MODIS_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 1234
+    },
+    {
+      "month": "2023-12",
+      "product": "MODIS_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 975
+    },
+    {
+      "month": "2023-12",
+      "product": "MODIS_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 842
+    },
+    {
+      "month": "2023-12",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 99
+    },
+    {
+      "month": "2023-12",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 2146
+    },
+    {
+      "month": "2023-12",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 1705
+    },
+    {
+      "month": "2023-12",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 1441
+    },
+    {
+      "month": "2024-01",
+      "product": "MODIS_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 280
+    },
+    {
+      "month": "2024-01",
+      "product": "MODIS_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 1072
+    },
+    {
+      "month": "2024-01",
+      "product": "MODIS_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 891
+    },
+    {
+      "month": "2024-01",
+      "product": "MODIS_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 780
+    },
+    {
+      "month": "2024-01",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 170
+    },
+    {
+      "month": "2024-01",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 2051
+    },
+    {
+      "month": "2024-01",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 1701
+    },
+    {
+      "month": "2024-01",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 1484
+    },
+    {
+      "month": "2024-02",
+      "product": "MODIS_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 108
+    },
+    {
+      "month": "2024-02",
+      "product": "MODIS_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 503
+    },
+    {
+      "month": "2024-02",
+      "product": "MODIS_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 422
+    },
+    {
+      "month": "2024-02",
+      "product": "MODIS_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 377
+    },
+    {
+      "month": "2024-02",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 53
+    },
+    {
+      "month": "2024-02",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 1026
+    },
+    {
+      "month": "2024-02",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 859
+    },
+    {
+      "month": "2024-02",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 745
+    },
+    {
+      "month": "2024-03",
+      "product": "MODIS_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 226
+    },
+    {
+      "month": "2024-03",
+      "product": "MODIS_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 986
+    },
+    {
+      "month": "2024-03",
+      "product": "MODIS_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 811
+    },
+    {
+      "month": "2024-03",
+      "product": "MODIS_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 701
+    },
+    {
+      "month": "2024-03",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 109
+    },
+    {
+      "month": "2024-03",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 1548
+    },
+    {
+      "month": "2024-03",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 1257
+    },
+    {
+      "month": "2024-03",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 1073
+    },
+    {
+      "month": "2024-04",
+      "product": "MODIS_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 84
+    },
+    {
+      "month": "2024-04",
+      "product": "MODIS_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 367
+    },
+    {
+      "month": "2024-04",
+      "product": "MODIS_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 311
+    },
+    {
+      "month": "2024-04",
+      "product": "MODIS_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 276
+    },
+    {
+      "month": "2024-04",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 48
+    },
+    {
+      "month": "2024-04",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 812
+    },
+    {
+      "month": "2024-04",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 693
+    },
+    {
+      "month": "2024-04",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 596
+    },
+    {
+      "month": "2024-05",
+      "product": "MODIS_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 235
+    },
+    {
+      "month": "2024-05",
+      "product": "MODIS_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 886
+    },
+    {
+      "month": "2024-05",
+      "product": "MODIS_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 702
+    },
+    {
+      "month": "2024-05",
+      "product": "MODIS_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 598
+    },
+    {
+      "month": "2024-05",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 153
+    },
+    {
+      "month": "2024-05",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 1877
+    },
+    {
+      "month": "2024-05",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 1485
+    },
+    {
+      "month": "2024-05",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 1261
+    },
+    {
+      "month": "2024-06",
+      "product": "MODIS_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 1196
+    },
+    {
+      "month": "2024-06",
+      "product": "MODIS_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 3789
+    },
+    {
+      "month": "2024-06",
+      "product": "MODIS_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 2492
+    },
+    {
+      "month": "2024-06",
+      "product": "MODIS_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 1787
+    },
+    {
+      "month": "2024-06",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 857
+    },
+    {
+      "month": "2024-06",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 6322
+    },
+    {
+      "month": "2024-06",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 4306
+    },
+    {
+      "month": "2024-06",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 3101
+    },
+    {
+      "month": "2024-07",
+      "product": "MODIS_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 874
+    },
+    {
+      "month": "2024-07",
+      "product": "MODIS_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 2706
+    },
+    {
+      "month": "2024-07",
+      "product": "MODIS_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 1834
+    },
+    {
+      "month": "2024-07",
+      "product": "MODIS_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 1315
+    },
+    {
+      "month": "2024-07",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 650
+    },
+    {
+      "month": "2024-07",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 4633
+    },
+    {
+      "month": "2024-07",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 3209
+    },
+    {
+      "month": "2024-07",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 2320
     },
     {
       "month": "2024-08",
@@ -2382,32 +3194,172 @@
       "cell_days": 5494
     },
     {
+      "month": "2024-10",
+      "product": "MODIS_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 1405
+    },
+    {
+      "month": "2024-10",
+      "product": "MODIS_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 3956
+    },
+    {
+      "month": "2024-10",
+      "product": "MODIS_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 2564
+    },
+    {
+      "month": "2024-10",
+      "product": "MODIS_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 1757
+    },
+    {
+      "month": "2024-10",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 972
+    },
+    {
+      "month": "2024-10",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 7056
+    },
+    {
+      "month": "2024-10",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 4481
+    },
+    {
+      "month": "2024-10",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 3029
+    },
+    {
+      "month": "2024-11",
+      "product": "MODIS_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 168
+    },
+    {
+      "month": "2024-11",
+      "product": "MODIS_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 653
+    },
+    {
+      "month": "2024-11",
+      "product": "MODIS_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 523
+    },
+    {
+      "month": "2024-11",
+      "product": "MODIS_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 448
+    },
+    {
+      "month": "2024-11",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 99
+    },
+    {
+      "month": "2024-11",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 1464
+    },
+    {
+      "month": "2024-11",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 1192
+    },
+    {
+      "month": "2024-11",
+      "product": "VIIRS_NOAA20_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 1030
+    },
+    {
+      "month": "2024-12",
+      "product": "MODIS_SP",
+      "grid": ".05",
+      "confidence": "high",
+      "cell_days": 50
+    },
+    {
+      "month": "2024-12",
+      "product": "MODIS_SP",
+      "grid": "0.025",
+      "confidence": "all",
+      "cell_days": 238
+    },
+    {
+      "month": "2024-12",
+      "product": "MODIS_SP",
+      "grid": "0.05",
+      "confidence": "all",
+      "cell_days": 204
+    },
+    {
+      "month": "2024-12",
+      "product": "MODIS_SP",
+      "grid": "0.1",
+      "confidence": "all",
+      "cell_days": 191
+    },
+    {
       "month": "2024-12",
       "product": "VIIRS_NOAA20_SP",
       "grid": ".05",
       "confidence": "high",
-      "cell_days": 5
+      "cell_days": 12
     },
     {
       "month": "2024-12",
       "product": "VIIRS_NOAA20_SP",
       "grid": "0.025",
       "confidence": "all",
-      "cell_days": 24
+      "cell_days": 588
     },
     {
       "month": "2024-12",
       "product": "VIIRS_NOAA20_SP",
       "grid": "0.05",
       "confidence": "all",
-      "cell_days": 21
+      "cell_days": 529
     },
     {
       "month": "2024-12",
       "product": "VIIRS_NOAA20_SP",
       "grid": "0.1",
       "confidence": "all",
-      "cell_days": 20
+      "cell_days": 502
     }
   ],
   "platform_daynight": [
@@ -4054,7 +5006,7 @@
       "product": "MODIS_SP",
       "platform": "Aqua",
       "daynight": "D",
-      "native": 80
+      "native": 83
     },
     {
       "month": "2023-04",
@@ -4068,56 +5020,658 @@
       "product": "MODIS_SP",
       "platform": "Terra",
       "daynight": "D",
-      "native": 95
+      "native": 100
     },
     {
       "month": "2023-04",
       "product": "MODIS_SP",
       "platform": "Terra",
       "daynight": "N",
-      "native": 19
+      "native": 21
     },
     {
       "month": "2023-04",
       "product": "VIIRS_NOAA20_SP",
       "platform": "N20",
       "daynight": "D",
-      "native": 234
+      "native": 249
     },
     {
       "month": "2023-04",
       "product": "VIIRS_NOAA20_SP",
       "platform": "N20",
       "daynight": "N",
-      "native": 187
+      "native": 193
+    },
+    {
+      "month": "2023-05",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "D",
+      "native": 219
+    },
+    {
+      "month": "2023-05",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "N",
+      "native": 15
+    },
+    {
+      "month": "2023-05",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "D",
+      "native": 168
+    },
+    {
+      "month": "2023-05",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "N",
+      "native": 46
+    },
+    {
+      "month": "2023-05",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "D",
+      "native": 958
+    },
+    {
+      "month": "2023-05",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "N",
+      "native": 615
+    },
+    {
+      "month": "2023-06",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "D",
+      "native": 411
+    },
+    {
+      "month": "2023-06",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "N",
+      "native": 76
+    },
+    {
+      "month": "2023-06",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "D",
+      "native": 217
+    },
+    {
+      "month": "2023-06",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "N",
+      "native": 176
+    },
+    {
+      "month": "2023-06",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "D",
+      "native": 1633
+    },
+    {
+      "month": "2023-06",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "N",
+      "native": 1447
+    },
+    {
+      "month": "2023-07",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "D",
+      "native": 756
+    },
+    {
+      "month": "2023-07",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "N",
+      "native": 150
+    },
+    {
+      "month": "2023-07",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "D",
+      "native": 303
+    },
+    {
+      "month": "2023-07",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "N",
+      "native": 278
+    },
+    {
+      "month": "2023-07",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "D",
+      "native": 1933
+    },
+    {
+      "month": "2023-07",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "N",
+      "native": 1737
+    },
+    {
+      "month": "2023-08",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "D",
+      "native": 1160
+    },
+    {
+      "month": "2023-08",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "N",
+      "native": 149
+    },
+    {
+      "month": "2023-08",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "D",
+      "native": 443
+    },
+    {
+      "month": "2023-08",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "N",
+      "native": 283
+    },
+    {
+      "month": "2023-08",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "D",
+      "native": 4942
+    },
+    {
+      "month": "2023-08",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "N",
+      "native": 1952
+    },
+    {
+      "month": "2023-09",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "D",
+      "native": 1707
+    },
+    {
+      "month": "2023-09",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "N",
+      "native": 160
+    },
+    {
+      "month": "2023-09",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "D",
+      "native": 619
+    },
+    {
+      "month": "2023-09",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "N",
+      "native": 385
+    },
+    {
+      "month": "2023-09",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "D",
+      "native": 7481
+    },
+    {
+      "month": "2023-09",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "N",
+      "native": 2503
+    },
+    {
+      "month": "2023-10",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "D",
+      "native": 2405
+    },
+    {
+      "month": "2023-10",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "N",
+      "native": 386
+    },
+    {
+      "month": "2023-10",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "D",
+      "native": 1128
+    },
+    {
+      "month": "2023-10",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "N",
+      "native": 1101
+    },
+    {
+      "month": "2023-10",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "D",
+      "native": 12437
+    },
+    {
+      "month": "2023-10",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "N",
+      "native": 5258
     },
     {
       "month": "2023-11",
       "product": "MODIS_SP",
       "platform": "Aqua",
       "daynight": "D",
-      "native": 901
+      "native": 5187
     },
     {
       "month": "2023-11",
       "product": "MODIS_SP",
       "platform": "Aqua",
       "daynight": "N",
-      "native": 185
+      "native": 1501
     },
     {
       "month": "2023-11",
       "product": "MODIS_SP",
       "platform": "Terra",
       "daynight": "D",
-      "native": 869
+      "native": 2880
     },
     {
       "month": "2023-11",
       "product": "MODIS_SP",
       "platform": "Terra",
       "daynight": "N",
-      "native": 360
+      "native": 3227
+    },
+    {
+      "month": "2023-11",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "D",
+      "native": 27160
+    },
+    {
+      "month": "2023-11",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "N",
+      "native": 19138
+    },
+    {
+      "month": "2023-12",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "D",
+      "native": 852
+    },
+    {
+      "month": "2023-12",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "N",
+      "native": 181
+    },
+    {
+      "month": "2023-12",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "D",
+      "native": 648
+    },
+    {
+      "month": "2023-12",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "N",
+      "native": 343
+    },
+    {
+      "month": "2023-12",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "D",
+      "native": 4180
+    },
+    {
+      "month": "2023-12",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "N",
+      "native": 2409
+    },
+    {
+      "month": "2024-01",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "D",
+      "native": 585
+    },
+    {
+      "month": "2024-01",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "N",
+      "native": 227
+    },
+    {
+      "month": "2024-01",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "D",
+      "native": 425
+    },
+    {
+      "month": "2024-01",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "N",
+      "native": 488
+    },
+    {
+      "month": "2024-01",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "D",
+      "native": 3471
+    },
+    {
+      "month": "2024-01",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "N",
+      "native": 2777
+    },
+    {
+      "month": "2024-02",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "D",
+      "native": 264
+    },
+    {
+      "month": "2024-02",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "N",
+      "native": 102
+    },
+    {
+      "month": "2024-02",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "D",
+      "native": 176
+    },
+    {
+      "month": "2024-02",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "N",
+      "native": 208
+    },
+    {
+      "month": "2024-02",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "D",
+      "native": 1381
+    },
+    {
+      "month": "2024-02",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "N",
+      "native": 1676
+    },
+    {
+      "month": "2024-03",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "D",
+      "native": 681
+    },
+    {
+      "month": "2024-03",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "N",
+      "native": 209
+    },
+    {
+      "month": "2024-03",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "D",
+      "native": 441
+    },
+    {
+      "month": "2024-03",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "N",
+      "native": 361
+    },
+    {
+      "month": "2024-03",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "D",
+      "native": 3008
+    },
+    {
+      "month": "2024-03",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "N",
+      "native": 2056
+    },
+    {
+      "month": "2024-04",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "D",
+      "native": 244
+    },
+    {
+      "month": "2024-04",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "N",
+      "native": 91
+    },
+    {
+      "month": "2024-04",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "D",
+      "native": 114
+    },
+    {
+      "month": "2024-04",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "N",
+      "native": 141
+    },
+    {
+      "month": "2024-04",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "D",
+      "native": 1272
+    },
+    {
+      "month": "2024-04",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "N",
+      "native": 1040
+    },
+    {
+      "month": "2024-05",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "D",
+      "native": 660
+    },
+    {
+      "month": "2024-05",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "N",
+      "native": 141
+    },
+    {
+      "month": "2024-05",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "D",
+      "native": 304
+    },
+    {
+      "month": "2024-05",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "N",
+      "native": 316
+    },
+    {
+      "month": "2024-05",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "D",
+      "native": 2949
+    },
+    {
+      "month": "2024-05",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "N",
+      "native": 2297
+    },
+    {
+      "month": "2024-06",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "D",
+      "native": 4250
+    },
+    {
+      "month": "2024-06",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "N",
+      "native": 995
+    },
+    {
+      "month": "2024-06",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "D",
+      "native": 1321
+    },
+    {
+      "month": "2024-06",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "N",
+      "native": 1729
+    },
+    {
+      "month": "2024-06",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "D",
+      "native": 18737
+    },
+    {
+      "month": "2024-06",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "N",
+      "native": 11092
+    },
+    {
+      "month": "2024-07",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "D",
+      "native": 3265
+    },
+    {
+      "month": "2024-07",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "N",
+      "native": 466
+    },
+    {
+      "month": "2024-07",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "D",
+      "native": 721
+    },
+    {
+      "month": "2024-07",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "N",
+      "native": 1040
+    },
+    {
+      "month": "2024-07",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "D",
+      "native": 14214
+    },
+    {
+      "month": "2024-07",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "N",
+      "native": 7387
     },
     {
       "month": "2024-08",
@@ -4204,18 +5758,130 @@
       "native": 54019
     },
     {
+      "month": "2024-10",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "D",
+      "native": 3660
+    },
+    {
+      "month": "2024-10",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "N",
+      "native": 1303
+    },
+    {
+      "month": "2024-10",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "D",
+      "native": 2021
+    },
+    {
+      "month": "2024-10",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "N",
+      "native": 2144
+    },
+    {
+      "month": "2024-10",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "D",
+      "native": 20994
+    },
+    {
+      "month": "2024-10",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "N",
+      "native": 17097
+    },
+    {
+      "month": "2024-11",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "D",
+      "native": 430
+    },
+    {
+      "month": "2024-11",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "N",
+      "native": 107
+    },
+    {
+      "month": "2024-11",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "D",
+      "native": 275
+    },
+    {
+      "month": "2024-11",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "N",
+      "native": 236
+    },
+    {
+      "month": "2024-11",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "D",
+      "native": 2417
+    },
+    {
+      "month": "2024-11",
+      "product": "VIIRS_NOAA20_SP",
+      "platform": "N20",
+      "daynight": "N",
+      "native": 2017
+    },
+    {
+      "month": "2024-12",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "D",
+      "native": 123
+    },
+    {
+      "month": "2024-12",
+      "product": "MODIS_SP",
+      "platform": "Aqua",
+      "daynight": "N",
+      "native": 34
+    },
+    {
+      "month": "2024-12",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "D",
+      "native": 98
+    },
+    {
+      "month": "2024-12",
+      "product": "MODIS_SP",
+      "platform": "Terra",
+      "daynight": "N",
+      "native": 67
+    },
+    {
       "month": "2024-12",
       "product": "VIIRS_NOAA20_SP",
       "platform": "N20",
       "daynight": "D",
-      "native": 36
+      "native": 658
     },
     {
       "month": "2024-12",
       "product": "VIIRS_NOAA20_SP",
       "platform": "N20",
       "daynight": "N",
-      "native": 20
+      "native": 418
     }
   ]
 }

@@ -26,7 +26,7 @@ The repository is intended for public collaboration. If a GitHub remote is pendi
 
 ## ember-1 dashboard and reproducibility
 
-Serve the pinned release with `python -m http.server 8000 --directory web` and open http://localhost:8000. No API key or dependency installation is needed for the dashboard. Modern browsers need native gzip `DecompressionStream` support. The compressed snapshot is about 11 MB; memory and initial-load cost remain a limitation on low-memory devices.
+Serve the pinned release with `python -m http.server 8000 --directory web` and open http://localhost:8000. No API key or dependency installation is needed for the dashboard. Modern browsers need native gzip `DecompressionStream` support. The compressed snapshot is about 14 MB; memory and initial-load cost remain a limitation on low-memory devices.
 
 Rebuild from the committed raw extracts:
 
@@ -42,3 +42,5 @@ python -m unittest discover -s tests
 See [measured release evidence](submission/RESULTS.md), [portal copy](submission/PROJECT-PAGE.md), [deployment runbook](docs/DEPLOYMENT.md) and [submission gates](submission/RELEASE-CHECKLIST.md). Snapshot payload hashes include build time: a rebuild produces the same scientific values, with a new snapshot identity. Original downloads and their checksums remain pinned. Gzip preserves all normalized observations; raw CSVs preserve all source fields.
 
 The beachhead is a regional fire or land-management organization preparing seasonal reviews. The open product links sensor comparisons to reproducible evidence. Monitored AOIs and scheduled reporting are potential service offerings, subject to pilot validation of review time, reproducibility, demand and willingness to pay. NASA observations remain publicly sourced.
+
+Access-recovery release: the paired 2020–2024 daily domain is now complete. The frozen 24-month holdout passes the adjustment rule; numerical evidence and limits are in submission/RESULTS.md. Use `python scripts/resume_matched.py` to resume only missing days before rebuilding. A prior versioned snapshot remains available for audit.

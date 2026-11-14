@@ -6,7 +6,7 @@ Checked 2026-11-14 UTC in Codex Cloud. No final submission was performed.
 | --- | --- | --- |
 | Verified | Engineering | Existing branch `work` clean at start; original Git history retained. No work redated. |
 | Verified | Engineering | Real SP pilot acquired for both sensors, August–September 2024. Raw CSVs/manifests and snapshot checksums preserved. |
-| Verified | Engineering | 36 training months, five partial-holdout months evaluated; adjusted publication withheld for insufficient support. RESULTS.md and validation.json agree. |
+| Verified | Engineering | 36 complete training months and 24 complete holdout months acquired after access recovery. RESULTS.md and validation.json record the frozen acceptance decision. |
 | Verified | Engineering | English app, CSV fields and package authored; no people or audio in authored media. |
 | Pending | Engineering / Owner | Anonymous public HTTPS deployment. Vercel create-project returned 403; DO SSH unavailable. docs/DEPLOYMENT.md gives exact recovery. |
 | Pending | Owner | Current official Project Demonstration duration/slide limit and separate local pitch limit. Resources/challenge fetch returned 503. Proposed fallback is not verified compliant. |
@@ -20,4 +20,4 @@ Checked 2026-11-14 UTC in Codex Cloud. No final submission was performed.
 
 Local browser verification evidence is recorded separately in browser-check.json after execution; it does not verify public hosting. No public deployment or media URL is claimed.
 
-Verified local browser checks: month buttons, September 2024 primary grid value (5,819 MODIS cell-days), north/MODIS/month observation export (18,038 rows), mobile width and no JavaScript exceptions. Nine Python tests pass, JavaScript syntax check passes, and raw-source credential scan passes. Actual screen captures and a silent video are included; public URL checks remain pending.
+Verified local browser checks: month buttons, September 2024 primary grid value (5,819 MODIS cell-days), north/MODIS/month observation export (18,038 rows), mobile width and no JavaScript exceptions. Nine Python tests pass, JavaScript syntax check passes, and raw-source credential scan passes. Actual screen captures and a silent video are included; public URL checks remain pending. The local flow also verifies that selected aggregate CSV agrees with the observation export and that any supported adjustment is limited to the full area.

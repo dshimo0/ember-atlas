@@ -1,0 +1,11 @@
+{
+  "source": "VIIRS_NOAA20_SP",
+  "bbox": "-59.0,-23.0,-54.0,-15.0",
+  "start": "2023-09-23",
+  "end": "2023-09-27",
+  "retrieved_at": "2026-11-14T19:22:58.932320+00:00",
+  "sha256": "a2aed46d9856eabd55e8f8dfebcbe3c951ecc2fb0605daca001b8ce1523c1847",
+  "rows": 3096,
+  "pipeline_version": "ember-1",
+  "processing_class": "SP"
+}
