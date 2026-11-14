@@ -16,3 +16,5 @@ The current demonstration format and local pitch duration require confirmation f
 | 21–30 s | Selected-month observation export and selected-period aggregate export. |
 
 The recording contains the English application screen and no people or audio. Runtime and public playback verification are recorded in `submission/media-check.json`.
+
+Current recording runtime: 29.64 seconds. It shows the geographic dashboard, September observations, validation summary, map navigation and both downloads. Public playback and source-file matching are recorded in media-check.json.

@@ -10,7 +10,7 @@ Source: https://github.com/dshimo0/ember-atlas
 
 Project Demonstration URL: https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4
 
-This is an actual 30-second silent screen recording. The Team Owner must confirm acceptance under the current official guide before using it in the portal; the separate three-minute pitch does not establish compliance.
+This is an actual 29.64-second silent screen recording. The Team Owner must confirm acceptance under the current official guide before using it in the portal; the separate three-minute pitch does not establish compliance.
 
 Project Details:
 

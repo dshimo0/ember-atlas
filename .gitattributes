@@ -5,3 +5,5 @@
 *.png binary
 # Retain upstream dependency bytes and its license line endings.
 web/vendor/leaflet/** -text whitespace=cr-at-eol
+# Geographic source files retain upstream bytes, including source whitespace.
+data/reference/*.geojson -text whitespace=-trailing-space

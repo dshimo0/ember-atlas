@@ -14,14 +14,14 @@ The default basemap uses OpenStreetMap tiles with attribution. Leaflet 1.9.4 pro
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
-| Initial state and copy | Compact title, September 2024, calculated 80.5% result, 24 holdout months and full-area scope; no promotional hero or rhetorical opening. | Local verified; public retest pending |
-| Desktop/mobile layout | Map beside comparison on desktop and before it on mobile; calendar follows both. | Local verified; public retest pending |
-| Basemap and navigation | Real OpenStreetMap tiles, visible attribution, zoom, keyboard pan, metric scale and fit. | Local verified; public retest pending |
-| Tile failure | External tile requests are aborted in a separate browser context. Local geography includes 23 river features and 27 settlements; observations and CSV remain available. | Local verified; public retest pending |
-| Filter synchronization | Month, area and sensor changes update actual rendered observation layers and matching CSV records. | Local verified; public retest pending |
-| Calibration scope | Both subregions have no adjusted series, factor or adjusted CSV value. | Local verified; public retest pending |
-| Export reconciliation | Default September: 125,055 observation rows and 120 full-period aggregate rows. Northern MODIS September: 18,038 rows. Export rows, source references and common-grid totals reconcile with the original snapshot. | Local verified; public retest pending |
-| Missing and partial data | A real zero day, a partial date interval and missing December 2019 are distinct. Unavailable counts stay blank. | Local verified; public retest pending |
+| Initial state and copy | Compact title, September 2024, calculated 80.5% result, 24 holdout months and full-area scope; no promotional hero or rhetorical opening. | Verified on local and public desktop/mobile |
+| Desktop/mobile layout | Map beside comparison on desktop and before it on mobile; calendar follows both. | Verified on local and public desktop/mobile |
+| Basemap and navigation | Real OpenStreetMap tiles, visible attribution, zoom, keyboard pan, metric scale and fit. | Verified on local and public desktop/mobile |
+| Tile failure | External tile requests are aborted in a separate browser context. Local geography includes 23 river features and 27 settlements; observations and CSV remain available. | Verified on local and public desktop/mobile |
+| Filter synchronization | Month, area and sensor changes update actual rendered observation layers and matching CSV records. | Verified on local and public desktop/mobile |
+| Calibration scope | Both subregions have no adjusted series, factor or adjusted CSV value. | Verified on local and public desktop/mobile |
+| Export reconciliation | Default September: 125,055 observation rows and 120 full-period aggregate rows. Northern MODIS September: 18,038 rows. Export rows, source references and common-grid totals reconcile with the original snapshot. | Verified on local and public desktop/mobile |
+| Missing and partial data | A real zero day, a partial date interval and missing December 2019 are distinct. Unavailable counts stay blank. | Verified on local and public desktop/mobile |
 
 ## Scientific figures
 
@@ -42,3 +42,5 @@ These figures measure agreement with MODIS. Retrieval completeness does not esta
 - `submission/map-before-desktop.png`, `submission/map-before-mobile.png`
 
 The final source commit, deployment and HTTP checks are recorded in `submission/judging-release.json`. Official demonstration format, event eligibility and final submission remain Team Owner checks.
+
+Verified application source: `4d665138201c4941cd9dc7e61e18311d8a5957cc`. Production deployment: `dpl_GgmKyKszTUz6ycwty9NeKmfxYdnC`. Public workflow check: 2026-11-14T23:05:04.491655+00:00. Both normal tiles and intentionally blocked tiles were exercised; no JavaScript exceptions were observed.

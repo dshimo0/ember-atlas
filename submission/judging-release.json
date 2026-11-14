@@ -1,18 +1,21 @@
 {
   "url": "https://ember-atlas-opal.vercel.app",
-  "checked_utc": "2026-11-14T21:38:27.589878+00:00",
-  "tested_ui_commit": "26f646a3da5c5e3757ec41e1a9d7aee3b2f307ff",
-  "deployment_source_commit": "26f646a3da5c5e3757ec41e1a9d7aee3b2f307ff",
-  "deployment_id": "dpl_62Ng6iCCLSvKpBQyYEt4PjHY5ZBg",
+  "deployment_source_commit": "4d665138201c4941cd9dc7e61e18311d8a5957cc",
+  "deployment_id": "dpl_GgmKyKszTUz6ycwty9NeKmfxYdnC",
   "checks": [
     {
       "path": "index.html",
-      "sha256": "c80ce57bd26290efda456ff755524a1e9f751a1ee3a5f27cd17e1f7f23d16e42",
+      "sha256": "716044694b10f3a66c4c96bc7b1c7abf258d9523b3631957a3271108460ce571",
       "http_status": 200
     },
     {
       "path": "app.js",
-      "sha256": "1f591416dc706827bf5f539e7920a2a49038626292aed8628cee08ce95a2938d",
+      "sha256": "3c5746ec3551aecfa0799292d387ac1acf603847ef7819bd254189547e3cd764",
+      "http_status": 200
+    },
+    {
+      "path": "geographic-map.mjs",
+      "sha256": "95f5f011b3942fbb06314b27efd3ff373da5b378a5d4803ae92f856235d32e4c",
       "http_status": 200
     },
     {
@@ -21,8 +24,8 @@
       "http_status": 200
     },
     {
-      "path": "style.css",
-      "sha256": "e83547677ded4770b796b308ca27c25120dfc39d67873ddf208981c526f5bf80",
+      "path": "data/latest.json",
+      "sha256": "24f68494cf0d1315b310685f881ce3ec5022c0725e093024e9e18fc7928f57d4",
       "http_status": 200
     },
     {
@@ -31,24 +34,25 @@
       "http_status": 200
     },
     {
-      "path": "data/latest.json",
-      "sha256": "24f68494cf0d1315b310685f881ce3ec5022c0725e093024e9e18fc7928f57d4",
-      "http_status": 200
-    },
-    {
       "path": "data/validation.json",
       "sha256": "e17b5f4c9e90e163104aa0acbac9bfac5035999aa0db1c86e87e7ca00ec0d2fe",
       "http_status": 200
     },
     {
-      "path": "assets/geography.json",
-      "sha256": "301e337a11429359e3ce3793fddc043440535e0ec06806d5f775ac5021c49d01",
+      "path": "assets/local-geography.json",
+      "sha256": "5e2bcb1bbdf11bf6a6dd07b2a755c20d96e15a55bd511378b8d6cabfc9371824",
+      "http_status": 200
+    },
+    {
+      "path": "vendor/leaflet/leaflet.js",
+      "sha256": "db49d009c841f5ca34a888c96511ae936fd9f5533e90d8b2c4d57596f4e5641a",
       "http_status": 200
     },
     {
       "path": "assets/workflow-capture.mp4",
-      "sha256": "8e4a6d59d153daa141fc1567dc39261e60a965550cf679447022daba1cbb1b05",
+      "sha256": "dde1dbc252a825fa4d6fbcd9a307f7d1162edecea363d36678e16d8704012c73",
       "http_status": 200
     }
-  ]
+  ],
+  "checked_utc": "2026-11-14T23:07:58.500928+00:00"
 }
