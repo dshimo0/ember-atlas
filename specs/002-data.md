@@ -19,7 +19,7 @@ Begin with the existing paired August–September 2024 Pantanal extract to check
 
 ## Common metric
 
-Retain all original fields in raw CSV. Normalize coordinates, UTC acquisition timestamp, platform and sensor-specific confidence in the next stage. An exact duplicate within a product should contribute once to the raw comparison, using source platform, time and coordinates. Preserve the raw delivered count for auditing. The current baseline counts delivered records and unique occupied cells on a globally aligned 0.05-degree WGS84 grid per UTC day and product. Grid cells have latitude-dependent physical area and edge sensitivity. Aggregate occupied cell-days monthly within a fixed AOI. Keep the number of retrieved UTC days as a separate completeness indicator. A retrieved day with zero detections leaves actual observation coverage unknown without swath and quality masks.
+Retain all original fields in raw CSV. Normalize coordinates, UTC acquisition timestamp, platform and sensor-specific confidence in the next stage. An exact duplicate within a product should contribute once to the raw comparison, using source platform, time and coordinates. Preserve the raw delivered count for auditing. The released baseline counts deduplicated native records and unique occupied cells on a globally aligned 0.05-degree WGS84 grid per UTC day and product. Grid cells have latitude-dependent physical area and edge sensitivity. Aggregate occupied cell-days monthly within a fixed AOI. Keep the number of retrieved UTC days as a separate completeness indicator. A retrieved day with zero detections leaves actual observation coverage unknown without swath and quality masks.
 
 ## Calibration and acceptance
 
@@ -54,3 +54,28 @@ Before holdout examination: training 2020–2022, holdout 2023–2024, calendar 
 ## Complete-overlap release
 
 After access recovery, all 60 paired months in 2020–2024 were acquired without changing the training years or holdout criteria. The 24 holdout months pass the fixed rule. The public selected-month comparison and aggregate export may show the seasonal adjusted NOAA-20 value only for the full rectangle, a complete month and the evaluated domain. Northern/southern filters retain separate sensor counts and withhold adjustment. The selected month now also filters the coordinate map. Detailed seasonal residuals remain published; no uncertainty interval or earlier legacy handoff is asserted.
+
+
+## Released scientific evidence and UI contract
+
+The original released input remains `snapshot-19621fa88d40.json.gz` (uncompressed SHA-256 `19621fa88d408fb5d9aa87482de1bb219e8dd7ed67128c1147d1a63fb087e677`). The immutable semantic copy of the existing validation is [validation-ba55acfc7909.json](../web/data/validation-ba55acfc7909.json), SHA-256 `ba55acfc7909acdf95ffb0083c91817bf573ca50ad8554b1804c1d8c2baf21bf`. The original `validation.json`, fit code, input daily CSV and acceptance rule are unchanged by the judging UI release.
+
+Observed products: MODIS C6.1 SP, Terra/Aqua pooled; NOAA-20 VIIRS 375 m SP. Metric: each occupied cell once per product per UTC day, summed into monthly occupied cell-days on the globally anchored 0.05° WGS84 grid. Full-area boundaries include north/east edges; the -19° latitude partition belongs to the northern half, avoiding subregion overlap. The same partition is used for aggregation, map filtering and exports.
+
+Frozen training is 36 complete paired months in 2020–2022, with 24 complete paired holdout months in 2023–2024. Quarterly ratios use at least six training months and 100 VIIRS cell-days, otherwise the pooled training ratio. The actual acceptance rule requires lower monthly MAE and no worse absolute signed bias over the identical holdout months, with all 36 training and 24 holdout months supported. Both conditions pass: MAE 1,021.7083333333334 → 199.6997313847094 cell-days/month, an 80.45433076451603% reduction; signed bias +1,021.7083333333334 → -123.96830007041311 cell-days/month. Negative bias means adjusted VIIRS is lower than MODIS on average. Two independent holdout years are too few for a precise year-block uncertainty interval. All quarterly residuals remain published.
+
+For September 2024, MODIS is 5,819 cell-days, VIIRS common-grid 8,809, adjusted VIIRS 4,879.0529915213565 using Q3 factor 0.5538713805791073. The residual is -939.9470084786435 cell-days (-16.153067683083755%). These are reference-agreement measures, not errors against independent ground truth. Native detections remain distinct: 23,396 MODIS and 101,659 VIIRS.
+
+Prior September medians are sensor-specific, using complete 2020–2023 values (n=4), excluding 2024: MODIS 2,532 and VIIRS 4,782 cell-days. The selected month is +129.8% / +84.2% above those medians. This descriptive small-sample comparison does not establish a long-term trend or attribute causes.
+
+The geographic transfer is supported only for complete months in the full Pantanal study rectangle and the released 2020–2024 domain. No factor or historical anomaly is inherited by a subregion. Partial selected months retain actual observed counts but receive no full-month adjustment or anomaly. No earlier legacy/VIIRS handoff is published.
+
+### Versioned presentation derivatives
+
+`python scripts/build_dashboard.py` verifies the original snapshot hash, constructs daily native/grid totals for each product and each of the full/northern/southern areas, and writes an immutable hashed summary plus monthly gzip observation shards. It asserts agreement of every full-area month/product in both units with the existing validation artifact before atomically publishing `web/data/dashboard.json`. That pointer records summary, validation and original snapshot hashes. The browser verifies each derivative SHA-256 before using it. No new fit, observation or confidence threshold is introduced.
+
+Both aggregate and observation exports cover exactly 2020-01-01–2024-12-31. Observation CSVs are the active month intersected with the selected dates/area/products; aggregate CSVs cover the entire chosen date range, one row per selected product/month. Every export records the snapshot SHA. Partial rows include clipped dates and retrieved/selected day counts. Missing numeric values remain blank; a retrieved zero remains numeric zero. The original raw files and their delivered counts are preserved.
+
+Retrieval completeness means all requested daily FIRMS files were retrieved; it does not establish continuous swath or cloud-free observation. Observation coverage remains unknown without usable-observation masks. Native detections are thermal anomalies; cell-days are activity measures, not burned area or unique fires.
+
+Local map geography uses Natural Earth Admin 0 countries at 1:110m, public domain, with original file/checksum provenance under `data/reference/` and a lightweight attributed subset in `web/assets/geography.json`. It supplies country context only. The study rectangle remains visible and is explicitly not a biome boundary.

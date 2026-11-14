@@ -1,52 +1,43 @@
-# Ember Atlas | Adversarial judging review
+# Ember Atlas | Judging evidence and retest
 
-Use this internal rubric before recording or submitting. The weights are a team decision. Check the 2026 official guide and São Paulo instructions for actual judging and submission rules. [NASA Space Apps Resources](https://www.spaceappschallenge.org/resources/)
+Reviewed application: https://ember-atlas-opal.vercel.app/ . Input code baseline: `6f56476baa55cf845dad8a44b4372e5c2cde63a4`, branch `work`. Scientific input is unchanged: `snapshot-19621fa88d40.json.gz`, uncompressed SHA-256 `19621fa88d408fb5d9aa87482de1bb219e8dd7ed67128c1147d1a63fb087e677`. Immutable validation: `validation-ba55acfc7909.json`. UI aggregate identity: `dashboard-a8513f5e713b.json`.
 
-## Review protocol
+Before changing the interface, the deployed `data/latest.json` and `data/validation.json` were fetched and matched repository bytes. [Before desktop](../submission/review-before-desktop.png) and [before mobile](../submission/review-before-mobile.png) capture that release. This review is an engineering/scientific self-review, not a claim of independent judge or user approval.
 
-Pin the release commit, snapshot ID, app URL and submission package. Run the workflow signed out on a phone and in a clean desktop browser. Record the path, expected and actual behavior, evidence link, reviewer and timestamp. For numerical claims, trace the number in the UI and pitch back to the same exported rows and validation artifact. Have a reviewer unfamiliar with the project try the workflow where available. Record solo review honestly.
+## Scientific evidence checked
 
-| Score | Evidence |
-| --- | --- |
-| 0 | Missing or contradicted by the release. |
-| 1 | Documented intent or unverified claim. |
-| 2 | Partial execution or narrow evidence with material gaps. |
-| 3 | Working and reproducible on the declared release and scope. |
-| 4 | Independent repeat or a documented stress case supports the result and its limits. |
+- Frozen fit: 2020–2022, 36 complete paired months. Holdout: 2023–2024, 24 complete paired months. Acceptance rules and factors were not changed or refit for this redesign.
+- Common-grid monthly MAE against MODIS: 1,021.7083333333334 → 199.6997313847094 cell-days/month, a calculated 80.45433076451603% reduction (UI 80.5%). Signed bias: +1,021.7083 → -123.9683. The residual and two-year independent support remain limitations.
+- September 2024: 5,819 MODIS / 8,809 VIIRS / 4,879.05299 adjusted VIIRS cell-days. Adjustment leaves -939.9470 cell-days (-16.1531%) relative to MODIS; it improves this month's agreement but does not establish accuracy against ground truth.
+- Prior September medians: MODIS 2,532 and VIIRS 4,782, complete 2020–2023 (n=4), excluding the target year. September 2024 is above both, by 129.8% / 84.2%. Native detections remain separate at 23,396 / 101,659.
+- The derivative builder verifies the snapshot checksum and reconciles every full-area monthly native/grid value with the original scientific artifact before publishing summaries and monthly shards. Coverage is 2020-01-01–2024-12-31 for both aggregates and observation exports. Retrieval is complete; swath/cloud observation coverage remains unknown.
 
-Multiply weight by score divided by four. Internal target is 80/100 with no release blocker. Scores do not waive submission requirements.
+## Findings and status
 
-| Criterion | Weight | Judge's roast | Evidence that earns points |
-| --- | ---: | --- | --- |
-| Challenge fit | 12 | A fire map with a different logo is still a fire map. | Choose the Pantanal study area, select a period, open the calendar, inspect sensor differences and export the evidence. |
-| NASA data | 10 | NASA in the footer is not a data pipeline. | Trace one displayed month and one CSV row to the FIRMS products and versioned raw manifests. Compare requested dates with actual retrieval. |
-| Innovation and validity | 22 | You changed the unit and called the difference solved. Show me the holdout. | Show raw counts, common-grid cell-days, frozen split and factors, same-unit holdout MAE and signed bias before and after, and the calibration decision. Show sampling caveats and sensitivity where measured. |
-| Working product | 16 | Your demo works perfectly on the machine that built it. | Signed-out HTTPS workflow from map and date filter through matching CSV. Check mobile, empty ranges, partial coverage, and continued service from the snapshot if FIRMS fails. |
-| User and impact | 10 | Which decision gets better on Monday morning? | Name user, recurring task, evidence used and a decision they can make. Keep interviews and any timed task results distinct from hypotheses. |
-| Documentation | 8 | If the number cannot be reproduced, it is decoration. | Pin inputs, commands and output artifacts. Confirm at least one reproducible result and version the methods, credits and limitations. |
-| Presentation | 8 | Five charts and I still cannot tell which sensor changed. | Independent listener can repeat the problem, result and use case in one sentence. Use English and the same result across the app and media. |
-| Submission | 8 | The draft is beautiful. Did it enter judging? | Link checks, team and form verification, correct media format, and Team Owner confirmation from the portal. |
-| Execution ownership | 3 | Who can fix the release if the data refresh fails? | Record actual contributors, responsibilities and a short recovery path. A one-person team can name distinct responsibilities. |
-| Geographic transfer | 3 | A new pin is not a validated new geography. | Explain the inputs, overlap, re-fit and validation required to apply the method to a second region. Show any tested transfer explicitly. |
+| Severity | Observed problem and judge consequence | Implemented fix | Owner / retest status |
+| --- | --- | --- | --- |
+| P0 | Strong validation result was below the map; percentage improvement and scope were not prominent. | First viewport derives 80.5% from unrounded artifact values, shows MAE before/after, split, sample size, geographic scope and reference caveat. | Engineering — Local verified; public retest pending |
+| P0 | Landing state did not explain the September finding or residual in one common unit. | September preselected; three-series chart, -16.2% residual and two prior same-month median breakdowns with years/n. | Engineering — Local verified; public retest pending |
+| P0 | Default date range exposed only two months despite five years of released inputs. | All 60 months visible by year; TRAIN / HOLDOUT text labels and selected-state markers. Mobile wraps into touch-sized four-column groups. | Engineering — Local verified; public retest pending |
+| P0 | “Selected aggregates” exported only the active month, with ambiguous scope. | Explicit selected-month observations versus entire selected-period aggregates; 125,055 default observation rows / 120 aggregate rows reconcile with the source. | Engineering — Local verified; public retest pending |
+| P0 | Incorrect treatment of missing periods could turn absence into a low-activity claim. | Real zero day 2020-01-08, partial September interval and absent December 2019 are separately exercised; unavailable counts export blank. | Engineering — Local verified; public retest pending |
+| P1 | A subregion could appear to inherit the displayed overall validation result. | Overall card explicitly says full study area; subregion comparison explains why factors/anomalies are unavailable, and CSV factor/adjusted columns remain blank. | Engineering — Local verified; public retest pending |
+| P1 | Coordinate-only plot lacked geographic context. | Attributed, locally served Natural Earth country boundaries/labels; study rectangle remains distinct from country borders and is explicitly not the biome. | Engineering — Local verified; public retest pending |
+| P1 | Map/export scope and active selection were difficult to infer. | Month, area, sensor, count and UTC interval shown together; map, chart and observation CSV share selection; date controls explain aggregate-period effects. | Engineering — Local verified; public retest pending |
+| P1 | Whole-snapshot loading was unnecessary for every selected month. | Small verified daily summary supplies the first-screen result; checksum-verified monthly shards supply points/CSV; original snapshot is retained. | Engineering — Local verified; public retest pending |
+| P1 | Mobile reading order put geography before the useful finding. | Validation and month finding precede map; visible focus, shape-coded series, keyboard month/map activation and no document overflow. | Engineering — Local verified; public retest pending |
 
-## Release blockers
+## Verification protocol and artifacts
 
-- **Evidence integrity** — Remove unsupported claims, synthetic observations in public views, hidden missing-window substitutions, and any suggestion that hotspots are unique fires or burned area. Withhold the calibrated series when the prespecified acceptance rule fails.
-- **Scientific leakage** — Any holdout period used for tuning invalidates the claimed independent test. Reissue findings with a genuinely untouched split or mark the result exploratory. Compare common-grid MAE on identical paired months. Keep raw detection counts as a separate diagnostic.
-- **User workflow** — Broken links, login walls, incorrect exports and failures on the selected judging path require a fix or an explicitly scoped release. A video cannot establish public app accessibility.
-- **Submission integrity** — Verify current format, credits, permissions, language, roster and eligibility from the submission addendum. Team Owner must verify the actual submission status.
-- **Security and reproducibility** — Check release artifacts for FIRMS keys and keyed URLs. Pin snapshot, AOI, UTC dates, method and calibration scope. Retain the last verified snapshot if ingestion fails.
+`python -m unittest discover -s tests`: nine pipeline/science tests. `node tests/test_model.mjs`: seven selection, baseline, missingness, scope and CSV tests. `scripts/check_judging_flow.py` uses the original pinned observations as its independent export oracle in fresh desktop (1440×1000) and mobile (390×844) contexts. Mobile checks are viewport emulation, not a physical-device usability study.
 
-## Verification cases
+The flow checks initial load, month change by keyboard, manual UTC date changes, sensor filter, both subregions, both CSVs, zero retrieval versus missing, native/grid reconciliation and JavaScript exceptions. Northern MODIS September export is 18,038 records. Every default observation row is compared by product, UTC date/time, coordinates and source reference with the original snapshot; common-grid totals and all 120 aggregate rows are checked. [Local machine-readable report](../submission/judging-check-local.json); public report is written to `submission/judging-check-public.json` only after the deployed workflow passes.
 
-1. Select a month with a complete pair and reconcile displayed month totals, per-product rows and exported filter state with the snapshot.
-2. Repeat with a zero-detection window, an absent window, and a partial month. Confirm the labels and aggregate behavior tell those conditions apart.
-3. Inspect one holdout month manually. Verify the factor came from the training years and recalculate the residual. Check signed bias convention, sample sizes, same comparison units and seasonal results.
-4. Change the AOI. Confirm the export changes and the Pantanal factor is unavailable outside its validated scope. Check transition handling and confirm VIIRS and MODIS estimates were not added together.
-5. Open the public URL and repository in a clean session. Rebuild the reported output from pinned inputs. Review resource and AI attribution where applicable. Record the actual outcome.
+Visual evidence: `submission/judging-first-viewport.png`, `submission/judging-desktop.png`, `submission/judging-mobile.png`. Source credentials are scanned without printing their values. The original scientific artifact and snapshot checksums must remain unchanged.
 
-## Triage and decision record
+## Checks that remain outside this review
 
-P0 covers evidence integrity, the primary public workflow and eligibility. Fix P0 first. P1 covers material scientific or product weaknesses. P2 covers polish. Every finding needs severity, observed evidence, user or judge consequence, specific fix, owner and retest.
-
-Current review baseline is commit `0785c3e` on `main`. FIRMS ingestion and the common-grid daily baseline are in the repository. The app, real-data ingestion run, calibration metrics and submission confirmation have not been verified at this baseline. Reassess from the release commit before giving a score. [Repository baseline](https://github.com/dshimo0/ember-atlas/tree/0785c3e1cd225a6ffaf91c34d723b9a07cbcfc75)
+- Official Project Demonstration format and São Paulo local pitch duration must be confirmed separately. The existing hosted screen recording predates this interface refresh unless explicitly updated in the release notes.
+- Team Owner must verify registration, roster, eligibility of prior work, final resource permissions, form limits and actual submission for judging. Engineering tests cannot establish those gates.
+- No independent user interview, timed pilot, physical-device test or commercial demand evidence is claimed. No new geographic calibration or masked observation coverage is available.
+- The scientific improvement is agreement with the MODIS reference, not ground-truth accuracy, burned area, unique fire counts or demonstrated prevention.

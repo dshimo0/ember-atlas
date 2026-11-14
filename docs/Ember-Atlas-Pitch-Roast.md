@@ -1,41 +1,46 @@
-# Ember Atlas | Pitch script and roast
+# Ember Atlas | Evidence-led pitch and judge walkthrough
 
-Rehearse in English. This three-minute script is for a local presentation if allowed. Verify the São Paulo pitch time and official submission media format independently. For the latter, follow the [submission addendum](Ember-Atlas-Space-Apps-Submission-Addendum.md). Replace bracketed fields with verified release evidence before recording. Use the fallback wherever a result is unavailable.
+Open https://ember-atlas-opal.vercel.app/ in a signed-out browser. The actual landing screen asks **“Fire season, or sensor change?”**, presents the measured holdout improvement and opens on September 2024. All figures below refer to `snapshot-19621fa88d40.json.gz` and immutable `validation-ba55acfc7909.json`; they are not forecasts or independent ground-truth accuracy.
 
-## Three-minute script
+## Opening
 
-| Time | Show | Say |
+“In September 2024, both satellites recorded more activity in our Pantanal study area than their own historical September medians. But they reported different amounts. Ember Atlas puts them on one grid and tests a local sensor adjustment on unseen years. Monthly disagreement with MODIS fell by 80.5%—and we show the error that remains.”
+
+## Short judge walkthrough
+
+1. Point to **80.5%** on the opening card: MAE **1,021.7 → 199.7 occupied cell-days/month**, fit on **2020–2022**, evaluated on **24 complete paired months in 2023–2024**. Read the full-area scope and MODIS reference caveat.
+2. In September 2024, show the chart: **5,819 MODIS**, **8,809 VIIRS common grid**, **4,879.1 adjusted VIIRS**. The adjustment moved VIIRS closer but left it **939.9 cell-days, or 16.2%, below MODIS** that month.
+3. Expand the baselines: **MODIS 2,532; VIIRS 4,782**, both from **2020–2023 (n=4)**. Their observed values are **129.8% and 84.2% above** the respective medians. Keep native detections separate at **23,396 / 101,659**.
+4. Choose another month in the labeled TRAIN/HOLDOUT calendar. Select the northern half: its observations change, but no full-area factor is inherited. The notice sits beside the comparison.
+5. Download the selected month's observations, then the selected-period aggregates. The default selection yields **125,055 observation records** and **120 aggregate rows** across the five-year calendar. Follow the provenance link to reproduce the comparison.
+
+## Three-minute local pitch — use only if the local format allows
+
+| Time | Actual screen/action | English narration |
 | --- | --- | --- |
-| 0:00–0:25 | Pantanal study area and two native sensor traces | “Imagine reviewing a fire season in the Pantanal. The record jumps around the time a different satellite sensor is introduced. Did fire activity change, or did the instrument change what we could see? That question affects which months a land manager investigates.” |
-| 0:25–0:55 | Same date range, different counts, then common grid | “Ember Atlas starts with real NASA FIRMS observations. MODIS and VIIRS report thermal anomalies at different spatial resolutions and observe at different times. We put the detections on the same grid and count each occupied cell once per UTC day, separately for each product. This gives us one unit for comparing monthly activity.” |
-| 0:55–1:35 | One holdout chart, with dates and units on-screen | “We estimated the seasonal adjustment on [training years] and kept [holdout years] separate. On [N] matched months, monthly mean absolute error against the MODIS reference went from [A] to [B] occupied cell-days. Signed bias went from [C] to [D]. [State the actual acceptance decision and a measured or documented limitation.]” |
-| 1:35–2:15 | Live month click, baseline and CSV | “Here is [verified month] in our Pantanal study area. The calendar shows [actual metric] against [actual same-month baseline and years]. A reviewer can see coverage, inspect the original sensor series and download the same selection I’m showing.” |
-| 2:15–2:40 | One concrete decision and geographic context | “A land-management analyst can use this view to choose which unusually active months or areas deserve deeper review before the next season. The workflow can be repeated for a new region by retrieving overlapping observations and testing the calibration there.” |
-| 2:40–3:00 | App, repository and evidence links | “The public app, source code and data provenance are linked in our submission. Pick a month, export the evidence and check our calculation.” |
+| 0:00–0:25 | First viewport: question, September finding and holdout card | “Was this an unusually active fire season, or did changing satellites change what we could detect? In our Pantanal study window, September 2024 was above the historical September median in both sensor records. The amount depends on which sensor we read.” |
+| 0:25–0:55 | September common-unit chart and native-count detail | “NASA FIRMS reports thermal anomalies, not unique fires or burned area. MODIS and NOAA-20 VIIRS have different footprints, sensitivity and observation times. We count occupied cells once per UTC day on the same 0.05-degree grid. Here MODIS records 5,819 cell-days and VIIRS 8,809. Native detection counts remain separately inspectable.” |
+| 0:55–1:30 | Opening validation card, frozen JSON and selected residual | “We fit quarterly VIIRS-to-MODIS factors using 2020 through 2022, then held them fixed for all 24 matched months in 2023 and 2024. Monthly mean absolute error against MODIS fell from 1,021.7 to 199.7 cell-days, a reduction of 80.5%. This is agreement with a reference, not ground truth. Average adjusted bias remains minus 124.0 cell-days per month.” |
+| 1:30–2:00 | September chart, then expand both baseline breakdowns | “The adjusted September value is about 4,879 cell-days—still 16.2% below MODIS. Separately, each product is above its own prior September median: 2,532 for MODIS and 4,782 for VIIRS, using four complete prior years. This is evidence for a seasonal review, not proof of a trend or a cause.” |
+| 2:00–2:30 | Full historical calendar, another month, north selector and notice | “The five-year calendar makes the training and holdout years visible. We can inspect a smaller area, but the full-area adjustment is withheld there. It would require a new fit and independent validation. Country boundaries orient the map; the rectangle is our study window, not a biome boundary.” |
+| 2:30–3:00 | Observation and aggregate downloads; methods/provenance links | “A regional analyst can choose which months deserve deeper investigation and export the exact evidence for that review. The map and observation export share the selected month, area and sensors; the aggregate export covers the chosen calendar period. Every figure links to a versioned NASA-derived snapshot. We have not yet measured time saved or prevented fires.” |
 
-## Fallback lines
+## Skeptical questions and defensible answers
 
-- **No defensible calibration** — “We aligned the instruments on a common grid and measured the remaining difference. [Explain the actual result or sample limitation.] The app shows the sensor-specific series for this area.”
-- **No eligible historical baseline for the chosen month** — Choose a verified month with a baseline. If none exists, show the verified sensor comparison and say the historical baseline is unavailable for the published coverage.
-- **Live network or projector fails** — Use a pre-recorded capture of the same verified release and keep exported evidence on hand. State the actual issue and retain direct public links.
-- **No verified real observations or deploy** — Say what was implemented and what remains blocked. Any captured artifacts must reflect the actual state.
-
-## Questions a skeptical judge will ask
-
-| Roast | Defensible answer or evidence |
+| Question | Answer from this release |
 | --- | --- |
-| “Why should I open this when FIRMS and INPE already exist?” | Show the exact comparison and export task. Describe observed workflow differences and cite the tools. Avoid claims about competitor capabilities you did not test. |
-| “A grid reduces duplicate pixels. How does that correct orbit timing and clouds?” | It standardizes the analytical unit. A local empirical transfer is evaluated out of sample. State remaining timing, coverage and detectability limits. |
-| “Where did those error numbers come from?” | Show validation.json, the tested periods and paired month count. Recalculate one residual. Confirm the unscaled and scaled errors are in the same unit. |
-| “Did the factor learn your showcase year?” | Show the frozen year split. If the showcased year was used for fitting, identify it as a workflow illustration and show independent evaluation separately. |
-| “Can I use that adjustment in Australia tomorrow?” | The method can be run there after gathering inputs and testing it on independent regional overlap. Show the current geographic scope. |
-| “Did your tool prevent a fire?” | Show the specific review decision the tool supports. Report any measured workflow effect within its scope. |
-| “What does zero mean?” | Zero recorded detections in a retrieved window. A missing window and unknown observation coverage are handled explicitly. |
-| “What did your team actually deliver?” | Name contributions and release artifacts. Disclose actual AI assistance where required and use the commit history to distinguish prior work. |
+| “Does 80.5% mean you measure fires 80.5% more accurately?” | No. It is a reduction in monthly MAE against MODIS on the same occupied cell-day scale, over the 24 frozen holdout months. MODIS is not independent ground truth. |
+| “Why is September still different after adjustment?” | A seasonal empirical ratio does not remove cloud, overpass, detectability or sampling differences. The remaining September residual is -939.9 cell-days; overall bias remains -124.0/month. |
+| “Did you fit on your showcase month?” | No. Factors use 2020–2022 only. September 2024 belongs to the held-out 2023–2024 period. No acceptance thresholds were changed for the redesign. |
+| “What exactly is the historical median?” | Each sensor's complete prior years for that calendar month, excluding the selected year. September 2024 uses 2020–2023, n=4; the underlying values are expandable. |
+| “Can you apply this in a smaller area tomorrow?” | Not without regional matched overlap, refitting and independent evaluation. The northern/southern views explicitly withhold adjustment and anomalies. |
+| “What does zero mean?” | Successful retrieval with no detections recorded. Missing retrieval remains unavailable/blank; partial selected months retain their clipped dates and receive no adjustment. Observation coverage remains unknown even after complete retrieval. |
+| “What can a land manager decide?” | Which unusually active months deserve a closer seasonal review. We have not established causal fire severity, unique fires, burned area, commercial demand or measured workflow impact. |
 
-## Rehearsal checklist
+## Separate media and owner gates
 
-- Run the script twice with a timer and once with the backup recording. Start the live walkthrough from a signed-out browser.
-- Freeze the release, the selected month and the validation figures before recording. Match all on-screen units, dates and numbers to the actual exports.
-- Ask a listener to state the decision, the scientific comparison and its limitation. Rewrite the specific sentence if they cannot.
-- Keep the pitch, formal submission media and submission status independently tracked. Trim content to the confirmed format before publishing.
+This three-minute script is for a local pitch only if permitted. The official Project Demonstration portal format is a separate requirement. A proposed 30-second cut or up-to-seven-slide fallback from the addendum is not confirmed compliant until the Team Owner checks the current official guide and São Paulo instructions. Do not substitute the three-minute pitch for that verification.
+
+The existing public screen recording is real but may show the preceding interface. Before submitting media, capture the refreshed verified flow, confirm the actual runtime/format, keep all text in English, and inspect for people under 18 or unreviewed audio. Final terms and submission for judging remain the Team Owner's responsibility. If the live network fails, show a capture of the same pinned release and state the issue.
+
+Rehearse with a timer and an independent listener if available. Match the screen, CSV and narration to the same frozen artifacts; do not claim that the engineering self-review establishes independent usability or event eligibility.

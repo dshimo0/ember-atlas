@@ -1,18 +1,23 @@
-# Product requirements
+# Product requirements — judging release
 
-An environmental analyst selects an area and date range, sees burning activity by month and year, and downloads the observations behind the analysis.
+A regional land-management analyst asks: “Fire season, or sensor change?” The product helps them select months for deeper seasonal review using comparable satellite-observed activity and reproducible evidence. It does not identify unique fires, burned area, ground truth or forecasts.
 
-| ID | Acceptance criterion |
+| ID | Acceptance criterion and verification |
 | --- | --- |
-| P1 | A bounding box or preset and a UTC date range filter every view and export consistently. First preset is a Pantanal demo rectangle, explicitly labeled as approximate. |
-| P2 | A calendar shows historical seasonality, highest activity months, and the selected month against a same-month historical median. Missing periods render separately from zero recorded detections. |
-| P3 | A comparison view shows MODIS and VIIRS raw counts, occupied cell-days and, after validation, the harmonized series. Processing level and sensor transitions are visible. |
-| P4 | CSV export includes coordinates, acquisition time, platform, product, confidence, FRP where present, and source provenance. An aggregate export includes metric, method version and coverage status. |
-| P5 | A documented command rebuilds the demo from a pinned data extract. The web app runs without a FIRMS key in the browser. |
-| P6 | The historical view aims to extend from the early 2000s to the latest available standard product. Recent NRT observations are provisional and labeled separately. |
+| P1 Landing | Opens in English on September 2024, full Pantanal study rectangle, both sensors and the full verified 2020–2024 calendar. The first viewport shows the actual holdout improvement computed from unrounded validation metrics, error units, training/holdout scope and full-area limitation. |
+| P2 Finding | Explains that both September products are above their own prior same-month medians. Shows medians, baseline years/individual values and n; requires three complete prior years and excludes the selected year. Withholds unsupported partial-month and subregion anomalies. |
+| P3 Comparison | A common-unit bar chart shows reference MODIS, unscaled common-grid VIIRS and accepted adjusted VIIRS. Reports the selected-month residual and keeps native detections in a separately labeled inspection table. Describes agreement with MODIS, not ground-truth accuracy. |
+| P4 History | Exposes all 60 released months in a month-by-year calendar. Training and holdout years use text labels. Selected buttons have aria-pressed and a visible border/marker; sensor series use labels and shapes as well as color. |
+| P5 Missingness | Successful zero-detection retrieval, partial selected months and unavailable retrieval remain distinct in calendar labels, comparisons and CSV. Missing numeric values are null/blank, never zero. |
+| P6 Selection | Shows selected month, area, sensor, observation count and actual UTC date interval together. Dates alter the calendar/aggregate period; calendar selection alters the month/map/observation export. Invalid ranges disable downloads; asynchronously loaded points cannot overwrite a newer selection. |
+| P7 Observations export | Download label names the selected month. CSV exactly matches month intersected with dates, area and sensors. It includes coordinates, acquisition UTC, product/platform, original confidence, FRP, source reference and pinned snapshot identity. |
+| P8 Aggregate export | Exports every visible month/product in the selected date range, not only the active month. Includes actual clipped dates, native detections, cell-days, retrieval days/status, method, units, coverage caveat and eligible adjustment. Default: 120 rows. |
+| P9 Geographic scope | Full-area factors never apply to the northern/southern filters. The withholding reason sits beside the comparison. Full-area validation results remain explicitly labeled global to the study rectangle. |
+| P10 Map | Uses locally served, attributed Natural Earth generalized country boundaries, country labels and coordinates for orientation. Shows the study rectangle and selected half separately from country borders; explicitly states that no biome boundary is included. Sensor legend and selected month sit beside the map. Points are sampled for display only; CSV includes all matching observations. |
+| P11 Responsive layout | Validation result and selected-month takeaway precede the map on mobile. Mobile calendar wraps into four-column month groups per labeled year, with no document-level horizontal overflow. Typography and spacing remain readable. |
+| P12 Input/accessibility | Controls and downloads have labels and touch targets; native buttons support keyboard month activation, arrow-key focus navigation and map subregion selection. Focus states and sensor markers do not depend on color alone. |
+| P13 Evidence | Factors, residual bias, retrieval versus observation coverage, source snapshot, immutable validation and diagnostics are available in the methods section or direct one-click links. |
+| P14 Publication | Works anonymously on the existing production HTTPS URL using only versioned real observations. The browser never uses FIRMS credentials. A missing derivative disables affected views/exports and does not introduce substitute data. |
+| P15 Reproduction | The derivative builder validates the original snapshot hash and reconciles all 120 full-area monthly native/grid totals with the scientific artifact. A frozen snapshot can be rebuilt into deterministic summaries/shards without refitting the calibration. |
 
-Hotspots represent satellite detections of thermal anomalies. A detection can come from agricultural burns and other heat sources. Coverage and cloud limitations must be visible where relevant.
-
-## Release ember-1
-
-The supported extent is the Pantanal study area rectangle, with northern and southern filters. The selected month, area, date range and sensor determine the observation export. The calendar reports each sensor separately. Complete prior same-month years (minimum three) support sensor-specific historical medians. All published inputs are real FIRMS SP records. A coordinate map avoids external tile services and shows study bounds with sensor colors. Calibration evidence is accessible independently; unsupported or failed adjusted series remain withheld.
+Actual released coverage is January 2020–December 2024. Earlier MODIS history, NRT layers and a calibrated temporal handoff remain outside this release. The rectangle is WGS84 west/south/east/north `-59,-23,-54,-15`; it is a Pantanal study area, not an asserted biome boundary.

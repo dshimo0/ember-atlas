@@ -13,4 +13,6 @@
 | Other | Vercel — https://vercel.com/ | Static app and media hosting on the existing Hobby team | Actual provider; no Vercel client library or imagery bundled |
 | Other | OpenAI Codex — https://openai.com/codex/ | Coding, tests, documentation assistance | AI disclosure belongs in portal materials |
 
-Map: project-authored WGS84 coordinate plot with NASA points and rectangular bounds. No external basemap, biome boundary dataset, imagery, icons, music, fonts or JavaScript libraries. No NASA insignia is used. Linked official terms: https://www.spaceappschallenge.org/legal/ (owner verification pending).
+Map: project-authored WGS84 coordinate plot with NASA points and rectangular bounds, now with locally served Natural Earth country context. No biome boundary dataset, external tile service, imagery, music, fonts or JavaScript libraries. No NASA insignia is used. Linked official terms: https://www.spaceappschallenge.org/legal/ (owner verification pending).
+
+Natural Earth Admin 0 countries, 1:110m: https://www.naturalearthdata.com/ . Public-domain terms https://www.naturalearthdata.com/about/terms-of-use/ were fetched and verified on 2026-11-14. Original country GeoJSON and its SHA-256 are preserved under data/reference and web/assets/geography.json. Used only for generalized geographic context; the rectangle is not labeled as a biome boundary.
