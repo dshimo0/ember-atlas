@@ -23,3 +23,15 @@ The calendar script emits daily raw detection counts and distinct grid-cell coun
 ## Publish
 
 The repository is intended for public collaboration. If a GitHub remote is pending, run `gh repo create ember-atlas --public --source=. --remote=origin --push` from this directory using the intended account. Credit NASA FIRMS and cite the products used in any release. See [NASA FIRMS](https://www.earthdata.nasa.gov/data/tools/firms) and the [challenge brief](https://www.spaceappschallenge.org/2026/challenges/modis-and-viirs-hot-spots/).
+
+## Snapshot dashboard and evaluation
+
+See [cloud runbook](docs/RUNBOOK.md) for ingestion, frozen split, snapshot publication and Vercel deployment. `web/` serves without a live NASA connection. Until a verified snapshot exists, it displays Data unavailable and disables downloads. No real observations or measured validation results have been acquired in this session. [Submission package](submission/RELEASE-CHECKLIST.md) records open release gates.
+
+```sh
+python scripts/harmonize.py data/calendar.csv data/evaluation --train 2019,2020,2021 --holdout 2022,2023,2024
+python scripts/snapshot.py data/raw web/data
+python -m http.server 8000 --directory web
+```
+
+Only use those years after checking actual SP availability. Freeze any changed split before evaluating holdout outcomes. The adjustment remains a research comparison until sensitivity and independent-year evidence supports publication.
