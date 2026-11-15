@@ -1,0 +1,11 @@
+{
+  "source": "MODIS_SP",
+  "bbox": "-59.0,-23.0,-54.0,-15.0",
+  "start": "2023-10-23",
+  "end": "2023-10-27",
+  "retrieved_at": "2026-11-14T19:21:08.075082+00:00",
+  "sha256": "b75b12a56359c8f748eb757fbbd3f17d534069990c7c8466e3ead11807d683a3",
+  "rows": 608,
+  "pipeline_version": "ember-1",
+  "processing_class": "SP"
+}

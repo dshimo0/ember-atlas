@@ -1,0 +1,32 @@
+[
+  {
+    "device": "desktop",
+    "route": "/",
+    "axe": []
+  },
+  {
+    "device": "desktop",
+    "route": "/explore",
+    "axe": []
+  },
+  {
+    "device": "desktop",
+    "route": "/about",
+    "axe": []
+  },
+  {
+    "device": "mobile",
+    "route": "/",
+    "axe": []
+  },
+  {
+    "device": "mobile",
+    "route": "/explore",
+    "axe": []
+  },
+  {
+    "device": "mobile",
+    "route": "/about",
+    "axe": []
+  }
+]

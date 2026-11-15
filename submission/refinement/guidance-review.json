@@ -1,0 +1,25 @@
+{
+  "date_utc": "2026-11-15",
+  "references": [
+    {
+      "file": "Vencedores do NASA Space Apps 2025.pdf",
+      "sha256": "136331cd84407078ae09680ae5129c63baa7f24d74dbb857238451fb4b1bacdb",
+      "role": "owner-supplied reference; not independently authenticated"
+    },
+    {
+      "file": "Guia de Submiss\u00e3o de Projeto (1).pdf",
+      "sha256": "224452b81bdacdcb1ed3dcd167fd6c88dc0143e78d68cc386050581b0fc88afb",
+      "role": "owner-supplied reference; not independently authenticated"
+    },
+    {
+      "file": "NASA Space Apps 2026 Pitch101.pdf",
+      "sha256": "3f77c3ad33cbb841f9986445a1334b4ac8e1bcf1bc262daaffbf8819a886b775",
+      "role": "owner-supplied reference; not independently authenticated"
+    }
+  ],
+  "official_url": "https://www.spaceappschallenge.org/resources/project-submission-guide/",
+  "official_http_status": 503,
+  "logo_original_file_available": false,
+  "portrait_original_file_available": false,
+  "winner_claims_verified": false
+}

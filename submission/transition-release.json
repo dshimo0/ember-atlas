@@ -1,0 +1,1405 @@
+{
+  "source_commit": "1018c678d7be5efb97efce5aaf221e155c6a8e24",
+  "data_commit": "a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391",
+  "branch": "work",
+  "repository": "https://github.com/dshimo0/ember-atlas",
+  "pr": "https://github.com/dshimo0/ember-atlas/pull/2",
+  "pr_status": "open; not merged",
+  "url": "https://ember-atlas-opal.vercel.app",
+  "routes": [
+    "/",
+    "/demo",
+    "/pitch"
+  ],
+  "deployment_id": "dpl_fuwGKU7pkWJASYCuEaUXCVkwPj3i",
+  "ready_state": "READY",
+  "checked_utc": "2026-11-15T07:58:46.587896+00:00",
+  "registry": {
+    "file": "regions-c06212509a51.json",
+    "sha256": "c06212509a517c5c91377bd2cdc40442559896168ad887a5218214e4e36a5942"
+  },
+  "evaluation": {
+    "file": "replay-evaluation-7d4268256831.json",
+    "sha256": "7d42682568315eba16bb6f62bae900ea28c76bd5c0c3aa3a590c4a2d1c973de0"
+  },
+  "coverage": [
+    {
+      "region": "pantanal",
+      "bounds_wsen": [
+        -59,
+        -23,
+        -54,
+        -15
+      ],
+      "datasets": {
+        "nrt": {
+          "calibration": {
+            "accepted": false,
+            "evaluated": false,
+            "geography": "Pantanal full study area only",
+            "period": null,
+            "reason": "SP calibration is not applied to NRT",
+            "reference_versions": null,
+            "selected_method": "frozen seasonal"
+          },
+          "comparison": null,
+          "coverage": {
+            "end": "2026-11-14",
+            "start": "2026-08-01"
+          },
+          "external_audit": {
+            "file": "pantanal-regional-validation-247ee21cc4ce.json",
+            "sha256": "247ee21cc4cef56dae6bfda36968babb4c7ac83286f3146252c11b0821046374"
+          },
+          "file": "pantanal-nrt-dashboard-6d9ac5b4e62c.json",
+          "last_retrieval_utc": "2026-11-15T03:56:38.785832+00:00",
+          "observations": 12703,
+          "products": [
+            "MODIS_NRT",
+            "VIIRS_NOAA20_NRT"
+          ],
+          "residual_csv": {
+            "file": "pantanal-candidate-residuals-7af61b7c8392.csv",
+            "sha256": "7af61b7c83928db5fa9d42d88ea96cd8c9b3e2a11ea10f80f4a168f4df53697b"
+          },
+          "sha256": "6d9ac5b4e62c935ca0cee2decd767be7e8659cc4c874c7d25be71ff6d7fe5b77",
+          "source_field_audit": null,
+          "validation": {
+            "file": "validation-ba55acfc7909.json",
+            "sha256": "ba55acfc7909acdf95ffb0083c91817bf573ca50ad8554b1804c1d8c2baf21bf"
+          }
+        },
+        "sp": {
+          "calibration": {
+            "accepted": true,
+            "evaluated": true,
+            "geography": "Pantanal full study area only",
+            "period": {
+              "end": "2024-12-31",
+              "start": "2020-01-01"
+            },
+            "reason": "Pantanal frozen publication retained; 19 fresh months are below the required 24",
+            "reference_versions": {
+              "fresh": {
+                "61.03": 9908
+              },
+              "outer": {
+                "61.03": 106593
+              },
+              "training": {
+                "6.03": 140704
+              }
+            },
+            "selected_method": "frozen seasonal"
+          },
+          "comparison": null,
+          "coverage": {
+            "end": "2026-07-31",
+            "start": "2000-11-01"
+          },
+          "evaluation_summary": {
+            "accepted": false,
+            "external": {
+              "scalar": {
+                "bias": 89.68343762947576,
+                "mae": 89.68343762947576,
+                "n": 19,
+                "rmse": 104.70492931102098
+              },
+              "seasonal": {
+                "bias": 67.38592607640409,
+                "mae": 70.79385244897725,
+                "n": 19,
+                "rmse": 90.20565604532551
+              },
+              "unadjusted": {
+                "bias": 399.42105263157896,
+                "mae": 399.42105263157896,
+                "n": 19,
+                "rmse": 454.0151284286739
+              }
+            },
+            "gates": {
+              "external": true,
+              "outer": true,
+              "outer_excluding_known": true
+            },
+            "outer": {
+              "scalar": {
+                "bias": -54.344752118498505,
+                "mae": 175.32928712011548,
+                "n": 24,
+                "rmse": 287.3199806041242
+              },
+              "seasonal": {
+                "bias": -123.96830007041311,
+                "mae": 199.6997313847094,
+                "n": 24,
+                "rmse": 317.66603826320306
+              },
+              "unadjusted": {
+                "bias": 1021.7083333333334,
+                "mae": 1021.7083333333334,
+                "n": 24,
+                "rmse": 1334.5145965231452
+              }
+            },
+            "selected_method": "seasonal"
+          },
+          "external_audit": {
+            "file": "pantanal-regional-validation-247ee21cc4ce.json",
+            "sha256": "247ee21cc4cef56dae6bfda36968babb4c7ac83286f3146252c11b0821046374"
+          },
+          "file": "pantanal-sp-dashboard-6e112532c828.json",
+          "last_retrieval_utc": "2026-11-15T03:56:36.575373+00:00",
+          "observations": 1869422,
+          "products": [
+            "MODIS_SP",
+            "VIIRS_NOAA20_SP"
+          ],
+          "residual_csv": {
+            "file": "pantanal-candidate-residuals-7af61b7c8392.csv",
+            "sha256": "7af61b7c83928db5fa9d42d88ea96cd8c9b3e2a11ea10f80f4a168f4df53697b"
+          },
+          "sha256": "6e112532c8288cc8688119b100911dad0957488ff36e836fd537e9fc88295acb",
+          "source_field_audit": {
+            "file": "pantanal-source-field-audit-205be670c367.json",
+            "sha256": "205be670c3672b483285bf81c6da8f532952ae7d61c8987875b5bb2b87a7e0f9"
+          },
+          "validation": {
+            "file": "validation-ba55acfc7909.json",
+            "sha256": "ba55acfc7909acdf95ffb0083c91817bf573ca50ad8554b1804c1d8c2baf21bf"
+          }
+        }
+      }
+    },
+    {
+      "region": "southern-amazon",
+      "bounds_wsen": [
+        -65,
+        -13,
+        -48,
+        -5
+      ],
+      "datasets": {
+        "nrt": {
+          "calibration": {
+            "accepted": false,
+            "evaluated": false,
+            "geography": "Southern Amazon full study area only",
+            "period": null,
+            "reason": "SP calibration is not applied to NRT",
+            "reference_versions": null,
+            "selected_method": null
+          },
+          "comparison": {
+            "file": "southern-amazon-regional-comparison-45a73db34fc7.json",
+            "sha256": "45a73db34fc727c1579d820eb5d139e479392242ff47de22ecd5e0402cc9ea7f"
+          },
+          "coverage": {
+            "end": "2026-11-14",
+            "start": "2026-08-01"
+          },
+          "external_audit": {
+            "file": "southern-amazon-regional-validation-2316d9c5ae29.json",
+            "sha256": "2316d9c5ae29cfc16bccc9e20e99e6bb325dcbf6b9c973dd920e3a8bcd06e1be"
+          },
+          "file": "southern-amazon-nrt-dashboard-71924c4c064a.json",
+          "last_retrieval_utc": "2026-11-15T04:17:05.979323+00:00",
+          "observations": 158707,
+          "products": [
+            "MODIS_NRT",
+            "VIIRS_NOAA20_NRT"
+          ],
+          "residual_csv": {
+            "file": "southern-amazon-candidate-residuals-24d80b9a99d8.csv",
+            "sha256": "24d80b9a99d8083c238b28932a64756868d332500e3ab23814fdb767c3318524"
+          },
+          "sha256": "71924c4c064a91340e8dd93522c3888b07215c11db635d44d41266ffd6692976",
+          "source_field_audit": null,
+          "validation": {
+            "file": "southern-amazon-regional-validation-2316d9c5ae29.json",
+            "sha256": "2316d9c5ae29cfc16bccc9e20e99e6bb325dcbf6b9c973dd920e3a8bcd06e1be"
+          }
+        },
+        "sp": {
+          "calibration": {
+            "accepted": true,
+            "evaluated": true,
+            "geography": "Southern Amazon full study area only",
+            "period": {
+              "area": "full study area",
+              "end": "2026-07-31",
+              "start": "2020-01-01"
+            },
+            "reason": "All preregistered gates passed",
+            "reference_versions": {
+              "fresh": {
+                "61.03": 48795
+              },
+              "outer": {
+                "61.03": 266832
+              },
+              "training": {
+                "6.03": 344311
+              }
+            },
+            "selected_method": "seasonal"
+          },
+          "comparison": {
+            "file": "southern-amazon-regional-comparison-45a73db34fc7.json",
+            "sha256": "45a73db34fc727c1579d820eb5d139e479392242ff47de22ecd5e0402cc9ea7f"
+          },
+          "coverage": {
+            "end": "2026-07-31",
+            "start": "2020-01-01"
+          },
+          "evaluation_summary": {
+            "accepted": true,
+            "external": {
+              "scalar": {
+                "bias": -71.27733885737896,
+                "mae": 141.5402712433704,
+                "n": 19,
+                "rmse": 196.80373375385676
+              },
+              "seasonal": {
+                "bias": 61.51428629286546,
+                "mae": 168.7308951218256,
+                "n": 19,
+                "rmse": 213.04252027065542
+              },
+              "unadjusted": {
+                "bias": 1399.578947368421,
+                "mae": 1428.421052631579,
+                "n": 19,
+                "rmse": 2146.405955618785
+              }
+            },
+            "gates": {
+              "external": true,
+              "outer": true,
+              "outer_excluding_known": true
+            },
+            "outer": {
+              "scalar": {
+                "bias": -584.4559349156631,
+                "mae": 715.3028464680998,
+                "n": 24,
+                "rmse": 988.6370412721373
+              },
+              "seasonal": {
+                "bias": -451.00753025897836,
+                "mae": 567.4871475148294,
+                "n": 24,
+                "rmse": 787.2439268955009
+              },
+              "unadjusted": {
+                "bias": 4330.958333333333,
+                "mae": 4584.541666666667,
+                "n": 24,
+                "rmse": 7709.664013971902
+              }
+            },
+            "selected_method": "seasonal"
+          },
+          "external_audit": {
+            "file": "southern-amazon-regional-validation-2316d9c5ae29.json",
+            "sha256": "2316d9c5ae29cfc16bccc9e20e99e6bb325dcbf6b9c973dd920e3a8bcd06e1be"
+          },
+          "file": "southern-amazon-sp-dashboard-2b1410497c76.json",
+          "last_retrieval_utc": "2026-11-15T04:16:58.890122+00:00",
+          "observations": 3213150,
+          "products": [
+            "MODIS_SP",
+            "VIIRS_NOAA20_SP"
+          ],
+          "residual_csv": {
+            "file": "southern-amazon-candidate-residuals-24d80b9a99d8.csv",
+            "sha256": "24d80b9a99d8083c238b28932a64756868d332500e3ab23814fdb767c3318524"
+          },
+          "sha256": "2b1410497c7645d2254e34e2e68981d2c7a35ab62e9c96e202ce931d6c655db2",
+          "source_field_audit": {
+            "file": "southern-amazon-source-field-audit-580175fac3e9.json",
+            "sha256": "580175fac3e9c44d474b07b156a5912cd411c2b35d8af9fd7f749502c2f036cc"
+          },
+          "validation": {
+            "file": "southern-amazon-regional-validation-2316d9c5ae29.json",
+            "sha256": "2316d9c5ae29cfc16bccc9e20e99e6bb325dcbf6b9c973dd920e3a8bcd06e1be"
+          }
+        }
+      }
+    },
+    {
+      "region": "cerrado",
+      "bounds_wsen": [
+        -55,
+        -20,
+        -44,
+        -8
+      ],
+      "datasets": {
+        "nrt": {
+          "calibration": {
+            "accepted": false,
+            "evaluated": false,
+            "geography": "Cerrado full study area only",
+            "period": null,
+            "reason": "SP calibration is not applied to NRT",
+            "reference_versions": null,
+            "selected_method": null
+          },
+          "comparison": {
+            "file": "cerrado-regional-comparison-c609228a422c.json",
+            "sha256": "c609228a422c29a256a6b808df76f640e1f9120881c47327d13d2f5bda9f1677"
+          },
+          "coverage": {
+            "end": "2026-11-14",
+            "start": "2026-08-01"
+          },
+          "external_audit": {
+            "file": "cerrado-regional-validation-b460d124157c.json",
+            "sha256": "b460d124157c947af4bd5836fdf08c50b7fe4c57013033cc2e2a4f57aa57793d"
+          },
+          "file": "cerrado-nrt-dashboard-aae086d7fa05.json",
+          "last_retrieval_utc": "2026-11-15T06:33:29.376681+00:00",
+          "observations": 163245,
+          "products": [
+            "MODIS_NRT",
+            "VIIRS_NOAA20_NRT"
+          ],
+          "residual_csv": {
+            "file": "cerrado-candidate-residuals-ff98d5e2c19c.csv",
+            "sha256": "ff98d5e2c19ce5a7e19eb6fcc48ef12ecd79bcaf3051fcb0a99d3a4ebba744e6"
+          },
+          "sha256": "aae086d7fa056f48e8a44e04ef69f8d4eecf9425702f2e23a26a1c8acb6de5f8",
+          "source_field_audit": null,
+          "validation": {
+            "file": "cerrado-regional-validation-b460d124157c.json",
+            "sha256": "b460d124157c947af4bd5836fdf08c50b7fe4c57013033cc2e2a4f57aa57793d"
+          }
+        },
+        "sp": {
+          "calibration": {
+            "accepted": true,
+            "evaluated": true,
+            "geography": "Cerrado full study area only",
+            "period": {
+              "area": "full study area",
+              "end": "2026-07-31",
+              "start": "2020-01-01"
+            },
+            "reason": "All preregistered gates passed",
+            "reference_versions": {
+              "fresh": {
+                "61.03": 88296
+              },
+              "outer": {
+                "61.03": 199019
+              },
+              "training": {
+                "6.03": 296515
+              }
+            },
+            "selected_method": "seasonal"
+          },
+          "comparison": {
+            "file": "cerrado-regional-comparison-c609228a422c.json",
+            "sha256": "c609228a422c29a256a6b808df76f640e1f9120881c47327d13d2f5bda9f1677"
+          },
+          "coverage": {
+            "end": "2026-07-31",
+            "start": "2020-01-01"
+          },
+          "evaluation_summary": {
+            "accepted": true,
+            "external": {
+              "scalar": {
+                "bias": -113.3621380636693,
+                "mae": 202.7224069421173,
+                "n": 19,
+                "rmse": 276.97350527400965
+              },
+              "seasonal": {
+                "bias": 116.53546828846446,
+                "mae": 322.136885587848,
+                "n": 19,
+                "rmse": 438.34962698190077
+              },
+              "unadjusted": {
+                "bias": 2641.684210526316,
+                "mae": 2641.684210526316,
+                "n": 19,
+                "rmse": 3923.1838842289417
+              }
+            },
+            "gates": {
+              "external": true,
+              "outer": true,
+              "outer_excluding_known": true
+            },
+            "outer": {
+              "scalar": {
+                "bias": -523.1061355865073,
+                "mae": 676.6134028916731,
+                "n": 24,
+                "rmse": 1040.6044034450936
+              },
+              "seasonal": {
+                "bias": -254.03886712151703,
+                "mae": 506.5210096071665,
+                "n": 24,
+                "rmse": 782.7457671987195
+              },
+              "unadjusted": {
+                "bias": 3678.3333333333335,
+                "mae": 3826.75,
+                "n": 24,
+                "rmse": 5425.16262429063
+              }
+            },
+            "selected_method": "seasonal"
+          },
+          "external_audit": {
+            "file": "cerrado-regional-validation-b460d124157c.json",
+            "sha256": "b460d124157c947af4bd5836fdf08c50b7fe4c57013033cc2e2a4f57aa57793d"
+          },
+          "file": "cerrado-sp-dashboard-1b5a65ee5cc3.json",
+          "last_retrieval_utc": "2026-11-15T05:43:21.205853+00:00",
+          "observations": 2772479,
+          "products": [
+            "MODIS_SP",
+            "VIIRS_NOAA20_SP"
+          ],
+          "residual_csv": {
+            "file": "cerrado-candidate-residuals-ff98d5e2c19c.csv",
+            "sha256": "ff98d5e2c19ce5a7e19eb6fcc48ef12ecd79bcaf3051fcb0a99d3a4ebba744e6"
+          },
+          "sha256": "1b5a65ee5cc303bf7be2d17143800c25173163ea270be13788a8796008145927",
+          "source_field_audit": {
+            "file": "cerrado-source-field-audit-322bfa50f95a.json",
+            "sha256": "322bfa50f95ab64056545b3d09d275d19f95f46a3afa5ab56d37179768c90f8e"
+          },
+          "validation": {
+            "file": "cerrado-regional-validation-b460d124157c.json",
+            "sha256": "b460d124157c947af4bd5836fdf08c50b7fe4c57013033cc2e2a4f57aa57793d"
+          }
+        }
+      }
+    },
+    {
+      "region": "gran-chaco",
+      "bounds_wsen": [
+        -66,
+        -32,
+        -57,
+        -17
+      ],
+      "datasets": {
+        "nrt": {
+          "calibration": {
+            "accepted": false,
+            "evaluated": false,
+            "geography": "Gran Chaco full study area only",
+            "period": null,
+            "reason": "SP calibration is not applied to NRT",
+            "reference_versions": null,
+            "selected_method": null
+          },
+          "comparison": {
+            "file": "gran-chaco-regional-comparison-eebd4ee8e31a.json",
+            "sha256": "eebd4ee8e31aebf06f184f4fe2b737217ab2fc2e0dacf1722be93f82ac787237"
+          },
+          "coverage": {
+            "end": "2026-11-14",
+            "start": "2026-08-01"
+          },
+          "external_audit": {
+            "file": "gran-chaco-regional-validation-c1b3162bb5ab.json",
+            "sha256": "c1b3162bb5ab3db8f28a49ff3e451f31c2d41239efb7ed01c8de86828bf6dde7"
+          },
+          "file": "gran-chaco-nrt-dashboard-a8933e74f5be.json",
+          "last_retrieval_utc": "2026-11-15T06:33:29.376681+00:00",
+          "observations": 90935,
+          "products": [
+            "MODIS_NRT",
+            "VIIRS_NOAA20_NRT"
+          ],
+          "residual_csv": {
+            "file": "gran-chaco-candidate-residuals-5452fb2e5952.csv",
+            "sha256": "5452fb2e595282d274092f7d1c41dabbc87cac58294451d9ba9c5001327c02ce"
+          },
+          "sha256": "a8933e74f5be66d9cb2c57fcd698b6836db0b8162dab758028a4c9058899dc50",
+          "source_field_audit": null,
+          "validation": {
+            "file": "gran-chaco-regional-validation-c1b3162bb5ab.json",
+            "sha256": "c1b3162bb5ab3db8f28a49ff3e451f31c2d41239efb7ed01c8de86828bf6dde7"
+          }
+        },
+        "sp": {
+          "calibration": {
+            "accepted": true,
+            "evaluated": true,
+            "geography": "Gran Chaco full study area only",
+            "period": {
+              "area": "full study area",
+              "end": "2026-07-31",
+              "start": "2020-01-01"
+            },
+            "reason": "All preregistered gates passed",
+            "reference_versions": {
+              "fresh": {
+                "61.03": 76494
+              },
+              "outer": {
+                "61.03": 217142
+              },
+              "training": {
+                "6.03": 408643
+              }
+            },
+            "selected_method": "seasonal"
+          },
+          "comparison": {
+            "file": "gran-chaco-regional-comparison-eebd4ee8e31a.json",
+            "sha256": "eebd4ee8e31aebf06f184f4fe2b737217ab2fc2e0dacf1722be93f82ac787237"
+          },
+          "coverage": {
+            "end": "2026-07-31",
+            "start": "2020-01-01"
+          },
+          "evaluation_summary": {
+            "accepted": true,
+            "external": {
+              "scalar": {
+                "bias": 184.6543303450455,
+                "mae": 296.6887099754511,
+                "n": 19,
+                "rmse": 383.82499821301855
+              },
+              "seasonal": {
+                "bias": 97.46800901515306,
+                "mae": 213.85750385693538,
+                "n": 19,
+                "rmse": 289.57429377226407
+              },
+              "unadjusted": {
+                "bias": 2923.7368421052633,
+                "mae": 2923.7368421052633,
+                "n": 19,
+                "rmse": 3352.70089864716
+              }
+            },
+            "gates": {
+              "external": true,
+              "outer": true,
+              "outer_excluding_known": true
+            },
+            "outer": {
+              "scalar": {
+                "bias": -189.71439125980987,
+                "mae": 427.558948622088,
+                "n": 24,
+                "rmse": 677.8380001859874
+              },
+              "seasonal": {
+                "bias": -291.91831906282187,
+                "mae": 405.8038909996267,
+                "n": 24,
+                "rmse": 594.1577206951835
+              },
+              "unadjusted": {
+                "bias": 3941.75,
+                "mae": 3941.75,
+                "n": 24,
+                "rmse": 4581.592963515346
+              }
+            },
+            "selected_method": "seasonal"
+          },
+          "external_audit": {
+            "file": "gran-chaco-regional-validation-c1b3162bb5ab.json",
+            "sha256": "c1b3162bb5ab3db8f28a49ff3e451f31c2d41239efb7ed01c8de86828bf6dde7"
+          },
+          "file": "gran-chaco-sp-dashboard-84594bf276a3.json",
+          "last_retrieval_utc": "2026-11-15T05:43:21.205853+00:00",
+          "observations": 3210662,
+          "products": [
+            "MODIS_SP",
+            "VIIRS_NOAA20_SP"
+          ],
+          "residual_csv": {
+            "file": "gran-chaco-candidate-residuals-5452fb2e5952.csv",
+            "sha256": "5452fb2e595282d274092f7d1c41dabbc87cac58294451d9ba9c5001327c02ce"
+          },
+          "sha256": "84594bf276a3a0ad160e6b1fdfa08dd890b7d35cea327ed52cc7598cd16824bf",
+          "source_field_audit": {
+            "file": "gran-chaco-source-field-audit-dddc1ad093b3.json",
+            "sha256": "dddc1ad093b3de8bc4913d2544826d793ae893bac3ae731b69108877a31f600e"
+          },
+          "validation": {
+            "file": "gran-chaco-regional-validation-c1b3162bb5ab.json",
+            "sha256": "c1b3162bb5ab3db8f28a49ff3e451f31c2d41239efb7ed01c8de86828bf6dde7"
+          }
+        }
+      }
+    },
+    {
+      "region": "california",
+      "bounds_wsen": [
+        -125,
+        32,
+        -114,
+        42.5
+      ],
+      "datasets": {
+        "nrt": {
+          "calibration": {
+            "accepted": false,
+            "evaluated": false,
+            "geography": "California full study area only",
+            "period": null,
+            "reason": "SP calibration is not applied to NRT",
+            "reference_versions": null,
+            "selected_method": null
+          },
+          "comparison": {
+            "file": "california-regional-comparison-ab424b1fdaa4.json",
+            "sha256": "ab424b1fdaa47f3dddff1cf4156dbc8dc969ba342ac93dee78ac06a04fa951b2"
+          },
+          "coverage": {
+            "end": "2026-11-14",
+            "start": "2026-08-01"
+          },
+          "external_audit": {
+            "file": "california-regional-validation-e90fee209c39.json",
+            "sha256": "e90fee209c397a6cfcbf7a4054e5e84c8f303144697b4f6296b3bc320957bc13"
+          },
+          "file": "california-nrt-dashboard-742d0871b9d0.json",
+          "last_retrieval_utc": "2026-11-15T06:33:37.417166+00:00",
+          "observations": 23158,
+          "products": [
+            "MODIS_NRT",
+            "VIIRS_NOAA20_NRT"
+          ],
+          "residual_csv": {
+            "file": "california-candidate-residuals-f54a8e92e9e0.csv",
+            "sha256": "f54a8e92e9e0fc1635d99decdfdb2cb13371ac15b80adfb2a4b671a5470b89d8"
+          },
+          "sha256": "742d0871b9d079ac39359f4773b037eecbe4abc5d03cf4e0905ae887bf560a1b",
+          "source_field_audit": null,
+          "validation": {
+            "file": "california-regional-validation-e90fee209c39.json",
+            "sha256": "e90fee209c397a6cfcbf7a4054e5e84c8f303144697b4f6296b3bc320957bc13"
+          }
+        },
+        "sp": {
+          "calibration": {
+            "accepted": true,
+            "evaluated": true,
+            "geography": "California full study area only",
+            "period": {
+              "area": "full study area",
+              "end": "2026-07-31",
+              "start": "2020-01-01"
+            },
+            "reason": "All preregistered gates passed",
+            "reference_versions": {
+              "fresh": {
+                "61.03": 13792
+              },
+              "outer": {
+                "61.03": 22652
+              },
+              "training": {
+                "6.03": 109212
+              }
+            },
+            "selected_method": "seasonal"
+          },
+          "comparison": {
+            "file": "california-regional-comparison-ab424b1fdaa4.json",
+            "sha256": "ab424b1fdaa47f3dddff1cf4156dbc8dc969ba342ac93dee78ac06a04fa951b2"
+          },
+          "coverage": {
+            "end": "2026-07-31",
+            "start": "2020-01-01"
+          },
+          "evaluation_summary": {
+            "accepted": true,
+            "external": {
+              "scalar": {
+                "bias": 328.8375609449635,
+                "mae": 328.8375609449635,
+                "n": 19,
+                "rmse": 338.2760722461293
+              },
+              "seasonal": {
+                "bias": 124.9037515018011,
+                "mae": 145.96836694637327,
+                "n": 19,
+                "rmse": 176.25739739532582
+              },
+              "unadjusted": {
+                "bias": 977.7368421052631,
+                "mae": 977.7368421052631,
+                "n": 19,
+                "rmse": 993.4841137182448
+              }
+            },
+            "gates": {
+              "external": true,
+              "outer": true,
+              "outer_excluding_known": true
+            },
+            "outer": {
+              "scalar": {
+                "bias": 271.46734163673966,
+                "mae": 271.46734163673966,
+                "n": 24,
+                "rmse": 281.74388809673644
+              },
+              "seasonal": {
+                "bias": 90.54934430560704,
+                "mae": 124.07890707631807,
+                "n": 24,
+                "rmse": 170.29470906769475
+              },
+              "unadjusted": {
+                "bias": 945.0833333333334,
+                "mae": 945.0833333333334,
+                "n": 24,
+                "rmse": 980.9229497434206
+              }
+            },
+            "selected_method": "seasonal"
+          },
+          "external_audit": {
+            "file": "california-regional-validation-e90fee209c39.json",
+            "sha256": "e90fee209c397a6cfcbf7a4054e5e84c8f303144697b4f6296b3bc320957bc13"
+          },
+          "file": "california-sp-dashboard-4ec1e974319f.json",
+          "last_retrieval_utc": "2026-11-15T05:53:17.273147+00:00",
+          "observations": 816069,
+          "products": [
+            "MODIS_SP",
+            "VIIRS_NOAA20_SP"
+          ],
+          "residual_csv": {
+            "file": "california-candidate-residuals-f54a8e92e9e0.csv",
+            "sha256": "f54a8e92e9e0fc1635d99decdfdb2cb13371ac15b80adfb2a4b671a5470b89d8"
+          },
+          "sha256": "4ec1e974319fa980c3773abde9b4ebeb6f0a6c32ae2d9d8a74313ff2337684b1",
+          "source_field_audit": {
+            "file": "california-source-field-audit-2df9a46b3c3c.json",
+            "sha256": "2df9a46b3c3c9e1eea13ff3d1b1052a5940f8b8fc1b75ec419e1d61a216655d4"
+          },
+          "validation": {
+            "file": "california-regional-validation-e90fee209c39.json",
+            "sha256": "e90fee209c397a6cfcbf7a4054e5e84c8f303144697b4f6296b3bc320957bc13"
+          }
+        }
+      }
+    },
+    {
+      "region": "southeastern-australia",
+      "bounds_wsen": [
+        140,
+        -44,
+        154,
+        -28
+      ],
+      "datasets": {
+        "nrt": {
+          "calibration": {
+            "accepted": false,
+            "evaluated": false,
+            "geography": "Southeastern Australia full study area only",
+            "period": null,
+            "reason": "SP calibration is not applied to NRT",
+            "reference_versions": null,
+            "selected_method": null
+          },
+          "comparison": {
+            "file": "southeastern-australia-regional-comparison-cb11b3a28723.json",
+            "sha256": "cb11b3a28723c3fc8c8481d49df8592a9a441bfa33fcd93e2f33fcfd39a8132d"
+          },
+          "coverage": {
+            "end": "2026-11-14",
+            "start": "2026-08-01"
+          },
+          "external_audit": {
+            "file": "southeastern-australia-regional-validation-b95c466291ec.json",
+            "sha256": "b95c466291ece0c165a5801b7ed3df4da6e76f7afa25e7cdc25eab6dc916900f"
+          },
+          "file": "southeastern-australia-nrt-dashboard-dcee01807d3b.json",
+          "last_retrieval_utc": "2026-11-15T06:33:39.878659+00:00",
+          "observations": 24733,
+          "products": [
+            "MODIS_NRT",
+            "VIIRS_NOAA20_NRT"
+          ],
+          "residual_csv": {
+            "file": "southeastern-australia-candidate-residuals-d5557281eaf0.csv",
+            "sha256": "d5557281eaf0122c4868c9cde7c03f04d35501e2e7181e8261eed92e2755f0e0"
+          },
+          "sha256": "dcee01807d3b98e6c4261e801484e043fb87b05fbc0c591813467f8ba960f3c5",
+          "source_field_audit": null,
+          "validation": {
+            "file": "southeastern-australia-regional-validation-b95c466291ec.json",
+            "sha256": "b95c466291ece0c165a5801b7ed3df4da6e76f7afa25e7cdc25eab6dc916900f"
+          }
+        },
+        "sp": {
+          "calibration": {
+            "accepted": true,
+            "evaluated": true,
+            "geography": "Southeastern Australia full study area only",
+            "period": {
+              "area": "full study area",
+              "end": "2026-07-31",
+              "start": "2020-01-01"
+            },
+            "reason": "All preregistered gates passed",
+            "reference_versions": {
+              "fresh": {
+                "61.03": 31047
+              },
+              "outer": {
+                "61.03": 43300
+              },
+              "training": {
+                "6.03": 65740
+              }
+            },
+            "selected_method": "seasonal"
+          },
+          "comparison": {
+            "file": "southeastern-australia-regional-comparison-cb11b3a28723.json",
+            "sha256": "cb11b3a28723c3fc8c8481d49df8592a9a441bfa33fcd93e2f33fcfd39a8132d"
+          },
+          "coverage": {
+            "end": "2026-07-31",
+            "start": "2020-01-01"
+          },
+          "evaluation_summary": {
+            "accepted": true,
+            "external": {
+              "scalar": {
+                "bias": 221.36140885261295,
+                "mae": 293.0775981502375,
+                "n": 19,
+                "rmse": 358.67024970498494
+              },
+              "seasonal": {
+                "bias": 13.841343139111647,
+                "mae": 147.79666518051138,
+                "n": 19,
+                "rmse": 210.49015000224165
+              },
+              "unadjusted": {
+                "bias": 1604,
+                "mae": 1604,
+                "n": 19,
+                "rmse": 1890.6017142976634
+              }
+            },
+            "gates": {
+              "external": true,
+              "outer": true,
+              "outer_excluding_known": true
+            },
+            "outer": {
+              "scalar": {
+                "bias": 92.40038656517368,
+                "mae": 206.24584173597623,
+                "n": 24,
+                "rmse": 266.5775874408595
+              },
+              "seasonal": {
+                "bias": -150.59766628351716,
+                "mae": 228.8841713678484,
+                "n": 24,
+                "rmse": 381.4135547407515
+              },
+              "unadjusted": {
+                "bias": 1453.2916666666667,
+                "mae": 1453.2916666666667,
+                "n": 24,
+                "rmse": 1726.6511783410876
+              }
+            },
+            "selected_method": "seasonal"
+          },
+          "external_audit": {
+            "file": "southeastern-australia-regional-validation-b95c466291ec.json",
+            "sha256": "b95c466291ece0c165a5801b7ed3df4da6e76f7afa25e7cdc25eab6dc916900f"
+          },
+          "file": "southeastern-australia-sp-dashboard-2236574e5d39.json",
+          "last_retrieval_utc": "2026-11-15T06:03:08.915817+00:00",
+          "observations": 810820,
+          "products": [
+            "MODIS_SP",
+            "VIIRS_NOAA20_SP"
+          ],
+          "residual_csv": {
+            "file": "southeastern-australia-candidate-residuals-d5557281eaf0.csv",
+            "sha256": "d5557281eaf0122c4868c9cde7c03f04d35501e2e7181e8261eed92e2755f0e0"
+          },
+          "sha256": "2236574e5d397fc025c4835fb4dc6ed3b30ae892871d27e51a42a9415ee64941",
+          "source_field_audit": {
+            "file": "southeastern-australia-source-field-audit-8327fe6ddc14.json",
+            "sha256": "8327fe6ddc14b8e703b2a6fb9b1cd56431292425d622a97c4eb83250fece1920"
+          },
+          "validation": {
+            "file": "southeastern-australia-regional-validation-b95c466291ec.json",
+            "sha256": "b95c466291ece0c165a5801b7ed3df4da6e76f7afa25e7cdc25eab6dc916900f"
+          }
+        }
+      }
+    },
+    {
+      "region": "iberian-peninsula",
+      "bounds_wsen": [
+        -10,
+        35,
+        4,
+        44.5
+      ],
+      "datasets": {
+        "nrt": {
+          "calibration": {
+            "accepted": false,
+            "evaluated": false,
+            "geography": "Iberian Peninsula full study area only",
+            "period": null,
+            "reason": "SP calibration is not applied to NRT",
+            "reference_versions": null,
+            "selected_method": null
+          },
+          "comparison": {
+            "file": "iberian-peninsula-regional-comparison-891062ab6287.json",
+            "sha256": "891062ab6287413994353e43c9d675e0bc33904c91890bca332362c9762db76a"
+          },
+          "coverage": {
+            "end": "2026-11-14",
+            "start": "2026-08-01"
+          },
+          "external_audit": {
+            "file": "iberian-peninsula-regional-validation-f363361431a9.json",
+            "sha256": "f363361431a97126315b48badaa82c6af28109b0b2c2cfd66cd5f0450d733d6d"
+          },
+          "file": "iberian-peninsula-nrt-dashboard-6fa362917dbb.json",
+          "last_retrieval_utc": "2026-11-15T06:33:44.252624+00:00",
+          "observations": 14017,
+          "products": [
+            "MODIS_NRT",
+            "VIIRS_NOAA20_NRT"
+          ],
+          "residual_csv": {
+            "file": "iberian-peninsula-candidate-residuals-cc7251076153.csv",
+            "sha256": "cc72510761538147d3c8a84f0e8991481d40f74a56441a979620809613b4f7b7"
+          },
+          "sha256": "6fa362917dbb14a3bfc0bd88e89cae50571d36aa9e8f724643ec4e0338122cda",
+          "source_field_audit": null,
+          "validation": {
+            "file": "iberian-peninsula-regional-validation-f363361431a9.json",
+            "sha256": "f363361431a97126315b48badaa82c6af28109b0b2c2cfd66cd5f0450d733d6d"
+          }
+        },
+        "sp": {
+          "calibration": {
+            "accepted": true,
+            "evaluated": true,
+            "geography": "Iberian Peninsula full study area only",
+            "period": {
+              "area": "full study area",
+              "end": "2026-07-31",
+              "start": "2020-01-01"
+            },
+            "reason": "All preregistered gates passed",
+            "reference_versions": {
+              "fresh": {
+                "61.03": 21802
+              },
+              "outer": {
+                "61.03": 10855
+              },
+              "training": {
+                "6.03": 21731
+              }
+            },
+            "selected_method": "seasonal"
+          },
+          "comparison": {
+            "file": "iberian-peninsula-regional-comparison-891062ab6287.json",
+            "sha256": "891062ab6287413994353e43c9d675e0bc33904c91890bca332362c9762db76a"
+          },
+          "coverage": {
+            "end": "2026-07-31",
+            "start": "2020-01-01"
+          },
+          "evaluation_summary": {
+            "accepted": true,
+            "external": {
+              "scalar": {
+                "bias": -38.444951630585116,
+                "mae": 134.43268567670142,
+                "n": 19,
+                "rmse": 283.3208405163313
+              },
+              "seasonal": {
+                "bias": -72.78426867811854,
+                "mae": 123.02370459856476,
+                "n": 19,
+                "rmse": 253.72175265097
+              },
+              "unadjusted": {
+                "bias": 794.6315789473684,
+                "mae": 794.6315789473684,
+                "n": 19,
+                "rmse": 823.7212737583662
+              }
+            },
+            "gates": {
+              "external": true,
+              "outer": true,
+              "outer_excluding_known": true
+            },
+            "outer": {
+              "scalar": {
+                "bias": 48.92948271157141,
+                "mae": 95.78464835611722,
+                "n": 24,
+                "rmse": 111.6379054364561
+              },
+              "seasonal": {
+                "bias": 20.704803234654324,
+                "mae": 71.50755279509627,
+                "n": 24,
+                "rmse": 92.5587679996081
+              },
+              "unadjusted": {
+                "bias": 738.9166666666666,
+                "mae": 738.9166666666666,
+                "n": 24,
+                "rmse": 753.8176724734791
+              }
+            },
+            "selected_method": "seasonal"
+          },
+          "external_audit": {
+            "file": "iberian-peninsula-regional-validation-f363361431a9.json",
+            "sha256": "f363361431a97126315b48badaa82c6af28109b0b2c2cfd66cd5f0450d733d6d"
+          },
+          "file": "iberian-peninsula-sp-dashboard-d7e807c5de1e.json",
+          "last_retrieval_utc": "2026-11-15T06:05:29.073404+00:00",
+          "observations": 283758,
+          "products": [
+            "MODIS_SP",
+            "VIIRS_NOAA20_SP"
+          ],
+          "residual_csv": {
+            "file": "iberian-peninsula-candidate-residuals-cc7251076153.csv",
+            "sha256": "cc72510761538147d3c8a84f0e8991481d40f74a56441a979620809613b4f7b7"
+          },
+          "sha256": "d7e807c5de1e8f278ac6091c77aa144a9a690aabad7685f7f8785134168d6e13",
+          "source_field_audit": {
+            "file": "iberian-peninsula-source-field-audit-9c7b387f05b6.json",
+            "sha256": "9c7b387f05b6998379ca6b3d6ac203212cc380602a7167e81bdc14cc396bd28d"
+          },
+          "validation": {
+            "file": "iberian-peninsula-regional-validation-f363361431a9.json",
+            "sha256": "f363361431a97126315b48badaa82c6af28109b0b2c2cfd66cd5f0450d733d6d"
+          }
+        }
+      }
+    },
+    {
+      "region": "siberia",
+      "bounds_wsen": [
+        60,
+        50,
+        140,
+        72
+      ],
+      "datasets": {
+        "nrt": {
+          "calibration": {
+            "accepted": false,
+            "evaluated": false,
+            "geography": "Siberia full study area only",
+            "period": null,
+            "reason": "SP calibration is not applied to NRT",
+            "reference_versions": null,
+            "selected_method": null
+          },
+          "comparison": {
+            "file": "siberia-regional-comparison-e30ebf981557.json",
+            "sha256": "e30ebf981557a3b815bd73207f367fd15d5fedceff7ac419cde724a29824a093"
+          },
+          "coverage": {
+            "end": "2026-11-14",
+            "start": "2026-08-01"
+          },
+          "external_audit": {
+            "file": "siberia-regional-validation-af9ef0d1023a.json",
+            "sha256": "af9ef0d1023a3bb6940e41c86f8475e6a63f7ec3ff379088acee7aec046b12a6"
+          },
+          "file": "siberia-nrt-dashboard-1a5eedc21ff6.json",
+          "last_retrieval_utc": "2026-11-15T06:34:25.446691+00:00",
+          "observations": 736921,
+          "products": [
+            "MODIS_NRT",
+            "VIIRS_NOAA20_NRT"
+          ],
+          "residual_csv": {
+            "file": "siberia-candidate-residuals-ee97f898783c.csv",
+            "sha256": "ee97f898783caf733ce6c930d57d83b45cb8f107950359cde0e92dfb5a7863af"
+          },
+          "sha256": "1a5eedc21ff67c8d96849c2354e8785258141bf1ac38e43ca1bad211230ea9df",
+          "source_field_audit": null,
+          "validation": {
+            "file": "siberia-regional-validation-af9ef0d1023a.json",
+            "sha256": "af9ef0d1023a3bb6940e41c86f8475e6a63f7ec3ff379088acee7aec046b12a6"
+          }
+        },
+        "sp": {
+          "calibration": {
+            "accepted": true,
+            "evaluated": true,
+            "geography": "Siberia full study area only",
+            "period": {
+              "area": "full study area",
+              "end": "2026-07-31",
+              "start": "2020-01-01"
+            },
+            "reason": "All preregistered gates passed",
+            "reference_versions": {
+              "fresh": {
+                "61.03": 174931
+              },
+              "outer": {
+                "61.03": 352225
+              },
+              "training": {
+                "6.03": 743782
+              }
+            },
+            "selected_method": "seasonal"
+          },
+          "comparison": {
+            "file": "siberia-regional-comparison-e30ebf981557.json",
+            "sha256": "e30ebf981557a3b815bd73207f367fd15d5fedceff7ac419cde724a29824a093"
+          },
+          "coverage": {
+            "end": "2026-07-31",
+            "start": "2020-01-01"
+          },
+          "evaluation_summary": {
+            "accepted": true,
+            "external": {
+              "scalar": {
+                "bias": 1267.191769529763,
+                "mae": 1363.337310751144,
+                "n": 19,
+                "rmse": 1485.7527341552434
+              },
+              "seasonal": {
+                "bias": 303.93516720874146,
+                "mae": 850.009628340925,
+                "n": 19,
+                "rmse": 1065.5764454369894
+              },
+              "unadjusted": {
+                "bias": 5080.368421052632,
+                "mae": 5080.368421052632,
+                "n": 19,
+                "rmse": 5475.139301280019
+              }
+            },
+            "gates": {
+              "external": true,
+              "outer": true,
+              "outer_excluding_known": true
+            },
+            "outer": {
+              "scalar": {
+                "bias": 959.8230940267111,
+                "mae": 1360.871572441762,
+                "n": 24,
+                "rmse": 1461.6412622511018
+              },
+              "seasonal": {
+                "bias": 115.71249526223137,
+                "mae": 824.5259214474798,
+                "n": 24,
+                "rmse": 947.9176083245005
+              },
+              "unadjusted": {
+                "bias": 5521.291666666667,
+                "mae": 5521.291666666667,
+                "n": 24,
+                "rmse": 6505.620067167567
+              }
+            },
+            "selected_method": "seasonal"
+          },
+          "external_audit": {
+            "file": "siberia-regional-validation-af9ef0d1023a.json",
+            "sha256": "af9ef0d1023a3bb6940e41c86f8475e6a63f7ec3ff379088acee7aec046b12a6"
+          },
+          "file": "siberia-sp-dashboard-68936d32138b.json",
+          "last_retrieval_utc": "2026-11-15T06:25:30.387943+00:00",
+          "observations": 6901324,
+          "products": [
+            "MODIS_SP",
+            "VIIRS_NOAA20_SP"
+          ],
+          "residual_csv": {
+            "file": "siberia-candidate-residuals-ee97f898783c.csv",
+            "sha256": "ee97f898783caf733ce6c930d57d83b45cb8f107950359cde0e92dfb5a7863af"
+          },
+          "sha256": "68936d32138bb790a8f51462fc551d11b8294f79c4010d45f46b5bd7f783cc17",
+          "source_field_audit": {
+            "file": "siberia-source-field-audit-06c3a606a818.json",
+            "sha256": "06c3a606a818901c9c1966099d9db49a276c424006e34e92ce9de8504ff3b5e1"
+          },
+          "validation": {
+            "file": "siberia-regional-validation-af9ef0d1023a.json",
+            "sha256": "af9ef0d1023a3bb6940e41c86f8475e6a63f7ec3ff379088acee7aec046b12a6"
+          }
+        }
+      }
+    }
+  ],
+  "pantanal_published_calibration_domain": {
+    "end": "2024-12-31",
+    "start": "2020-01-01"
+  },
+  "regional_evaluations": "regional-evaluation-index.json",
+  "pinned_static_delivery": {
+    "data_commit": "a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391",
+    "integrity": "Uncompressed SHA-256 checked before use; no API key",
+    "origin": "https://raw.githubusercontent.com",
+    "preserved_local_baseline": "a792e07c78066fcd4a6308fa3f3dd7acca7f93c7",
+    "preserved_local_paths": 461,
+    "registry": {
+      "file": "regions-c06212509a51.json",
+      "sha256": "c06212509a517c5c91377bd2cdc40442559896168ad887a5218214e4e36a5942"
+    },
+    "remote_observation_shards": 878,
+    "schema": "ember-pinned-data-1"
+  },
+  "source_archives": {
+    "archives": 161,
+    "csv_manifest_members": 19308,
+    "index_sha256": "b083afb304087ba642d50ade56fec2a22aefd285b978e7518bc8e11e05dcb984",
+    "original_and_derived_inputs_distinguished": true
+  },
+  "pantanal_holdout_metrics": {
+    "scalar": {
+      "bias": -54.344752118498505,
+      "mae": 175.32928712011548,
+      "n": 24
+    },
+    "seasonal": {
+      "bias": -123.96830007041311,
+      "mae": 199.6997313847094,
+      "n": 24
+    },
+    "unadjusted": {
+      "bias": 1021.7083333333334,
+      "mae": 1021.7083333333334,
+      "n": 24
+    }
+  },
+  "pantanal_peak_metrics": {
+    "scalar": {
+      "bias": -404.6017273725079,
+      "mae": 404.6017273725079,
+      "n": 6
+    },
+    "seasonal": {
+      "bias": -534.637304969327,
+      "mae": 534.637304969327,
+      "n": 6
+    },
+    "unadjusted": {
+      "bias": 2225.1666666666665,
+      "mae": 2225.1666666666665,
+      "n": 6
+    }
+  },
+  "tests": {
+    "python_tests": 25,
+    "node_test_modules": 5,
+    "public_browser_groups": 50,
+    "datasets_fully_reconciled": 16,
+    "regional_evaluations_reproduced": 8,
+    "svg_keyboard_region_links": 16,
+    "unexpected_application_or_console_errors": 0,
+    "production_assets_byte_matched": 6,
+    "first_viewport_map_desktop_and_mobile": true,
+    "github_pr_workflow_runs": [
+      {
+        "id": 43691682778,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 43691682824,
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "media": {
+    "silent_actual_screen_capture_seconds": 29.96,
+    "audio_tracks": 0,
+    "pdf_pages": 9,
+    "script_words": 406,
+    "synthesized_read_seconds": 184.10381,
+    "human_rehearsal": "not measured"
+  },
+  "evidence": [
+    "eight-region-check-public.json",
+    "regional-artifact-check.json",
+    "regional-evaluation.md",
+    "source-field-verification.json",
+    "final-public-assets.json",
+    "final-root-check.json",
+    "media-check.json",
+    "integrity-check.json",
+    "official-guidance-expansion-check.json"
+  ],
+  "remaining": [
+    "MODIS reports 6.03 in training and 61.03 in holdout/fresh data. Producer mapping and physical processing homogeneity are unverified; results measure agreement with MODIS_SP as delivered, not isolated sensor effects.",
+    "Usable satellite observation opportunity, ground truth and independent fire classification are unmeasured. All source-reported thermal types remain included; VIIRS type-code semantics are unverified.",
+    "Pantanal published adjustment remains 2020\u20132024. Its 19 later months are a separate audit, below the registered 24-fresh-month extension gate.",
+    "No SP/NRT joining: recorded same-sensor availability has zero overlap. Pre-2020 archive outside Pantanal remains an expansion item.",
+    "Preset masks are explicit study rectangles. New biome/custom masks need recomputation and separate evaluation; full-area factors do not transfer.",
+    "Historical noninitial observation shards require the immutable public GitHub origin; initial sixteen SP/NRT views and full aggregate history are local. Missing shard retrieval remains unavailable, never zero.",
+    "Physical-device validation and human pitch rehearsal remain Team Owner actions; browser mobile checks use emulation. Measured 184.1-second read was synthesized.",
+    "Official challenge/submission pages returned HTTP 503. Team Owner must confirm current eligibility/media format/roster, accept terms and submit for judging. No final submission performed."
+  ],
+  "previous_release": {
+    "source_commit": "a792e07c78066fcd4a6308fa3f3dd7acca7f93c7",
+    "deployment_id": "dpl_DMf1hhuqnDiB3R5bLCs6BiaTNWuM",
+    "registry": {
+      "file": "regions-9e4c20518f99.json",
+      "sha256": "9e4c20518f99fab08943a4ba365dbdd0e4b869595820ece07222fc7957ccdf30"
+    }
+  },
+  "later_presentation_update": {
+    "source_commit": "c1c11f44172eb6cd93b1e954ba3b952972751036",
+    "deployment_id": "dpl_28hoTPfqfoAUE8H4B5PwHMJ4xg6Q",
+    "report": "about-release.json",
+    "change": "Sole-creator About page and navigation; scientific artifacts unchanged"
+  },
+  "later_experience_update": {
+    "source_commit": "5df68c7ddfb8d5586c92c330c9ee20caf52fa902",
+    "report": "submission/experience-release.json",
+    "scope": "P0/P1 presentation and navigation; original scientific identity and frozen results retained"
+  }
+}

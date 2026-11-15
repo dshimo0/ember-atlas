@@ -46,3 +46,18 @@ class PipelineTest(unittest.TestCase):
             with patch("firms.download", return_value=b"Invalid MAP_KEY"), self.assertRaises(ValueError):
                 fetch("fixture", "MODIS_SP", "-59,-23,-54,-15", day, day, output)
             self.assertEqual(list(output.iterdir()), [])
+
+class FailureTest(unittest.TestCase):
+    def test_http_auth_failure_is_sanitized(self):
+        from urllib.error import HTTPError
+        from firms import download
+        with patch('firms.urlopen', side_effect=HTTPError('https://example/secret',401,'secret',{},None)):
+            with self.assertRaisesRegex(ValueError, '^FIRMS returned HTTP 401$'):
+                download('area/csv/secret')
+
+    def test_outside_window_or_area_never_cached(self):
+        for record in [b'-19,-57,2024-08-02,0030,Terra\n',b'40,-57,2024-08-01,0030,Terra\n',b'-19,-57,2024-08-01,2460,Terra\n']:
+            with tempfile.TemporaryDirectory() as d:
+                with patch('firms.download',return_value=b'latitude,longitude,acq_date,acq_time,satellite\n'+record), self.assertRaises(ValueError):
+                    fetch('fixture','MODIS_SP','-59,-23,-54,-15',date(2024,8,1),date(2024,8,1),Path(d))
+                self.assertEqual(list(Path(d).iterdir()),[])

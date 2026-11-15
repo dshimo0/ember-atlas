@@ -1,0 +1,69 @@
+{
+  "base": "https://ember-atlas-opal.vercel.app",
+  "routes": {
+    "/": 200,
+    "/explore": 200,
+    "/demo": 200,
+    "/methods": 200,
+    "/about": 200,
+    "/pitch": 200
+  },
+  "assets": {
+    "app.js": {
+      "bytes": 59833,
+      "sha256": "05f13c70c0230cd49cd9fa42d2e61c5e0d35ae45b738792e01a5db41e046a2e5"
+    },
+    "discover.mjs": {
+      "bytes": 2476,
+      "sha256": "cd2365deeaae5e974d0e8c5667d1880c27c8d7d69a99547cd90391200e1a5350"
+    },
+    "discover.css": {
+      "bytes": 4416,
+      "sha256": "4876607bc831b2827bfc3fc70320715e407cecf829129c902363c73eab585b8d"
+    },
+    "about-status.mjs": {
+      "bytes": 964,
+      "sha256": "f3694a1999eacc4515cce9a94765784e8308686264b19b1e3d219494b43d9d77"
+    },
+    "presentation.mjs": {
+      "bytes": 3266,
+      "sha256": "18ca4346bb05f6f57dcc6d9064458548706ed01fae67aeafc75f7f2a58e108e0"
+    },
+    "locale-pt.mjs": {
+      "bytes": 68330,
+      "sha256": "fe6a6f595b693ee5a3c3a03c9b8f1d61a23ba38d0c01a469370ee918beb6dd7e"
+    },
+    "workspace-ui.css": {
+      "bytes": 29036,
+      "sha256": "c9f129151ccd5b0493858917e3e2ddc37f3ec45b83709b3b0643cff99accfe52"
+    },
+    "pitch-content.mjs": {
+      "bytes": 12348,
+      "sha256": "f7f20613909529f4047f369c52ebe13fb94cf776752963bb9282825f04a4c137"
+    },
+    "pitch.mjs": {
+      "bytes": 4261,
+      "sha256": "8d72d9c0330725d6751f11005f3fdc473930d3e1f3a60b94b731bc564a62b96e"
+    },
+    "url-state.mjs": {
+      "bytes": 2912,
+      "sha256": "427fc898e4a0376c98c9fbaeb3f9af082f7f26a01410565d7198ebf9cd4cbd2f"
+    },
+    "assets/ember-atlas-pitch.pdf": {
+      "bytes": 1132211,
+      "sha256": "b0c44520df6ecd1a5bc12c669b6cd9df1321780a1f35fcdbd24cd589d61d1764"
+    },
+    "assets/dashboard-view.png": {
+      "bytes": 745065,
+      "sha256": "7d956ee2f941ca60d1b6830ceb66544afda9ca4088d763fecdd8092104fd7d7e"
+    },
+    "assets/workflow-capture.mp4": {
+      "bytes": 689979,
+      "sha256": "2a6eefec54c7610ce6819264a221b21f66db19ca73d32e559807baad49b4b4e3"
+    },
+    "data/regions.json": {
+      "bytes": 112,
+      "sha256": "c1367d773a9f4952d2af8daa3711bc83cf6a20544e7e966409e973f34e73646c"
+    }
+  }
+}

@@ -35,13 +35,20 @@ def aggregate(directory):
             raise ValueError(f"Invalid date window in {manifest}")
         counts = defaultdict(int)
         cells = defaultdict(set)
+        seen = set()
+        delivered = 0
         for row in read_csv(payload):
             day = date.fromisoformat(row["acq_date"])
             if not first <= day <= last:
                 raise ValueError(f"Detection outside its source window in {manifest}")
+            delivered += 1
+            identity = tuple(row.get(k, "") for k in ("satellite", "acq_date", "acq_time", "latitude", "longitude"))
+            if identity in seen:
+                continue
+            seen.add(identity)
             counts[day] += 1
             cells[day].add(grid_cell(row["latitude"], row["longitude"]))
-        if sum(counts.values()) != meta["rows"]:
+        if delivered != meta["rows"]:
             raise ValueError(f"Unexpected row count in {manifest}")
         day = first
         while day <= last:

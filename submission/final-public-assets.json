@@ -1,0 +1,59 @@
+{
+  "checked_utc": "2026-11-15T07:50:54.993010+00:00",
+  "checks": [
+    {
+      "url": "https://ember-atlas-opal.vercel.app/",
+      "status": 200,
+      "bytes": 14170,
+      "sha256": "e6f849b578cdc04c4cd73c1a69a6f9f943637b1fb2a034c3785e57bc5aec23b5",
+      "matches_local_release": true,
+      "anonymous": true,
+      "system_ca_verified": true
+    },
+    {
+      "url": "https://ember-atlas-opal.vercel.app/demo",
+      "status": 200,
+      "bytes": 14170,
+      "sha256": "e6f849b578cdc04c4cd73c1a69a6f9f943637b1fb2a034c3785e57bc5aec23b5",
+      "matches_local_release": true,
+      "anonymous": true,
+      "system_ca_verified": true
+    },
+    {
+      "url": "https://ember-atlas-opal.vercel.app/pitch",
+      "status": 200,
+      "bytes": 14170,
+      "sha256": "e6f849b578cdc04c4cd73c1a69a6f9f943637b1fb2a034c3785e57bc5aec23b5",
+      "matches_local_release": true,
+      "anonymous": true,
+      "system_ca_verified": true
+    },
+    {
+      "url": "https://ember-atlas-opal.vercel.app/data/regions.json",
+      "status": 200,
+      "bytes": 112,
+      "sha256": "c1367d773a9f4952d2af8daa3711bc83cf6a20544e7e966409e973f34e73646c",
+      "matches_local_release": true,
+      "anonymous": true,
+      "system_ca_verified": true
+    },
+    {
+      "url": "https://ember-atlas-opal.vercel.app/assets/ember-atlas-pitch.pdf",
+      "status": 200,
+      "bytes": 512432,
+      "sha256": "7f5dd72015293b3533a424d0b940faf107d40324c425ff944766e1c8fbdae839",
+      "matches_local_release": true,
+      "anonymous": true,
+      "system_ca_verified": true
+    },
+    {
+      "url": "https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4",
+      "status": 200,
+      "bytes": 963380,
+      "sha256": "d1a3cc673cc34a298e73c64cbc2c2dd2e480288e4289875995cbc34dc803f495",
+      "matches_local_release": true,
+      "anonymous": true,
+      "system_ca_verified": true
+    }
+  ]
+}

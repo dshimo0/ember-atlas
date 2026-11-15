@@ -1,0 +1,120 @@
+{
+  "registry": {
+    "file": "regions-c06212509a51.json",
+    "sha256": "c06212509a517c5c91377bd2cdc40442559896168ad887a5218214e4e36a5942"
+  },
+  "checks": [
+    {
+      "region": "pantanal",
+      "mode": "nrt",
+      "observations": 12703,
+      "all_daily_counts_and_grid_totals_match": true,
+      "regional_evaluation_reproduced": false
+    },
+    {
+      "region": "pantanal",
+      "mode": "sp",
+      "observations": 1869422,
+      "all_daily_counts_and_grid_totals_match": true,
+      "regional_evaluation_reproduced": true
+    },
+    {
+      "region": "southern-amazon",
+      "mode": "nrt",
+      "observations": 158707,
+      "all_daily_counts_and_grid_totals_match": true,
+      "regional_evaluation_reproduced": false
+    },
+    {
+      "region": "southern-amazon",
+      "mode": "sp",
+      "observations": 3213150,
+      "all_daily_counts_and_grid_totals_match": true,
+      "regional_evaluation_reproduced": true
+    },
+    {
+      "region": "cerrado",
+      "mode": "nrt",
+      "observations": 163245,
+      "all_daily_counts_and_grid_totals_match": true,
+      "regional_evaluation_reproduced": false
+    },
+    {
+      "region": "cerrado",
+      "mode": "sp",
+      "observations": 2772479,
+      "all_daily_counts_and_grid_totals_match": true,
+      "regional_evaluation_reproduced": true
+    },
+    {
+      "region": "gran-chaco",
+      "mode": "nrt",
+      "observations": 90935,
+      "all_daily_counts_and_grid_totals_match": true,
+      "regional_evaluation_reproduced": false
+    },
+    {
+      "region": "gran-chaco",
+      "mode": "sp",
+      "observations": 3210662,
+      "all_daily_counts_and_grid_totals_match": true,
+      "regional_evaluation_reproduced": true
+    },
+    {
+      "region": "california",
+      "mode": "nrt",
+      "observations": 23158,
+      "all_daily_counts_and_grid_totals_match": true,
+      "regional_evaluation_reproduced": false
+    },
+    {
+      "region": "california",
+      "mode": "sp",
+      "observations": 816069,
+      "all_daily_counts_and_grid_totals_match": true,
+      "regional_evaluation_reproduced": true
+    },
+    {
+      "region": "southeastern-australia",
+      "mode": "nrt",
+      "observations": 24733,
+      "all_daily_counts_and_grid_totals_match": true,
+      "regional_evaluation_reproduced": false
+    },
+    {
+      "region": "southeastern-australia",
+      "mode": "sp",
+      "observations": 810820,
+      "all_daily_counts_and_grid_totals_match": true,
+      "regional_evaluation_reproduced": true
+    },
+    {
+      "region": "iberian-peninsula",
+      "mode": "nrt",
+      "observations": 14017,
+      "all_daily_counts_and_grid_totals_match": true,
+      "regional_evaluation_reproduced": false
+    },
+    {
+      "region": "iberian-peninsula",
+      "mode": "sp",
+      "observations": 283758,
+      "all_daily_counts_and_grid_totals_match": true,
+      "regional_evaluation_reproduced": true
+    },
+    {
+      "region": "siberia",
+      "mode": "nrt",
+      "observations": 736921,
+      "all_daily_counts_and_grid_totals_match": true,
+      "regional_evaluation_reproduced": false
+    },
+    {
+      "region": "siberia",
+      "mode": "sp",
+      "observations": 6901324,
+      "all_daily_counts_and_grid_totals_match": true,
+      "regional_evaluation_reproduced": true
+    }
+  ]
+}

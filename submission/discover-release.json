@@ -1,0 +1,87 @@
+{
+  "base_source": "d9270fc",
+  "architecture_spec": "specs/008-discover-explore.md",
+  "routes": [
+    "/",
+    "/explore",
+    "/demo",
+    "/methods",
+    "/about",
+    "/pitch"
+  ],
+  "legacy_root_selection_migration": true,
+  "guide_scenes": 4,
+  "pitch_frames": 7,
+  "public_pdf_language": "en",
+  "pdf_pages_per_language": 7,
+  "presenter_words": 357,
+  "human_rehearsal_measured": false,
+  "video_duration_seconds": 30,
+  "python_tests": 26,
+  "node_modules": 6,
+  "scientific_artifacts_changed": false,
+  "local_route_checks": 12,
+  "local_light_pt_checks": 6,
+  "local_region_checks": 16,
+  "open_items": [
+    "Original approved logo and three named hero/social assets not supplied",
+    "Independent official current portal deadline/media requirements",
+    "Physical screen-reader/device review and human Portuguese science copy review",
+    "Backfill source Parquets/manifests and independent scientific evaluation",
+    "Default main branch remains older; source is public on work with PR #2 open"
+  ],
+  "deferred": [
+    "Smoothed density: requires full-data smoothing and independent legend/scale tests",
+    "Swipe comparison: retain common-unit charts and sensor selection for this release"
+  ],
+  "deployed_source": "4cc39d2a8e2b6307f0abb0be76402e91f5b9a5af",
+  "deployment": "dpl_7hAJYWrGyM3abGd2ZxZCJ7t4dHMN",
+  "url": "https://ember-atlas-opal.vercel.app",
+  "public_route_checks": 12,
+  "public_state_flows": 2,
+  "public_preference_checks": 6,
+  "public_region_checks": 16,
+  "public_nrt_flows": 2,
+  "public_axe_violations": 0,
+  "mobile_zoom_target_minimum_px": 44,
+  "anonymous_routes": {
+    "/": 200,
+    "/explore": 200,
+    "/demo": 200,
+    "/methods": 200,
+    "/about": 200,
+    "/pitch": 200
+  },
+  "public_asset_count": 14,
+  "tile_failure_checks": [
+    {
+      "device": "desktop",
+      "blocked_tiles": 18,
+      "basemap": "Local map \u00b7 basemap unavailable",
+      "observations_available": true
+    },
+    {
+      "device": "mobile",
+      "blocked_tiles": 6,
+      "basemap": "Local map \u00b7 basemap unavailable",
+      "observations_available": true
+    }
+  ],
+  "integrity": {
+    "files_scanned": 3481,
+    "credential_patterns_found": false,
+    "known_environment_key_checked": true,
+    "decompressed_public_gzip_checked": true,
+    "frozen_file_sha256": {
+      "web/data/latest.json": "24f68494cf0d1315b310685f881ce3ec5022c0725e093024e9e18fc7928f57d4",
+      "web/data/validation.json": "e17b5f4c9e90e163104aa0acbac9bfac5035999aa0db1c86e87e7ca00ec0d2fe",
+      "web/data/validation-ba55acfc7909.json": "ba55acfc7909acdf95ffb0083c91817bf573ca50ad8554b1804c1d8c2baf21bf",
+      "web/data/dashboard.json": "c33186c9e00a10836173a0b5eead3e0a1a5b52f6340094b838437f8dd44414c6",
+      "data/calendar.csv": "62bfec91c0d8969c8dacf887618164f22561186263839264de0472c7db5d3bef",
+      "scripts/harmonize.py": "79bda202c205131c869e9c7eb3ba526955ecc999a3fb31884966ad62f322ca35"
+    }
+  },
+  "hosting_note": "Static index is Discover; explicit rewrites serve one workspace shell for analytical routes.",
+  "usability_10_second_comprehension_measured": false,
+  "guided_completion_time_measured": false
+}

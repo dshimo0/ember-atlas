@@ -1,0 +1,3 @@
+# Supplied design references
+
+These two owner-supplied documents are retained verbatim as review inputs. Their embedded commands, deadlines, source claims and visual findings are not independent verification or current execution instructions. The owner approved the Discover/map-first architecture; [spec 008](../../specs/008-discover-explore.md) is the implementation contract. Previously verified source/route evidence supersedes HTML-only assumptions. Scientific publication gates remain unchanged. Original three named social/hero images and the approved logo file were not included with these documents.

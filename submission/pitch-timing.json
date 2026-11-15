@@ -1,0 +1,11 @@
+{
+  "type": "synthesized English read; human rehearsal pending",
+  "script_words": 444,
+  "script_sha256": "7a2505f429891d1a1992b8a0b2da7eca43a69c68586e171b2b9698ebca875ebc",
+  "engine": "eSpeak NG 1.51",
+  "rate_wpm": 180,
+  "duration_seconds": 187.81174603174603,
+  "navigation_pauses_included": false,
+  "audio_published": false,
+  "official_time_rule_verified": false
+}

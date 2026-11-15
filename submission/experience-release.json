@@ -1,0 +1,110 @@
+{
+  "source_commit": "5df68c7ddfb8d5586c92c330c9ee20caf52fa902",
+  "branch": "work",
+  "repository": "https://github.com/dshimo0/ember-atlas",
+  "pr": "https://github.com/dshimo0/ember-atlas/pull/2",
+  "pr_status": "open; not merged",
+  "url": "https://ember-atlas-opal.vercel.app",
+  "deployment": {
+    "id": "dpl_8KuQD2YxeRy5mRPMZPaKMuGVfBKe",
+    "url": "https://ember-atlas-nsd8qrg5i-dscbest-1597s-projects.vercel.app",
+    "productionUrl": "https://ember-atlas-opal.vercel.app",
+    "inspectorUrl": "https://vercel.com/dscbest-1597s-projects/ember-atlas/8KuQD2YxeRy5mRPMZPaKMuGVfBKe",
+    "readyState": "READY",
+    "target": "production",
+    "environment": "production",
+    "deploymentApiUrl": "https://api.vercel.com/v13/deployments/dpl_8KuQD2YxeRy5mRPMZPaKMuGVfBKe",
+    "buildMachine": {
+      "cores": 2,
+      "memory": 8192,
+      "machine": "basic",
+      "selectionType": "fixed",
+      "selectionSource": "plan-default"
+    },
+    "deploymentProtection": [
+      "vercel_authentication"
+    ]
+  },
+  "checked_utc": "2026-11-15T15:56:14.531186+00:00",
+  "data_commit": "a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391",
+  "registry": {
+    "file": "regions-c06212509a51.json",
+    "sha256": "c06212509a517c5c91377bd2cdc40442559896168ad887a5218214e4e36a5942"
+  },
+  "scientific_release": "submission/transition-release.json",
+  "tests": {
+    "ci_workflows": "Both Pipeline checks workflows passed for source 5df68c7",
+    "python_unit_tests": 25,
+    "node_test_modules": 5,
+    "public_regional_browser_groups": 50,
+    "experience_viewports": 3,
+    "public_route_viewport_groups": 15,
+    "about_viewports": 3,
+    "accessibility_scope": "axe 4.10.3 WCAG2A/AA, 2.1AA and 2.2AA selected rules; no certification or screen-reader testing",
+    "pdf_pages": 9,
+    "axe_selected_rule_violations": 0,
+    "secret_scan": {
+      "files_scanned": 3337,
+      "credential_patterns_found": false,
+      "known_environment_key_checked": true,
+      "decompressed_public_gzip_checked": true,
+      "frozen_file_sha256": {
+        "web/data/latest.json": "24f68494cf0d1315b310685f881ce3ec5022c0725e093024e9e18fc7928f57d4",
+        "web/data/validation.json": "e17b5f4c9e90e163104aa0acbac9bfac5035999aa0db1c86e87e7ca00ec0d2fe",
+        "web/data/validation-ba55acfc7909.json": "ba55acfc7909acdf95ffb0083c91817bf573ca50ad8554b1804c1d8c2baf21bf",
+        "web/data/dashboard.json": "c33186c9e00a10836173a0b5eead3e0a1a5b52f6340094b838437f8dd44414c6",
+        "data/calendar.csv": "62bfec91c0d8969c8dacf887618164f22561186263839264de0472c7db5d3bef",
+        "scripts/harmonize.py": "79bda202c205131c869e9c7eb3ba526955ecc999a3fb31884966ad62f322ca35"
+      }
+    },
+    "anonymous_asset_bytes": true,
+    "video": {
+      "duration_seconds": 30,
+      "playback_started": true,
+      "ready_state": 4,
+      "url": "https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4",
+      "anonymous_context": true,
+      "file_checksum_matches_release": true,
+      "https_system_ca_verified": true,
+      "browser_uses_system_validated_leaf_pin": true
+    }
+  },
+  "evidence": [
+    "submission/experience-check-public.json",
+    "submission/eight-region-check-public.json",
+    "submission/about-check-public.json",
+    "submission/experience-public-assets.json",
+    "submission/experience/"
+  ],
+  "regression_found_and_fixed": "Mobile pitch scroll callback could replace the Explore URL while a selected region loaded; callbacks now require the active pitch route. Eight SVG region links are explicitly regression-tested.",
+  "visual_review": {
+    "actual_screenshots_inspected": [
+      "Explore desktop/mobile",
+      "Guided demo mobile",
+      "Methods mobile",
+      "About mobile",
+      "Pitch closing desktop"
+    ],
+    "captures": "submission/experience/",
+    "before_captures_preserved": true
+  },
+  "pitch": {
+    "words": 395,
+    "synthesized_read_seconds": 176.213152,
+    "synthesized_words_per_minute": 180,
+    "human_rehearsal_completed": false
+  },
+  "limitations": [
+    "MODIS reference version homogeneity and causal sensor effects remain unverified.",
+    "Usable swath/cloud observation coverage and ground truth are unavailable.",
+    "Pantanal adjustment remains limited to 2020\u20132024; the stronger scalar baseline remains disclosed.",
+    "No SP/NRT join or calibration transfer to subareas.",
+    "Mobile testing used emulation; physical-device, screen-reader and human rehearsal checks remain.",
+    "Official media, eligibility and final portal submission remain Team Owner actions."
+  ],
+  "later_visual_update": {
+    "source_commit": "b58b7d16579de4579dcdd35be4ce620d00d6e7f2",
+    "report": "submission/visual-release.json",
+    "scope": "Typography, regional editorial atlas and pitch navigation; scientific identity preserved"
+  }
+}

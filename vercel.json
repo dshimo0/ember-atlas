@@ -1,0 +1,29 @@
+{
+  "outputDirectory": "web",
+  "buildCommand": null,
+  "installCommand": null,
+  "framework": null,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/explore",
+      "destination": "/workspace.html"
+    },
+    {
+      "source": "/demo",
+      "destination": "/workspace.html"
+    },
+    {
+      "source": "/pitch",
+      "destination": "/workspace.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/methods",
+      "destination": "/workspace.html"
+    }
+  ]
+}

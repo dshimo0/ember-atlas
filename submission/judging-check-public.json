@@ -1,0 +1,71 @@
+{
+  "url": "https://ember-atlas-opal.vercel.app",
+  "checked_utc": "2026-11-15T01:42:08.221209+00:00",
+  "snapshot": {
+    "file": "snapshot-19621fa88d40.json.gz",
+    "sha256": "19621fa88d408fb5d9aa87482de1bb219e8dd7ed67128c1147d1a63fb087e677"
+  },
+  "validation_sha256": "e17b5f4c9e90e163104aa0acbac9bfac5035999aa0db1c86e87e7ca00ec0d2fe",
+  "checks": [
+    {
+      "viewport": "desktop",
+      "initial_month": "2024-09",
+      "calendar_months": 60,
+      "observation_rows": 125055,
+      "observation_csv_sha256": "d74d2faab59d9b6da0641a7c20d7c0dd02bfed4d3d474f321fef934e60f0d045",
+      "aggregate_rows": 120,
+      "csv_rows_reconcile_with_snapshot": true
+    },
+    {
+      "viewport": "desktop",
+      "month_keyboard_selection": true,
+      "manual_partial_dates": true,
+      "sensor_filter": true,
+      "north_modis_rows": 18038,
+      "map_zoom_pan_scale_fit": true,
+      "map_filter_synchronization": true,
+      "subregion_transfer_withheld": true,
+      "zero_day": "2020-01-08",
+      "missing_counts_blank": true,
+      "javascript_errors": []
+    },
+    {
+      "viewport": "desktop",
+      "basemap_failure_fallback": true,
+      "local_settlements": 27,
+      "local_rivers": 23,
+      "fallback_north_modis_csv_rows": 18038
+    },
+    {
+      "viewport": "mobile",
+      "initial_month": "2024-09",
+      "calendar_months": 60,
+      "observation_rows": 125055,
+      "observation_csv_sha256": "d74d2faab59d9b6da0641a7c20d7c0dd02bfed4d3d474f321fef934e60f0d045",
+      "aggregate_rows": 120,
+      "csv_rows_reconcile_with_snapshot": true
+    },
+    {
+      "viewport": "mobile",
+      "month_keyboard_selection": true,
+      "manual_partial_dates": true,
+      "sensor_filter": true,
+      "north_modis_rows": 18038,
+      "map_zoom_pan_scale_fit": true,
+      "map_filter_synchronization": true,
+      "subregion_transfer_withheld": true,
+      "zero_day": "2020-01-08",
+      "missing_counts_blank": true,
+      "javascript_errors": []
+    },
+    {
+      "viewport": "mobile",
+      "basemap_failure_fallback": true,
+      "local_settlements": 27,
+      "local_rivers": 23,
+      "fallback_north_modis_csv_rows": 18038
+    }
+  ],
+  "public_https_verified": true,
+  "browser_uses_system_validated_leaf_pin": true
+}

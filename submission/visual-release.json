@@ -1,0 +1,97 @@
+{
+  "source_commit": "b58b7d16579de4579dcdd35be4ce620d00d6e7f2",
+  "branch": "work",
+  "repository": "https://github.com/dshimo0/ember-atlas",
+  "pr": "https://github.com/dshimo0/ember-atlas/pull/2",
+  "pr_status": "open; not merged",
+  "url": "https://ember-atlas-opal.vercel.app",
+  "deployment": {
+    "id": "dpl_7DQ2yg7XaGKDJFo28NcbqNmP7L6N",
+    "url": "https://ember-atlas-lsa73218a-dscbest-1597s-projects.vercel.app",
+    "productionUrl": "https://ember-atlas-opal.vercel.app",
+    "inspectorUrl": "https://vercel.com/dscbest-1597s-projects/ember-atlas/7DQ2yg7XaGKDJFo28NcbqNmP7L6N",
+    "readyState": "READY",
+    "target": "production",
+    "environment": "production",
+    "deploymentApiUrl": "https://api.vercel.com/v13/deployments/dpl_7DQ2yg7XaGKDJFo28NcbqNmP7L6N",
+    "buildMachine": {
+      "cores": 2,
+      "memory": 8192,
+      "machine": "basic",
+      "selectionType": "fixed",
+      "selectionSource": "plan-default"
+    },
+    "deploymentProtection": [
+      "vercel_authentication"
+    ]
+  },
+  "checked_utc": "2026-11-15T16:15:49.496447+00:00",
+  "scope": "P2 typography, motion and imagery; owner-selected P3 deeper visual presentation",
+  "data_commit": "a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391",
+  "registry": {
+    "file": "regions-c06212509a51.json",
+    "sha256": "c06212509a517c5c91377bd2cdc40442559896168ad887a5218214e4e36a5942"
+  },
+  "tests": {
+    "python_tests": 25,
+    "node_modules": 5,
+    "ci_workflows_passed": 2,
+    "experience_viewports": 3,
+    "five_routes_per_viewport": true,
+    "targeted_axe_violations": 0,
+    "atlas_regions": 8,
+    "atlas_explore_links_tested_at_each_of_two_viewports": 8,
+    "pantanal_csv_rows": 125055,
+    "font_failure_and_reduced_motion": true,
+    "pdf_pages": 9,
+    "public_routes_byte_verified": 5,
+    "public_asset_files_byte_verified": 16,
+    "video": {
+      "duration_seconds": 30,
+      "playback_started": true,
+      "ready_state": 4,
+      "url": "https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4",
+      "anonymous_context": true,
+      "file_checksum_matches_release": true,
+      "https_system_ca_verified": true,
+      "browser_uses_system_validated_leaf_pin": true
+    },
+    "integrity": {
+      "files_scanned": 3358,
+      "credential_patterns_found": false,
+      "known_environment_key_checked": true,
+      "decompressed_public_gzip_checked": true,
+      "frozen_file_sha256": {
+        "web/data/latest.json": "24f68494cf0d1315b310685f881ce3ec5022c0725e093024e9e18fc7928f57d4",
+        "web/data/validation.json": "e17b5f4c9e90e163104aa0acbac9bfac5035999aa0db1c86e87e7ca00ec0d2fe",
+        "web/data/validation-ba55acfc7909.json": "ba55acfc7909acdf95ffb0083c91817bf573ca50ad8554b1804c1d8c2baf21bf",
+        "web/data/dashboard.json": "c33186c9e00a10836173a0b5eead3e0a1a5b52f6340094b838437f8dd44414c6",
+        "data/calendar.csv": "62bfec91c0d8969c8dacf887618164f22561186263839264de0472c7db5d3bef",
+        "scripts/harmonize.py": "79bda202c205131c869e9c7eb3ba526955ecc999a3fb31884966ad62f322ca35"
+      }
+    }
+  },
+  "scientific_artifacts_and_calculations_unchanged_from": "5df68c7ddfb8d5586c92c330c9ee20caf52fa902",
+  "previous_full_50_group_region_suite": "submission/experience-release.json; not rerun for this presentation-only release",
+  "evidence": [
+    "submission/experience-check-public.json",
+    "submission/visual-check-public.json",
+    "submission/visual-public-assets.json",
+    "submission/visual/"
+  ],
+  "backfill_review": {
+    "status": "blocked; files unavailable",
+    "reason": "Owner local Windows directory is not mounted and no backfill folder exists in this Git tree.",
+    "unblock": "Provide an uploaded archive or an accessible repository branch.",
+    "unrelated_temporary_scripts_not_treated_as_the_requested_folder": true
+  },
+  "limitations": [
+    "No new data acquisition, calibration or ground-truth validation.",
+    "Physical-device, assistive-technology and human rehearsal checks remain.",
+    "Official submission/media/eligibility checks remain owner actions."
+  ],
+  "later_workspace_update": {
+    "source_commit": "0ef44972f2433bc8651773f5849e72bfe2931f70",
+    "report": "submission/workspace-release.json"
+  }
+}

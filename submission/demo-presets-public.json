@@ -1,0 +1,145 @@
+{
+  "tiles_blocked_for_smoke": true,
+  "checks": [
+    {
+      "viewport": "desktop",
+      "route": "/demo",
+      "region": "pantanal",
+      "status": 200,
+      "real_observations": true,
+      "map_region_correct": true
+    },
+    {
+      "viewport": "desktop",
+      "route": "/demo",
+      "region": "southern-amazon",
+      "status": 200,
+      "real_observations": true,
+      "map_region_correct": true
+    },
+    {
+      "viewport": "desktop",
+      "route": "/demo",
+      "region": "cerrado",
+      "status": 200,
+      "real_observations": true,
+      "map_region_correct": true
+    },
+    {
+      "viewport": "desktop",
+      "route": "/demo",
+      "region": "gran-chaco",
+      "status": 200,
+      "real_observations": true,
+      "map_region_correct": true
+    },
+    {
+      "viewport": "desktop",
+      "route": "/demo",
+      "region": "california",
+      "status": 200,
+      "real_observations": true,
+      "map_region_correct": true
+    },
+    {
+      "viewport": "desktop",
+      "route": "/demo",
+      "region": "southeastern-australia",
+      "status": 200,
+      "real_observations": true,
+      "map_region_correct": true
+    },
+    {
+      "viewport": "desktop",
+      "route": "/demo",
+      "region": "iberian-peninsula",
+      "status": 200,
+      "real_observations": true,
+      "map_region_correct": true
+    },
+    {
+      "viewport": "desktop",
+      "route": "/demo",
+      "region": "siberia",
+      "status": 200,
+      "real_observations": true,
+      "map_region_correct": true
+    },
+    {
+      "viewport": "desktop",
+      "route": "/",
+      "default_pantanal": true,
+      "status": 200
+    },
+    {
+      "viewport": "mobile",
+      "route": "/demo",
+      "region": "pantanal",
+      "status": 200,
+      "real_observations": true,
+      "map_region_correct": true
+    },
+    {
+      "viewport": "mobile",
+      "route": "/demo",
+      "region": "southern-amazon",
+      "status": 200,
+      "real_observations": true,
+      "map_region_correct": true
+    },
+    {
+      "viewport": "mobile",
+      "route": "/demo",
+      "region": "cerrado",
+      "status": 200,
+      "real_observations": true,
+      "map_region_correct": true
+    },
+    {
+      "viewport": "mobile",
+      "route": "/demo",
+      "region": "gran-chaco",
+      "status": 200,
+      "real_observations": true,
+      "map_region_correct": true
+    },
+    {
+      "viewport": "mobile",
+      "route": "/demo",
+      "region": "california",
+      "status": 200,
+      "real_observations": true,
+      "map_region_correct": true
+    },
+    {
+      "viewport": "mobile",
+      "route": "/demo",
+      "region": "southeastern-australia",
+      "status": 200,
+      "real_observations": true,
+      "map_region_correct": true
+    },
+    {
+      "viewport": "mobile",
+      "route": "/demo",
+      "region": "iberian-peninsula",
+      "status": 200,
+      "real_observations": true,
+      "map_region_correct": true
+    },
+    {
+      "viewport": "mobile",
+      "route": "/demo",
+      "region": "siberia",
+      "status": 200,
+      "real_observations": true,
+      "map_region_correct": true
+    },
+    {
+      "viewport": "mobile",
+      "route": "/",
+      "default_pantanal": true,
+      "status": 200
+    }
+  ]
+}

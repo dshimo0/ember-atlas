@@ -1,7 +1,16 @@
-.env
-.env.*
 __pycache__/
+.env*
+.vercel/
+node_modules/
 .venv/
-/data/
-/build/
+build/
 *.zip
+
+# New FIRMS inputs are preserved byte-for-byte in data/source-archives/.
+/data/history/
+/data/regions/
+
+/data/covering/
+
+/data/expansion-progress.json
+/data/shared-acquisition-progress.json

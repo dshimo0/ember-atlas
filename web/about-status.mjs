@@ -1,0 +1,4 @@
+if(location.hash==='#study-areas'){const d=document.querySelector('.atlas-disclosure');if(d)d.open=true;}
+import {loadRelease} from './data-loader.mjs';
+try{const {registry}=await loadRelease();const cards=[...document.querySelectorAll('.atlas-card')];for(const [i,r]of registry.regions.entries()){const card=cards[i];if(!card)continue;const p=document.createElement('p');p.className='regional-status';const d=r.datasets.sp;p.textContent=`SP ${d.coverage.start} → ${d.coverage.end} · ${d.calibration?.accepted?'Local full-area adjustment published':'Sensor-native observations; adjustment withheld'}. NRT: ${r.datasets.nrt.coverage.start} → ${r.datasets.nrt.coverage.end}.`;card.querySelector('.atlas-copy').append(p);}}
+catch{for(const card of document.querySelectorAll('.atlas-card')){const p=document.createElement('p');p.className='regional-status';p.textContent='Coverage status unavailable. Inspect the versioned registry in Science.';card.append(p);}}

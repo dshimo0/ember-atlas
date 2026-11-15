@@ -1,0 +1,69 @@
+[
+  {
+    "url": "https://www.spaceappschallenge.org/2026/challenges/modis-and-viirs-hot-spots/",
+    "status": 503,
+    "checked_utc": "2026-11-15T01:30:18.011923+00:00"
+  },
+  {
+    "url": "https://www.spaceappschallenge.org/resources/",
+    "status": 503,
+    "checked_utc": "2026-11-15T01:30:18.017696+00:00"
+  },
+  {
+    "url": "https://www.spaceappschallenge.org/2026/",
+    "status": 503,
+    "checked_utc": "2026-11-15T01:30:18.011569+00:00"
+  },
+  {
+    "url": "https://www.spaceappschallenge.org/legal/",
+    "status": 503,
+    "checked_utc": "2026-11-15T01:30:18.142744+00:00"
+  },
+  {
+    "url": "https://www.earthdata.nasa.gov/data/tools/firms",
+    "status": 200,
+    "resolved_url": "https://www.earthdata.nasa.gov/data/tools/firms",
+    "title": "FIRMS | NASA Earthdata",
+    "checked_utc": "2026-11-15T01:30:18.525578+00:00"
+  },
+  {
+    "url": "https://firms.modaps.eosdis.nasa.gov/download/",
+    "status": 200,
+    "resolved_url": "https://firms.modaps.eosdis.nasa.gov/download/",
+    "title": "Archive Download - NASA | LANCE | FIRMS",
+    "checked_utc": "2026-11-15T01:30:18.436856+00:00"
+  },
+  {
+    "url": "https://firms.modaps.eosdis.nasa.gov/api/area/",
+    "status": 200,
+    "resolved_url": "https://firms.modaps.eosdis.nasa.gov/api/area/",
+    "title": "API - Area - NASA | LANCE | FIRMS",
+    "checked_utc": "2026-11-15T01:30:18.438631+00:00"
+  },
+  {
+    "url": "https://www.openstreetmap.org/copyright",
+    "status": 200,
+    "resolved_url": "https://www.openstreetmap.org/copyright",
+    "title": "Copyright and License | OpenStreetMap",
+    "checked_utc": "2026-11-15T01:30:18.782612+00:00"
+  },
+  {
+    "url": "https://operations.osmfoundation.org/policies/tiles/",
+    "status": 200,
+    "resolved_url": "https://operations.osmfoundation.org/policies/tiles/",
+    "title": "Tile Usage Policy",
+    "checked_utc": "2026-11-15T01:30:18.815194+00:00"
+  },
+  {
+    "url": "https://www.naturalearthdata.com/about/terms-of-use/",
+    "status": 406,
+    "checked_utc": "2026-11-15T01:30:18.592411+00:00"
+  },
+  {
+    "url": "https://leafletjs.com/",
+    "status": 200,
+    "resolved_url": "https://leafletjs.com/",
+    "title": "Leaflet - a JavaScript library for interactive maps",
+    "checked_utc": "2026-11-15T01:30:18.615838+00:00"
+  }
+]

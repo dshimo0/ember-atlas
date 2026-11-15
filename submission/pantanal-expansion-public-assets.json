@@ -1,0 +1,46 @@
+{
+  "checks": [
+    {
+      "url": "https://ember-atlas-opal.vercel.app/",
+      "status": 200,
+      "sha256": "568723bc45ce67cf9f9d8561e05d42f8b1ab38a0d3bc80988391eb655d86d17c",
+      "anonymous": true,
+      "matches_release": true
+    },
+    {
+      "url": "https://ember-atlas-opal.vercel.app/demo",
+      "status": 200,
+      "sha256": "568723bc45ce67cf9f9d8561e05d42f8b1ab38a0d3bc80988391eb655d86d17c",
+      "anonymous": true,
+      "matches_release": true
+    },
+    {
+      "url": "https://ember-atlas-opal.vercel.app/pitch",
+      "status": 200,
+      "sha256": "568723bc45ce67cf9f9d8561e05d42f8b1ab38a0d3bc80988391eb655d86d17c",
+      "anonymous": true,
+      "matches_release": true
+    },
+    {
+      "url": "https://ember-atlas-opal.vercel.app/data/regions.json",
+      "status": 200,
+      "sha256": "29827222f7d25e4b0763dc8d350be2fc8e30ca8e72a9dd31c931e49122840277",
+      "anonymous": true,
+      "matches_release": true
+    },
+    {
+      "url": "https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4",
+      "status": 200,
+      "sha256": "9058862805b388535d2931e87e865d0852349144b3dfed35488942c0621b946b",
+      "anonymous": true,
+      "matches_release": true
+    },
+    {
+      "url": "https://ember-atlas-opal.vercel.app/assets/ember-atlas-pitch.pdf",
+      "status": 200,
+      "sha256": "05b9c91bff297762498b087d3d09ae4139da0b78003e22071e11f91015797284",
+      "anonymous": true,
+      "matches_release": true
+    }
+  ]
+}

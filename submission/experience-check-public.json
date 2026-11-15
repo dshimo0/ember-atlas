@@ -1,0 +1,125 @@
+{
+  "url": "https://ember-atlas-opal.vercel.app",
+  "checked_utc": "2026-11-15T16:12:02.704118+00:00",
+  "checks": [
+    {
+      "viewport": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "map_top": 619.875,
+      "all_five_routes_load_refresh": true,
+      "legacy_methods_anchor": true,
+      "menu_navigation": true,
+      "calendar_no_numeric_overflow": true,
+      "slider_map_synchronized": true,
+      "scientific_detail_url_restored": true,
+      "five_scenes_and_reset": true,
+      "guide_keyboard": true,
+      "pitch_keyboard_or_scroll_progress": true,
+      "no_page_overflow": true,
+      "unexpected_page_errors": [],
+      "accessibility": [
+        {
+          "page": "explore",
+          "violations": []
+        },
+        {
+          "page": "demo",
+          "violations": []
+        },
+        {
+          "page": "methods",
+          "violations": []
+        },
+        {
+          "page": "about",
+          "violations": []
+        },
+        {
+          "page": "pitch",
+          "violations": []
+        }
+      ]
+    },
+    {
+      "viewport": "tablet",
+      "width": 768,
+      "height": 1024,
+      "map_top": 620.140625,
+      "all_five_routes_load_refresh": true,
+      "legacy_methods_anchor": true,
+      "menu_navigation": true,
+      "calendar_no_numeric_overflow": true,
+      "slider_map_synchronized": true,
+      "scientific_detail_url_restored": true,
+      "five_scenes_and_reset": true,
+      "guide_keyboard": true,
+      "pitch_keyboard_or_scroll_progress": true,
+      "no_page_overflow": true,
+      "unexpected_page_errors": [],
+      "accessibility": [
+        {
+          "page": "explore",
+          "violations": []
+        },
+        {
+          "page": "demo",
+          "violations": []
+        },
+        {
+          "page": "methods",
+          "violations": []
+        },
+        {
+          "page": "about",
+          "violations": []
+        },
+        {
+          "page": "pitch",
+          "violations": []
+        }
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "width": 375,
+      "height": 812,
+      "map_top": 706.96875,
+      "all_five_routes_load_refresh": true,
+      "legacy_methods_anchor": true,
+      "menu_navigation": true,
+      "calendar_no_numeric_overflow": true,
+      "slider_map_synchronized": true,
+      "scientific_detail_url_restored": true,
+      "five_scenes_and_reset": true,
+      "guide_keyboard": true,
+      "pitch_keyboard_or_scroll_progress": true,
+      "no_page_overflow": true,
+      "unexpected_page_errors": [],
+      "accessibility": [
+        {
+          "page": "explore",
+          "violations": []
+        },
+        {
+          "page": "demo",
+          "violations": []
+        },
+        {
+          "page": "methods",
+          "violations": []
+        },
+        {
+          "page": "about",
+          "violations": []
+        },
+        {
+          "page": "pitch",
+          "violations": []
+        }
+      ]
+    }
+  ],
+  "axe_version": "4.10.3",
+  "pdf_pages": 9
+}

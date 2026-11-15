@@ -1,0 +1,22 @@
+{
+  "checks": [
+    {
+      "viewport": "desktop",
+      "anonymous": true,
+      "default_month": "2024-09",
+      "default_region": "pantanal",
+      "map_top_pixels": 768.390625,
+      "viewport_height": 1000,
+      "map_begins_in_first_viewport": true
+    },
+    {
+      "viewport": "mobile",
+      "anonymous": true,
+      "default_month": "2024-09",
+      "default_region": "pantanal",
+      "map_top_pixels": 718.28125,
+      "viewport_height": 844,
+      "map_begins_in_first_viewport": true
+    }
+  ]
+}

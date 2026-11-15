@@ -1,0 +1,167 @@
+{
+  "registry": {
+    "file": "regions-c06212509a51.json",
+    "sha256": "c06212509a517c5c91377bd2cdc40442559896168ad887a5218214e4e36a5942"
+  },
+  "regions": [
+    {
+      "region": "pantanal",
+      "audit": {
+        "file": "pantanal-regional-validation-247ee21cc4ce.json",
+        "sha256": "247ee21cc4cef56dae6bfda36968babb4c7ac83286f3146252c11b0821046374"
+      },
+      "selected_method": "seasonal",
+      "accepted": true,
+      "domain": {
+        "end": "2024-12-31",
+        "start": "2020-01-01"
+      },
+      "gates": {
+        "external": true,
+        "outer": true,
+        "outer_excluding_known": true
+      },
+      "support_complete": true
+    },
+    {
+      "region": "southern-amazon",
+      "audit": {
+        "file": "southern-amazon-regional-validation-2316d9c5ae29.json",
+        "sha256": "2316d9c5ae29cfc16bccc9e20e99e6bb325dcbf6b9c973dd920e3a8bcd06e1be"
+      },
+      "selected_method": "seasonal",
+      "accepted": true,
+      "domain": {
+        "area": "full study area",
+        "end": "2026-07-31",
+        "start": "2020-01-01"
+      },
+      "gates": {
+        "external": true,
+        "outer": true,
+        "outer_excluding_known": true
+      },
+      "support_complete": true
+    },
+    {
+      "region": "cerrado",
+      "audit": {
+        "file": "cerrado-regional-validation-b460d124157c.json",
+        "sha256": "b460d124157c947af4bd5836fdf08c50b7fe4c57013033cc2e2a4f57aa57793d"
+      },
+      "selected_method": "seasonal",
+      "accepted": true,
+      "domain": {
+        "area": "full study area",
+        "end": "2026-07-31",
+        "start": "2020-01-01"
+      },
+      "gates": {
+        "external": true,
+        "outer": true,
+        "outer_excluding_known": true
+      },
+      "support_complete": true
+    },
+    {
+      "region": "gran-chaco",
+      "audit": {
+        "file": "gran-chaco-regional-validation-c1b3162bb5ab.json",
+        "sha256": "c1b3162bb5ab3db8f28a49ff3e451f31c2d41239efb7ed01c8de86828bf6dde7"
+      },
+      "selected_method": "seasonal",
+      "accepted": true,
+      "domain": {
+        "area": "full study area",
+        "end": "2026-07-31",
+        "start": "2020-01-01"
+      },
+      "gates": {
+        "external": true,
+        "outer": true,
+        "outer_excluding_known": true
+      },
+      "support_complete": true
+    },
+    {
+      "region": "california",
+      "audit": {
+        "file": "california-regional-validation-e90fee209c39.json",
+        "sha256": "e90fee209c397a6cfcbf7a4054e5e84c8f303144697b4f6296b3bc320957bc13"
+      },
+      "selected_method": "seasonal",
+      "accepted": true,
+      "domain": {
+        "area": "full study area",
+        "end": "2026-07-31",
+        "start": "2020-01-01"
+      },
+      "gates": {
+        "external": true,
+        "outer": true,
+        "outer_excluding_known": true
+      },
+      "support_complete": true
+    },
+    {
+      "region": "southeastern-australia",
+      "audit": {
+        "file": "southeastern-australia-regional-validation-b95c466291ec.json",
+        "sha256": "b95c466291ece0c165a5801b7ed3df4da6e76f7afa25e7cdc25eab6dc916900f"
+      },
+      "selected_method": "seasonal",
+      "accepted": true,
+      "domain": {
+        "area": "full study area",
+        "end": "2026-07-31",
+        "start": "2020-01-01"
+      },
+      "gates": {
+        "external": true,
+        "outer": true,
+        "outer_excluding_known": true
+      },
+      "support_complete": true
+    },
+    {
+      "region": "iberian-peninsula",
+      "audit": {
+        "file": "iberian-peninsula-regional-validation-f363361431a9.json",
+        "sha256": "f363361431a97126315b48badaa82c6af28109b0b2c2cfd66cd5f0450d733d6d"
+      },
+      "selected_method": "seasonal",
+      "accepted": true,
+      "domain": {
+        "area": "full study area",
+        "end": "2026-07-31",
+        "start": "2020-01-01"
+      },
+      "gates": {
+        "external": true,
+        "outer": true,
+        "outer_excluding_known": true
+      },
+      "support_complete": true
+    },
+    {
+      "region": "siberia",
+      "audit": {
+        "file": "siberia-regional-validation-af9ef0d1023a.json",
+        "sha256": "af9ef0d1023a3bb6940e41c86f8475e6a63f7ec3ff379088acee7aec046b12a6"
+      },
+      "selected_method": "seasonal",
+      "accepted": true,
+      "domain": {
+        "area": "full study area",
+        "end": "2026-07-31",
+        "start": "2020-01-01"
+      },
+      "gates": {
+        "external": true,
+        "outer": true,
+        "outer_excluding_known": true
+      },
+      "support_complete": true
+    }
+  ]
+}

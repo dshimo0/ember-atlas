@@ -1,0 +1,21 @@
+{
+  "checked_utc": "2026-11-15T04:32:58.155249+00:00",
+  "checks": [
+    {
+      "url": "https://www.spaceappschallenge.org/2026/",
+      "status": 503,
+      "verified_requirements": false
+    },
+    {
+      "url": "https://www.spaceappschallenge.org/resources/",
+      "status": 503,
+      "verified_requirements": false
+    },
+    {
+      "url": "https://www.spaceappschallenge.org/2026/challenges/harmonization-of-modis-and-viirs-hot-spots/",
+      "status": 503,
+      "verified_requirements": false
+    }
+  ],
+  "owner_action": "Verify current portal guide, media rules, eligibility and terms; final submission remains with Team Owner."
+}

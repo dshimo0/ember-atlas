@@ -1,0 +1,4 @@
+# Browser acceptance tooling only; serving and pipeline use the Python standard library.
+playwright==1.62.0
+pyee==13.0.1
+greenlet==3.5.5

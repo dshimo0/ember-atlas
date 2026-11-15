@@ -1,0 +1,289 @@
+{
+  "url": "https://ember-atlas-opal.vercel.app",
+  "checks": [
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "lang": "en",
+      "route": "/",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "lang": "en",
+      "route": "demo",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "lang": "en",
+      "route": "methods",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "lang": "en",
+      "route": "about",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "lang": "en",
+      "route": "pitch?slide=5",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "lang": "pt-BR",
+      "route": "/",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "lang": "pt-BR",
+      "route": "demo",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "lang": "pt-BR",
+      "route": "methods",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "lang": "pt-BR",
+      "route": "about",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "lang": "pt-BR",
+      "route": "pitch?slide=5",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "lang": "en",
+      "route": "/",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "lang": "en",
+      "route": "demo",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "lang": "en",
+      "route": "methods",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "lang": "en",
+      "route": "about",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "lang": "en",
+      "route": "pitch?slide=5",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "lang": "pt-BR",
+      "route": "/",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "lang": "pt-BR",
+      "route": "demo",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "lang": "pt-BR",
+      "route": "methods",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "lang": "pt-BR",
+      "route": "about",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "lang": "pt-BR",
+      "route": "pitch?slide=5",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "lang": "en",
+      "route": "/",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "lang": "en",
+      "route": "demo",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "lang": "en",
+      "route": "methods",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "lang": "en",
+      "route": "about",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "lang": "en",
+      "route": "pitch?slide=5",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "lang": "pt-BR",
+      "route": "/",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "lang": "pt-BR",
+      "route": "demo",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "lang": "pt-BR",
+      "route": "methods",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "lang": "pt-BR",
+      "route": "about",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "lang": "pt-BR",
+      "route": "pitch?slide=5",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "lang": "en",
+      "route": "/",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "lang": "en",
+      "route": "demo",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "lang": "en",
+      "route": "methods",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "lang": "en",
+      "route": "about",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "lang": "en",
+      "route": "pitch?slide=5",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "lang": "pt-BR",
+      "route": "/",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "lang": "pt-BR",
+      "route": "demo",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "lang": "pt-BR",
+      "route": "methods",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "lang": "pt-BR",
+      "route": "about",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "lang": "pt-BR",
+      "route": "pitch?slide=5",
+      "axe": []
+    }
+  ],
+  "axe_violation_count": 0,
+  "chart_selection_and_csv_scope": true,
+  "language_preserves_export_bytes": true,
+  "subregion_adjustment_withheld": true
+}

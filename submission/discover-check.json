@@ -1,0 +1,97 @@
+{
+  "base": "https://ember-atlas-opal.vercel.app",
+  "checks": [
+    {
+      "viewport": "desktop",
+      "route": "/",
+      "refresh": true,
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "route": "/explore",
+      "refresh": true,
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "route": "/demo",
+      "refresh": true,
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "route": "/methods",
+      "refresh": true,
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "route": "/about",
+      "refresh": true,
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "route": "/pitch",
+      "refresh": true,
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "legacy_migration": true,
+      "csv_rows": 129280,
+      "calendar_sync": true,
+      "subregion_raw": true,
+      "guide_steps": 4,
+      "pitch_frames": 7,
+      "pageerrors": []
+    },
+    {
+      "viewport": "mobile",
+      "route": "/",
+      "refresh": true,
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "route": "/explore",
+      "refresh": true,
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "route": "/demo",
+      "refresh": true,
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "route": "/methods",
+      "refresh": true,
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "route": "/about",
+      "refresh": true,
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "route": "/pitch",
+      "refresh": true,
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "legacy_migration": true,
+      "csv_rows": 129280,
+      "calendar_sync": true,
+      "subregion_raw": true,
+      "guide_steps": 4,
+      "pitch_frames": 7,
+      "pageerrors": []
+    }
+  ]
+}

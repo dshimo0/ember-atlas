@@ -1,0 +1,36 @@
+{
+  "checked_utc": "2026-11-15T06:24:02.609628+00:00",
+  "definitions_url": "https://www.earthdata.nasa.gov/data/tools/firms/active-fire-data-attributes-modis-viirs",
+  "http_status": 200,
+  "literal_versions_preserved": true,
+  "uniform_vintage_verified": false,
+  "modis_type_legend": {
+    "0": "presumed vegetation fire",
+    "1": "active volcano",
+    "2": "other static land source",
+    "3": "offshore"
+  },
+  "viirs_type_mapping_independently_verified": false,
+  "all_reported_types_retained": true,
+  "september_2024_pantanal": {
+    "MODIS_SP": {
+      "source_versions": {
+        "61.03": 23396
+      },
+      "reported_types": {
+        "0": 23368,
+        "2": 28
+      }
+    },
+    "VIIRS_NOAA20_SP": {
+      "source_versions": {
+        "2": 101659
+      },
+      "reported_types": {
+        "0": 101263,
+        "2": 4,
+        "3": 392
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "family": "Manrope",
+  "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/manrope/Manrope%5Bwght%5D.ttf",
+  "license": "SIL Open Font License 1.1",
+  "license_file": "OFL.txt",
+  "subset": "Latin, Latin supplement, general punctuation and interface arrows/shapes; browser fallback supplies other glyphs",
+  "sha256": "9344820e818ed2fc59b6605e222508ab62140cca15a05f9f2bf71a7e1efa2711"
+}

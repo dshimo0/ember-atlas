@@ -1,48 +1,42 @@
-# FIRMS data and harmonization
+# Data acceptance contract
 
-## Ingestion
+The implemented method and measured evidence are documented in [methodology.md](../docs/methodology.md). This specification governs publication, not a future feature plan.
 
-- Pilot region uses WGS84 bbox `-59,-23,-54,-15` in west, south, east, north order. The demonstration starts with August–September 2024. Use FIRMS availability before requesting additional dates.
-- Use MODIS C6.1 SP for the legacy series and VIIRS NOAA-20 SP for the continuation. Consider S-NPP SP as a bridge from 2012 and NOAA-21 SP as an additional sensitivity check. Validate each platform transition independently. NASA's archive lists S-NPP coverage ending on 2 November 2026.
-- API requests cover at most five inclusive dates. Persist raw CSV and a manifest with product, bbox, date window, download UTC, byte hash and row count. Keep NRT files in a separate directory and track their processing level.
-- Use the bulk regional FIRMS archive for the long history. It requires Earthdata or email authentication. Verify the processing level of delivered files before incorporating them.
-
-## Reference dataset and reproducibility
-
-| Layer | Contract |
+| ID | Acceptance criterion |
 | --- | --- |
-| Raw reference | Keep every record and field returned for the selected AOI, products and dates in immutable original CSV extracts. Pair each extract with a manifest containing source, processing class, AOI, requested dates, retrieval time, SHA-256 and delivered row count. Record platform identifiers where available. Use the Area API for bounded extracts and the regional archive for the historical backfill. |
-| Normalized observations | Preserve source and original confidence, normalize coordinates and acquisition datetime in UTC, and retain platform, day/night and fire radiative power (FRP, MW) when present. Keep a reference to the raw extract and track deduplication separately from delivered counts. |
-| Published analysis | Generate versioned monthly data by AOI and product, with native detection counts, occupied cell-days, retrieval completeness, and calibrated values only where validated. Missing windows remain missing. A retrieved day with zero records indicates zero recorded detections. |
+| D1 Inputs | Use real FIRMS observations only. Verify original CSV SHA, row count, requested region/product/processing class, coordinates and UTC acquisition window. Preserve raw payloads and adjacent manifests; never record keyed URLs. |
+| D2 Registry | Version eight project-defined study rectangles in requested order, with exact WGS84 geometry, type, source, available products and immutable SP/NRT dataset references. Expose broad-area extents and no official biome implication. |
+| D3 Completeness | Daily zero only from successful retrieval. Missing source windows remain absent and monthly missing values stay blank. Partial periods retain actual counts and clipped scope, with no full-month adjustment. Usable satellite coverage remains unknown. |
+| D4 Grid | Globally anchored 0.05° WGS84, one occupied cell/product/UTC day. Native detections are separate. Full map-cell occupancies sum to the same selected-period/product cell-days as exports. |
+| D5 Frozen fit | Preserve original 36 training / 24 holdout months, support and acceptance rules, source artifacts and quarter factors. No fitting on holdout or transfer to a different region/mask. |
+| D6 Baselines | Recompute unadjusted, training-only through-origin least-squares scalar and frozen seasonal on identical full-area paired months. Publish MAE, signed bias and every monthly residual; verify both Python artifact and browser recomputation. |
+| D7 Peaks | Six holdout months ranked by observed MODIS cell-days, month ascending for ties. Report all methods on this same subset; no selection using residuals. |
+| D8 Selection protocol | The existing holdout is evaluation evidence, not a fresh selection set. Retain the frozen output; require a preregistered new outer holdout or nested blocked-year protocol before choosing a replacement. |
+| D9 Replay | Derive January 2023 cutoff from verified training end. Observed MODIS before; eligible seasonal VIIRS after. Benchmark MODIS remains a separate observed layer. Every month/export identifies source, adjustment/factor and scenario. No actual source-availability cutoff is asserted. |
+| D10 Historical context | Use earlier complete same-month values, no target/future years, minimum n=3. Replay baselines are limited to the paired 2020–2024 domain; older MODIS remains archive context. Show exact years/n and excluded periods. |
+| D11 Regions | Enable historical views only for retrieved periods. All eight open real SP and separate NRT data without visitor keys. No regional factor before local multi-year training and independent holdout evaluation. |
+| D12 NRT | Actual UTC window, last retrieval and partial-period status. No joining SP/NRT or full-month historical comparisons without matched-window and processing-transition evidence. |
+| D13 Integrity | Version/hash inventories, summaries, shards and evaluation. Keep original snapshot/validation immutable. Verify credentials are absent from repository, exports and decompressed public data. |
 
-Begin with the existing paired August–September 2024 Pantanal extract to check ingestion, schemas and aggregation. Then acquire multiple full overlapping years of MODIS and VIIRS NOAA-20 standard processing and pin their input manifests before calibration. Keep standard processing and near-real-time records separate. Keep the FIRMS key in `FIRMS_MAP_KEY` and exclude keyed request URLs from published artifacts.
+Source availability: [FIRMS](https://firms.modaps.eosdis.nasa.gov/api/data_availability/) · [Area API](https://firms.modaps.eosdis.nasa.gov/api/area/) · [archive](https://firms.modaps.eosdis.nasa.gov/download/). Original frozen validation: [validation-ba55acfc7909.json](../web/data/validation-ba55acfc7909.json). Current regional release and scalar evaluation are addressed by `web/data/regions.json` and `web/data/replay-evaluation.json`.
 
-## Common metric
+## Regional expansion acceptance
 
-Retain all original fields in raw CSV. Normalize coordinates, UTC acquisition timestamp, platform and sensor-specific confidence in the next stage. An exact duplicate within a product should contribute once to the raw comparison, using source platform, time and coordinates. Preserve the raw delivered count for auditing. The current baseline counts delivered records and unique occupied cells on a globally aligned 0.05-degree WGS84 grid per UTC day and product. Grid cells have latitude-dependent physical area and edge sensitivity. Aggregate occupied cell-days monthly within a fixed AOI. Keep the number of retrieved UTC days as a separate completeness indicator. A retrieved day with zero detections leaves actual observation coverage unknown without swath and quality masks.
+- Keep the original Pantanal artifact and domain unchanged; 19 fresh months are an audit, not authorization to extend a 24-fresh-month gate.
+- Apply registered inner selection on 2022 only, then refit on 2020–2022. Require complete support and pass all independent outer, known-month-excluded and external gates before publishing a regional adjustment.
+- Preserve every original covering query and verify derived area/date masks against it before aggregation. Different study rectangles never share fitted factors.
+- Keep raw regional history available when a gate fails. Show the failed gate and candidate residuals; do not silently switch candidates.
+- Version and hash any externally served observation shard at an immutable repository commit. Integrity-check decompressed bytes before map/export use. Preserve previously published local URLs.
+- Publish an SP/NRT join only after actual same-sensor/window overlap and a separate evaluation protocol; availability adjacency alone is insufficient.
 
-## Calibration and acceptance
+## Source-field preservation
 
-1. Compare raw monthly counts against occupied cell-days on aligned complete months. Test sensitivity to grid size, confidence selection and MODIS Terra versus Aqua sampling changes.
-2. Fit a robust VIIRS-to-MODIS scale on matched complete months from training years. Compute the ratio from seasonal totals with a documented fallback for sparse seasons. Use blocked holdout years and keep each platform's results visible. Quantify seasonal error and transition discontinuity, and report uncertainty via year-block resampling if enough years exist.
-3. Compare against both raw concatenation and the uncalibrated grid baseline. Report holdout MAE, signed bias and seasonal behavior. If calibration fails to improve the grid baseline or overlap is insufficient, ship sensor-specific lines and flag the harmonized series as unavailable.
-4. Compute anomalies against the historical median for the same month using only complete comparable years, excluding the target year. Emit absolute deviation and omit percent when the median is zero. Keep partial current months provisional.
+Preserve each reported `version` and `type` string in current observation shards/CSVs, while retaining immutable legacy files. Enrich frozen records only by joining their exact source manifest and observation identity, checking the source SHA and original normalized fields. Current daily version/type counts must sum to the same native counts and follow the same date/area mask. Include source versions in monthly/replay exports and benchmark versions separately. Do not infer uniform MODIS processing vintage from the source name, or treat all thermal types as independently classified vegetation fires. MODIS type-code definitions have a verified NASA source; VIIRS code interpretation remains explicitly unverified. Keep all types in the frozen metric and do not silently refit or filter the accepted record.
 
-## Calibration command and output contract
+## Presentation invariants
 
-Implement `scripts/harmonize.py` as the reproducible next stage after `scripts/build_calendar.py`. The input is the daily calendar CSV with dates, AOI, product, raw counts and occupied cells. Require explicit training and holdout year lists and reject overlapping lists or mixed AOIs in a single fit. A paired month is eligible only when the extract manifests and daily calendar establish retrieval for every UTC day for both products. Keep observation coverage separate from retrieval completeness.
+The P0/P1 redesign does not refit factors, alter the grid, filter thermal types, extend any publication domain or rewrite observation shards. Calendar intensity is a view-relative encoding, not a percentile or anomaly estimate. Compact formatting applies only to display labels. The original monthly and observation exports retain numerical precision and provenance. NASA photographs/composites are editorial context with an independent image inventory, not evidence added to the quantitative evaluation.
 
-For each defined season, fit the factor as the training sum of MODIS occupied cell-days divided by the training sum of VIIRS occupied cell-days over matched eligible months. Define the seasons, minimum support and pooled fallback before inspecting holdout results. If the pooled denominator is zero or the support requirement fails, leave the applicable factor unavailable. Hold the fitted factors fixed during validation. Compare adjusted and unadjusted VIIRS to MODIS using the same eligible holdout months and common cell-day units. Treat the comparison of native counts as a separate diagnostic. Record the acceptance rule before fitting and report unavailable calibration explicitly when evidence is insufficient or the rule fails.
+## Experimental archive publication gates
 
-| Output | Minimum contents |
-| --- | --- |
-| `monthly_comparison.csv` | AOI and month, both products' native counts and occupied cell-days, both products' retrieval completeness, applied factor and adjusted VIIRS value when eligible, split and calibration status. |
-| `validation.json` | Method version, input snapshot identity and checksums, AOI, grid and product identifiers, training and holdout years, season rules, fitted factors, paired month counts and exclusions, unadjusted and adjusted holdout MAE and signed bias, and acceptance decision with reason. |
-
-Add regression checks for missing versus zero detections, incomplete paired months, overlapping year lists and zero denominators. Verify the first scientific result on real held-out FIRMS observations. Report September 2024 as a held-out example only if its year was excluded from fitting.
-
-Sources
-
-- [NASA FIRMS Area API](https://firms.modaps.eosdis.nasa.gov/api/area/)
-- [NASA FIRMS availability](https://firms.modaps.eosdis.nasa.gov/api/data_availability/)
-- [NASA FIRMS archive and temporal coverage](https://firms.modaps.eosdis.nasa.gov/download/)
+Backfill detection-count research is isolated from the frozen cell-day release. See [spec 007](007-calendar-backfill.md). Product availability alone is not retrieval completeness or usable satellite coverage.

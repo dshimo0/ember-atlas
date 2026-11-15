@@ -1,0 +1,71 @@
+{
+  "source_commit": "0ef44972f2433bc8651773f5849e72bfe2931f70",
+  "branch": "work",
+  "url": "https://ember-atlas-opal.vercel.app",
+  "pr": "https://github.com/dshimo0/ember-atlas/pull/2",
+  "pr_status": "open; not merged",
+  "checked_utc": "2026-11-15T17:24:05.985461+00:00",
+  "deployment": {
+    "id": "dpl_BfNSP3JS1JD2xKvCXAFpgpd1XRtu",
+    "url": "https://ember-atlas-7vm2bc39x-dscbest-1597s-projects.vercel.app",
+    "productionUrl": "https://ember-atlas-opal.vercel.app",
+    "inspectorUrl": "https://vercel.com/dscbest-1597s-projects/ember-atlas/BfNSP3JS1JD2xKvCXAFpgpd1XRtu",
+    "readyState": "READY",
+    "target": "production",
+    "environment": "production",
+    "deploymentApiUrl": "https://api.vercel.com/v13/deployments/dpl_BfNSP3JS1JD2xKvCXAFpgpd1XRtu",
+    "buildMachine": {
+      "cores": 2,
+      "memory": 8192,
+      "machine": "basic",
+      "selectionType": "fixed",
+      "selectionSource": "plan-default"
+    },
+    "deploymentProtection": [
+      "vercel_authentication"
+    ]
+  },
+  "data_commit": "a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391",
+  "registry": {
+    "file": "regions-c06212509a51.json",
+    "sha256": "c06212509a517c5c91377bd2cdc40442559896168ad887a5218214e4e36a5942"
+  },
+  "changes": [
+    "Map-dominant layout across Explore and compact guided journey",
+    "Selected-month common-axis dot plot",
+    "Interactive monthly time series with missing gaps and replay cutoff",
+    "Holdout identity scatter and three-method monthly residual plot",
+    "Evidence-led Methods and Pitch, larger actual regional imagery",
+    "Locally persistent EN/PT-BR and dark/light preferences"
+  ],
+  "tests": {
+    "python": 25,
+    "node_modules": 6,
+    "ci_workflows": 2,
+    "public_route_viewport_theme_language_checks": 40,
+    "scoped_axe_violations": 0,
+    "plot_selection_updates_map_and_csv": true,
+    "language_switch_preserves_csv_bytes": true,
+    "subregion_adjustment_withheld": true,
+    "nine_page_pdf_languages": [
+      "en",
+      "pt-BR"
+    ],
+    "anonymous_assets": "submission/workspace-public-assets.json",
+    "video": "submission/media-check.json",
+    "credential_and_frozen_integrity": "submission/integrity-check.json"
+  },
+  "evidence": [
+    "submission/workspace-ui-public.json",
+    "submission/workspace-public-assets.json",
+    "submission/workspace-ui/"
+  ],
+  "limits": [
+    "Portuguese scientific wording requires human domain review; canonical evidence documents, CSV schemas and numerical display notation remain English/original.",
+    "Accessibility tests cover selected automated rules and emulated desktop/mobile; no physical-device or screen-reader certification.",
+    "Full prior 50-group eight-region suite was not rerun for this presentation-only release; core analytical artifacts were verified unchanged.",
+    "Original reference-processing continuity, ground-truth and observation-opportunity limits remain.",
+    "Owner Windows backfill directory remains unavailable pending upload or accessible branch.",
+    "No official judging submission or owner terms acceptance performed."
+  ]
+}
