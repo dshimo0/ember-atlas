@@ -1,1 +1,17 @@
-{"outputDirectory":"web","buildCommand":null,"installCommand":null,"framework":null}
+{
+  "outputDirectory": "web",
+  "buildCommand": null,
+  "installCommand": null,
+  "framework": null,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/demo",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/pitch",
+      "destination": "/index.html"
+    }
+  ]
+}

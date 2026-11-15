@@ -1,6 +1,6 @@
 export const PRODUCTS = ['MODIS_SP', 'VIIRS_NOAA20_SP'];
 export const SENSOR_NAMES = {MODIS_SP: 'MODIS', VIIRS_NOAA20_SP: 'NOAA-20 VIIRS'};
-export const AREAS = {all: 'Full Pantanal study area', north: 'Northern study area', south: 'Southern study area'};
+export const AREAS = {all: 'Full Pantanal study rectangle', north: 'Northern study area', south: 'Southern study area'};
 const DAY = 86400000;
 export function monthEnd(month) { return new Date(Date.UTC(+month.slice(0, 4), +month.slice(5), 0)).toISOString().slice(0, 10); }
 export function monthName(month) { return new Date(month + '-01T00:00:00Z').toLocaleDateString('en-US', {month: 'long', year: 'numeric', timeZone: 'UTC'}); }
@@ -41,12 +41,12 @@ export function adjustment(row, state, validation) {
   return Number.isFinite(factor) ? {factor, value: row.cells * factor} : null;
 }
 export function historicalBaseline(index, month, product, state, validation) {
-  // Preserve release scope: no subregion transfer or historical claims without validation.
-  if (state.area !== 'all') return null;
+  // Within-sensor historical comparison uses the same spatial mask; it does not transfer calibration.
   const current = aggregateMonth(index, month, product, state);
   if (!current.complete) return null;
   const entries = [];
-  const years = [...new Set(validation.monthly.map(m => m.year))].sort();
+  const prefix = `${state.area}|${product}|`;
+  const years = [...new Set([...index.keys()].filter(key => key.startsWith(prefix)).map(key => +key.split('|')[2].slice(0,4)))].sort();
   for (const year of years.filter(y => y < +month.slice(0, 4))) {
     const m = year + month.slice(4);
     const r = aggregateMonth(index, m, product, {...state, start: m + '-01', end: monthEnd(m)});

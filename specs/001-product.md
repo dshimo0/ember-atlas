@@ -21,3 +21,17 @@ The dashboard supports regional review of satellite-observed fire activity in th
 | P15 Copy | Plain labels such as Study area, Sensor comparison, Monthly calendar and Methods & data. Limitations appear where they affect interpretation; complete methodology is in details. |
 | P16 Reproduction | Original snapshot, validation, frozen split, acceptance rules and export calculations remain unchanged. Locally vendored Leaflet and geographic inputs have licenses/source checksums. No FIRMS credentials are served. |
 | P17 Verification | Signed-out desktop/mobile checks cover initial load, zoom/pan/scale/fit, month/area/sensor changes, both CSVs, subregion withholding and forced tile failure. One displayed grid total and downloaded records reconcile with the pinned source. |
+
+## Final presentation acceptance criteria
+
+| ID | Acceptance criterion |
+| --- | --- |
+| P18 Routes | `/`, `/demo`, `/pitch` load directly and after refresh on Vercel. Shared Explore / Guided demo / Pitch / Methods & data navigation preserves analytical state. |
+| P19 Guided case | Five inline actual-state steps, Back/Next, numbered selection and reset. Default September 2024 supported by the release; free exploration is never blocked. Mobile filters fold while selected place/month/result remain visible. |
+| P20 Reference scale | Explicit adjusted VIIRS on MODIS-reference scale calendar and time series, beside raw common-grid mode. Distinct purple/triangle treatment and units. No sensor sum, source handoff or adjusted point coordinates. Subregions and MODIS-only mode expose raw history. |
+| P21 Residuals | Full-area validation remains visibly separate from selected-area metrics. Recompute all 24 holdout residuals, MAE, bias and RMSE; expose underperforming months without changing factors. |
+| P22 Regional baselines | Full/north/south use the same fixed spatial masks in observations, daily totals and historical medians. At least three complete prior same-month years; exclude missing/partial/target/future periods. No regional calibration. |
+| P23 URLs | Month, area, product, dates, metric mode and route progress restore through shared URLs, refresh and browser back/forward. Invalid inputs use validated defaults. |
+| P24 Evidence manifest | JSON records current selection, immutable input/validation/source hashes and exact CSV checksums. Its adjustment applicability matches analytical scope. No credentials. |
+| P25 Pitch | Nine concise desktop slides; previous/next and keyboard operation, counter, optional fullscreen, notes hidden initially, mobile scroll order, nine-page readable landscape PDF. Shared metrics/artifacts, real product screenshots and verified ownership only. |
+| P26 Acceptance evidence | Nine Python and 13 Node checks; signed-out desktop/mobile route and analytical-flow suites; screenshots, normal network checks and isolated tile-failure tests. Printed PDF page count verified. Human rehearsal and official media compliance remain explicitly pending. |

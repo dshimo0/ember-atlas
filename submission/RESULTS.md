@@ -32,3 +32,9 @@ Native-unit differences are diagnostics, not common-grid errors. The prior-year 
 Descriptive diagnostics include 0.025/0.05/0.1-degree grids, high confidence using sensor-specific thresholds, platform mix and day/night. These are not independent validation for another AOI. Physical cell area varies with latitude. Swath/cloud observation coverage remains unknown even though daily retrieval is complete. Raw extracts and checksum manifests remain committed; the public app requires no FIRMS key.
 
 Anonymous production HTTPS is verified at https://ember-atlas-opal.vercel.app after CLI authentication resolved the earlier Vercel creation blocker. The full public browser flow and CSV exports passed; see browser-check.json and docs/DEPLOYMENT.md. Official Space Apps resources still return HTTP 503; portal demonstration format must be verified by the Team Owner.
+
+## Final product evidence
+
+The original daily calendar and validation were reproduced exactly from committed raw manifests for the final presentation release. No factors or acceptance rules changed. Recomputed holdout RMSE is 1334.5146 → 317.6660 cell-days/month. February and March 2023 have larger absolute residuals after adjustment; all 24 residuals are exposed. The explicit history is adjusted VIIRS on the MODIS-reference scale, separately from MODIS, with no fused source transition.
+
+The `/demo` journey, `/pitch` presentation, shared selection URLs, regional own-mask historical medians and exact CSV-checksum manifest are documented in docs/demo-experience.md and docs/pitch.md. Final execution/deployment evidence is recorded in product-release.json and routes-check-public.json. Regional adjustment remains unavailable.

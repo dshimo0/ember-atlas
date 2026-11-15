@@ -1,0 +1,38 @@
+{
+  "url": "http://127.0.0.1:8930",
+  "checked_utc": "2026-11-15T01:38:13.460374+00:00",
+  "checks": [
+    {
+      "viewport": "desktop",
+      "direct_load_refresh_all_routes": true,
+      "guided_steps_reset": true,
+      "regional_baseline_n": 4,
+      "no_regional_adjustment": true,
+      "manifest_export_hashes_match": true,
+      "map_visibility_display_only": true,
+      "observation_tooltip_source_time_fields": true,
+      "share_url": "http://127.0.0.1:8930/demo?month=2024-08&area=north&sensor=MODIS_SP&start=2020-01-01&end=2024-12-31&view=raw&step=1",
+      "back_forward_restore": true,
+      "pitch_navigation_notes": true,
+      "pitch_print_pages": 9,
+      "unexpected_http_errors": [],
+      "javascript_errors": []
+    },
+    {
+      "viewport": "mobile",
+      "direct_load_refresh_all_routes": true,
+      "guided_steps_reset": true,
+      "regional_baseline_n": 4,
+      "no_regional_adjustment": true,
+      "manifest_export_hashes_match": true,
+      "map_visibility_display_only": true,
+      "observation_tooltip_source_time_fields": true,
+      "share_url": "http://127.0.0.1:8930/demo?month=2024-08&area=north&sensor=MODIS_SP&start=2020-01-01&end=2024-12-31&view=raw&step=1",
+      "back_forward_restore": true,
+      "pitch_navigation_notes": true,
+      "pitch_print_pages": null,
+      "unexpected_http_errors": [],
+      "javascript_errors": []
+    }
+  ]
+}

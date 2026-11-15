@@ -1,5 +1,7 @@
 # Ember Atlas | NASA Space Apps 2026 submission addendum
 
+Release note (2026-11-15): this planning document contains supplied event/deadline and fallback-format assertions that could not be independently reverified because official pages returned HTTP 503. Do not treat them as current verified rules. Follow [release-checklist.md](release-checklist.md), resource-check.json and the current portal/Local Lead guidance before final submission.
+
 Use this English-language addendum alongside `Ember-Atlas-Codex-Cloud-Prompt.md` in the Codex Cloud workspace for [dshimo0/ember-atlas](https://github.com/dshimo0/ember-atlas). Apply this file to submission packaging and eligibility checks. The primary prompt governs the product, science and deployment. Carry out the preparation, create the artifacts below, verify their contents, and hand the Team Owner a paste-ready submission package. Leave acceptance of terms and the final portal submission to the Team Owner.
 
 ## Requirements audit
@@ -24,7 +26,7 @@ Use this English-language addendum alongside `Ember-Atlas-Codex-Cloud-Prompt.md`
 
 1. Open the team's **Project** tab for the current edition. Use the [official Resources page](https://www.spaceappschallenge.org/resources/) and the Project Submission Guide linked from the form. Record the confirmed labels, required fields, character limits, demo formats, link rules, any AI disclosure instructions, and any event-specific instructions from the São Paulo Local Lead. Follow the current official form and guide when they differ from this addendum.
 2. Prepare a **30-second English video or up to seven English slides** as a practical fallback. These limits appear on a 2026 local organizer's schedule in [Kushimoto](https://www.spaceappschallenge.org/2026/local-events/kushimoto/?tab=schedule); confirm acceptance with the current guide or São Paulo form before marking compliant. The three-minute walkthrough in the primary prompt is for rehearsal or a local pitch if permitted. Verify São Paulo's actual pitch runtime and any separate deadline.
-3. Official portal deadline for a São Paulo Local Event registration is **Sunday, November 15, 2026 at 23:59 São Paulo time**. The supplied eligibility slide states that Universal Event teams use the Team Owner's local timezone. Confirm any earlier local judging or pitch cutoff separately. Suggested internal deadline for final portal submission is 20:00 São Paulo time. [Official 2026 event page](https://www.spaceappschallenge.org/2026/)
+3. Confirm the current official portal deadline, applicable timezone and any earlier local judging cutoff with the current portal and São Paulo Local Lead. The planning date supplied with this document was not independently verified and must not be used as a current deadline. [Official event page](https://www.spaceappschallenge.org/2026/)
 4. Check applicable rules for work done before the official start and reuse of existing material. Preserve original Git history, document actual dates and scope of repository scaffolding and any pre-existing Orbital Edge work, and ask the Local Lead for a ruling if eligibility is unclear. Use accepted work only in the judged submission. Never redate, conceal or relabel work as newly produced.
 
 ## Produce the submission package

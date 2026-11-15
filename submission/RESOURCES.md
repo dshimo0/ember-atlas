@@ -22,3 +22,9 @@
 | Natural Earth | Admin 0 countries 1:110m; rivers and populated places 1:50m; local geographic fallback | Public domain: https://www.naturalearthdata.com/about/terms-of-use/ . Raw inputs under data/reference; URLs and SHA-256 values in web/assets/local-geography.json. |
 
 Map credits remain visible in the map control and Methods & data. The study rectangle is an analysis extent; no Pantanal biome geometry is included. No external imagery, music, font service or NASA insignia is used.
+
+## Current link verification
+
+Checked 2026-11-15 UTC; exact results and resolved URLs are in [resource-check.json](resource-check.json). NASA FIRMS landing, archive and Area API pages returned 200, as did OpenStreetMap copyright/tile policy and Leaflet. The archive page identifies the NOAA-20 375 m record starting 2018-04-01. The release uses only its 2020–2024 SP slice with MODIS C6.1 SP, verified in raw manifests. Natural Earth's terms endpoint returned 406 on this check; committed source/checksum metadata and existing public-domain attribution remain preserved, and owner verification is still required for final portal wording. Official challenge/resources/event/legal pages returned 503. Link HTTP availability alone does not certify event eligibility or permission wording.
+
+The pitch's product images are actual screen captures of this application, including its attributed map, rather than generated imagery. The nine-slide PDF is a print export of the product presentation. A temporary eSpeak NG synthesized read measured script duration; no generated audio is published or submitted. The public screen recording is silent and contains no people. Codex implementation/documentation assistance is disclosed in PROJECT-PAGE.md.

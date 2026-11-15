@@ -15,7 +15,7 @@ test('released September reconciles with frozen reference and prior-year medians
   assert.equal(historicalBaseline(index,'2024-09','VIIRS_NOAA20_SP',state,validation).median,4782);
 });
 test('full-domain transfer never leaks into a subregion or partial month',()=>{
-  for(const area of ['north','south']){const s={...state,area};assert.equal(adjustment(aggregateMonth(index,'2024-09','VIIRS_NOAA20_SP',s),s,validation),null);assert.equal(historicalBaseline(index,'2024-09','MODIS_SP',s,validation),null);}
+  for(const area of ['north','south']){const s={...state,area};assert.equal(adjustment(aggregateMonth(index,'2024-09','VIIRS_NOAA20_SP',s),s,validation),null);const baseline=historicalBaseline(index,'2024-09','MODIS_SP',s,validation);assert.equal(baseline.n,4);assert.deepEqual(baseline.entries.map(e=>e.year),[2020,2021,2022,2023]);}
   const s={...state,start:'2024-09-10',end:'2024-09-20'},r=aggregateMonth(index,'2024-09','VIIRS_NOAA20_SP',s);
   assert.equal(r.expected,11);assert.equal(r.retrieved,11);assert.equal(r.status,'Partial month');assert.equal(adjustment(r,s,validation),null);
 });

@@ -2,7 +2,7 @@
 
 Public application: https://ember-atlas-opal.vercel.app/
 
-Application source: `4d665138201c4941cd9dc7e61e18311d8a5957cc`, branch `work`. Production deployment: `dpl_GgmKyKszTUz6ycwty9NeKmfxYdnC`. Verification: `submission/judging-release.json` and `submission/judging-check-public.json`. Subsequent evidence/documentation commits do not change the hosted application. The PR remains open.
+Final application source, production deployment ID, anonymous route checks and asset hashes are recorded in [product-release.json](../submission/product-release.json). Branch: `work`. PR #2 remains open; production uses explicit authorized CLI deployment, independently of merge status.
 
 ## Architecture
 
@@ -16,7 +16,7 @@ Project `ember-atlas` belongs to `dscbest-1597s-projects`. Verify the target bef
 
 ```sh
 python -m unittest discover -s tests
-node tests/test_model.mjs
+node --test tests/test_*.mjs
 node --check web/app.js
 node --check web/geographic-map.mjs
 vercel project inspect ember-atlas --scope dscbest-1597s-projects --non-interactive
@@ -35,3 +35,9 @@ The default September observation export contains 125,055 rows; the full-period 
 HTTPS and hostname validation used the system CA store. Chromium automation used the independently validated leaf-key pins for the application and tile provider to accommodate the Cloud proxy; no global certificate-error bypass was used. Mobile checks use browser emulation, not a physical device.
 
 Actual screen recording: https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4 . Runtime is 29.64 seconds, with no people/audio. Public playback is recorded in `submission/media-check.json`. Official portal media format and final submission remain Team Owner checks.
+
+## Route and presentation release
+
+`vercel.json` rewrites `/demo` and `/pitch` to the same `index.html` and removes trailing slashes. Existing root, data and asset URLs are preserved. Native modules handle query-state restoration and browser history; no new backend or framework was added. For equivalent local direct-route behavior run `python scripts/serve.py`.
+
+Run both `scripts/check_judging_flow.py` and `scripts/check_routes.py` with `BASE_URL` set to the actual production origin. The latter verifies direct loads/refreshes for all routes, guided steps, share state, manifest hashes and pitch controls/print. The public route report rejects unexpected HTTP errors and JavaScript exceptions. Deployment includes only web assets/configuration. The published presentation screenshot is an actual screen capture; timing audio is temporary and not deployed.

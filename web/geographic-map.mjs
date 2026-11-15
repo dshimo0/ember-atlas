@@ -4,6 +4,14 @@ const STUDY = [[-23, -59], [-15, -54]];
 const AREA_BOUNDS = {all: STUDY, north: [[-19, -59], [-15, -54]], south: [[-23, -59], [-19, -54]]};
 const credit = '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>';
 
+const DiamondCanvas=L.Canvas.extend({
+  _updateDiamond(layer){
+    if(!this._drawing||layer._empty())return;
+    const p=layer._point,r=layer._radius,ctx=this._ctx;
+    ctx.beginPath();ctx.moveTo(p.x,p.y-r);ctx.lineTo(p.x+r,p.y);ctx.lineTo(p.x,p.y+r);ctx.lineTo(p.x-r,p.y);ctx.closePath();this._fillStroke(ctx,layer);
+  }
+});
+const DiamondMarker=L.CircleMarker.extend({_updatePath(){this._renderer._updateDiamond(this);}});
 export function createGeographicMap(element, geography) {
   const map = L.map(element, {preferCanvas: true, scrollWheelZoom: false, minZoom: 3, maxZoom: 17, zoomControl: true});
   map.createPane('local-geography'); map.getPane('local-geography').style.zIndex = 180;
@@ -32,6 +40,8 @@ export function createGeographicMap(element, geography) {
     return L.circleMarker(latlng, {pane: 'local-geography', radius: 2, color: '#344e58', weight: 1, fillOpacity: 1})
       .bindTooltip(feature.properties.name, {permanent: true, pane: 'local-labels', direction: 'right', className: 'local-place-label'});
   }}).addTo(map);
+  const sensorRenderer=new DiamondCanvas({padding:.2});
+  let lastRows=[],lastSelection=null;
   const study = L.rectangle(STUDY, {color: '#8e3a19', weight: 2.5, dashArray: '8 4', fill: false, interactive: false}).addTo(map);
   let areaLayer = null, pointLayer = L.layerGroup().addTo(map), tileLayer = null, timer = null, generation = 0, lastArea = 'all';
   const modeSelect = document.getElementById('basemapMode'), status = document.getElementById('basemapStatus');
@@ -67,14 +77,18 @@ export function createGeographicMap(element, geography) {
   new ResizeObserver(() => map.invalidateSize({pan: false})).observe(element);
   element.setAttribute('tabindex', '0');
   element.setAttribute('aria-label', 'Study area map. Arrow keys pan; plus and minus zoom.');
-  return {
-    update(rows, selection) {
+  function update(rows, selection) {
+      lastRows=rows;lastSelection=selection;
       pointLayer.clearLayers();
       const stride = Math.max(1, Math.ceil(rows.length / 4000));
       for (let i = 0; i < rows.length; i += stride) {
         const r = rows[i], modis = r.product === 'MODIS_SP';
-        L.circleMarker([r.latitude, r.longitude], {radius: modis ? 2.7 : 3, color: modis ? '#6e3b16' : '#15677c', weight: modis ? .6 : 1.1, fillColor: modis ? '#e6802a' : '#66c9da', fillOpacity: modis ? .85 : .28, product: r.product})
-          .bindTooltip(`${modis ? 'MODIS' : 'NOAA-20 VIIRS'} · ${r.date_utc} ${r.time_utc.slice(0,2)}:${r.time_utc.slice(2)} UTC`).addTo(pointLayer);
+        if(!(modis?document.getElementById('layerModis').checked:document.getElementById('layerViirs').checked))continue;
+        const marker=(modis?L.circleMarker:(latlng,options)=>new DiamondMarker(latlng,options));
+        const tooltip=document.createElement('div');
+        for(const [label,value] of [['Product',r.product],['Platform',r.platform],['Acquired',r.date_utc+' '+r.time_utc.slice(0,2)+':'+r.time_utc.slice(2)+' UTC'],['FRP (MW)',r.frp_mw],['Confidence',r.confidence],['Day/night',r.daynight],['Coordinates',r.latitude+', '+r.longitude],['Source',r.source]]){const line=document.createElement('div');line.textContent=label+': '+(value??'Unavailable');tooltip.append(line);}
+        marker([r.latitude, r.longitude], {renderer:sensorRenderer,radius: modis ? 2.7 : 3.5, color: modis ? '#6e3b16' : '#15677c', weight: modis ? .6 : 1.1, fillColor: modis ? '#e6802a' : '#66c9da', fillOpacity: modis ? .85 : .28, product: r.product})
+          .bindTooltip(tooltip,{className:'observation-tooltip'}).bindPopup(tooltip.cloneNode(true)).addTo(pointLayer);
       }
       if (areaLayer) {map.removeLayer(areaLayer); areaLayer = null;}
       if (selection.area !== 'all') areaLayer = L.rectangle(AREA_BOUNDS[selection.area], {color: '#183d6a', weight: 2.5, fillColor: '#5c9dc1', fillOpacity: .08, interactive: false}).addTo(map);
@@ -84,7 +98,9 @@ export function createGeographicMap(element, geography) {
       element.dataset.points = String(layers.length); element.dataset.observations = String(rows.length);
       element.dataset.area = selection.area; element.dataset.sensor = selection.sensor; element.dataset.month = selection.month;
       element.dataset.sample = first ? JSON.stringify({latitude: first.getLatLng().lat, longitude: first.getLatLng().lng, product: first.options.product}) : '';
+      element.dispatchEvent(new CustomEvent('mapdisplaychange',{detail:{shown:layers.length,total:rows.length}}));
       return layers.length;
-    }
-  };
+  }
+  for(const id of ['layerModis','layerViirs'])document.getElementById(id).addEventListener('change',()=>{if(lastSelection)update(lastRows,lastSelection);});
+  return {update,resize(){map.invalidateSize({pan:false});}};
 }

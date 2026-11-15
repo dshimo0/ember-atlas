@@ -66,9 +66,9 @@ with sync_playwright() as p:
         assert page.locator('#baseline summary').count()==2
         assert all('n = 4' in text for text in page.locator('#baseline summary').all_text_contents())
         m=next(m for m in validation['monthly'] if m['month']=='2024-09')
-        for series,key in [('modis','modis'),('viirs','viirs'),('adjusted','adjusted')]:assert abs(float(page.locator(f'[data-series="{series}"]').get_attribute('data-value'))-m[key])<1e-8
+        for series,key in [('modis','modis'),('viirs','viirs'),('adjusted','adjusted')]:assert abs(float(page.locator(f'#comparison [data-series="{series}"]').get_attribute('data-value'))-m[key])<1e-8
         assert '16.2%' in page.locator('#adjusted').inner_text()
-        assert page.locator('h1').inner_text()=='Pantanal fire activity, 2020–2024'
+        assert page.locator('#pageTitle').inner_text()=='Pantanal fire activity, 2020–2024'
         assert page.locator('#takeaway').bounding_box()['y']<page.locator('#map').bounding_box()['y']
         map_box=page.locator('.map-panel').bounding_box();comparison_box=page.locator('.comparison-panel').bounding_box()
         if name=='desktop':assert abs(map_box['y']-comparison_box['y'])<2 and map_box['x']<comparison_box['x']
@@ -113,13 +113,13 @@ with sync_playwright() as p:
         assert page.locator('#map').get_attribute('data-month')=='2024-08'
         assert 'August 2024' in page.locator('#monthTitle').inner_text() and 'August 2024' in page.locator('#mapMonth').inner_text()
         assert page.locator('#calendar [data-month="2024-08"]').get_attribute('aria-pressed')=='true'
-        assert float(page.locator('[data-series="modis"]').get_attribute('data-value'))==5880
+        assert float(page.locator('#comparison [data-series="modis"]').get_attribute('data-value'))==5880
         page.keyboard.press('ArrowRight');assert page.evaluate('document.activeElement.dataset.month')=='2024-09'
         page.keyboard.press('Enter');stable(page)
         # Manual date range creates a genuinely partial month, with no full-month transfer.
         dates(page,'2024-09-10','2024-09-20');stable(page)
         assert 'Partial month' in page.locator('#status').inner_text()
-        assert page.locator('[data-series="adjusted"]').count()==0
+        assert page.locator('#comparison [data-series="adjusted"]').count()==0
         assert page.locator('.month.partial').count()==1
         partial,_,_=read_download(page,'#download');assert len(partial)==len(oracle('2024-09',start='2024-09-10',end='2024-09-20'))
         ag,_,_=read_download(page,'#aggregateDownload');assert len(ag)==2 and all(r['calibration']=='unavailable' and r['selected_days']=='11' for r in ag)
@@ -130,7 +130,7 @@ with sync_playwright() as p:
         assert json.loads(page.locator('#map').get_attribute('data-sample'))['product']=='VIIRS_NOAA20_SP'
         sensor_rows,_,_=read_download(page,'#download');assert len(sensor_rows)==101659 and all(r['product']=='VIIRS_NOAA20_SP' for r in sensor_rows)
         page.select_option('#area','north');stable(page)
-        assert page.locator('[data-series="adjusted"]').count()==0
+        assert page.locator('#comparison [data-series="adjusted"]').count()==0
         assert 'validated only for the full' in page.locator('#scopeNotice').inner_text()
         page.select_option('#sensor','MODIS_SP');stable(page)
         assert page.locator('#map').get_attribute('data-area')=='north'
@@ -141,7 +141,7 @@ with sync_playwright() as p:
         ag,_,_=read_download(page,'#aggregateDownload');assert len(ag)==1 and ag[0]['factor']=='' and ag[0]['adjusted_modis_reference_cell_days']=='' and int(ag[0]['native_detections'])==len(north)
         # Both subregions withhold full-area calibration.
         page.select_option('#area','south');stable(page)
-        assert page.locator('#area').input_value()=='south' and page.locator('[data-series="adjusted"]').count()==0
+        assert page.locator('#area').input_value()=='south' and page.locator('#comparison [data-series="adjusted"]').count()==0
         # A real retrieved zero-detection day is distinct from missing retrieval.
         page.select_option('#area','all')
         zero=next(d for d in summary['daily'] if d['area']=='all' and d['product']=='MODIS_SP' and d['native']==0)
@@ -152,7 +152,7 @@ with sync_playwright() as p:
         dates(page,'2019-12-01','2019-12-31');page.wait_for_function("document.querySelector('#status').textContent.startsWith('Data unavailable')")
         assert page.locator('#download').is_disabled()
         assert page.locator('.month.missing').count()==1
-        assert page.locator('[data-series="modis"]').get_attribute('data-value')==''
+        assert page.locator('#comparison [data-series="modis"]').get_attribute('data-value')==''
         missing,_,_=read_download(page,'#aggregateDownload');assert len(missing)==1 and missing[0]['native_detections']=='' and missing[0]['occupied_cell_days']=='' and missing[0]['retrieval_status']=='Data unavailable'
         assert not errors,errors
         report['checks'].append({'viewport':name,'month_keyboard_selection':True,'manual_partial_dates':True,'sensor_filter':True,'north_modis_rows':len(north),'map_zoom_pan_scale_fit':True,'map_filter_synchronization':True,'subregion_transfer_withheld':True,'zero_day':zero['day'],'missing_counts_blank':True,'javascript_errors':errors})
@@ -171,7 +171,7 @@ with sync_playwright() as p:
         page.locator('.map-panel').screenshot(path=str(ROOT/f'submission/map-fallback-{name}.png'))
         page.select_option('#area','north');page.select_option('#sensor','MODIS_SP');stable(page)
         exported,_,_=read_download(page,'#download');assert len(exported)==18038
-        assert page.locator('[data-series="adjusted"]').count()==0
+        assert page.locator('#comparison [data-series="adjusted"]').count()==0
         assert int(page.locator('#map').get_attribute('data-observations'))==len(exported)
         assert not fallback_errors,fallback_errors
         report['checks'].append({'viewport':name,'basemap_failure_fallback':True,'local_settlements':27,'local_rivers':23,'fallback_north_modis_csv_rows':len(exported)})

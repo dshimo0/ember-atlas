@@ -49,7 +49,7 @@ Sources
 
 ## Release ember-1 frozen evaluation
 
-Before holdout examination: training 2020–2022, holdout 2023–2024, calendar quarters (Jan–Mar etc.). Seasonal ratios require six complete training months and 100 VIIRS cell-days, otherwise pooled training ratio. Overall requires at least three training and two holdout years. Accept only lower holdout monthly MAE and no increase in absolute signed bias on identical complete paired months. No uncertainty interval with only two holdout years. Derived native counts deduplicate identical product/platform/time/coordinates; raw files retain delivered counts. Calibration is limited to the study rectangle. Subarea medians and transfer are withheld. Alternate grid/confidence and platform diagnostics are required before treating transfer as robust outside this release domain.
+Before holdout examination: training 2020–2022, holdout 2023–2024, calendar quarters (Jan–Mar etc.). Seasonal ratios require six complete training months and 100 VIIRS cell-days, otherwise pooled training ratio. Overall requires at least three training and two holdout years. Accept only lower holdout monthly MAE and no increase in absolute signed bias on identical complete paired months. No uncertainty interval with only two holdout years. Derived native counts deduplicate identical product/platform/time/coordinates; raw files retain delivered counts. Calibration is limited to the study rectangle. Subarea transfer is withheld. Descriptive within-sensor medians use each fixed regional mask independently. Alternate grid/confidence and platform diagnostics are required before treating transfer as robust outside this release domain.
 
 ## Complete-overlap release
 
@@ -68,7 +68,7 @@ For September 2024, MODIS is 5,819 cell-days, VIIRS common-grid 8,809, adjusted 
 
 Prior September medians are sensor-specific, using complete 2020–2023 values (n=4), excluding 2024: MODIS 2,532 and VIIRS 4,782 cell-days. The selected month is +129.8% / +84.2% above those medians. This descriptive small-sample comparison does not establish a long-term trend or attribute causes.
 
-The geographic transfer is supported only for complete months in the full Pantanal study rectangle and the released 2020–2024 domain. No factor or historical anomaly is inherited by a subregion. Partial selected months retain actual observed counts but receive no full-month adjustment or anomaly. No earlier legacy/VIIRS handoff is published.
+The geographic transfer is supported only for complete months in the full Pantanal study rectangle and the released 2020–2024 domain. No factor is inherited by a subregion. Regional historical medians are computed independently from the same regional mask in each prior year; they are not transferred full-area anomalies. Partial selected months retain actual observed counts but receive no full-month adjustment or anomaly. No earlier legacy/VIIRS handoff is published.
 
 ### Versioned presentation derivatives
 
@@ -83,3 +83,15 @@ Local map geography uses Natural Earth Admin 0 countries at 1:110m, public domai
 ## Interactive map presentation
 
 The map uses Leaflet 1.9.4 and an attributed OpenStreetMap tile basemap. Local Natural Earth country boundaries (1:110m), rivers and settlements (1:50m) provide a fallback. Geographic sources and checksums are stored under data/reference and web/assets/local-geography.json. Map navigation uses Web Mercator; observation inputs and the scientific grid remain WGS84. Pan and zoom change only the view, not the selected area or exported records. No verified Pantanal biome geometry is included. No scientific inputs, factors, acceptance rules or export calculations changed for this presentation update.
+
+## Explicit reference-scale output and regional history
+
+The reference-scale calendar and time series use the unchanged `adjustment` calculation: raw monthly NOAA-20 VIIRS occupied cell-days multiplied by the frozen quarter factor, only where `accepted`, complete and in the full released rectangle/domain. Separate MODIS and VIIRS sources remain inspectable. There is no composite sensor sum, average, source transition or spatial relocation. Partial/missing reference-scale months remain null and appear as gaps. Raw partial-period CSV values remain available with their clipped scope.
+
+Regional historical baselines now use precomputed full-data daily summaries for the same north/south mask as map and exports. Each product independently uses complete prior same-calendar-month values, excluding target/future years and requiring at least three. Full/north/south mask consistency and independently summed regional medians are tested. These descriptive baselines do not constitute regional calibration; both regional adjusted series remain unavailable.
+
+`web/analysis.mjs` recomputes holdout values from training-only factors and verifies artifact MAE/bias/n before displaying results. Complementary RMSE: 1,334.5145965231452 → 317.66603826320306 cell-days/month. Adjustment worsens absolute error in February 2023 (+32 → −49.94 cell-days) and March 2023 (+50 → −73.15); all 24 residuals are exposed. No method was selected or fitted using these residuals.
+
+Existing full-period descriptive sensitivity totals: compared with 0.05°, 0.025° raises MODIS/VIIRS cell-days by 43.4%/41.3%; 0.1° lowers them by 25.2%/25.0%. High-confidence shares at 0.05° are 45.6%/16.4% using MODIS ≥80 and VIIRS h, respectively. These sensor-specific thresholds are not equivalent probabilities. No alternate calibration or uncertainty interval follows from these diagnostics.
+
+The evidence JSON manifest hashes the exact CSV byte strings produced by the preserved exporters, records observation coverage as unknown and identifies source products, grid, selection, snapshot, validation, split and applicable geography. A display-layer checkbox never changes the analytical selection or exported data.
