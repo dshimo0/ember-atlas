@@ -15,3 +15,7 @@ Supersedes calendar-first placement in spec 007 following owner approval. Preser
 ## Acceptance evidence
 
 Capture six routes at 1440×900 and 390×844 before/after. Verify migrated URLs, history, month/area/sensor/export synchronization, missing/partial/zero, subregion adjustment withholding, four guide scenes, seven pitch scenes and print. Inject tile failure. Run Python/Node tests and credentials/integrity checks. Record tested source/deployment and unresolved official submission, human accessibility and translation checks.
+
+## Hosting invariant
+
+Vercel static filesystem routing takes precedence over the attempted root rewrite. `web/index.html` is therefore the actual Discover entry. `web/workspace.html` contains the one shared analytical shell for `/explore`, `/demo`, `/methods` and `/pitch`. The established Python server uses the same mapping. This was observed on the first deployment and corrected before acceptance.

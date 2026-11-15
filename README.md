@@ -144,12 +144,12 @@ python scripts/check_release_integrity.py
 
 The first two commands run the Python tests and JavaScript tests; Node is only needed for JavaScript checks. The artifact check recomputes regional evaluations and reconciles every shard with its native/grid totals. The integrity check verifies original frozen files and scans for credential patterns; when an ingestion key is present in the environment, it also checks that value without printing it.
 
-Optional Linux browser acceptance checks use the pinned packages in `requirements-dev.txt` and Chromium at `/usr/bin/chromium`. Install the packages with `python -m pip install -r requirements-dev.txt`. Chromium also generates the presentation PDF during the workflow check. Start the server in another terminal, then run:
+Optional Linux browser acceptance checks use the pinned packages in `requirements-dev.txt` and Chromium at `/usr/bin/chromium`. Install the packages with `python -m pip install -r requirements-dev.txt`. The current seven-page presentation can be regenerated with `scripts/build_pitch_media.py`. The browser route check requires a local axe-core 4.10.3 script via `AXE_SCRIPT`. Start the server in another terminal, then run:
 
 ```sh
-BASE_URL=http://127.0.0.1:8000 python scripts/check_eight_regions.py
-BASE_URL=http://127.0.0.1:8000 python scripts/check_about.py
-BASE_URL=http://127.0.0.1:8000 python scripts/check_experience.py
+BASE_URL=http://127.0.0.1:8000 AXE_SCRIPT=/path/to/axe.min.js python scripts/check_discover.py
+BASE_URL=http://127.0.0.1:8000 python scripts/check_discover_regions.py
+BASE_URL=http://127.0.0.1:8000 python scripts/build_pitch_media.py
 ```
 
 The recorded scientific release passed **25 Python tests, five JavaScript test modules and 50 signed-out desktop/mobile browser groups**; 16 processing/region datasets and eight evaluations were reconciled. Later About-page and personal-site updates have their own checks. The linked reports identify the tested source commits. Mobile testing used emulation.
