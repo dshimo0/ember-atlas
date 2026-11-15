@@ -4,7 +4,7 @@ Continuation input: branch `work`, release `3e28f40`; the existing eight-region 
 
 | Requirement | Status and working evidence | Limits / remaining work |
 | --- | --- | --- |
-| Eight geographic presets | Implemented; local browser verification of all SP/NRT maps, actual bounds and matching CSVs | Study rectangles, not official biome/state masks |
+| Eight geographic presets | Implemented and publicly verified; all SP/NRT maps, actual bounds and matching CSVs | Study rectangles, not official biome/state masks |
 | Matched history and local calibration | Implemented; 79 paired SP months per area; seven local inner choices and all independent gates reproduced from daily evidence | Fixed full-area factors; no transfer to subregions or NRT |
 | Transparent three-method comparison | Verified from artifacts and browser recomputation; raw common grid, training-only scalar, quarterly factors; MAE/bias/residuals/peak-six | Existing holdout is evaluation evidence; no post-holdout method switch |
 | Sensor transition replay | Implemented and verified; January 2023 scenario, source/factor per month, separate observed MODIS benchmark | MODIS actually continues; reference-version labels also differ across split |
@@ -15,7 +15,7 @@ Continuation input: branch `work`, release `3e28f40`; the existing eight-region 
 | Missingness and recovery | Implemented; retrieved zero differs from missing/partial data and unavailable observation file | Usable swath/cloud coverage remains unknown |
 | SP/NRT separation | Verified; captured availability shows zero same-sensor overlap; no join | Preserve NRT vintages; evaluate coincident SP re-extraction when available |
 | Earliest MODIS | Verified Pantanal November 2000 start, through July 2026 | Pre-2020 archives outside Pantanal remain an open expansion item |
-| Routes and presentation | /, /demo, /pitch; shared state; nine sections, keyboard navigation, eight world-map links and print/PDF | Public retest identity is in the executed release report; mobile is emulation |
+| Routes and presentation | /, /demo, /pitch; shared state; nine sections, keyboard navigation, eight world-map links and print/PDF | 50 public browser groups passed on source 1018c678; mobile is emulation |
 | Demonstration asset | Actual English silent screen capture; anonymous playback and checksum checks | Official Project Demonstration format is separate from the local three-minute pitch |
 | Source-version homogeneity | Unverified; exact 6.03 → 61.03 reported-label change is visible and exported | Confirm producer mapping or acquire a demonstrably homogeneous reference before causal attribution |
 | Observation opportunity / ground truth | Missing; explicitly excluded from claims | Requires swath/cloud quality data and independent physical validation |

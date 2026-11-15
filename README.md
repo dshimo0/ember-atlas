@@ -94,3 +94,5 @@ The captured availability table has no same-sensor SP/NRT overlap. [Availability
 
 Units: occupied cell-days/month; full named study rectangle, SP only. Inner choice uses 2022 after fitting 2020–2021; refit uses 2020–2022. Outer: 2023–2024, including the previously published September 2024; the artifact also reports the sensitivity excluding that month. Fresh: January 2025–July 2026, excluded from fitting and selection. Pantanal retains the original publication regardless of the new audit. A failed regional gate withholds adjustment. MODIS is the comparison reference, not ground truth.
 <!-- REGIONAL-EVALUATION:END -->
+
+Release verification: deployed source [`1018c678`](https://github.com/dshimo0/ember-atlas/commit/1018c678d7be5efb97efce5aaf221e155c6a8e24), immutable observation data [`a9bc9c9b`](https://github.com/dshimo0/ember-atlas/commit/a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391). All 50 signed-out desktop/mobile workflow groups passed; 16 datasets and eight regional evaluations were reconciled. See the [executed release evidence](submission/transition-release.json) and [remaining release items](docs/release-checklist.md).

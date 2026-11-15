@@ -11,7 +11,7 @@ Authoritative executed identity: [transition-release.json](../submission/transit
 - [x] Local desktop/mobile workflow, exports, source fields, SVG keyboard links, missing/zero/partial states and tile/shard-failure recovery exercised.
 - [x] Original local data URLs protected; initial SP/NRT views local; other observations pinned to immutable public Git bytes with SHA verification.
 - [x] Unit tests, frozen-file/credential checks, real recording and nine-page print executed locally.
-- [ ] Current pinned production source deployed and signed-out public workflow retested; see executed identity report.
+- [x] Source `1018c678` deployed to the public production alias; all 50 signed-out desktop/mobile browser groups passed against registry `c06212509a51`. See executed identity report.
 - [ ] Official Project Demonstration format, eligibility/deadline and media restrictions confirmed by Team Owner (official pages returned 503).
 - [ ] Human roster/contributions, physical-device check and human pitch rehearsal completed by Team Owner.
 - [ ] Terms accepted and final Submit for Judging performed by Team Owner.

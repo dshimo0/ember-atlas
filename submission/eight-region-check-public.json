@@ -1,9 +1,9 @@
 {
   "url": "https://ember-atlas-opal.vercel.app",
-  "checked_utc": "2026-11-15T05:42:08.244460+00:00",
+  "checked_utc": "2026-11-15T07:50:24.143244+00:00",
   "registry": {
-    "file": "regions-9e4c20518f99.json",
-    "sha256": "9e4c20518f99fab08943a4ba365dbdd0e4b869595820ece07222fc7957ccdf30"
+    "file": "regions-c06212509a51.json",
+    "sha256": "c06212509a517c5c91377bd2cdc40442559896168ad887a5218214e4e36a5942"
   },
   "checks": [
     {
@@ -39,11 +39,11 @@
       "rows": 393318,
       "csv_matches_full_snapshot": true,
       "bounds_fit": true,
-      "map_product": "MODIS_SP",
-      "map_cell_days": 27563,
+      "map_product": "VIIRS_NOAA20_SP",
+      "map_cell_days": 52031,
       "cell_csv_reconciles": true,
       "refresh": true,
-      "adjustment_supported": false
+      "adjustment_supported": true
     },
     {
       "viewport": "desktop",
@@ -65,11 +65,11 @@
       "rows": 287585,
       "csv_matches_full_snapshot": true,
       "bounds_fit": true,
-      "map_product": "MODIS_SP",
-      "map_cell_days": 19591,
+      "map_product": "VIIRS_NOAA20_SP",
+      "map_cell_days": 34242,
       "cell_csv_reconciles": true,
       "refresh": true,
-      "adjustment_supported": false
+      "adjustment_supported": true
     },
     {
       "viewport": "desktop",
@@ -91,11 +91,11 @@
       "rows": 185771,
       "csv_matches_full_snapshot": true,
       "bounds_fit": true,
-      "map_product": "MODIS_SP",
-      "map_cell_days": 12407,
+      "map_product": "VIIRS_NOAA20_SP",
+      "map_cell_days": 21981,
       "cell_csv_reconciles": true,
       "refresh": true,
-      "adjustment_supported": false
+      "adjustment_supported": true
     },
     {
       "viewport": "desktop",
@@ -117,11 +117,11 @@
       "rows": 9643,
       "csv_matches_full_snapshot": true,
       "bounds_fit": true,
-      "map_product": "MODIS_SP",
-      "map_cell_days": 452,
+      "map_product": "VIIRS_NOAA20_SP",
+      "map_cell_days": 1579,
       "cell_csv_reconciles": true,
       "refresh": true,
-      "adjustment_supported": false
+      "adjustment_supported": true
     },
     {
       "viewport": "desktop",
@@ -143,11 +143,11 @@
       "rows": 9252,
       "csv_matches_full_snapshot": true,
       "bounds_fit": true,
-      "map_product": "MODIS_SP",
-      "map_cell_days": 913,
+      "map_product": "VIIRS_NOAA20_SP",
+      "map_cell_days": 3063,
       "cell_csv_reconciles": true,
       "refresh": true,
-      "adjustment_supported": false
+      "adjustment_supported": true
     },
     {
       "viewport": "desktop",
@@ -169,11 +169,11 @@
       "rows": 15373,
       "csv_matches_full_snapshot": true,
       "bounds_fit": true,
-      "map_product": "MODIS_SP",
-      "map_cell_days": 790,
+      "map_product": "VIIRS_NOAA20_SP",
+      "map_cell_days": 1620,
       "cell_csv_reconciles": true,
       "refresh": true,
-      "adjustment_supported": false
+      "adjustment_supported": true
     },
     {
       "viewport": "desktop",
@@ -195,11 +195,11 @@
       "rows": 42711,
       "csv_matches_full_snapshot": true,
       "bounds_fit": true,
-      "map_product": "MODIS_SP",
-      "map_cell_days": 3307,
+      "map_product": "VIIRS_NOAA20_SP",
+      "map_cell_days": 8381,
       "cell_csv_reconciles": true,
       "refresh": true,
-      "adjustment_supported": false
+      "adjustment_supported": true
     },
     {
       "viewport": "desktop",
@@ -219,9 +219,93 @@
       "region": "pantanal",
       "new_sp_month": "2025-01",
       "rows": 2047,
-      "source_url": null,
+      "source_url": "https://raw.githubusercontent.com/dshimo0/ember-atlas/a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391/web/data/pantanal-sp-observations-2025-01-fba03c0358dd.json.gz",
       "csv_matches_new_shard": true,
       "adjustment_supported_in_new_month": false,
+      "single_sensor_no_replay": true,
+      "manual_date_clipped_and_adjustment_disabled": true,
+      "refresh": true
+    },
+    {
+      "viewport": "desktop",
+      "region": "southern-amazon",
+      "new_sp_month": "2025-01",
+      "rows": 948,
+      "source_url": "https://raw.githubusercontent.com/dshimo0/ember-atlas/a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391/web/data/southern-amazon-sp-observations-2025-01-a5936aec2f52.json.gz",
+      "csv_matches_new_shard": true,
+      "adjustment_supported_in_new_month": true,
+      "single_sensor_no_replay": true,
+      "manual_date_clipped_and_adjustment_disabled": true,
+      "refresh": true
+    },
+    {
+      "viewport": "desktop",
+      "region": "cerrado",
+      "new_sp_month": "2025-01",
+      "rows": 2287,
+      "source_url": "https://raw.githubusercontent.com/dshimo0/ember-atlas/a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391/web/data/cerrado-sp-observations-2025-01-091e18ffc9f5.json.gz",
+      "csv_matches_new_shard": true,
+      "adjustment_supported_in_new_month": true,
+      "single_sensor_no_replay": true,
+      "manual_date_clipped_and_adjustment_disabled": true,
+      "refresh": true
+    },
+    {
+      "viewport": "desktop",
+      "region": "gran-chaco",
+      "new_sp_month": "2025-01",
+      "rows": 25832,
+      "source_url": "https://raw.githubusercontent.com/dshimo0/ember-atlas/a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391/web/data/gran-chaco-sp-observations-2025-01-c1f71e492ab7.json.gz",
+      "csv_matches_new_shard": true,
+      "adjustment_supported_in_new_month": true,
+      "single_sensor_no_replay": true,
+      "manual_date_clipped_and_adjustment_disabled": true,
+      "refresh": true
+    },
+    {
+      "viewport": "desktop",
+      "region": "california",
+      "new_sp_month": "2025-01",
+      "rows": 5809,
+      "source_url": "https://raw.githubusercontent.com/dshimo0/ember-atlas/a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391/web/data/california-sp-observations-2025-01-a709295d3160.json.gz",
+      "csv_matches_new_shard": true,
+      "adjustment_supported_in_new_month": true,
+      "single_sensor_no_replay": true,
+      "manual_date_clipped_and_adjustment_disabled": true,
+      "refresh": true
+    },
+    {
+      "viewport": "desktop",
+      "region": "southeastern-australia",
+      "new_sp_month": "2025-01",
+      "rows": 8308,
+      "source_url": "https://raw.githubusercontent.com/dshimo0/ember-atlas/a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391/web/data/southeastern-australia-sp-observations-2025-01-154d6b8ba293.json.gz",
+      "csv_matches_new_shard": true,
+      "adjustment_supported_in_new_month": true,
+      "single_sensor_no_replay": true,
+      "manual_date_clipped_and_adjustment_disabled": true,
+      "refresh": true
+    },
+    {
+      "viewport": "desktop",
+      "region": "iberian-peninsula",
+      "new_sp_month": "2025-01",
+      "rows": 1168,
+      "source_url": "https://raw.githubusercontent.com/dshimo0/ember-atlas/a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391/web/data/iberian-peninsula-sp-observations-2025-01-4f18b1fd240f.json.gz",
+      "csv_matches_new_shard": true,
+      "adjustment_supported_in_new_month": true,
+      "single_sensor_no_replay": true,
+      "manual_date_clipped_and_adjustment_disabled": true,
+      "refresh": true
+    },
+    {
+      "viewport": "desktop",
+      "region": "siberia",
+      "new_sp_month": "2025-01",
+      "rows": 5878,
+      "source_url": "https://raw.githubusercontent.com/dshimo0/ember-atlas/a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391/web/data/siberia-sp-observations-2025-01-531e182845c1.json.gz",
+      "csv_matches_new_shard": true,
+      "adjustment_supported_in_new_month": true,
       "single_sensor_no_replay": true,
       "manual_date_clipped_and_adjustment_disabled": true,
       "refresh": true
@@ -240,6 +324,7 @@
       "world_map_links": 8,
       "world_map_keyboard_links_navigate": 8,
       "all_regions_tile_fallback": true,
+      "unavailable_shard_is_not_zero": true,
       "javascript_errors": [],
       "application_http_errors": [],
       "unexpected_console_errors": []
@@ -277,11 +362,11 @@
       "rows": 393318,
       "csv_matches_full_snapshot": true,
       "bounds_fit": true,
-      "map_product": "MODIS_SP",
-      "map_cell_days": 27563,
+      "map_product": "VIIRS_NOAA20_SP",
+      "map_cell_days": 52031,
       "cell_csv_reconciles": true,
       "refresh": true,
-      "adjustment_supported": false
+      "adjustment_supported": true
     },
     {
       "viewport": "mobile",
@@ -303,11 +388,11 @@
       "rows": 287585,
       "csv_matches_full_snapshot": true,
       "bounds_fit": true,
-      "map_product": "MODIS_SP",
-      "map_cell_days": 19591,
+      "map_product": "VIIRS_NOAA20_SP",
+      "map_cell_days": 34242,
       "cell_csv_reconciles": true,
       "refresh": true,
-      "adjustment_supported": false
+      "adjustment_supported": true
     },
     {
       "viewport": "mobile",
@@ -329,11 +414,11 @@
       "rows": 185771,
       "csv_matches_full_snapshot": true,
       "bounds_fit": true,
-      "map_product": "MODIS_SP",
-      "map_cell_days": 12407,
+      "map_product": "VIIRS_NOAA20_SP",
+      "map_cell_days": 21981,
       "cell_csv_reconciles": true,
       "refresh": true,
-      "adjustment_supported": false
+      "adjustment_supported": true
     },
     {
       "viewport": "mobile",
@@ -355,11 +440,11 @@
       "rows": 9643,
       "csv_matches_full_snapshot": true,
       "bounds_fit": true,
-      "map_product": "MODIS_SP",
-      "map_cell_days": 452,
+      "map_product": "VIIRS_NOAA20_SP",
+      "map_cell_days": 1579,
       "cell_csv_reconciles": true,
       "refresh": true,
-      "adjustment_supported": false
+      "adjustment_supported": true
     },
     {
       "viewport": "mobile",
@@ -381,11 +466,11 @@
       "rows": 9252,
       "csv_matches_full_snapshot": true,
       "bounds_fit": true,
-      "map_product": "MODIS_SP",
-      "map_cell_days": 913,
+      "map_product": "VIIRS_NOAA20_SP",
+      "map_cell_days": 3063,
       "cell_csv_reconciles": true,
       "refresh": true,
-      "adjustment_supported": false
+      "adjustment_supported": true
     },
     {
       "viewport": "mobile",
@@ -407,11 +492,11 @@
       "rows": 15373,
       "csv_matches_full_snapshot": true,
       "bounds_fit": true,
-      "map_product": "MODIS_SP",
-      "map_cell_days": 790,
+      "map_product": "VIIRS_NOAA20_SP",
+      "map_cell_days": 1620,
       "cell_csv_reconciles": true,
       "refresh": true,
-      "adjustment_supported": false
+      "adjustment_supported": true
     },
     {
       "viewport": "mobile",
@@ -433,11 +518,11 @@
       "rows": 42711,
       "csv_matches_full_snapshot": true,
       "bounds_fit": true,
-      "map_product": "MODIS_SP",
-      "map_cell_days": 3307,
+      "map_product": "VIIRS_NOAA20_SP",
+      "map_cell_days": 8381,
       "cell_csv_reconciles": true,
       "refresh": true,
-      "adjustment_supported": false
+      "adjustment_supported": true
     },
     {
       "viewport": "mobile",
@@ -457,9 +542,93 @@
       "region": "pantanal",
       "new_sp_month": "2025-01",
       "rows": 2047,
-      "source_url": null,
+      "source_url": "https://raw.githubusercontent.com/dshimo0/ember-atlas/a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391/web/data/pantanal-sp-observations-2025-01-fba03c0358dd.json.gz",
       "csv_matches_new_shard": true,
       "adjustment_supported_in_new_month": false,
+      "single_sensor_no_replay": true,
+      "manual_date_clipped_and_adjustment_disabled": true,
+      "refresh": true
+    },
+    {
+      "viewport": "mobile",
+      "region": "southern-amazon",
+      "new_sp_month": "2025-01",
+      "rows": 948,
+      "source_url": "https://raw.githubusercontent.com/dshimo0/ember-atlas/a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391/web/data/southern-amazon-sp-observations-2025-01-a5936aec2f52.json.gz",
+      "csv_matches_new_shard": true,
+      "adjustment_supported_in_new_month": true,
+      "single_sensor_no_replay": true,
+      "manual_date_clipped_and_adjustment_disabled": true,
+      "refresh": true
+    },
+    {
+      "viewport": "mobile",
+      "region": "cerrado",
+      "new_sp_month": "2025-01",
+      "rows": 2287,
+      "source_url": "https://raw.githubusercontent.com/dshimo0/ember-atlas/a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391/web/data/cerrado-sp-observations-2025-01-091e18ffc9f5.json.gz",
+      "csv_matches_new_shard": true,
+      "adjustment_supported_in_new_month": true,
+      "single_sensor_no_replay": true,
+      "manual_date_clipped_and_adjustment_disabled": true,
+      "refresh": true
+    },
+    {
+      "viewport": "mobile",
+      "region": "gran-chaco",
+      "new_sp_month": "2025-01",
+      "rows": 25832,
+      "source_url": "https://raw.githubusercontent.com/dshimo0/ember-atlas/a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391/web/data/gran-chaco-sp-observations-2025-01-c1f71e492ab7.json.gz",
+      "csv_matches_new_shard": true,
+      "adjustment_supported_in_new_month": true,
+      "single_sensor_no_replay": true,
+      "manual_date_clipped_and_adjustment_disabled": true,
+      "refresh": true
+    },
+    {
+      "viewport": "mobile",
+      "region": "california",
+      "new_sp_month": "2025-01",
+      "rows": 5809,
+      "source_url": "https://raw.githubusercontent.com/dshimo0/ember-atlas/a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391/web/data/california-sp-observations-2025-01-a709295d3160.json.gz",
+      "csv_matches_new_shard": true,
+      "adjustment_supported_in_new_month": true,
+      "single_sensor_no_replay": true,
+      "manual_date_clipped_and_adjustment_disabled": true,
+      "refresh": true
+    },
+    {
+      "viewport": "mobile",
+      "region": "southeastern-australia",
+      "new_sp_month": "2025-01",
+      "rows": 8308,
+      "source_url": "https://raw.githubusercontent.com/dshimo0/ember-atlas/a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391/web/data/southeastern-australia-sp-observations-2025-01-154d6b8ba293.json.gz",
+      "csv_matches_new_shard": true,
+      "adjustment_supported_in_new_month": true,
+      "single_sensor_no_replay": true,
+      "manual_date_clipped_and_adjustment_disabled": true,
+      "refresh": true
+    },
+    {
+      "viewport": "mobile",
+      "region": "iberian-peninsula",
+      "new_sp_month": "2025-01",
+      "rows": 1168,
+      "source_url": "https://raw.githubusercontent.com/dshimo0/ember-atlas/a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391/web/data/iberian-peninsula-sp-observations-2025-01-4f18b1fd240f.json.gz",
+      "csv_matches_new_shard": true,
+      "adjustment_supported_in_new_month": true,
+      "single_sensor_no_replay": true,
+      "manual_date_clipped_and_adjustment_disabled": true,
+      "refresh": true
+    },
+    {
+      "viewport": "mobile",
+      "region": "siberia",
+      "new_sp_month": "2025-01",
+      "rows": 5878,
+      "source_url": "https://raw.githubusercontent.com/dshimo0/ember-atlas/a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391/web/data/siberia-sp-observations-2025-01-531e182845c1.json.gz",
+      "csv_matches_new_shard": true,
+      "adjustment_supported_in_new_month": true,
       "single_sensor_no_replay": true,
       "manual_date_clipped_and_adjustment_disabled": true,
       "refresh": true
@@ -478,6 +647,7 @@
       "world_map_links": 8,
       "world_map_keyboard_links_navigate": 8,
       "all_regions_tile_fallback": true,
+      "unavailable_shard_is_not_zero": true,
       "javascript_errors": [],
       "application_http_errors": [],
       "unexpected_console_errors": []
