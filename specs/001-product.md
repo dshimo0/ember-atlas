@@ -48,3 +48,10 @@ Source flags are one click from the selected comparison and present in observati
 - P24 Regional visual context: About contains eight dated NASA true-color study-area cards in registry order. Images have source links, SHA-256, explicit bounds and date; imagery is contextual and never a fire-activity metric or biome geometry. Each card links to the corresponding real Explore state.
 - P25 Presentation navigation: a labeled nine-section rail reflects the same pitch state and supports direct section selection, keyboard focus, mobile overflow within the rail and print exclusion. The pitch scroll callback cannot restore a pitch URL after Explore navigation begins.
 - P26 Verification: review actual desktop/mobile captures, reduced-motion and font-failure states, eight gallery links and image hashes, section navigation, nine-page print and unchanged scientific output. Local Windows-only backfill material requires an accessible copy before review; no inferred inventory or data integration.
+
+## Evidence-first redesign and bilingual presentation
+
+- Map-dominant analytical composition, with selected-month evidence and time-series selection using the existing shared state.
+- Quantitative time series with axes, missing-data gaps, selectable months and replay cutoff; holdout scatter with identity line and three-method residual diagnostic from existing validation rows.
+- Explicit dark/light appearance and English/Português (Brasil) controls, persistent locally; English remains initial/default submission language. Scientific source identifiers, raw artifacts and CSV schema remain canonical English. Translation must not change numbers, factors or data scope.
+- Responsive analytical and editorial layouts; both themes need readable controls, chart labels, map attribution and print. User visual preferences are independent of analytical filter state.

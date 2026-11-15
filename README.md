@@ -211,3 +211,7 @@ The [P0/P1 experience release](docs/experience-redesign.md) introduces dedicated
 [About → Study area atlas](https://ember-atlas-opal.vercel.app/about#study-areas) provides dated NASA MODIS Terra true-color context for all eight study rectangles, with image sources, bounds and links to the matching observations. The September 1, 2024 images are editorial context; clouds and swath gaps are retained and the images do not measure fire activity. [Image inventory](web/assets/regional-imagery.json).
 
 The pitch includes direct navigation across its nine sections. Typography uses a locally hosted, SIL OFL-licensed Manrope subset with a system fallback. Motion is brief, optional through the device's reduced-motion preference, and disabled for print. Scientific calculations and exported precision are unchanged. [Font provenance](web/assets/fonts/provenance.json).
+
+### Evidence workspace · EN / PT-BR · dark / light
+
+The header provides language and appearance controls across Explore, Guided demo, Methods, About and Pitch. [Light interface](https://ember-atlas-opal.vercel.app/?theme=light&lang=en) · [Português](https://ember-atlas-opal.vercel.app/?lang=pt-BR&theme=light). Select a month directly on the time-series plot to update the map, comparison and exports. Methods includes observed-versus-adjusted scatter and three-method holdout residuals. [Presentation and language contract](docs/evidence-workspace.md).

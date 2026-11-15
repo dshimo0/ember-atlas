@@ -4,7 +4,7 @@ import {loadRelease,loadDataset,verifiedJSON,sha256} from './data-loader.mjs';
 import {number,signed,yearsLabel,escapeHTML,compact} from './format.mjs';
 import {readURL,stateURL,defaultState,datasetDefaults} from './url-state.mjs';
 import {evaluateValidation,referenceRows,sensitivitySummary} from './analysis.mjs';
-import {barChart,timeSeries} from './charts.mjs';
+import {activityPlot,diagnosticPlots,comparisonPlot} from './evidence-charts.mjs';
 import {createPitch} from './pitch.mjs';
 import {createGeographicMap} from './geographic-map.mjs';
 import {PRODUCTS, SENSOR_NAMES, AREAS, monthEnd, monthName, monthsBetween, selectedProducts, scope, makeIndex, aggregateMonth, adjustment, historicalBaseline, filterObservations, observationCSV, aggregateCSV,cellCSV,evaluationPhase} from './model.mjs';
@@ -103,7 +103,7 @@ function comparison(s, values) {
   const v = row(selected, s.mode==='nrt'?'VIIRS_NOAA20_NRT':'VIIRS_NOAA20_SP', s), m = row(selected, s.mode==='nrt'?'MODIS_NRT':'MODIS_SP', s), a = adjustment(v, s, validation);
   const series = values.map(r => ({name: SENSOR_NAMES[r.product] + (r.product.startsWith('MODIS') ? ' · reference' : ' · common grid'), value: r.cells, kind: r.product.startsWith('MODIS') ? 'modis' : 'viirs'}));
   if (s.sensor !== 'MODIS_SP' && a) series.push({name: 'Adjusted VIIRS · MODIS reference', value: a.value, kind: 'adjusted'});
-  $('comparison').innerHTML=barChart(series);
+  $('comparison').innerHTML=comparisonPlot(series);
   if (a && m.complete && s.sensor !== 'MODIS_SP') {
     const delta = a.value - m.cells, pct = m.cells ? 100 * delta / m.cells : null;
     $('adjusted').textContent = `Adjusted VIIRS is ${number(Math.abs(delta), 1)} cell-days ${delta < 0 ? 'below' : 'above'} MODIS${pct !== null ? ` (${signed(pct)}%)` : ''} this month.`;
@@ -217,17 +217,19 @@ function historyView(s) {
  if(view==='replay'&&supportsReplay(s)){
  const rows=replayRows(index,s,validation);
  $('referenceScope').textContent=`Replay scenario · cutoff ${replayCutoff(validation)} · MODIS before; adjusted VIIRS after. Simulated transition, not actual source availability. Older MODIS is observed archive context; calibration publication ends ${validation.publication_domain?.end||'2024-12-31'}.`;
- $('timeSeries').innerHTML=timeSeries(rows.map(r=>({...r,replay_modis:r.source==='MODIS_SP'?r.value:null,replay_adjusted:r.source==='VIIRS_NOAA20_SP'?r.value:null,benchmark:$('showBenchmark').checked?r.benchmark:null})), 'replay',{cutoff:replayCutoff(validation)});
+ $('timeSeries').innerHTML=activityPlot(rows.map(r=>({...r,replay_modis:r.source==='MODIS_SP'?r.value:null,replay_adjusted:r.source==='VIIRS_NOAA20_SP'?r.value:null,benchmark:$('showBenchmark').checked?r.benchmark:null})), 'replay',{cutoff:replayCutoff(validation),selected});
  $('seriesLegend').innerHTML='<span>○ Observed MODIS before cutoff</span><span>▲ Adjusted VIIRS after cutoff</span><span>Dashed: observed holdout MODIS benchmark (optional)</span>';
  $('seriesTable').innerHTML=`<table><thead><tr><th>Month / split</th><th>Source</th><th>Adjustment / factor</th><th>Reported source versions</th><th>Cell-days</th><th>Retrieval</th></tr></thead><tbody>${rows.map(r=>`<tr><th>${r.month} · ${r.phase}</th><td>${r.source}</td><td>${r.adjustment} / ${number(r.factor,4)}</td><td>${Object.keys(r.source_versions||{}).map(escapeHTML).join(", ")||"Not provided"}</td><td>${number(r.value,1)}</td><td>${r.retrieved}/${r.expected} days · ${r.status}</td></tr>`).join('')}</tbody></table>`;return;}
  const rows=referenceRows(index,s,validation);
  $('referenceScope').textContent=s.mode==='nrt'?'Recent detections in the selected partial UTC window. NRT and Standard Processing are not joined; historical comparison requires independent evaluation.':s.area==='all'?(view==='reference'?'Adjusted VIIRS on the MODIS-reference scale · complete months · full study rectangle. Separate MODIS reference; no fused record or source transition.':'Unadjusted sensor-specific activity on the common grid.'):'Regional sensor history. Full-area calibration is unavailable here; historical medians use each product’s own regional mask.';
- $('timeSeries').innerHTML=timeSeries(rows,view);
+ $('timeSeries').innerHTML=activityPlot(rows,view,{selected});
  $('seriesLegend').innerHTML=(s.sensor!=='VIIRS_NOAA20_SP'?'<span>○ MODIS reference (dashed)</span>':'')+(s.sensor!=='MODIS_SP'?`<span>${view==='reference'?'▲ Adjusted VIIRS':'◇ VIIRS common grid'} (solid)</span>`:'');
  $('seriesTable').innerHTML=`<table><thead><tr><th>Month / split</th><th>MODIS cell-days</th><th>VIIRS cell-days</th><th>Adjusted VIIRS</th><th>Adjustment status</th><th>MODIS / VIIRS reported versions</th></tr></thead><tbody>${rows.map(r=>`<tr><th>${r.month} · ${r.phase}</th><td>${number(r.reference)}</td><td>${number(r.viirs)}</td><td>${number(r.adjusted,1)}</td><td>${r.status}</td><td>${Object.keys(r.reference_versions||{}).map(escapeHTML).join(", ")||"—"} / ${Object.keys(r.viirs_versions||{}).map(escapeHTML).join(", ")||"—"}</td></tr>`).join('')}</tbody></table><p class="unit">Source products: ${summary.products.join(' / ')}. Raw values cover the selected UTC dates; partial windows are labeled. No SP/NRT join. Adjustment is unavailable for partial or unsupported periods.</p>`;
 }
 function residualView() {
  const e=evaluation,methods=compareMethods(validation),artifact=currentComparison||release.replayEvaluation,calibrationName=release.registry.regions.find(r=>r.id===(validation.region||'pantanal'))?.name||'Pantanal';
+ $('diagnosticPlots').innerHTML=diagnosticPlots(methods);
+ $('methodsPage').querySelector('.methods-intro').after($('diagnosticPlots'));
  for(const k of ['unadjusted','scalar','seasonal'])for(const field of ['mae','bias','n'])if(Math.abs(methods.metrics[k][field]-artifact.metrics[k][field])>1e-7)throw new Error('Three-method evidence mismatch');
  $('scalarSummary').textContent=`Scalar MAE ${number(methods.metrics.scalar.mae,1)} vs seasonal ${number(methods.metrics.seasonal.mae,1)}; ${validation.selected_method?'inner-selected '+validation.selected_method:validation.region?'regional selection unavailable':'frozen method retained'}.`;
  $('methodComparison').innerHTML=`<table class="method-table"><caption>Identical ${methods.metrics.unadjusted.n} complete paired holdout months · ${calibrationName} study area · occupied cell-days/month</caption><thead><tr><th>Method</th><th>MAE</th><th>Signed bias</th></tr></thead><tbody>${Object.entries(methods.metrics).map(([k,m])=>`<tr data-method="${k}"><th>${k==='unadjusted'?'Unadjusted common-grid VIIRS':k==='scalar'?'Training-only single scalar':'Quarterly training factors'}</th><td>${number(m.mae,1)}</td><td>${signed(m.bias)}</td></tr>`).join('')}</tbody></table><p>Scalar ${number(methods.scalar,6)} minimizes training sum of squared monthly residuals through the origin. Fit only on 2020–2022. ${validation.region&&!validation.selected_method?"Inner selection is unavailable until 24 inner-fit and 12 selection months are complete. No adjustment is published.":validation.selected_method?"The method was chosen using 2022 only, after fitting 2020–2021, and refitted on 2020–2022. Outer and external results cannot switch this choice.":"It is an evaluation baseline; the Pantanal seasonal publication rule is unchanged. Future method selection requires separate evaluation."}</p>`;
@@ -376,3 +378,6 @@ document.addEventListener('click',event=>{
   publishedMetrics();residualView();applyLocation();
  }catch(error){console.error('Release load failed',error);$('error').hidden=false;$('error').textContent='Release data could not be loaded. Reload to retry.';$('status').textContent='Data unavailable';$('pitchPage').textContent='Presentation evidence unavailable. Reload to retry.';}
 })();
+
+function selectPlotMonth(e){const hit=e.target.closest('[data-plot-month]');if(!hit||e.type==='keydown'&&!['Enter',' '].includes(e.key))return;e.preventDefault();$('monthSelect').value=hit.dataset.plotMonth;$('monthSelect').dispatchEvent(new Event('change'));}
+$('timeSeries').addEventListener('click',selectPlotMonth);$('timeSeries').addEventListener('keydown',selectPlotMonth);

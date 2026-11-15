@@ -1,0 +1,336 @@
+{
+  "url": "http://127.0.0.1:8932",
+  "checks": [
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "lang": "en",
+      "route": "/",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "lang": "en",
+      "route": "demo",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "lang": "en",
+      "route": "methods",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "lang": "en",
+      "route": "about",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "lang": "en",
+      "route": "pitch?slide=5",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "lang": "pt-BR",
+      "route": "/",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "lang": "pt-BR",
+      "route": "demo",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "lang": "pt-BR",
+      "route": "methods",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "lang": "pt-BR",
+      "route": "about",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "lang": "pt-BR",
+      "route": "pitch?slide=5",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "lang": "en",
+      "route": "/",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "lang": "en",
+      "route": "demo",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "lang": "en",
+      "route": "methods",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "lang": "en",
+      "route": "about",
+      "axe": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            {
+              "target": [
+                ".creator-initials"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.31 (foreground color: #965000, background color: #2b2c24, font size: 19.5pt (26px), font weight: normal). Expected contrast ratio of 3:1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "lang": "en",
+      "route": "pitch?slide=5",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "lang": "pt-BR",
+      "route": "/",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "lang": "pt-BR",
+      "route": "demo",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "lang": "pt-BR",
+      "route": "methods",
+      "axe": []
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "lang": "pt-BR",
+      "route": "about",
+      "axe": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            {
+              "target": [
+                ".creator-initials"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.31 (foreground color: #965000, background color: #2b2c24, font size: 19.5pt (26px), font weight: normal). Expected contrast ratio of 3:1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "lang": "pt-BR",
+      "route": "pitch?slide=5",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "lang": "en",
+      "route": "/",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "lang": "en",
+      "route": "demo",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "lang": "en",
+      "route": "methods",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "lang": "en",
+      "route": "about",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "lang": "en",
+      "route": "pitch?slide=5",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "lang": "pt-BR",
+      "route": "/",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "lang": "pt-BR",
+      "route": "demo",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "lang": "pt-BR",
+      "route": "methods",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "lang": "pt-BR",
+      "route": "about",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "dark",
+      "lang": "pt-BR",
+      "route": "pitch?slide=5",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "lang": "en",
+      "route": "/",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "lang": "en",
+      "route": "demo",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "lang": "en",
+      "route": "methods",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "lang": "en",
+      "route": "about",
+      "axe": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            {
+              "target": [
+                ".creator-initials"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.31 (foreground color: #965000, background color: #2b2c24, font size: 19.5pt (26px), font weight: normal). Expected contrast ratio of 3:1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "lang": "en",
+      "route": "pitch?slide=5",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "lang": "pt-BR",
+      "route": "/",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "lang": "pt-BR",
+      "route": "demo",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "lang": "pt-BR",
+      "route": "methods",
+      "axe": []
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "lang": "pt-BR",
+      "route": "about",
+      "axe": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            {
+              "target": [
+                ".creator-initials"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.31 (foreground color: #965000, background color: #2b2c24, font size: 19.5pt (26px), font weight: normal). Expected contrast ratio of 3:1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "viewport": "mobile",
+      "theme": "light",
+      "lang": "pt-BR",
+      "route": "pitch?slide=5",
+      "axe": []
+    }
+  ],
+  "chart_selection_and_csv_scope": true,
+  "language_preserves_export_bytes": true,
+  "subregion_adjustment_withheld": true
+}

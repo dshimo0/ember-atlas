@@ -1,0 +1,11 @@
+# Evidence workspace, appearance and language
+
+The redesign makes geographic observations and quantitative plots the primary evidence. Explore uses a dominant interactive map, a shared-axis sensor comparison and a selectable monthly time series. Methods opens on holdout scatter against an identity line and monthly residuals for unadjusted, scalar and seasonal methods. The pitch uses actual residuals and source-transition observations. About brings the eight dated study-area images forward.
+
+Dark and light palettes are available on every route. English is the initial language; Português (Brasil) is selectable. Preferences persist locally and can be set explicitly with `lang=en`, `lang=pt-BR`, `theme=dark` and `theme=light`. Source product IDs, original evidence documents and CSV schemas remain canonical English. Presentation translations never change the selected analytical state, stored observations or exported bytes. The visible number notation currently remains the canonical scientific display notation in both languages.
+
+The presentation catalog is local, without a translation service or external AI call. It preserves original text nodes for reversible switching and applies translations to newly rendered content. Scientific wording should be reviewed by a Portuguese-speaking domain reviewer before using Portuguese for a formal submission. English remains the submission reference.
+
+The plots derive from existing monthly rows. Missing months break lines; recorded zero remains zero. The scatter uses holdout MODIS as the reference, not physical ground truth. Selecting a month in Explore's plot uses the existing month-selection handler. The previously frozen factor, publication domain, region masks, training/holdout split and all source artifacts are unchanged. UI-only preferences are never a calibration input.
+
+Verification is recorded in `submission/workspace-release.json`: routes, two themes, two languages, desktop/mobile captures, chart-to-map selection, export-byte equality between languages, region limitations, unit tests and scoped accessibility checks. Physical-device and human language/accessibility review remain separate checks. The unavailable owner Windows backfill directory remains pending an accessible copy.

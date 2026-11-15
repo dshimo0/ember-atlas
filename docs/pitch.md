@@ -59,3 +59,7 @@ We invite a fire-monitoring team to review the seasonal evidence and define an o
 ## Presentation controls
 
 The nine-section rail selects the same shared slide state as Previous/Next and keyboard navigation. It remains usable on mobile, is omitted from print and does not autoplay. Self-hosted typography has a system fallback; reduced-motion preferences disable entry effects. The current PDF is generated from the actual route, with nine pages. About's eight-area atlas is dated editorial context, separate from analytical fire measurements.
+
+## Evidence workspace revision
+
+The measurement slide uses the selected-month common-axis dot plot; the validation slide pairs all three MAEs with actual monthly residuals. The continuity slide uses the versioned monthly series with a visible cutoff. English and Portuguese presentation text are selectable, with dark/light palettes. The English script remains the submission reference; earlier synthesized timing applies to that unchanged English script, not the Portuguese translation. Each language was checked for nine-page print output.

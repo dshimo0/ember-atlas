@@ -34,3 +34,9 @@ The subsequent visual audit confirmed numerical overflow, mobile navigation over
 ## P2/P3 presentation follow-up
 
 Self-hosted typography, optional brief transitions, a dated eight-area NASA context atlas and a direct pitch section rail extend the prior fixes. Imagery retains visible clouds/swath gaps and is explicitly separate from monthly thermal activity. Exact queries, extents and hashes are public. Executed evidence is recorded in `submission/visual-release.json`; unavailable Windows backfill material is not claimed as reviewed. Physical-device and assistive-technology checks remain unresolved.
+
+## Evidence-first composition and bilingual interface
+
+The next revision replaces progress-style selected-month bars with a shared-axis dot plot, brings actual holdout scatter and three-method residuals to the Methods introduction, and makes monthly time-series marks select the existing application month. Explore gives the map more width; the guide introduces the same evidence with a compact rail. The pitch now shows a residual time series rather than only three summary bars. About presents the eight dated geographic images at readable scale.
+
+Dark/light and EN/PT-BR controls are available across routes. English remains the submission reference and original artifacts/export schemas remain canonical. Translation is presentation-only, with byte-identical observation exports checked across languages. Public execution identity is recorded in `submission/workspace-release.json`. Human Portuguese scientific copy review and physical-device checks remain visible limitations.
