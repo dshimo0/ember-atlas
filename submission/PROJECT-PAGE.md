@@ -24,7 +24,7 @@ Literal source-version/type fields are exported. MODIS reported labels differ be
 
 Map occupancy uses full matching observations: occupied UTC days per 0.05° cell for a named sensor. Sampled detections are optional. NRT stays separate from Standard Processing. Retrieval completeness does not establish usable satellite observation; thermal anomalies and cell-days are not unique fires or burned area.
 
-Project Demonstration: the current silent screen recording is https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4 . It shows the redesigned opening, actual Pantanal comparison and replay, three-method evidence, California map and CSV action, and the dated eight-area visual atlas. The Team Owner must verify the current official demonstration format and choose or update the compliant asset. The nine-slide pitch is separate and is not asserted to meet an official cap.
+Project Demonstration: https://ember-atlas-opal.vercel.app/assets/ember-atlas-pitch.pdf — seven slides in English, including team, creator, challenge, actual product, NASA data and evaluated results. The supplied guide permits at most seven slides or a video of at most 30 seconds. The separate product route includes a recorded walkthrough; its linked PDF is the submission candidate. The official URL returned 503 during review.
 
 Use of Artificial Intelligence:
 
@@ -33,3 +33,5 @@ OpenAI Codex assisted with implementation, scientific analysis code, tests and E
 NASA and third-party resources: use the named public links and product list in RESOURCES.md. Diego Shimohama is the sole human creator, as confirmed by the owner. Eligibility, media format, terms and final submission remain owner actions.
 
 Team: Diego Shimohama — sole creator; project direction, implementation and release coordination. About: https://ember-atlas-opal.vercel.app/about . Detailed contribution wording and current portal fields remain subject to owner review.
+
+Public disclosure and asset credits: https://ember-atlas-opal.vercel.app/credits.html . Machine-readable disclosure: https://ember-atlas-opal.vercel.app/ai-disclosure.json .

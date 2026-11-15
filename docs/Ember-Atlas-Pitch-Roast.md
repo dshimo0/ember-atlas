@@ -17,3 +17,7 @@ The same nine-section script and scientific figures are retained. A direct secti
 ## Current seven-frame walkthrough
 
 Open Discover to explain comparability, then Explore on September 2024. Show the map, expand the calendar and inspect the common-unit comparison. The seven-frame Pitch walks through product, replay and held-out error, including the stronger scalar and peak limitations. It makes no prediction or avoided-fire claim. Official media requirements remain separate from this presentation.
+
+## Spec 009 correction
+
+The opening now shows the actual product with creator and exact challenge. Product definitions use an explicit measurement comparison. The September and MAE frames use shared zero-based bar charts. The product frame contains inline playback and a printable actual capture. The final frame names a concrete seasonal-report pilot, its unverified observation-coverage requirement, the creator and public product address. See `docs/pitch.md` for the synchronized seven-frame script. Supplied Pitch101 narrative advice is distinguished from the submission guide's media limits; the online guide remained HTTP 503.

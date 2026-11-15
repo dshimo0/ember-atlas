@@ -1,0 +1,25 @@
+{
+  "base": "http://127.0.0.1:8943",
+  "checks": [
+    {
+      "viewport": "desktop",
+      "satellite": "satellite",
+      "forced_street_failure": "local",
+      "matching_csv_rows": 125055,
+      "calendar_full_labels": true,
+      "methods_open_sections": true,
+      "embedded_product": true,
+      "pageerrors": []
+    },
+    {
+      "viewport": "mobile",
+      "satellite": "satellite",
+      "forced_street_failure": "local",
+      "matching_csv_rows": 125055,
+      "calendar_full_labels": true,
+      "methods_open_sections": true,
+      "embedded_product": true,
+      "pageerrors": []
+    }
+  ]
+}

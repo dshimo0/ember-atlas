@@ -47,3 +47,13 @@ Verify `/`, `/explore`, `/demo`, `/methods`, `/about`, `/pitch` directly and aft
 Source `4cc39d2a8e2b6307f0abb0be76402e91f5b9a5af`, deployment `dpl_7hAJYWrGyM3abGd2ZxZCJ7t4dHMN`, https://ember-atlas-opal.vercel.app/. Six routes loaded/refreshed anonymously at desktop/mobile sizes. State migration, CSV, month selection, subregion withholding, four guide scenes, seven pitch frames, keyboard and mobile 44px zoom targets passed. Six additional light/PT checks had no axe violations. All eight region CSVs and bounds passed on both viewports; separate NRT and sensor-filter exports passed. Forced tile failures preserved local geography and observations. Both PDFs have seven pages and fit checks passed; actual silent capture is 30 seconds. 26 Python tests and six Node modules passed; frozen scientific artifacts unchanged and credential scan clean.
 
 Reports: `submission/discover-release.json`, `discover-check.json`, `discover-extra-check.json`, `discover-regions-check.json`, `discover-public-assets.json`, `discover-tile-failure.json`. Automated accessibility results do not establish full WCAG conformance; 10-second comprehension, 90-second walkthrough completion and a human pitch rehearsal remain unmeasured. Approved logo/social files, official current portal rules and physical assistive-technology review remain open. Source is public on `work`; PR #2 is unmerged.
+
+## Spec 009 release checks
+
+- [x] Owner-supplied guide, Pitch101 and generated winners commentary read and distinguished.
+- [x] Public AI-assisted code/text/derived-data disclosure and source inventory added.
+- [x] Seven-page English PDF regenerated; no new human pitch timing claimed.
+- [x] Existing numerical model, source snapshots and split preserved.
+- [ ] Owner supplies original logo/photo files and confirms logo generation provenance; mark any generated media as the guide requires.
+- [ ] Owner confirms local-event membership eligibility (pasted Universal Event rules specify at least two members).
+- [ ] Owner confirms final portal requirements, accepts terms and submits for judging.

@@ -1,5 +1,5 @@
 {
-  "base": "https://ember-atlas-opal.vercel.app",
+  "base": "http://127.0.0.1:8943",
   "checks": [
     {
       "viewport": "desktop",

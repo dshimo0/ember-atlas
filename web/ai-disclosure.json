@@ -1,0 +1,10 @@
+{
+  "schema": "ember-ai-disclosure-1",
+  "tool": "OpenAI Codex",
+  "assisted_content": ["application and analysis source code", "tests", "documentation and explanatory text", "presentation layout"],
+  "observations": "Real NASA FIRMS records; not AI-generated",
+  "derived_data": "Deterministic aggregation and calibration using AI-assisted source code; provenance and frozen validation preserved",
+  "visualizations": "Computed from versioned data; actual browser captures for product imagery and video",
+  "published_generated_audio": false,
+  "disclosure_url": "/credits.html"
+}

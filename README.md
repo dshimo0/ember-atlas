@@ -225,3 +225,9 @@ The [backfill integration review](docs/backfill-review.md) separates adopted pre
 ## Discover and Explore
 
 [Discover](https://ember-atlas-opal.vercel.app/) explains the measurement problem with observed September evidence and a clickable calendar preview. [Explore](https://ember-atlas-opal.vercel.app/explore) opens the map-first workspace; expand Monthly calendar & history to investigate another month. [Guided demo](https://ember-atlas-opal.vercel.app/demo) has four scenes; [Pitch](https://ember-atlas-opal.vercel.app/pitch) has seven frames. Legacy root selection URLs redirect to Explore with filters preserved. The frontend remains static HTML/ES modules with Vercel rewrites; current implementation and evidence are on the `work` branch, not the stale default branch. See [spec 008](specs/008-discover-explore.md).
+
+## Evidence presentation and disclosure
+
+The map exposes street, satellite and local geography choices above the map. Satellite imagery is a contextual mosaic, with varying acquisition dates; FIRMS occupancy remains a separate observed layer. The calendar spells out products and exceptional coverage states. Shared zero-based charts compare reported cell-days and holdout MAE, with equations and monthly evidence available in Science.
+
+The [seven-slide English demonstration](https://ember-atlas-opal.vercel.app/assets/ember-atlas-pitch.pdf) includes the actual product, team, challenge and NASA sources. The interactive pitch embeds a real screen recording; no external navigation is required to show the product. [Sources and AI disclosure](https://ember-atlas-opal.vercel.app/credits.html) and [machine-readable disclosure](https://ember-atlas-opal.vercel.app/ai-disclosure.json) describe assisted code, text and deterministic derived data. See [spec 009](specs/009-evidence-presentation.md) for acceptance and remaining owner actions.

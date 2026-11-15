@@ -14,7 +14,7 @@ const DiamondCanvas=L.Canvas.extend({
 });
 const DiamondMarker=L.CircleMarker.extend({_updatePath(){this._renderer._updateDiamond(this);}});
 export function createGeographicMap(element, geography) {
-  const map = L.map(element, {preferCanvas: true, scrollWheelZoom: false, minZoom: 1, maxZoom: 17, zoomControl: true});
+  const map = L.map(element, {preferCanvas: true, scrollWheelZoom: true, minZoom: 1, maxZoom: 17, zoomControl: true});
   map.createPane('local-geography'); map.getPane('local-geography').style.zIndex = 180;
   map.createPane('local-labels'); map.getPane('local-labels').style.zIndex = 185;
   L.control.scale({imperial: false, maxWidth: 100}).addTo(map);
@@ -55,20 +55,20 @@ export function createGeographicMap(element, geography) {
     element.dataset.basemap = 'local'; modeSelect.value = 'local';
     status.textContent = unavailable ? 'Local map · basemap unavailable' : 'Local map · Natural Earth';
   }
-  function street() {
+  function street(kind = 'street') {
     local(); const active = ++generation;
-    element.dataset.basemap = 'loading'; modeSelect.value = 'street'; status.textContent = 'Loading street map…';
-    tileLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: credit, maxZoom: 17, crossOrigin: true});
-    tileLayer.on('tileload', () => {
+    element.dataset.basemap = 'loading'; modeSelect.value = kind; status.textContent = 'Loading basemap…';
+    tileLayer = L.tileLayer(kind === 'satellite' ? 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}' : 'https://tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: kind === 'satellite' ? 'Imagery © Esri, Maxar, Earthstar Geographics, and the GIS User Community · contextual mosaic' : credit, maxZoom: 17, crossOrigin: true});
+    tileLayer.on('load', () => {
       if (active !== generation) return;
-      clearTimeout(timer); element.dataset.basemap = 'street'; status.textContent = 'Street map · OpenStreetMap';
+      clearTimeout(timer); element.dataset.basemap = kind; status.textContent = kind === 'satellite' ? 'Satellite imagery · Esri · dates vary; not selected-month observations' : 'Street map · OpenStreetMap';
     });
     // A failed tile or slow provider leaves a complete local map, not blank geography.
     tileLayer.on('tileerror', () => {if (active === generation) local(true);});
     tileLayer.addTo(map);
-    timer = setTimeout(() => {if (active === generation && element.dataset.basemap !== 'street') local(true);}, 7000);
+    timer = setTimeout(() => {if (active === generation && element.dataset.basemap === 'loading') local(true);}, 12000);
   }
-  modeSelect.addEventListener('change', () => modeSelect.value === 'street' ? street() : local());
+  modeSelect.addEventListener('change', () => modeSelect.value === 'local' ? local() : street(modeSelect.value));
   function publishView() {
     element.dataset.zoom = String(map.getZoom());
     element.dataset.center = JSON.stringify([map.getCenter().lat, map.getCenter().lng]);
@@ -100,7 +100,7 @@ export function createGeographicMap(element, geography) {
       const product=document.getElementById('mapProduct').value.replace('_SP',selection.mode==='nrt'?'_NRT':'_SP');
       const grid=occupiedDays(rows,product),gridAvailable=selection.retrieved_products?selection.retrieved_products.includes(product):true;
       if(document.getElementById('showGrid').checked)for(const c of grid){
-        L.rectangle([[c.lat*.05,c.lon*.05],[(c.lat+1)*.05,(c.lon+1)*.05]],{renderer:sensorRenderer,color:product.startsWith('MODIS')?'#8a5718':'#147185',weight:.25,fillColor:product.startsWith('MODIS')?'#ed9d30':'#159caf',fillOpacity:.18+.72*c.occupied_days/Math.max(1,selection.period_days||31)})
+        L.rectangle([[c.lat*.05,c.lon*.05],[(c.lat+1)*.05,(c.lon+1)*.05]],{renderer:sensorRenderer,color:product.startsWith('MODIS')?'#8a5718':'#147185',weight:.25,fillColor:(product.startsWith('MODIS')?['#ffd166','#fca636','#ed6925','#c13b13','#7f230b']:['#a4e8e0','#56c5cc','#169db6','#087692','#034c67'])[Math.min(4,Math.floor((c.occupied_days-1)/Math.max(1,(selection.period_days||31)/5)))],fillOpacity:.85})
          .bindTooltip(`${product}: ${c.occupied_days} occupied UTC days in this 0.05° cell. ${c.dates.join(', ')}. Observed occupancy, no spatial adjustment.`).addTo(pointLayer);
       }
       if (areaLayer) {map.removeLayer(areaLayer);areaLayer=null;}

@@ -1,0 +1,19 @@
+{
+  "spec": "009-evidence-presentation",
+  "status": "local checks passed; deployment pending",
+  "python_tests": 26,
+  "node_test_modules": 6,
+  "route_checks": "12 desktop/mobile direct and refreshed loads; zero axe findings in selected rules",
+  "selection_checks": "129280 August CSV rows; synchronized month; subregion adjustment withheld",
+  "map_checks": "satellite and forced local fallback, desktop/mobile; September CSV 125055 records",
+  "pdf_pages": 7,
+  "english_and_portuguese_frame_fit_checks": 14,
+  "screen_capture_seconds": 27.466667,
+  "scientific_model_and_data_changes": false,
+  "official_guide_http": 503,
+  "open_items": [
+    "Original logo/photo files and logo provenance",
+    "Team Owner event eligibility, terms and final submission",
+    "Human accessibility, translation and presentation review"
+  ]
+}

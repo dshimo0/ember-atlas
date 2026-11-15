@@ -77,3 +77,9 @@ The timestamped owner-supplied video transcript is mapped in [spec 006](../specs
 ## Discover / map-first delivery
 
 Spec 008 supersedes the calendar-first route composition following owner approval. Discover explains the sensor problem; Explore retains the common-grid/replay workflow and reproducible exports. Methods remains `/methods` under the Science navigation label. Four guide scenes and seven pitch frames preserve the held-out comparison, stronger scalar baseline, bias and peak limitations. Smoothed density and swipe remain deferred to separately tested cartographic work. Source/artifacts stay unchanged.
+
+## Owner feedback and supplied guidance, 2026-11-15
+
+Spec 009 tracks the 20 annotated presentation/map comments. Map base selection is visible; occupancy has an absolute day scale; calendar cells name their sensor; shared comparisons are zero-based bars. Methods expose counting/evaluation equations and monthly residual evidence. The pitch embeds a real product recording and retains a static product view in its seven-page PDF. Public `/credits.html` and `/ai-disclosure.json` expose attribution and AI assistance.
+
+The owner-supplied guide and Pitch101 specify <=7 slides or <=30 seconds, English and publicly accessible links. The live guide URL returned 503 on this review. The winners PDF is generated commentary, not verified winner research. Logo/photo originals and logo provenance remain outstanding; no substitute was fabricated. Terms, team-event eligibility and final submission are owner actions.

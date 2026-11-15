@@ -27,7 +27,7 @@ Map credits remain visible in the map control and Methods & data. The study rect
 
 Checked 2026-11-15 UTC; exact results and resolved URLs are in [resource-check.json](resource-check.json). NASA FIRMS landing, archive and Area API pages returned 200, as did OpenStreetMap copyright/tile policy and Leaflet. The archive page identifies the NOAA-20 375 m record starting 2018-04-01. The paired release uses January 2020–July 2026 SP observations with MODIS_SP, whose literal source-version strings are now preserved per record. Natural Earth's terms endpoint returned 406 on this check; committed source/checksum metadata and existing public-domain attribution remain preserved, and owner verification is still required for final portal wording. Official challenge/resources/event/legal pages returned 503. Link HTTP availability alone does not certify event eligibility or permission wording.
 
-The pitch includes actual product captures and credited NASA editorial composites, labeled separately from quantitative evidence. The nine-slide PDF is a print export of the product presentation. A temporary eSpeak NG synthesized read measured script duration; no generated audio is published or submitted. The public screen recording is silent and contains no people. Codex implementation/documentation assistance is disclosed in PROJECT-PAGE.md.
+The pitch includes actual product captures and credited NASA editorial composites, labeled separately from quantitative evidence. The current seven-slide PDF is a print export of the product presentation. A temporary eSpeak NG synthesized read measured script duration; no generated audio is published or submitted. The public screen recording is silent and contains no people. Codex implementation/documentation assistance is disclosed in PROJECT-PAGE.md.
 
 ## Eight-region and replay release
 
@@ -41,7 +41,7 @@ Source-field definitions: https://www.earthdata.nasa.gov/data/tools/firms/active
 
 ## Editorial NASA imagery
 
-- **Blue Marble 2007 West**, NASA/Goddard Space Flight Center/Reto Stöckli. NASA image identifier `GSFC_20171208_Archive_e002131`; released October 9, 2007. Source: https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e002131/GSFC_20171208_Archive_e002131~medium.jpg . Local file `web/assets/earth-nasa.jpg`. Used in About, Pitch and general editorial Earth context. It is a composite, not current imagery or the selected period's analytical layer.
+- **Blue Marble 2007 West**, NASA/Goddard Space Flight Center/Reto Stöckli. NASA image identifier `GSFC_20171208_Archive_e002131`; released October 9, 2007. Source: https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e002131/GSFC_20171208_Archive_e002131~medium.jpg . Local file `web/assets/earth-nasa.jpg`. Retained for About and editorial context; removed from the Discover and Pitch opening. It is a composite, not current imagery or the selected period's analytical layer.
 - **MODIS Terra corrected reflectance, true color**, NASA GIBS, September 1, 2024, study bounds W/S/E/N -59/-23/-54/-15. WMS source and exact request parameters are retained in `web/assets/editorial-imagery.json`. Local file `pantanal-modis-2024-09-01.jpg`; used only as dated Pantanal editorial context in scene 1. No detections are overlaid on that photograph.
 - NASA media guidance: https://www.nasa.gov/nasa-brand-center/images-and-media/ (HTTP 200 when acquired). Credits remain adjacent to imagery. No NASA endorsement is implied. Original source metadata, byte hashes and declared use are in [editorial-imagery.json](../web/assets/editorial-imagery.json). No generated scientific image or portrait is used.
 
@@ -50,3 +50,9 @@ Source-field definitions: https://www.earthdata.nasa.gov/data/tools/firms/active
 Eight local study-area context images use NASA GIBS `MODIS_Terra_CorrectedReflectance_TrueColor`, dated 2024-09-01. [regional-imagery.json](../web/assets/regional-imagery.json) records exact WMS queries, WGS84 study bounds, dimensions and SHA-256. These are editorial reflectance images, separate from FIRMS monthly activity; clouds and swath gaps remain visible. No new thermal observations, fire perimeters or burned-area estimates are inferred.
 
 Manrope: [Google Fonts source](https://github.com/google/fonts/tree/main/ofl/manrope), SIL Open Font License 1.1. [Local license](../web/assets/fonts/OFL.txt), [subset provenance](../web/assets/fonts/provenance.json). The font is self-hosted; normal application use makes no request to a font service.
+
+## Evidence-presentation revision
+
+Optional Esri World Imagery: Esri, Maxar, Earthstar Geographics and the GIS User Community. Service metadata: https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer . Interactive contextual mosaic, varying dates; never evidence of selected-month fire conditions.
+
+Public AI disclosure: https://ember-atlas-opal.vercel.app/credits.html ; machine-readable implementation/derived-data metadata: https://ember-atlas-opal.vercel.app/ai-disclosure.json . axe-core (https://github.com/dequelabs/axe-core) and FFmpeg (https://ffmpeg.org/) support verification/media export.
