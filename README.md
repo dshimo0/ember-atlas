@@ -10,7 +10,7 @@ Ember Atlas is a geographic dashboard for the NASA Space Apps Challenge, **“Ha
 
 [![Ember Atlas: Pantanal map and September 2024 sensor comparison](web/assets/dashboard-view.png)](https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&benchmark=1&month=2024-09)
 
-*Actual map-first workspace using released observations. The map shows occupied UTC days per grid cell; expand the sensor comparison and calendar to inspect monthly occupied cell-days.*
+*Actual map-first workspace using released observations. The map shows occupied UTC days per grid cell; inspect the sensor comparison and expand the calendar for monthly occupied cell-days.*
 
 ## What you can do
 

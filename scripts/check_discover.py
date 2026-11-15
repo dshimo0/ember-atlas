@@ -14,6 +14,8 @@ with sync_playwright()as p:
    if route=='/pitch':page.wait_for_selector('.pitch-slide.active');assert page.locator('.pitch-slide').count()==7
    if route=='/about':page.wait_for_selector('.regional-status',state='attached');assert page.locator('.regional-status').count()==8
    assert not page.evaluate('document.documentElement.scrollWidth>innerWidth'),(n,route)
+   if route=='/explore' and n=='mobile':
+    target=page.locator('.leaflet-control-zoom-in').bounding_box();assert target['width']>=44 and target['height']>=44,target
    page.screenshot(path=str(out/f'{n}-{route.strip("/")or"discover"}.png'))
    page.add_script_tag(path=os.environ['AXE_SCRIPT']);v=page.evaluate("async()=>{const r=await axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa','wcag22aa']}});return r.violations.map(x=>({id:x.id,nodes:x.nodes.map(n=>n.target)}))}")
    report['checks'].append({'viewport':n,'route':route,'refresh':True,'axe':v});assert not v,(n,route,v);print(n,route,v,flush=True)
