@@ -2,6 +2,8 @@
 
 Application: https://ember-atlas-opal.vercel.app/
 
+The recording below predates the final guided and presentation routes. The current interactive walkthrough is https://ember-atlas-opal.vercel.app/demo and the separate nine-slide presentation is https://ember-atlas-opal.vercel.app/pitch . The official demonstration format remains unverified.
+
 Screen recording: https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4
 
 The current demonstration format and local pitch duration require confirmation from the official portal and São Paulo instructions. The three-minute presentation in `docs/Ember-Atlas-Pitch-Roast.md` is a separate script.

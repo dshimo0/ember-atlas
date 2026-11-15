@@ -2,7 +2,7 @@
 
 | Category | Link text and full URL | Product/version and use | Rights / verification |
 | --- | --- | --- | --- |
-| NASA | NASA FIRMS — https://www.earthdata.nasa.gov/data/tools/firms | Raw thermal anomaly observations, calendar, comparisons, CSV | NASA FIRMS credited in UI; landing page verification pending |
+| NASA | NASA FIRMS — https://www.earthdata.nasa.gov/data/tools/firms | Raw thermal anomaly observations, calendar, comparisons, CSV | NASA FIRMS credited in UI; landing page HTTP 200 verified 2026-11-15 |
 | NASA | MODIS C6.1 fire archive — https://firms.modaps.eosdis.nasa.gov/download/ | MODIS_SP, Terra/Aqua pooled reference | Actual Area API extracts and checksums verified; product-page license text pending owner review |
 | NASA | NOAA-20 VIIRS 375 m fire archive — https://firms.modaps.eosdis.nasa.gov/download/ | VIIRS_NOAA20_SP comparison | Actual observations verified; exact product documentation/attribution wording pending |
 | NASA | FIRMS Area API — https://firms.modaps.eosdis.nasa.gov/api/area/ | Bounded authenticated CSV ingestion | Key restricted to ingestion; never cite keyed URLs |

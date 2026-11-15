@@ -1,58 +1,123 @@
 {
   "url": "https://ember-atlas-opal.vercel.app",
-  "deployment_source_commit": "4d665138201c4941cd9dc7e61e18311d8a5957cc",
-  "deployment_id": "dpl_GgmKyKszTUz6ycwty9NeKmfxYdnC",
+  "deployment_source_commit": "ddefa36d09254b16dc5e94381725e77dfb689bb8",
+  "deployment_id": "dpl_6kdDLH6ML1YxaKcw6cKgWf6EaYVH",
+  "checked_utc": "2026-11-15T01:47:55.321767+00:00",
   "checks": [
     {
       "path": "index.html",
-      "sha256": "716044694b10f3a66c4c96bc7b1c7abf258d9523b3631957a3271108460ce571",
-      "http_status": 200
+      "status": 200,
+      "sha256": "9acc8cda7e985e2a1a95a4515eb769e3198829c0e69b9d71bb59c760635bd463",
+      "matches_committed_asset": true
     },
     {
       "path": "app.js",
-      "sha256": "3c5746ec3551aecfa0799292d387ac1acf603847ef7819bd254189547e3cd764",
-      "http_status": 200
-    },
-    {
-      "path": "geographic-map.mjs",
-      "sha256": "95f5f011b3942fbb06314b27efd3ff373da5b378a5d4803ae92f856235d32e4c",
-      "http_status": 200
+      "status": 200,
+      "sha256": "44ff7cfeeea02aaec769b587b727a8a6f6fc79353f58a78c28de3e7c9ad71e75",
+      "matches_committed_asset": true
     },
     {
       "path": "model.mjs",
-      "sha256": "254167bf86db81cccfa1f3ccd9268bf06cf10be1409f398fee549afb71129c5b",
-      "http_status": 200
+      "status": 200,
+      "sha256": "edac7cc43bfe90ddd219471fb7f7b2b094c0e691cedf0b56ce3efa8c55bd40a8",
+      "matches_committed_asset": true
     },
     {
-      "path": "data/latest.json",
-      "sha256": "24f68494cf0d1315b310685f881ce3ec5022c0725e093024e9e18fc7928f57d4",
-      "http_status": 200
+      "path": "analysis.mjs",
+      "status": 200,
+      "sha256": "6e3226386f87f19ac115bf1f8252b9365dbf53e39136a7c78e00b5c4999f4263",
+      "matches_committed_asset": true
+    },
+    {
+      "path": "charts.mjs",
+      "status": 200,
+      "sha256": "83a4ec54784db760054514de3eb1bf40134c5d8bcfcb60846424b3fafccde6cd",
+      "matches_committed_asset": true
+    },
+    {
+      "path": "data-loader.mjs",
+      "status": 200,
+      "sha256": "1baaa5e185d9dda627397a376dbce2fa38079bf9e9e472410daad9c704f52d29",
+      "matches_committed_asset": true
+    },
+    {
+      "path": "format.mjs",
+      "status": 200,
+      "sha256": "cec4447750c66bb396b758ccc739640225b82f04482081e9c6a383dfc24f63e2",
+      "matches_committed_asset": true
+    },
+    {
+      "path": "url-state.mjs",
+      "status": 200,
+      "sha256": "7811c6ec0b83f4b4864663af2e1881a43bc2a53553df87950f1ef72dd2f3b202",
+      "matches_committed_asset": true
+    },
+    {
+      "path": "pitch-content.mjs",
+      "status": 200,
+      "sha256": "6e4b49de63fc3ff9652263cecabf76995a67e438e432815ccdb446b925c774f2",
+      "matches_committed_asset": true
+    },
+    {
+      "path": "pitch.mjs",
+      "status": 200,
+      "sha256": "4624f75fd97769658bc4f44bdbd77b60a585eee39464c33ade7bb35ee2db9bdc",
+      "matches_committed_asset": true
+    },
+    {
+      "path": "geographic-map.mjs",
+      "status": 200,
+      "sha256": "030ebff22d74c19fda19f1e933ff83db64344f0a23bbfb4e3d67203fcfdd0cfe",
+      "matches_committed_asset": true
+    },
+    {
+      "path": "style.css",
+      "status": 200,
+      "sha256": "322a21de87e489a6de38949bdecc065e5738eaf439bc159aaa0f02d6f0ba8a2e",
+      "matches_committed_asset": true
+    },
+    {
+      "path": "assets/dashboard-view.png",
+      "status": 200,
+      "sha256": "b00c540ea9aa625104eb4cca6e27ebb06b1c6219b7bdeef5944e921b0a766941",
+      "matches_committed_asset": true
+    },
+    {
+      "path": "assets/ember-atlas-pitch.pdf",
+      "status": 200,
+      "sha256": "667fb425bbe6fd51ffbc2100cccb08fe51a8906e11b4347511538ef1421293b7",
+      "matches_committed_asset": true
     },
     {
       "path": "data/dashboard.json",
+      "status": 200,
       "sha256": "c33186c9e00a10836173a0b5eead3e0a1a5b52f6340094b838437f8dd44414c6",
-      "http_status": 200
+      "matches_committed_asset": true
     },
     {
-      "path": "data/validation.json",
-      "sha256": "e17b5f4c9e90e163104aa0acbac9bfac5035999aa0db1c86e87e7ca00ec0d2fe",
-      "http_status": 200
+      "path": "data/validation-ba55acfc7909.json",
+      "status": 200,
+      "sha256": "ba55acfc7909acdf95ffb0083c91817bf573ca50ad8554b1804c1d8c2baf21bf",
+      "matches_committed_asset": true
     },
     {
-      "path": "assets/local-geography.json",
-      "sha256": "5e2bcb1bbdf11bf6a6dd07b2a755c20d96e15a55bd511378b8d6cabfc9371824",
-      "http_status": 200
+      "path": "/",
+      "status": 200,
+      "anonymous": true,
+      "serves_current_app": true
     },
     {
-      "path": "vendor/leaflet/leaflet.js",
-      "sha256": "db49d009c841f5ca34a888c96511ae936fd9f5533e90d8b2c4d57596f4e5641a",
-      "http_status": 200
+      "path": "/demo",
+      "status": 200,
+      "anonymous": true,
+      "serves_current_app": true
     },
     {
-      "path": "assets/workflow-capture.mp4",
-      "sha256": "dde1dbc252a825fa4d6fbcd9a307f7d1162edecea363d36678e16d8704012c73",
-      "http_status": 200
+      "path": "/pitch",
+      "status": 200,
+      "anonymous": true,
+      "serves_current_app": true
     }
   ],
-  "checked_utc": "2026-11-14T23:07:58.500928+00:00"
+  "details": "product-release.json"
 }

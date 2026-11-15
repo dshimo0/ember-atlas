@@ -18,7 +18,7 @@ Checked 2026-11-14 UTC in Codex Cloud. No final submission was performed.
 | Pending | Owner | Use the verified app/media links, confirm media format, supply human contributions, paste portal copy, save, preview and reopen every link. |
 | Pending | Owner only | Read terms/privacy, personally accept, select Submit for Judging and capture explicit success state privately. Saving is insufficient. |
 
-Public browser verification evidence is recorded in browser-check.json; media-check.json records anonymous video playback. HTTPS and hostname were verified with the system CA store. Chromium used the validated leaf pin to accommodate the Cloud runtime proxy, as documented in docs/DEPLOYMENT.md.
+Current public browser verification evidence is recorded in judging-check-public.json and routes-check-public.json; media-check.json records anonymous video playback. HTTPS and hostname were verified with the system CA store. Chromium used the validated leaf pin to accommodate the Cloud runtime proxy, as documented in docs/DEPLOYMENT.md.
 
 Verified public browser checks: month buttons, September 2024 primary grid value (5,819 MODIS cell-days), north/MODIS/month observation export (18,038 rows), mobile width and no JavaScript exceptions. Nine Python tests pass, JavaScript syntax check passes, and raw-source credential scan passes. Actual screen captures and a silent video are included; public app and media checks passed. The public flow also verifies that selected aggregate CSV agrees with the observation export and that any supported adjustment is limited to the full area.
 

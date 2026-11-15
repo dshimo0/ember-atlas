@@ -1,6 +1,6 @@
 # Three-minute presentation
 
-Public deck: https://ember-atlas-opal.vercel.app/pitch
+Public deck: https://ember-atlas-opal.vercel.app/pitch · [PDF snapshot](https://ember-atlas-opal.vercel.app/assets/ember-atlas-pitch.pdf)
 
 Nine slides use the same pinned release and metric calculations as Explore and Guided demo. Previous/Next, arrow keys, Page Up/Down, Home/End, optional fullscreen and hidden presenter notes are available. A slide query parameter supports sharing and browser navigation. Mobile shows the nine sections in reading order. Print / PDF produces nine landscape A4 pages. The [PDF](../submission/ember-atlas-pitch.pdf) is a presentation export, not a verified official submission format.
 

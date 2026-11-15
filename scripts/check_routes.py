@@ -90,7 +90,7 @@ with sync_playwright() as p:
   if name=='mobile':
    page.wait_for_function("document.querySelector('#slide-2').getBoundingClientRect().top>=90&&document.querySelector('#slide-2').getBoundingClientRect().top<250")
   assert not page.evaluate('document.documentElement.scrollWidth>innerWidth')
-  page.screenshot(path=str(ROOT/f'submission/pitch-{name}.png'),full_page=name=='mobile')
+  page.screenshot(path=str(ROOT/f'submission/pitch-{name}.png'))
   if name=='desktop':
    page.emulate_media(media='print');page.pdf(path=str(ROOT/'submission/ember-atlas-pitch.pdf'),prefer_css_page_size=True,print_background=True)
    info=subprocess.check_output(['pdfinfo',str(ROOT/'submission/ember-atlas-pitch.pdf')],text=True)

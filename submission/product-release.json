@@ -1,0 +1,83 @@
+{
+  "url": "https://ember-atlas-opal.vercel.app",
+  "verified_routes": [
+    "/",
+    "/demo",
+    "/pitch"
+  ],
+  "deployment_source_commit": "ddefa36d09254b16dc5e94381725e77dfb689bb8",
+  "branch": "work",
+  "repository": "https://github.com/dshimo0/ember-atlas",
+  "pr": "https://github.com/dshimo0/ember-atlas/pull/2",
+  "pr_status": "open; not merged",
+  "deployment_id": "dpl_6kdDLH6ML1YxaKcw6cKgWf6EaYVH",
+  "ready_state": "READY",
+  "checked_utc": "2026-11-15T01:47:55.321767+00:00",
+  "anonymous_https_system_ca_verified": true,
+  "github_source_check": {
+    "url": "https://github.com/dshimo0/ember-atlas/tree/work",
+    "status": 200,
+    "anonymous": true
+  },
+  "public_asset_report": "public-asset-check.json",
+  "route_report": "routes-check-public.json",
+  "route_check_utc": "2026-11-15T01:45:13.056837+00:00",
+  "analytical_report": "judging-check-public.json",
+  "analytical_check_utc": "2026-11-15T01:42:08.221209+00:00",
+  "analytical_check_source_commit": "5c3174931b5eb5a15a04499c19a3736c1a728474",
+  "subsequent_changes": "Pitch mobile scroll restoration, image layout and PDF snapshot only; analytical JS/data unchanged. Final route suite repeats selected CSV/manifest/filter checks.",
+  "pipeline_reproduction": "pipeline-reproduction.json",
+  "integrity_report": "integrity-check.json",
+  "tests": {
+    "python_unittest": 9,
+    "node_test": 13,
+    "local_and_public_desktop_mobile": true,
+    "normal_route_console_or_network_errors": 0,
+    "forced_tile_failure": true,
+    "printed_pitch_pages": 9,
+    "github_implementation_ci": "success"
+  },
+  "coverage": {
+    "start": "2020-01-01",
+    "end": "2024-12-31",
+    "products": [
+      "MODIS_SP C6.1 Terra/Aqua",
+      "VIIRS_NOAA20_SP 375m"
+    ],
+    "observations": 1213587,
+    "paired_months": 60,
+    "native_counts_distinct_from_cell_days": true
+  },
+  "validation": {
+    "scope": "full Pantanal study rectangle only",
+    "metric": "monthly MAE against MODIS, occupied cell-days/month",
+    "training_years": [
+      2020,
+      2021,
+      2022
+    ],
+    "holdout_years": [
+      2023,
+      2024
+    ],
+    "holdout_months": 24,
+    "before": 1021.7083333333334,
+    "after": 199.6997313847094,
+    "reduction_percent": 80.45433076451603,
+    "adjusted_bias": -123.96830007041311,
+    "rmse_before": 1334.5145965231452,
+    "rmse_after": 317.66603826320306,
+    "worse_months": [
+      "2023-02",
+      "2023-03"
+    ]
+  },
+  "pitch_timing": "pitch-timing.json; synthesized read 184.646 s, human rehearsal pending",
+  "official_guidance": "unverified; current official pages returned 503; resource-check.json",
+  "remaining_owner_actions": [
+    "Confirm current official guide, demonstration format and event eligibility",
+    "Confirm human roster and contributions",
+    "Rehearse human pitch with navigation",
+    "Review terms and personally submit for judging"
+  ]
+}
