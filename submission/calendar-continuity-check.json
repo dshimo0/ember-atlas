@@ -1,5 +1,5 @@
 {
-  "url": "http://127.0.0.1:8932",
+  "url": "https://ember-atlas-opal.vercel.app",
   "checks": [
     {
       "device": "desktop",

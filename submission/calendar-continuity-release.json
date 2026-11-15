@@ -20,5 +20,121 @@
     "Official current submission rules and deadline",
     "Original emblem asset",
     "Physical device/screen-reader and Portuguese science copy review"
-  ]
+  ],
+  "deployed_source": "85050621f44bdbd7644a14b0237de6ef2d87b062",
+  "deployment_id": "dpl_3swGS98QAEhYmvnt2BnHQDg3jYxj",
+  "url": "https://ember-atlas-opal.vercel.app",
+  "public_checks": [
+    {
+      "device": "desktop",
+      "route": "/",
+      "refresh": true,
+      "overflow": false
+    },
+    {
+      "device": "desktop",
+      "route": "/demo",
+      "refresh": true,
+      "overflow": false
+    },
+    {
+      "device": "desktop",
+      "route": "/methods",
+      "refresh": true,
+      "overflow": false
+    },
+    {
+      "device": "desktop",
+      "route": "/about",
+      "refresh": true,
+      "overflow": false
+    },
+    {
+      "device": "desktop",
+      "route": "/pitch",
+      "refresh": true,
+      "overflow": false
+    },
+    {
+      "device": "desktop",
+      "anomaly_prior_n": 4,
+      "export_month": "2024-08",
+      "csv_rows": 129280,
+      "local_basemap": true,
+      "subregion_raw": true,
+      "keyboard_chart": true,
+      "pageerrors": []
+    },
+    {
+      "device": "mobile",
+      "route": "/",
+      "refresh": true,
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "route": "/demo",
+      "refresh": true,
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "route": "/methods",
+      "refresh": true,
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "route": "/about",
+      "refresh": true,
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "route": "/pitch",
+      "refresh": true,
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "anomaly_prior_n": 4,
+      "export_month": "2024-08",
+      "csv_rows": 129280,
+      "local_basemap": true,
+      "subregion_raw": true,
+      "keyboard_chart": true,
+      "pageerrors": []
+    }
+  ],
+  "workspace_audit_scope": "40 local combinations before final calendar placement refinement; final deployed layout separately passed ten direct-load/refresh checks and desktop/mobile state/export/anomaly/keyboard checks",
+  "anomaly_axe": "zero violations in targeted public checks",
+  "new_timing": "407 words; no new human rehearsal or synthesized timing available",
+  "tile_failure_checks": [
+    {
+      "device": "desktop",
+      "blocked_tiles": 12,
+      "basemap": "Local map \u00b7 basemap unavailable",
+      "observations_available": true
+    },
+    {
+      "device": "mobile",
+      "blocked_tiles": 6,
+      "basemap": "Local map \u00b7 basemap unavailable",
+      "observations_available": true
+    }
+  ],
+  "integrity": {
+    "files_scanned": 3432,
+    "credential_patterns_found": false,
+    "known_environment_key_checked": true,
+    "decompressed_public_gzip_checked": true,
+    "frozen_file_sha256": {
+      "web/data/latest.json": "24f68494cf0d1315b310685f881ce3ec5022c0725e093024e9e18fc7928f57d4",
+      "web/data/validation.json": "e17b5f4c9e90e163104aa0acbac9bfac5035999aa0db1c86e87e7ca00ec0d2fe",
+      "web/data/validation-ba55acfc7909.json": "ba55acfc7909acdf95ffb0083c91817bf573ca50ad8554b1804c1d8c2baf21bf",
+      "web/data/dashboard.json": "c33186c9e00a10836173a0b5eead3e0a1a5b52f6340094b838437f8dd44414c6",
+      "data/calendar.csv": "62bfec91c0d8969c8dacf887618164f22561186263839264de0472c7db5d3bef",
+      "scripts/harmonize.py": "79bda202c205131c869e9c7eb3ba526955ecc999a3fb31884966ad62f322ca35"
+    }
+  }
 }

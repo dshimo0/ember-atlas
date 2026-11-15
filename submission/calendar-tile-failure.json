@@ -1,0 +1,14 @@
+[
+  {
+    "device": "desktop",
+    "blocked_tiles": 12,
+    "basemap": "Local map \u00b7 basemap unavailable",
+    "observations_available": true
+  },
+  {
+    "device": "mobile",
+    "blocked_tiles": 6,
+    "basemap": "Local map \u00b7 basemap unavailable",
+    "observations_available": true
+  }
+]
