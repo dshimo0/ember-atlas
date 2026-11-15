@@ -99,6 +99,6 @@ Release verification: deployed source [`1018c678`](https://github.com/dshimo0/em
 
 ## Creator
 
-Ember Atlas is an individual project by **Diego Shimohama**. The [About page](https://ember-atlas-opal.vercel.app/about) identifies the creator and links to the project, reproducible evidence and data credits. AI assistance and submission-specific disclosures are recorded in the submission materials.
+Ember Atlas is an individual project by **Diego Shimohama**. Personal website: [dshimo.vercel.app](https://dshimo.vercel.app/). The [About page](https://ember-atlas-opal.vercel.app/about) identifies the creator and links to the project, reproducible evidence and data credits. AI assistance and submission-specific disclosures are recorded in the submission materials.
 
 About-page verification and its deployment identity are recorded in [about-release.json](submission/about-release.json); scientific artifacts and their prior validation remain unchanged.
