@@ -51,6 +51,8 @@ with sync_playwright()as p:
   assert page.locator('#skipDemo').is_visible()
   page.goto(BASE+'/pitch?slide=5');page.wait_for_function("document.querySelector('#pitchCounter')?.textContent==='Slide 5 of 9'");capture('pitch-evidence');page.goto(BASE+'/pitch?slide=9');page.wait_for_function("document.querySelector('#pitchCounter')?.textContent==='Slide 9 of 9'");assert page.locator('#slide-9 table').count()==0;capture('pitch-closing')
   if name=='mobile':
+   for i in range(8):
+    page.goto(BASE+'/pitch?slide=7');page.wait_for_function("document.querySelector('#pitchCounter')?.textContent==='Slide 7 of 9'");page.locator('.world-map a').nth(i).focus();page.keyboard.press('Enter');page.wait_for_function("location.pathname==='/'&&!document.querySelector('#download').disabled",timeout=120000);assert '/pitch' not in page.url
    page.goto(BASE+'/pitch');page.wait_for_selector('#slide-5');page.locator('#slide-5').scroll_into_view_if_needed();page.wait_for_function("document.querySelector('#pitchCounter').textContent==='Slide 5 of 9'");assert 'slide=5'in page.url;capture('pitch-scroll-synced')
   if name=='desktop':
    page.goto(BASE+'/pitch');page.wait_for_selector('.pitch-slide.active');page.keyboard.press('ArrowRight');assert page.locator('#pitchCounter').inner_text()=='Slide 2 of 9'

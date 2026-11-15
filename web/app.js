@@ -372,7 +372,7 @@ document.addEventListener('click',event=>{
   release=await loadRelease();({summary,validation,geography}=release);evaluation=evaluateValidation(validation);index=makeIndex(summary);ready=true;
   $('region').innerHTML=release.registry.regions.map(r=>`<option value="${r.id}">${r.name}</option>`).join('');
   $('start').value=summary.coverage.start;$('end').value=summary.coverage.end;
-  pitch=createPitch($('pitchPage'),release,n=>{pitchSlide=n;history.pushState(null,'',stateURL('/pitch',allState()));pitch.setSlide(n,true);updateLinks();},n=>{pitchSlide=n;history.replaceState(null,'',stateURL('/pitch',allState()));updateLinks();});
+  pitch=createPitch($('pitchPage'),release,n=>{pitchSlide=n;history.pushState(null,'',stateURL('/pitch',allState()));pitch.setSlide(n,true);updateLinks();},n=>{if(currentRoute()!=='/pitch')return;pitchSlide=n;history.replaceState(null,'',stateURL('/pitch',allState()));updateLinks();});
   publishedMetrics();residualView();applyLocation();
  }catch(error){console.error('Release load failed',error);$('error').hidden=false;$('error').textContent='Release data could not be loaded. Reload to retry.';$('status').textContent='Data unavailable';$('pitchPage').textContent='Presentation evidence unavailable. Reload to retry.';}
 })();

@@ -13,9 +13,12 @@ export function createPitch(root,release,onSlide,onObserve=()=>{}) {
  const mobile=()=>matchMedia('(max-width:700px)').matches;
  // Scroll reading and button navigation have one counter and one inspectable URL.
  function observe(){
-  if(frame||root.hidden||!mobile())return;
+  if(frame||root.hidden||location.pathname!=='/pitch'||!mobile())return;
   frame=requestAnimationFrame(()=>{
-   frame=0;const toolbar=root.querySelector('.pitch-toolbar').getBoundingClientRect(),top=Math.max(0,toolbar.bottom),bottom=innerHeight;
+   frame=0;
+   // A queued scroll must not restore the pitch URL after an Explore link starts loading.
+   if(root.hidden||location.pathname!=='/pitch'||!mobile())return;
+   const toolbar=root.querySelector('.pitch-toolbar').getBoundingClientRect(),top=Math.max(0,toolbar.bottom),bottom=innerHeight;
    const heights=sections.map(s=>{const r=s.getBoundingClientRect();return Math.max(0,Math.min(bottom,r.bottom)-Math.max(top,r.top));});
    const maximum=Math.max(...heights),n=heights.indexOf(maximum)+1;
    if(maximum>0&&n!==current){paint(n);onObserve(n);}
