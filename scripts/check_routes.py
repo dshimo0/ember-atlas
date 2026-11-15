@@ -87,6 +87,8 @@ with sync_playwright() as p:
   page.locator('#pitchNext').click();assert page.locator('#pitchCounter').inner_text()=='Slide 2 of 9'
   page.locator('#pitchNotes').check();assert page.locator('.active .presenter-notes').is_visible();page.locator('#pitchNotes').uncheck()
   page.reload();page.wait_for_function("document.querySelector('#pitchCounter')?.textContent==='Slide 2 of 9'")
+  if name=='mobile':
+   page.wait_for_function("document.querySelector('#slide-2').getBoundingClientRect().top>=90&&document.querySelector('#slide-2').getBoundingClientRect().top<250")
   assert not page.evaluate('document.documentElement.scrollWidth>innerWidth')
   page.screenshot(path=str(ROOT/f'submission/pitch-{name}.png'),full_page=name=='mobile')
   if name=='desktop':

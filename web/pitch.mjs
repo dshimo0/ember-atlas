@@ -16,5 +16,5 @@ export function createPitch(root,release,onSlide) {
   if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();change(-1);}
   if(e.key==='Home'){e.preventDefault();onSlide(1);}if(e.key==='End'){e.preventDefault();onSlide(slides.length);}
  });
- return {setSlide(n,scroll=false){current=n;root.querySelectorAll('.pitch-slide').forEach((s,i)=>s.classList.toggle('active',i===n-1));root.querySelector('#pitchCounter').textContent=`Slide ${n} of ${slides.length}`;root.querySelector('#pitchPrev').disabled=n===1;root.querySelector('#pitchNext').disabled=n===slides.length;if(scroll&&matchMedia('(max-width:700px)').matches)root.querySelector(`#slide-${n}`).scrollIntoView({block:'start'});},slides};
+ return {setSlide(n,scroll=false){current=n;root.querySelectorAll('.pitch-slide').forEach((s,i)=>s.classList.toggle('active',i===n-1));root.querySelector('#pitchCounter').textContent=`Slide ${n} of ${slides.length}`;root.querySelector('#pitchPrev').disabled=n===1;root.querySelector('#pitchNext').disabled=n===slides.length;if((scroll||n>1)&&matchMedia('(max-width:700px)').matches)root.querySelector(`#slide-${n}`).scrollIntoView({block:'start'});},slides};
 }
