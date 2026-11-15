@@ -1396,5 +1396,10 @@
     "deployment_id": "dpl_28hoTPfqfoAUE8H4B5PwHMJ4xg6Q",
     "report": "about-release.json",
     "change": "Sole-creator About page and navigation; scientific artifacts unchanged"
+  },
+  "later_experience_update": {
+    "source_commit": "5df68c7ddfb8d5586c92c330c9ee20caf52fa902",
+    "report": "submission/experience-release.json",
+    "scope": "P0/P1 presentation and navigation; original scientific identity and frozen results retained"
   }
 }

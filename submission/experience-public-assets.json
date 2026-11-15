@@ -1,0 +1,64 @@
+{
+  "url": "https://ember-atlas-opal.vercel.app",
+  "anonymous": true,
+  "routes": {
+    "/": {
+      "status": 200,
+      "release_bytes_match": true
+    },
+    "/demo": {
+      "status": 200,
+      "release_bytes_match": true
+    },
+    "/methods": {
+      "status": 200,
+      "release_bytes_match": true
+    },
+    "/pitch": {
+      "status": 200,
+      "release_bytes_match": true
+    },
+    "/about": {
+      "status": 200,
+      "release_bytes_match": true
+    }
+  },
+  "assets": {
+    "experience.css": {
+      "bytes": 34987,
+      "sha256": "2941d0e0ebf135a97fb540de17575b112e0ed60ff1df9d7bc64fb7497dea8ae1"
+    },
+    "experience.mjs": {
+      "bytes": 1791,
+      "sha256": "1660f758ec5a0fcdfce06a6d637757137dbb4f80de23c8cd639b29e59218f077"
+    },
+    "app.js": {
+      "bytes": 56966,
+      "sha256": "c161efd926d2dbd3becdd355f2676d196c819d491afd4bee5869943d6f56cd7c"
+    },
+    "assets/earth-nasa.jpg": {
+      "bytes": 218925,
+      "sha256": "515585f45f80026a66cbf597ef186b088289f3c10385ff1d15749601561f06c0"
+    },
+    "assets/pantanal-modis-2024-09-01.jpg": {
+      "bytes": 131233,
+      "sha256": "36f0037171be5320b9a09b5a3c11dfc29475cb4e3b26b1720be65ad3d550f1fc"
+    },
+    "assets/editorial-imagery.json": {
+      "bytes": 5918,
+      "sha256": "877330ce3b91e0cdc1e95f9c6711ef786bada2a6c6000695265a329b1e6baef2"
+    },
+    "assets/workflow-capture.mp4": {
+      "bytes": 805831,
+      "sha256": "d6aff9f6fff3a7cc3090224a3241f30f8414ba6d7570aac96c787a8317c273ec"
+    },
+    "assets/ember-atlas-pitch.pdf": {
+      "bytes": 782543,
+      "sha256": "71b19503181ed8b7aee93094354f893e4c60369d72eb6556dfafac33134edf56"
+    },
+    "data/regions-c06212509a51.json": {
+      "bytes": 31597,
+      "sha256": "c06212509a517c5c91377bd2cdc40442559896168ad887a5218214e4e36a5942"
+    }
+  }
+}

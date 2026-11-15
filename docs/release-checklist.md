@@ -1,6 +1,6 @@
 # Release verification checklist
 
-Authoritative executed identity: [transition-release.json](../submission/transition-release.json). Distinguish source commit from immutable data commit. The prior public Pantanal expansion at `a792e07` remains in history; current public execution is recorded after deployment.
+Current presentation identity: [experience-release.json](../submission/experience-release.json). Scientific executed identity: [transition-release.json](../submission/transition-release.json). Distinguish source commit from immutable data commit. The prior public Pantanal expansion at `a792e07` remains in history; current public execution is recorded after deployment.
 
 - [x] Eight fixed study geometries and real precomputed SP/NRT observations.
 - [x] 79 complete paired SP months per region; full snapshot/native/grid/flag reconciliation for 16 datasets.
@@ -13,7 +13,9 @@ Authoritative executed identity: [transition-release.json](../submission/transit
 - [x] Unit tests, frozen-file/credential checks, real recording and nine-page print executed locally.
 - [x] Source `1018c678` deployed to the public production alias; all 50 signed-out desktop/mobile browser groups passed against registry `c06212509a51`. See executed identity report.
 - [ ] Official Project Demonstration format, eligibility/deadline and media restrictions confirmed by Team Owner (official pages returned 503).
-- [ ] Human roster/contributions, physical-device check and human pitch rehearsal completed by Team Owner.
+- [x] Sole creator Diego Shimohama confirmed by owner; personal site preserved.
+- [x] P0/P1 source `5df68c7` publicly verified: five routes, three layouts, targeted accessibility rules, 50 regional groups and matching media bytes.
+- [ ] Physical-device check, assistive-technology review and human pitch rehearsal completed by Team Owner.
 - [ ] Terms accepted and final Submit for Judging performed by Team Owner.
 
 Scientific limits remain explicit: all reported thermal types, unverified reference-vintage homogeneity/VIIRS code interpretation, unknown usable observation opportunity, no ground-truth accuracy, no SP/NRT join, no factor transfer to smaller masks, and no pre-2020 archive outside Pantanal. These limits are not replaced by a generic banner.
