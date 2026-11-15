@@ -5,7 +5,7 @@ export async function sha256(bytes) {
 }
 export async function verifiedJSON(ref,compressed=false) {
   let url='/data/'+ref.file;
-  if(ref.url){const u=new URL(ref.url);if(u.protocol!=='https:'||u.hostname!=='raw.githubusercontent.com'||!/^\/dshimo0\/ember-atlas\/[a-f0-9]{40}\/web\/data\/[a-zA-Z0-9._-]+$/.test(u.pathname)||u.search||u.hash)throw new Error('Invalid pinned data origin');url=u.href;}
+  if(ref.url){const u=new URL(ref.url);if(u.protocol!=='https:'||u.origin!=='https://raw.githubusercontent.com'||u.username||u.password||!/^\/dshimo0\/ember-atlas\/[a-f0-9]{40}\/web\/data\/[a-zA-Z0-9._-]+$/.test(u.pathname)||u.search||u.hash)throw new Error('Invalid pinned data origin');url=u.href;}
   const response=await fetch(url);
   if(!response.ok)throw new Error('Data file unavailable');
   const bytes=compressed?await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer():await response.arrayBuffer();

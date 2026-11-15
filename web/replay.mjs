@@ -1,11 +1,11 @@
-import {aggregateMonth,adjustment,monthsBetween,monthEnd,csv} from './model.mjs';
+import {aggregateMonth,adjustment,monthsBetween,monthEnd,csv,evaluationPhase} from './model.mjs';
 export const replayCutoff=v=>`${Math.max(...v.train_years)+1}-01`;
 export const supportsReplay=(s,v)=>s.area==='all'&&s.mode!=='nrt'&&(v?!!v.accepted&&(s.region||'pantanal')===(v.region||'pantanal'):typeof s.calibrationAvailable==='boolean'?s.calibrationAvailable:!s.region||s.region==='pantanal');
 export function replayMonth(index,month,s,v){
  const cutoff=replayCutoff(v),before=month<cutoff,source=before?'MODIS_SP':'VIIRS_NOAA20_SP';
  const observed=aggregateMonth(index,month,source,s),benchmark=aggregateMonth(index,month,'MODIS_SP',s),a=before?null:adjustment(observed,s,v);
  const supported=supportsReplay(s,v),value=supported&&observed.complete?(before?observed.cells:a?.value??null):null;
- return {month,value,source,adjustment:before?'none; observed MODIS':a&&supported?(v.selected_method==='scalar'?'training-only scalar':v.region?'regional seasonal factor':'frozen seasonal factor'):'unavailable',factor:before?1:a&&supported?a.factor:null,from:observed.from,to:observed.to,retrieved:observed.retrieved,expected:observed.expected,complete:observed.complete,status:!observed.retrieved?'Data unavailable':!observed.complete?'Partial month':value===null?'Adjustment unavailable':'Complete retrieval',benchmark:!before&&benchmark.complete?benchmark.cells:null,phase:v.train_years.includes(+month.slice(0,4))?'Training':v.holdout_years.includes(+month.slice(0,4))?'Holdout':+month.slice(0,4)>Math.max(...v.holdout_years)?'External evaluation':'Archive',cutoff};
+ return {month,value,source,adjustment:before?'none; observed MODIS':a&&supported?(v.selected_method==='scalar'?'training-only scalar':v.region?'regional seasonal factor':'frozen seasonal factor'):'unavailable',factor:before?1:a&&supported?a.factor:null,from:observed.from,to:observed.to,retrieved:observed.retrieved,expected:observed.expected,complete:observed.complete,status:!observed.retrieved?'Data unavailable':!observed.complete?'Partial month':value===null?'Adjustment unavailable':'Complete retrieval',benchmark:!before&&benchmark.complete?benchmark.cells:null,phase:evaluationPhase(month,s,v),cutoff};
 }
 export function replayRows(index,s,v){return monthsBetween(s.start,s.end).map(m=>replayMonth(index,m,s,v));}
 export function replayBaseline(index,month,s,v){

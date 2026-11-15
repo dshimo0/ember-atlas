@@ -1,4 +1,4 @@
-import {aggregateMonth,adjustment,monthsBetween} from './model.mjs';
+import {aggregateMonth,adjustment,monthsBetween,evaluationPhase} from './model.mjs';
 export function evaluateValidation(v) {
  const rows=v.monthly.filter(r=>v.holdout_years.includes(r.year)).map(r=>{const factor=v.factors[r.season],value=Number.isFinite(factor)?r.viirs*factor:null,before=r.viirs-r.modis,after=value===null?null:value-r.modis;return {...r,adjusted:value,before,after,underperforms:after!==null&&Math.abs(after)>Math.abs(before)};});
  function metrics(k){const values=rows.map(r=>r[k]).filter(x=>x!==null),n=values.length;return{n,mae:n?values.reduce((s,x)=>s+Math.abs(x),0)/n:null,bias:n?values.reduce((s,x)=>s+x,0)/n:null,rmse:n?Math.sqrt(values.reduce((s,x)=>s+x*x,0)/n):null};}
@@ -9,7 +9,7 @@ export function evaluateValidation(v) {
 export function referenceRows(index,s,v) {
   return monthsBetween(s.start,s.end).map(month=>{
     const m=aggregateMonth(index,month,s.mode==='nrt'?'MODIS_NRT':'MODIS_SP',s),r=aggregateMonth(index,month,s.mode==='nrt'?'VIIRS_NOAA20_NRT':'VIIRS_NOAA20_SP',s),a=adjustment(r,s,v);
-    return {month,reference:s.sensor!=='VIIRS_NOAA20_SP'&&m.retrieved?m.cells:null,viirs:s.sensor!=='MODIS_SP'&&r.retrieved?r.cells:null,adjusted:s.sensor!=='MODIS_SP'?(a?.value??null):null,status:!r.retrieved?'Data unavailable':!r.complete?'Partial month':a?'Supported':'Adjustment unavailable',phase:s.mode==='nrt'?'Partial NRT window':s.area!=='all'?'Observed SP window':v.train_years.includes(+month.slice(0,4))?'Training':v.holdout_years.includes(+month.slice(0,4))?'Holdout':+month.slice(0,4)>Math.max(...v.holdout_years)?'External evaluation':'Archive context',source:'VIIRS_NOAA20_SP',reference_source:'MODIS_SP'};
+    return {month,reference:s.sensor!=='VIIRS_NOAA20_SP'&&m.retrieved?m.cells:null,viirs:s.sensor!=='MODIS_SP'&&r.retrieved?r.cells:null,adjusted:s.sensor!=='MODIS_SP'?(a?.value??null):null,status:!r.retrieved?'Data unavailable':!r.complete?'Partial month':a?'Supported':'Adjustment unavailable',phase:evaluationPhase(month,s,v),source:'VIIRS_NOAA20_SP',reference_source:'MODIS_SP'};
   });
 }
 export function sensitivitySummary(d) {

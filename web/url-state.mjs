@@ -20,3 +20,10 @@ export function stateURL(path,s,hash='') {
   if(path==='/demo')p.set('step',String(s.step||1));if(path==='/pitch')p.set('slide',String(s.slide||1));
   return path+'?'+p.toString()+hash;
 }
+
+export function datasetDefaults(ref,region,mode='sp'){
+ const period=mode==='sp'&&ref.calibration?.accepted&&ref.calibration.period?ref.calibration.period:ref.coverage;
+ const s={...defaultState(period),region,mode,view:mode==='sp'&&(ref.calibration?.accepted||region==='pantanal')?'replay':'raw'};
+ if(mode==='nrt')s.start=[new Date(Date.parse(s.end)-6*86400000).toISOString().slice(0,10),ref.coverage.start].sort().at(-1);
+ return s;
+}

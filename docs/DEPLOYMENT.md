@@ -8,7 +8,7 @@ Authoritative source/deployment identity, HTTP checks and public execution repor
 
 Static English HTML/CSS and native modules, locally vendored Leaflet 1.9.4, output `web`, no build/install command or new backend. `vercel.json` preserves root/asset paths and rewrites `/demo` and `/pitch` to the same index, with trailing slashes removed. Shared state/loaders/models/charts restore direct URLs and browser history.
 
-Visitors load versioned regional SP/NRT snapshots from the same deployment and never supply a FIRMS key or contact FIRMS. OpenStreetMap supplies interactive raster tiles; local Natural Earth geography covers all eight extents if tiles fail. No offline OSM tile cache is included. Original snapshots and frozen validation remain available at existing paths.
+Visitors load versioned regional SP/NRT snapshots from versioned release files and never supply a FIRMS key or contact FIRMS. OpenStreetMap supplies interactive raster tiles; local Natural Earth geography covers all eight extents if tiles fail. No offline OSM tile cache is included. Original snapshots and frozen validation remain available at existing paths.
 
 Root ingestion data, source archives, scripts, tests and `.env*` files are excluded by `.vercelignore`. Source evidence remains public in the repository. The existing Hobby project, team and infrastructure are unchanged; no paid service or server function is added.
 
@@ -28,8 +28,12 @@ Attach the committed source SHA to deployment metadata. For local equivalent rou
 
 ## Executed evidence
 
-The signed-out suite checks all eight SP and NRT presets on desktop and touch-enabled mobile: intended geometry fit, actual normalized observations, exact CSV records, map-cell sums and cell CSVs, source-change cutoff, benchmark state, 290-month MODIS calendar, early missing VIIRS, zero day, regional withholding, shared state and forced tile fallback. Presentation direct loads, refresh, world links, keyboard operation and nine-page printing are checked. Separate public checks verify source/asset hashes and anonymous video playback. Mobile remains emulation, not a physical-device claim.
+The signed-out suite checks all eight SP and NRT presets on desktop and touch-enabled mobile: intended geometry fit, actual normalized observations, exact CSV records, map-cell sums and cell CSVs, source-change cutoff, benchmark state, full available MODIS calendar (309 months in the Pantanal expansion), early missing VIIRS, zero day, regional withholding, shared state and forced tile fallback. Presentation direct loads, refresh, world links, keyboard operation and nine-page printing are checked. Separate public checks verify source/asset hashes and anonymous video playback. Mobile remains emulation, not a physical-device claim.
 
 HTTPS and hostnames use the system CA store. Chromium in this Cloud proxy uses only independently system-validated leaf-key pins, never a global certificate bypass; production has no such flags. The production alias is verified anonymously even if unique preview deployment URLs use provider authentication.
 
 The actual 30-second silent recording is at `/assets/workflow-capture.mp4`; the nine-page PDF is `/assets/ember-atlas-pitch.pdf`. Neither establishes official demonstration-format acceptance. Current guide, eligibility, human roster/rehearsal, terms and final submission remain Team Owner actions.
+
+## Selective reproducible update
+
+`python scripts/source_archives.py unpack` restores preserved original and derived source files. `python scripts/build_regions.py --regions pantanal` rebuilds only Pantanal while retaining other published registry references. A full rebuild evaluates all available regional source windows. Publication gates stay separate from raw retrieval coverage. Acquisition progress files are temporary and excluded from commits.

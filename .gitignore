@@ -11,3 +11,6 @@ build/
 /data/regions/
 
 /data/covering/
+
+/data/expansion-progress.json
+/data/shared-acquisition-progress.json

@@ -1,5 +1,5 @@
 """Build immutable regional summaries/shards from verified extracts without changing the frozen fit."""
-import calendar,gzip,hashlib,json,tempfile
+import argparse,calendar,gzip,hashlib,json,tempfile
 from collections import defaultdict
 from datetime import date,datetime,timezone
 from pathlib import Path
@@ -8,9 +8,14 @@ from build_calendar import grid_cell
 from build_dashboard import publish,encode
 from source_archives import unpack
 from stream_region import stream_inputs
-from evaluate_regions import evaluate,comparison_document
+from evaluate_regions import evaluate,comparison_document,publish_residuals
 
 ROOT=Path('web/data')
+def publish_observations(prefix,value):
+ # New shards use bounded-cost compression; existing canonical shards are reused byte-for-byte.
+ payload=encode(value);digest=hashlib.sha256(payload).hexdigest();name=prefix+'-'+digest[:12]+'.json.gz'
+ atomic_write(ROOT/name,gzip.compress(payload,compresslevel=6,mtime=0));return {'file':name,'sha256':digest}
+
 def read_inputs(directory,bbox,expected_class):
  observations=defaultdict(list);manifests=[];covered=defaultdict(set);seen=set()
  for path in sorted(directory.rglob('*.json')):
@@ -58,34 +63,38 @@ def build(region,mode,base,validation_ref,previous=None,regional_validation=None
      old_data=json.loads(gzip.decompress((ROOT/old['file']).read_bytes()));old_hash=hashlib.sha256(encode(old_data['observations'])).hexdigest()
     if old_hash==obs_hash:
      shards[month]=dict(old,observations_sha256=obs_hash);continue
-   shards[month]=dict(publish(region['id']+'-'+mode+'-observations-'+month,{'snapshot_sha256':inventory['sha256'],'month':month,'observations':rows},True),dataset_sha256=inventory['sha256'],observations_sha256=obs_hash)
+   shards[month]=dict(publish_observations(region['id']+'-'+mode+'-observations-'+month,{'snapshot_sha256':inventory['sha256'],'month':month,'observations':rows}),dataset_sha256=inventory['sha256'],observations_sha256=obs_hash)
   manifest_count=len(manifests);latest=max((m['retrieved_at']for m in manifests),default=base['built_utc'])
   if is_pantanal and mode=='sp':
    occupied={(r['day'],r['product'],r['area'])for r in daily};assert not any((r['day'],r['product'],r['area'])in occupied for r in base['daily'])
    daily+=base['daily'];shards.update({m:dict(ref,dataset_sha256=base['snapshot']['sha256'])for m,ref in base['observation_shards'].items()});observation_count+=base['observation_count'];manifest_count+=base['manifest_count']
   products=sorted({r['product']for r in daily});coverage={'start':min(r['day']for r in daily),'end':max(r['day']for r in daily)}
   product_coverage={p:{'start':min(r['day']for r in daily if r['product']==p),'end':max(r['day']for r in daily if r['product']==p),'retrieved_days':sum(1 for r in daily if r['product']==p and r['area']=='all')}for p in products}
-  audit_ref=None;comparison_ref=None;selected_ref=validation_ref;validation=None
+  audit_ref=None;comparison_ref=None;residual_ref=None;selected_ref=validation_ref;validation=None
   if mode=='sp':
-   validation=evaluate(daily,region['id']);audit_ref=publish(region['id']+'-regional-validation',validation);comparison_ref=publish(region['id']+'-regional-comparison',comparison_document(validation))
+   validation=evaluate(daily,region['id']);residual_ref=publish_residuals(validation);audit_ref=publish(region['id']+'-regional-validation',validation);comparison_ref=publish(region['id']+'-regional-comparison',comparison_document(validation))
    if not is_pantanal:selected_ref=audit_ref
   elif regional_validation:
-   selected_ref=regional_validation['validation'];audit_ref=regional_validation.get('external_audit');comparison_ref=regional_validation.get('comparison')
+   residual_ref=regional_validation.get('residual_csv');selected_ref=regional_validation['validation'];audit_ref=regional_validation.get('external_audit');comparison_ref=regional_validation.get('comparison')
   accepted=mode=='sp'and(is_pantanal or bool(validation and validation['accepted']))
-  calibration={'evaluated':accepted,'accepted':accepted,'geography':region['name']+' full study area only','period':{'start':'2020-01-01','end':'2024-12-31'}if is_pantanal and mode=='sp'else validation['publication_domain']if validation and validation['accepted']else None,'selected_method':'frozen seasonal'if is_pantanal else validation['selected_method']if validation else None,'reason':validation['reason']if validation else'SP calibration is not applied to NRT'}
-  summary={'schema':'ember-regional-dashboard-2','region':region['id'],'name':region['name'],'bounds':bbox,'processing_class':mode.upper(),'metric_method':'ember-1','grid_degrees':.05,'snapshot':inventory,'validation':selected_ref,'external_audit':audit_ref,'comparison':comparison_ref,'built_utc':latest,'daily':sorted(daily,key=lambda r:(r['day'],r['product'],r['area'])),'observation_shards':dict(sorted(shards.items())),'observation_count':observation_count,'manifest_count':manifest_count,'coverage':coverage,'product_coverage':product_coverage,'products':products,'observation_coverage':'unknown; no usable swath/cloud masks','calibration':calibration}
+  calibration={'evaluated':mode=='sp'and validation is not None,'accepted':accepted,'geography':region['name']+' full study area only','period':{'start':'2020-01-01','end':'2024-12-31'}if is_pantanal and mode=='sp'else validation['publication_domain']if validation and validation['accepted']else None,'selected_method':'frozen seasonal'if is_pantanal else validation['selected_method']if validation else None,'reason':validation['reason']if validation else'SP calibration is not applied to NRT'}
+  summary={'schema':'ember-regional-dashboard-2','region':region['id'],'name':region['name'],'bounds':bbox,'processing_class':mode.upper(),'metric_method':'ember-1','grid_degrees':.05,'snapshot':inventory,'validation':selected_ref,'external_audit':audit_ref,'comparison':comparison_ref,'residual_csv':residual_ref,'built_utc':latest,'daily':sorted(daily,key=lambda r:(r['day'],r['product'],r['area'])),'observation_shards':dict(sorted(shards.items())),'observation_count':observation_count,'manifest_count':manifest_count,'coverage':coverage,'product_coverage':product_coverage,'products':products,'observation_coverage':'unknown; no usable swath/cloud masks','calibration':calibration}
   if is_pantanal:summary['comparison']=None
   ref=publish(region['id']+'-'+mode+'-dashboard',summary)
-  compact=dict(ref,coverage=coverage,products=products,observations=observation_count,last_retrieval_utc=latest,calibration=calibration,validation=selected_ref,external_audit=audit_ref,comparison=summary['comparison'])
+  compact=dict(ref,coverage=coverage,products=products,observations=observation_count,last_retrieval_utc=latest,calibration=calibration,validation=selected_ref,external_audit=audit_ref,comparison=summary['comparison'],residual_csv=residual_ref)
   if validation:compact['evaluation_summary']={'selected_method':validation['selected_method'],'accepted':validation['accepted'],'outer':validation['partitions']['outer'],'external':validation['partitions']['external'],'gates':validation['gates']}
   return compact
 
 def main():
+ parser=argparse.ArgumentParser();parser.add_argument('--regions',nargs='+',help='Rebuild only these presets, preserving other published references');args=parser.parse_args()
  unpack()
  definitions=json.loads(Path('data/region-definitions-v1.json').read_text());p=json.loads((ROOT/'dashboard.json').read_text());base=json.loads((ROOT/p['file']).read_text());regions=[]
  previous_registry=json.loads((ROOT/json.loads((ROOT/'regions.json').read_text())['file']).read_text())if (ROOT/'regions.json').exists()else{'regions':[]}
  previous={r['id']:r for r in previous_registry['regions']}
+ if args.regions and not set(args.regions)<=set(r['id']for r in definitions['regions']):raise ValueError('Unknown study area')
  for region in definitions['regions']:
+  if args.regions and region['id']not in args.regions:
+   regions.append(previous[region['id']]);continue
   r=dict(region,geometry_type='bounding box',source=definitions['geometry_source'],source_url=definitions['source_url'])
   w,s,e,n=r['bounds'];r['geometry']={'type':'Polygon','coordinates':[[[w,s],[e,s],[e,n],[w,n],[w,s]]]}
   r['datasets']={}

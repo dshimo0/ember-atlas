@@ -30,13 +30,22 @@ def pack():
    year=json.loads(path.with_suffix('.json').read_text()).get('start',path.stem)[:4]
    key='pantanal-history-'+year if family=='history'else 'covering-'+path.relative_to(ROOT/'data/covering').parts[0]+'-'+year if family=='covering'else'-'.join(path.relative_to(ROOT/'data/regions').parts[:2])+'-'+year
    groups[key].append(path)
+ # Bound archive-building memory and stay below GitHub's per-file size limit.
+ chunks={}
  for key,paths in sorted(groups.items()):
+  bucket=[];size=0;part=0
+  for path in paths:
+   if bucket and size+path.stat().st_size>64*1024*1024:
+    chunks[key+'-part'+str(part)]=bucket;part+=1;bucket=[];size=0
+   bucket.append(path);size+=path.stat().st_size
+  if bucket:chunks[key+'-part'+str(part)]=bucket
+ for key,paths in sorted(chunks.items()):
   output=io.BytesIO();members={}
   with tarfile.open(fileobj=output,mode='w',format=tarfile.PAX_FORMAT)as archive:
    for path in paths:
     name=str(path.relative_to(ROOT));content=path.read_bytes();members[name]=hashlib.sha256(content).hexdigest()
     info=tarfile.TarInfo(name);info.size=len(content);info.mtime=0;info.mode=0o644;archive.addfile(info,io.BytesIO(content))
-  payload=gzip.compress(output.getvalue(),mtime=0);digest=hashlib.sha256(payload).hexdigest();name='data/source-archives/'+key+'-'+digest[:12]+'.tar.gz';atomic_write(ROOT/name,payload)
+  payload=gzip.compress(output.getvalue(),compresslevel=6,mtime=0);assert len(payload)<95*1024*1024,'Source archive exceeds publication limit';digest=hashlib.sha256(payload).hexdigest();name='data/source-archives/'+key+'-'+digest[:12]+'.tar.gz';atomic_write(ROOT/name,payload)
   refs.append({'path':name,'sha256':digest,'members':members})
  record={'schema':'ember-source-archives-2','license':'NASA FIRMS observations; see submission/RESOURCES.md','extraction':'python scripts/source_archives.py unpack; exact original paths and bytes; no overwrite of changed work','archives':refs}
  payload=json.dumps(record,indent=2,sort_keys=True).encode();digest=hashlib.sha256(payload).hexdigest();atomic_write(INDEX,payload);atomic_write(INDEX.with_name('index-'+digest[:12]+'.json'),payload)

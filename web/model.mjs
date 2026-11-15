@@ -68,11 +68,11 @@ export function csv(headers, rows) { return [headers, ...rows].map(row => row.ma
 export const OBSERVATION_COLUMNS = ['latitude', 'longitude', 'date_utc', 'time_utc', 'product', 'platform', 'confidence', 'frp_mw', 'daynight', 'source', 'snapshot_sha256'];
 export function observationCSV(rows, snapshot) { return csv(OBSERVATION_COLUMNS, rows.map(r => OBSERVATION_COLUMNS.map(k => k === 'snapshot_sha256' ? snapshot : r[k]))); }
 export function aggregateCSV(index, state, validation, snapshot) {
-  const columns = ['month','area','product','from_utc','through_utc','native_detections','occupied_cell_days','retrieved_days','selected_days','retrieval_status','complete_month','metric','unit','method','observation_coverage','calibration','factor','adjusted_modis_reference_cell_days','snapshot_sha256','region','processing_class'];
+  const columns = ['month','area','product','from_utc','through_utc','native_detections','occupied_cell_days','retrieved_days','selected_days','retrieval_status','complete_month','metric','unit','method','observation_coverage','calibration','factor','adjusted_modis_reference_cell_days','snapshot_sha256','region','processing_class','calibration_method'];
   const rows = [];
   for (const month of monthsBetween(state.start, state.end)) for (const product of selectedProducts(state.sensor,state.mode)) {
     const r = aggregateMonth(index, month, product, state), a = adjustment(r, state, validation);
-    rows.push([month,state.area,product,r.from,r.to,r.native,r.cells,r.retrieved,r.expected,r.status,r.complete,'occupied cells per UTC day summed over selected dates','cell-days',validation.method,'unknown',a ? 'supported full study area' : 'unavailable',a?.factor,a?.value,snapshot,state.region||'pantanal',(state.mode||'sp').toUpperCase()]);
+    rows.push([month,state.area,product,r.from,r.to,r.native,r.cells,r.retrieved,r.expected,r.status,r.complete,'occupied cells per UTC day summed over selected dates','cell-days','ember-1','unknown',a ? 'supported full study area' : 'unavailable',a?.factor,a?.value,snapshot,state.region||'pantanal',(state.mode||'sp').toUpperCase(),a?.method]);
   }
   return csv(columns, rows);
 }
@@ -83,3 +83,10 @@ export function occupiedDays(rows,product) {
  return [...cells.values()].map(c=>({lat:c.lat,lon:c.lon,occupied_days:c.days.size,dates:[...c.days].sort()}));
 }
 export function cellCSV(rows,product,state,snapshot){return csv(['region','product','from_utc','through_utc','grid_south','grid_west','grid_degrees','occupied_days','utc_days','snapshot_sha256'],occupiedDays(rows,product).map(c=>[state.region||'pantanal',product,state.from,state.to,c.lat*.05,c.lon*.05,.05,c.occupied_days,c.dates.join(';'),snapshot]));}
+
+export function evaluationPhase(month,s,v){
+ if(s.mode==='nrt')return 'NRT (provisional)';
+ if(s.area!=='all')return 'Regional observed SP';
+ const year=+month.slice(0,4);
+ return v.train_years.includes(year)?'Training':v.holdout_years.includes(year)?'Holdout':year>Math.max(...v.holdout_years)?'External evaluation':'Archive context';
+}

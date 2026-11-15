@@ -21,6 +21,8 @@ class RegionalProtocolTests(unittest.TestCase):
   self.assertTrue(all(r['adjusted']is None for r in b['monthly']))
  def test_missing_day_cannot_become_a_complete_publication_month(self):
   daily=self.daily();daily.pop();r=evaluate(daily,'siberia');self.assertFalse(r['support_complete']);self.assertFalse(r['accepted']);self.assertIn('2026-07',r['excluded_months'])
+ def test_incomplete_inner_period_cannot_be_reported_as_a_selected_fit(self):
+  rows=[r for r in self.daily()if not(r['day'].startswith('2020')and r['product']=='MODIS_SP')];v=evaluate(rows,'california');self.assertIsNone(v['selected_method']);self.assertFalse(v['accepted']);self.assertEqual(v['adjusted']['n'],0);self.assertTrue(all(f is None for f in v['factors'].values()))
  def test_original_pantanal_stays_frozen_despite_comparison_gates(self):
   r=evaluate(self.daily(),'pantanal');self.assertFalse(r['accepted']);self.assertIn('19 fresh months',r['reason']);self.assertIsNone(r['publication_domain'])
  def test_streamed_zero_and_duplicate_rules(self):

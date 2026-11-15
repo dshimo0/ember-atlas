@@ -23,7 +23,7 @@ def main():
      if key[0][:7]==month:assert x['native']==native[key]and x['cells']==len(cells[key]),(r['id'],key)
    assert count==s['observation_count']
    if mode=='sp'and s.get('external_audit'):
-    audit=read(s['external_audit']);assert evaluate(s['daily'],r['id'])==audit
+    audit=read(s['external_audit']);assert json.loads(json.dumps(evaluate(s['daily'],r['id'])))==audit
     if r['id']!='pantanal':assert s['calibration']['accepted']==audit['accepted']
    checks.append({'region':r['id'],'mode':mode,'observations':count,'all_daily_counts_and_grid_totals_match':True,'regional_evaluation_reproduced':mode=='sp'and bool(s.get('external_audit'))})
  report={'registry':json.loads((ROOT/'regions.json').read_text()),'checks':checks};Path('submission/regional-artifact-check.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))
