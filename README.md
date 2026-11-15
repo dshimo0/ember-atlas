@@ -1,20 +1,71 @@
 # Ember Atlas
 
-[Explore](https://ember-atlas-opal.vercel.app/) · [Sensor transition replay](https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&benchmark=1&month=2024-09) · [Pitch](https://ember-atlas-opal.vercel.app/pitch) · [About the team](https://ember-atlas-opal.vercel.app/about)
+**Explore comparable fire activity across MODIS and VIIRS.**
 
-Ember Atlas serves observed NASA FIRMS fire activity for eight explicitly bounded study areas. Pantanal is the default scientific walkthrough. All initial observations, daily summaries and exports are versioned snapshots; visitors do not supply a FIRMS key. The interactive OpenStreetMap basemap has an attributed local Natural Earth fallback.
+Ember Atlas is a geographic dashboard for the NASA Space Apps Challenge, **“Harmonization of MODIS and VIIRS Hot Spots.”** It combines real NASA FIRMS observations, a source-labeled activity calendar and reproducible downloads across eight study areas.
 
-## Verify the transition
+[Explore the app](https://ember-atlas-opal.vercel.app/) · [Guided demo](https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&benchmark=1&month=2024-09) · [Pitch](https://ember-atlas-opal.vercel.app/pitch) · [About](https://ember-atlas-opal.vercel.app/about)
 
-1. Open `/demo` on Pantanal. The primary reference-scale calendar replays a source change at **January 2023**, immediately after training ends.
-2. Select December 2022 and January 2023. The source changes from observed MODIS to frozen seasonally adjusted NOAA-20 VIIRS on the MODIS reference scale. Every month identifies its source and adjustment.
-3. Reveal the separate observed holdout MODIS benchmark. MODIS actually remains available after the cutoff; the cutoff is a replay scenario, not a mission end date.
-4. Inspect September 2024: MODIS 5,819, common-grid VIIRS 8,809, seasonal replay 4,879.1 occupied cell-days. The replay is 16.2% below MODIS. Historical context uses complete earlier matched-domain months, without future years.
-5. Export source-tagged replay months, matching observations, full-data occupied-day cells, selected-period aggregates and a checksum manifest. Change region, sensor or dates; the map and exports use the same mask and UTC scope.
+[Run locally](#run-locally) · [Validation](#measured-sensor-agreement) · [Coverage](#regions-and-released-coverage) · [Methodology](docs/methodology.md)
 
-The map's primary analytical layer is observed occupied UTC days per 0.05° cell for one named sensor, computed from all matching records. Sampled detections are a separate optional inspection layer. Monthly calibration does not move points or adjust the spatial occupancy layer. Retrieved zero detections, missing retrieval and unknown usable satellite observation coverage remain distinct.
+[![Ember Atlas: Pantanal map and September 2024 sensor comparison](web/assets/dashboard-view.png)](https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&benchmark=1&month=2024-09)
 
-## Published coverage
+*Actual product view using released observations. The map shows occupied UTC days per grid cell; the comparison uses monthly occupied cell-days.*
+
+## What you can do
+
+- Explore eight study areas on an interactive, attributed map with zoom, pan, scale and a local geographic fallback.
+- Select a month, area and sensor; inspect the matching calendar, comparison, historical context and observations.
+- Replay a source change, then reveal the continuing MODIS observations as a separate benchmark.
+- Inspect full-data grid occupancy or a clearly labeled sample of individual detections.
+- Download observations, monthly aggregates, occupied-day cells, reference-scale months and a provenance manifest.
+- Share the selected analytical state through its URL.
+
+The public app reads versioned snapshots. Visitors need no account, FIRMS key or live FIRMS connection. All sixteen initial SP/NRT observation views and aggregate history are served locally; additional historical observation shards use immutable public GitHub URLs with SHA-256 verification. External map tiles have an attributed local fallback.
+
+## Start with the Pantanal case
+
+1. Open the [September 2024 walkthrough](https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&benchmark=1&month=2024-09).
+2. Compare **5,819 MODIS**, **8,809 common-grid VIIRS** and **4,879.1 adjusted VIIRS** occupied cell-days. The adjustment remains **16.2% below MODIS** that month.
+3. Compare December 2022 with January 2023. The replay uses observed MODIS before the cutoff and adjusted NOAA-20 VIIRS afterward. January 2023 is a **replay scenario**; MODIS observations actually continue.
+4. Inspect the same-month historical baseline, including its earlier years, sample size and coverage. The selected year and future years are excluded.
+5. Export the evidence, then change the region or filters. Map, comparison and downloads follow the same selected study mask and UTC scope.
+
+## Measured sensor agreement
+
+The original Pantanal evaluation uses **36 training months in 2020–2022** and **24 separate holdout months in 2023–2024**, over the full Pantanal study area. All three methods use the same paired months and units.
+
+| Method | Holdout MAE ↓ | Signed bias |
+| --- | ---: | ---: |
+| Unadjusted VIIRS on the common grid | 1,021.7 | +1,021.7 |
+| Training-only scalar | **175.3** | −54.3 |
+| Published frozen quarterly factors | 199.7 | −124.0 |
+
+**Units: occupied cell-days per month.** The frozen quarterly adjustment reduces MAE by **80.5% against unadjusted common-grid VIIRS**. The scalar performs better on this holdout and remains visible in the comparison. The published Pantanal method was retained; selecting a replacement requires a separate evaluation protocol.
+
+The scalar minimizes training-only squared monthly residuals through the origin: `a = sum(VIIRS × MODIS) / sum(VIIRS²)`, giving `a = 0.5497999782`. Quarterly factors preserve the corresponding training-quarter totals, with the documented pooled fallback.
+
+Peak-month residuals also remain visible. The six most active holdout months are selected by observed MODIS cell-days, independently of candidate errors. Their scalar/quarterly MAE is **404.6 / 534.6** cell-days per month. See the [three-method artifact](web/data/replay-evaluation-7d4268256831.json) and [all monthly residuals](https://ember-atlas-opal.vercel.app/data/replay-residuals.csv).
+
+**Interpretation:** MODIS is the comparison reference. Ground-truth accuracy and usable satellite observation opportunity are unmeasured. Reported MODIS version labels change from `6.03` in training to `61.03` in evaluation; physical processing homogeneity remains unverified. The results describe agreement with MODIS_SP as delivered, without isolating sensor effects. Literal versions and source-type flags are preserved in current exports.
+
+## Regions and released coverage
+
+Presets appear in this order: [Pantanal](https://ember-atlas-opal.vercel.app/?region=pantanal), [Southern Amazon](https://ember-atlas-opal.vercel.app/?region=southern-amazon), [Cerrado](https://ember-atlas-opal.vercel.app/?region=cerrado), [Gran Chaco](https://ember-atlas-opal.vercel.app/?region=gran-chaco), [California](https://ember-atlas-opal.vercel.app/?region=california), [Southeastern Australia](https://ember-atlas-opal.vercel.app/?region=southeastern-australia), [Iberian Peninsula](https://ember-atlas-opal.vercel.app/?region=iberian-peninsula) and [Siberia](https://ember-atlas-opal.vercel.app/?region=siberia).
+
+| Released view | Products | Observed UTC coverage |
+| --- | --- | --- |
+| Paired archive, all eight areas | `MODIS_SP`, `VIIRS_NOAA20_SP` | January 2020–July 2026 · 79 complete paired months |
+| Extended Pantanal archive | `MODIS_SP` | November 2000–July 2026 |
+| Recent detections, all eight areas | `MODIS_NRT` | September 1–November 14, 2026 |
+| Recent detections, all eight areas | `VIIRS_NOAA20_NRT` | August 1–November 14, 2026 |
+
+These dates describe the frozen release snapshot. The default NRT selection is November 8–14 UTC. SP and NRT remain separate because the captured availability provides no same-sensor overlap for evaluating a join.
+
+Every preset is an explicitly bounded **WGS84 study rectangle**. The [region registry](data/region-definitions-v1.json) defines the geometry; the [published registry](https://ember-atlas-opal.vercel.app/data/regions.json) resolves the current products and versioned artifacts. Siberia means 60–140°E, 50–72°N; Southeastern Australia means 140–154°E, 44–28°S, including Tasmania. These rectangles are analytical masks, rather than official biome or state boundaries.
+
+<details>
+<summary>Eight-area inventory: exact bounds, product dates and retrieved days</summary>
 
 <!-- COVERAGE:START -->
 | Study area (W/S/E/N) | Observed SP coverage | Recent NRT UTC window | Adjustment |
@@ -29,56 +80,16 @@ The map's primary analytical layer is observed occupied UTC days per 0.05° cell
 | Siberia (60, 50, 140, 72) | MODIS_SP: 2020-01-01–2026-07-31 (2404 retrieved days); VIIRS_NOAA20_SP: 2020-01-01–2026-07-31 (2404 retrieved days) | MODIS_NRT: 2026-09-01–2026-11-14 (75 retrieved days); VIIRS_NOAA20_NRT: 2026-08-01–2026-11-14 (106 retrieved days) | Evaluated seasonal, full area SP through 2026-07-31 |
 <!-- COVERAGE:END -->
 
-Each preset is a project-defined WGS84 rectangle called a **study area**, not an official biome/state mask. The [versioned registry](https://ember-atlas-opal.vercel.app/data/regions.json) links to exact geometries, sources, products, observation counts and immutable SP/NRT datasets. Broad Siberia means 60–140°E, 50–72°N; Southeastern Australia means 140–154°E, 44–28°S, including Tasmania. Full bounds appear in the application and registry.
+</details>
 
-Pantanal MODIS observations span November 2000–July 2026; NOAA-20 SP spans January 2020–July 2026. Each other preset now has the same 79 complete paired SP months in 2020–July 2026. Each new region passed its own registered inner-selection and independent evaluation gates. Pantanal retains its frozen 2020–2024 adjustment; new regional factors apply only to their full evaluated rectangles through July 2026. Subregions and NRT inherit no adjustment.
+### Where adjustment is supported
 
-NRT remains separate: MODIS September 1–November 14, 2026; NOAA-20 August 1–November 14. The default recent selection is November 8–14 UTC. The full archive and selected-period exports expose the actual product windows and missingness.
+Pantanal retains its frozen **2020–2024** publication domain. Its 19 later paired months in January 2025–July 2026 are a separate audit: MAE **399.4 raw / 89.7 scalar / 70.8 quarterly**, with quarterly signed bias **+67.4**. The registered extension gate requires 24 fresh complete months.
 
-Reported MODIS labels are `6.03` in training and `61.03` in holdout. Source-vintage homogeneity is unverified. The measured gains describe agreement with MODIS_SP as delivered, without isolating sensor effects. All reported thermal types remain included. Current observation/monthly exports retain literal versions and types; the source split is linked beside the headline. See [methods](docs/methodology.md) and [regional results](submission/regional-evaluation.md).
+Each of the seven other areas has its own registered method selection and evaluation. An inner 2022 comparison follows fitting on 2020–2021; the chosen method is refitted on 2020–2022, then evaluated on the outer, known-month-excluded and fresh partitions. All seven passed their registered gates and publish local quarterly adjustments through July 2026. Factors apply only to their evaluated full study areas and complete SP months. Subregions, partial periods and NRT receive no transferred calibration.
 
-## Three-method evidence
-
-All methods use the same full Pantanal study area, 36 training months in 2020–2022 and 24 complete paired holdout months in 2023–2024. The scalar minimizes training-only through-origin squared monthly residuals: `a = sum(VIIRS × MODIS) / sum(VIIRS²)`.
-
-| Method | Holdout MAE | Signed bias | Peak-six MAE | Peak-six bias |
-| --- | ---: | ---: | ---: | ---: |
-| Unadjusted VIIRS, common grid | 1,021.7 | +1,021.7 | 2,225.2 | +2,225.2 |
-| Training-only scalar (0.5497999782) | 175.3 | −54.3 | 404.6 | −404.6 |
-| Existing frozen quarterly factors | 199.7 | −124.0 | 534.6 | −534.6 |
-
-Units are occupied cell-days/month. The six peak months are the holdout months with greatest observed MODIS activity, ranked before considering method residuals: August/September 2024, November 2023, October/June/July 2024 in descending activity. Every monthly residual is published in [CSV](https://ember-atlas-opal.vercel.app/data/replay-residuals.csv) and the [versioned evaluation](https://ember-atlas-opal.vercel.app/data/replay-evaluation.json).
-
-The scalar performs better on this existing holdout. The seasonal method remains the published frozen rule; no replacement was selected using the same evaluation evidence. Any later method selection requires a preregistered new outer holdout or nested blocked-year protocol. The seasonal 80.5% reduction is against unadjusted common-grid VIIRS, **not against the scalar**. MODIS is a comparison reference; these results do not establish detection accuracy, ground-truth accuracy or global performance.
-
-## Evidence and reproduction
-
-- [Original frozen validation](https://ember-atlas-opal.vercel.app/data/validation-ba55acfc7909.json) and [original snapshot](https://ember-atlas-opal.vercel.app/data/snapshot-19621fa88d40.json.gz) remain unchanged.
-- [Methodology](docs/methodology.md), [data specification](specs/002-data.md), [challenge traceability](docs/challenge-traceability.md), [pitch/script](docs/pitch.md), [resources](submission/RESOURCES.md) and [release checks](docs/release-checklist.md).
-- [Eight-region execution evidence](submission/eight-region-check-public.json) and [release identity](submission/transition-release.json).
-
-```sh
-python scripts/serve.py
-python -m unittest discover -s tests
-node --test tests/test_*.mjs
-BASE_URL=http://127.0.0.1:8000 python scripts/check_eight_regions.py
-```
-
-Static HTML/CSS, native ES modules and locally vendored Leaflet 1.9.4; no new backend or framework. Direct loads/refreshes of `/`, `/demo` and `/pitch` use the established Vercel rewrites. Browser checks require Playwright, Chromium and pdfinfo. Mobile checks use viewport/touch emulation, not a physical device.
-
-Ingestion requires `FIRMS_MAP_KEY` only in its environment. `scripts/acquire_regions.py` reuses the original bounded downloader and checksum manifests; `--history --respect-quota` resumes older Pantanal MODIS with quota backoff. Run `scripts/evaluate_replay.py`, `scripts/build_regions.py` and `scripts/build_geography.py` to reproduce public derivatives, then update coverage documentation. Original raw payload bytes and manifests are retained in deterministic `data/source-archives/` packages. `python scripts/source_archives.py unpack` restores their exact recorded paths; resumed ingestion and building do this automatically. Run `python scripts/source_archives.py pack` after new ingestion.
-
-Remaining scientific gaps: multi-year overlap and independent calibration for seven areas; expanded out-of-time evaluation; usable swath/cloud masks; ground truth; validated NRT/SP joining and a biome-mask analysis. Team roster, current official media requirements, human pitch rehearsal, terms and final submission remain Team Owner actions. The nine-slide presentation is separate from the unverified official Project Demonstration format.
-
-## Regional evaluation protocol
-
-New regional method selection is registered in [regional-evaluation-protocol-v1.json](data/regional-evaluation-protocol-v1.json), committed before acquisition. The scalar or quarterly method is chosen on 2022 after fitting 2020–2021, then refitted on 2020–2022. Publication requires complete support and better MAE with no worse absolute bias on the outer, known-month-excluded and fresh evaluation partitions. Raw exploration remains available if any gate fails. See [methodology](docs/methodology.md) for the exact objective, gates and acquisition provenance.
-
-The new Pantanal audit covers 19 complete paired SP months in January 2025–July 2026. MAE is 399.4 unadjusted, 89.7 scalar and 70.8 frozen quarterly cell-days/month; quarterly signed bias is +67.4. These are diagnostic candidate results outside the original publication domain. The 2020–2024 published adjustment is unchanged; the registered extension gate requires 24 fresh complete months. [Versioned audit](web/data/pantanal-regional-validation-247ee21cc4ce.json).
-
-The captured availability table has no same-sensor SP/NRT overlap. [Availability audit](web/data/processing-transition.json) records why the series remain separate and the evidence required before joining them.
-
-## Regional evaluation
+<details>
+<summary>Eight-area evaluation: local methods, MAE, bias and publication domains</summary>
 
 <!-- REGIONAL-EVALUATION:START -->
 | Study area | Inner choice | Outer MAE: raw → choice (n) | Fresh MAE: raw → choice (n) | Fresh signed bias | Published adjustment |
@@ -95,10 +106,99 @@ The captured availability table has no same-sensor SP/NRT overlap. [Availability
 Units: occupied cell-days/month; full named study rectangle, SP only. Inner choice uses 2022 after fitting 2020–2021; refit uses 2020–2022. Outer: 2023–2024, including the previously published September 2024; the artifact also reports the sensitivity excluding that month. Fresh: January 2025–July 2026, excluded from fitting and selection. Pantanal retains the original publication regardless of the new audit. A failed regional gate withholds adjustment. MODIS is the comparison reference, not ground truth.
 <!-- REGIONAL-EVALUATION:END -->
 
-Release verification: deployed source [`1018c678`](https://github.com/dshimo0/ember-atlas/commit/1018c678d7be5efb97efce5aaf221e155c6a8e24), immutable observation data [`a9bc9c9b`](https://github.com/dshimo0/ember-atlas/commit/a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391). All 50 signed-out desktop/mobile workflow groups passed; 16 datasets and eight regional evaluations were reconciled. See the [executed release evidence](submission/transition-release.json) and [remaining release items](docs/release-checklist.md).
+</details>
 
-## Creator
+## How the measurements work
 
-Ember Atlas is an individual project by **Diego Shimohama**. Personal website: [dshimo.vercel.app](https://dshimo.vercel.app/). The [About page](https://ember-atlas-opal.vercel.app/about) identifies the creator and links to the project, reproducible evidence and data credits. AI assistance and submission-specific disclosures are recorded in the submission materials.
+1. **Preserve the observations.** Retain original FIRMS CSV bytes and retrieval manifests, including products, study bounds, UTC windows, hashes and source fields.
+2. **Use a common basis.** Assign detections to a globally anchored **0.05° WGS84 grid**. Count each occupied cell once per product per UTC day, then sum those daily counts over the month.
+3. **Fit on training data.** Estimate transparent VIIRS-to-MODIS scale factors within the defined region and training period.
+4. **Evaluate separately.** Report MAE, signed bias, individual monthly residuals and active-month diagnostics against observed MODIS.
 
-About-page verification and its deployment identity are recorded in [about-release.json](submission/about-release.json); scientific artifacts and their prior validation remain unchanged.
+An **occupied cell-day** is one grid cell with at least one reported detection from a product on a UTC day. Native detection counts, occupied cell-days, independent fire events and burned area describe different quantities. Monthly adjustment changes aggregate values; map cells and point locations remain observed.
+
+A successful retrieval with no reported detections yields zero. Missing retrievals and unavailable observation files remain blank or unavailable. Partial periods retain their actual UTC scope. Historical baselines use complete earlier same-month values, with exact years and sample sizes displayed. All reported thermal-source types remain in the frozen metric; independent fire classification is unmeasured.
+
+[Full methodology](docs/methodology.md) · [Data acceptance rules](specs/002-data.md) · [Regional evaluation protocol](data/regional-evaluation-protocol-v1.json)
+
+## Run locally
+
+The application is static HTML/CSS and native JavaScript modules, with locally vendored Leaflet 1.9.4. Serving it uses Python's standard library; there is no frontend install or build step. Python 3.12 is the tested runtime.
+
+```sh
+git clone --branch work https://github.com/dshimo0/ember-atlas.git
+cd ember-atlas
+python scripts/serve.py --port 8000
+```
+
+Open [localhost:8000](http://localhost:8000). The server handles direct loads and refreshes of `/`, `/demo`, `/pitch` and `/about`. Branch `work` contains the published implementation; [PR #2](https://github.com/dshimo0/ember-atlas/pull/2) remains open against `main`. The repository includes the versioned observation data and source archives.
+
+### Verify the release
+
+```sh
+python -m unittest discover -s tests
+node --test tests/test_*.mjs
+python scripts/verify_regional_artifacts.py
+python scripts/check_release_integrity.py
+```
+
+The first two commands run the Python tests and JavaScript tests; Node is only needed for JavaScript checks. The artifact check recomputes regional evaluations and reconciles every shard with its native/grid totals. The integrity check verifies original frozen files and scans for credential patterns; when an ingestion key is present in the environment, it also checks that value without printing it.
+
+Optional Linux browser acceptance checks require the Playwright Python package and Chromium at `/usr/bin/chromium`. Chromium also generates the presentation PDF during the workflow check. Start the server in another terminal, then run:
+
+```sh
+BASE_URL=http://127.0.0.1:8000 python scripts/check_eight_regions.py
+BASE_URL=http://127.0.0.1:8000 python scripts/check_about.py
+```
+
+The recorded scientific release passed **25 Python tests, five JavaScript test modules and 50 signed-out desktop/mobile browser groups**; 16 processing/region datasets and eight evaluations were reconciled. Later About-page and personal-site updates have their own checks. The linked reports identify the tested source commits. Mobile testing used emulation.
+
+[Scientific release evidence](submission/transition-release.json) · [Public workflow checks](submission/eight-region-check-public.json) · [About-page checks](submission/about-release.json)
+
+### Data ingestion and reproduction
+
+Browsing and checking the released snapshots require no FIRMS key. New retrievals use `FIRMS_MAP_KEY` only in the ingestion environment. Keep credentials outside source control and client assets.
+
+- `scripts/firms.py` plans bounded downloads and verifies FIRMS responses.
+- `scripts/acquire_shared.py` resumes the matched regional release, preserving original covering queries and exact subarea derivations.
+- `scripts/source_archives.py unpack` restores original CSV/manifest paths from the immutable archives.
+- `scripts/build_regions.py` builds the regional summaries and observation shards; `scripts/evaluate_replay.py` reproduces the Pantanal three-method comparison.
+- `scripts/pin_release_data.py` pins historical observation shards to an immutable public data commit before deployment.
+
+The [methodology](docs/methodology.md) documents the scientific contract. The [deployment guide](docs/DEPLOYMENT.md) records the authorized Vercel workflow and snapshot-hosting rules. The immutable observation-data origin is commit [`a9bc9c9b`](https://github.com/dshimo0/ember-atlas/commit/a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391).
+
+## Project guide
+
+| Path | Contents |
+| --- | --- |
+| [`web/`](web/) | Public application, Leaflet, local geography and versioned release artifacts |
+| [`scripts/`](scripts/) | Ingestion, transformation, evaluation, static serving and verification |
+| [`data/`](data/) | Region registry, registered protocols, original source archives and manifests |
+| [`tests/`](tests/) | Python and JavaScript tests |
+| [`specs/`](specs/) | Product and data acceptance contracts |
+| [`docs/`](docs/) | Methodology, judging review, demonstration journey, pitch and deployment |
+| [`submission/`](submission/) | Portal copy, resource inventory, media and executed release evidence |
+
+## Demonstration and submission materials
+
+- [Guided exploration](docs/demo-experience.md) and [challenge traceability](docs/challenge-traceability.md).
+- [Nine-section pitch and script](docs/pitch.md), [public PDF](https://ember-atlas-opal.vercel.app/assets/ember-atlas-pitch.pdf) and [actual silent screen recording](https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4).
+- [English portal copy](submission/PROJECT-PAGE.md), [resource inventory](submission/RESOURCES.md) and [release checklist](docs/release-checklist.md).
+
+The local three-minute pitch is separate from the official Project Demonstration format. Current official guidance returned HTTP 503 during verification. Eligibility, media requirements, human rehearsal, terms and final submission remain Team Owner actions.
+
+## Current limits and next work
+
+- Confirm the MODIS source-version mapping and reference-processing continuity before making sensor-only causal claims.
+- Measure usable swath/cloud coverage and compare against independent physical evidence.
+- Acquire the additional fresh months needed to evaluate an extension of the Pantanal adjustment.
+- Extend pre-2020 history beyond Pantanal, evaluate SP/NRT continuity when matching windows exist, and separately evaluate any new biome or custom mask.
+- Complete physical-device testing and human pitch rehearsal.
+
+## Creator and credits
+
+**Diego Shimohama** — sole creator of Ember Atlas.
+
+[Personal website](https://dshimo.vercel.app/) · [GitHub](https://github.com/dshimo0) · [About the project and creator](https://ember-atlas-opal.vercel.app/about)
+
+Observations: [NASA FIRMS](https://www.earthdata.nasa.gov/data/tools/firms). Basemap: [OpenStreetMap contributors](https://www.openstreetmap.org/copyright). Local geography: [Natural Earth](https://www.naturalearthdata.com/about/terms-of-use/). Map controls: [Leaflet](web/vendor/leaflet/LICENSE). Product-specific sources, third-party attributions and AI assistance are documented in the [submission resource inventory](submission/RESOURCES.md) and [portal materials](submission/PROJECT-PAGE.md).
