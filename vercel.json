@@ -6,20 +6,16 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/discover.html"
-    },
-    {
       "source": "/explore",
-      "destination": "/index.html"
+      "destination": "/workspace.html"
     },
     {
       "source": "/demo",
-      "destination": "/index.html"
+      "destination": "/workspace.html"
     },
     {
       "source": "/pitch",
-      "destination": "/index.html"
+      "destination": "/workspace.html"
     },
     {
       "source": "/about",
@@ -27,7 +23,7 @@
     },
     {
       "source": "/methods",
-      "destination": "/index.html"
+      "destination": "/workspace.html"
     }
   ]
 }
