@@ -119,5 +119,7 @@
       "serves_current_app": true
     }
   ],
-  "details": "product-release.json"
+  "details": "product-release.json",
+  "superseded_by": "transition-release.json",
+  "status": "Historical release evidence; current release is transition-release.json"
 }

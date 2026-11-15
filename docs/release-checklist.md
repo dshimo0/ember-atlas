@@ -1,6 +1,6 @@
 # Eight-region transition release checklist
 
-Authoritative identity and executed evidence: [transition-release.json](../submission/transition-release.json). Inspect [eight-region-check-public.json](../submission/eight-region-check-public.json) for per-region/window counts and actual deployed execution. The prior one-area release evidence remains historical.
+Authoritative identity and executed evidence: [transition-release.json](../submission/transition-release.json). Inspect [eight-region-check-public.json](../submission/eight-region-check-public.json) for per-region/window counts and actual deployed execution. The prior one-area release evidence remains historical. The deployed source `ca8c7e9` passed all 34 main browser groups, 18 additional /demo/root checks, 39 exact-byte public checks and anonymous video playback. GitHub CI passed.
 
 | Gate | Evidence / scope |
 | --- | --- |

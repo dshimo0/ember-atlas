@@ -1,0 +1,463 @@
+{
+  "source_commit": "ca8c7e94a571eefef645e6026b0c11b5281948c9",
+  "branch": "work",
+  "repository": "https://github.com/dshimo0/ember-atlas",
+  "pr": "https://github.com/dshimo0/ember-atlas/pull/2",
+  "pr_status": "open; not merged",
+  "url": "https://ember-atlas-opal.vercel.app",
+  "routes": [
+    "/",
+    "/demo",
+    "/pitch"
+  ],
+  "deployment_id": "dpl_oAB9F5GnaWH3Sy6TeTzkCnjEBPry",
+  "ready_state": "READY",
+  "checked_utc": "2026-11-15T03:38:15.239785+00:00",
+  "registry": {
+    "file": "regions-903b27ca98b3.json",
+    "sha256": "903b27ca98b3a2272166002c4941c76cbcfaed343e212f993890626f99fc55b2"
+  },
+  "evaluation": {
+    "file": "replay-evaluation-7d4268256831.json",
+    "sha256": "7d42682568315eba16bb6f62bae900ea28c76bd5c0c3aa3a590c4a2d1c973de0"
+  },
+  "coverage": [
+    {
+      "id": "pantanal",
+      "name": "Pantanal",
+      "bounds_wsen": [
+        -59,
+        -23,
+        -54,
+        -15
+      ],
+      "geometry_type": "bounding box",
+      "datasets": {
+        "nrt": {
+          "coverage": {
+            "end": "2026-11-14",
+            "start": "2026-11-08"
+          },
+          "file": "pantanal-nrt-dashboard-8c6d16d36fbd.json",
+          "last_retrieval_utc": "2026-11-15T02:26:33.614512+00:00",
+          "observations": 830,
+          "products": [
+            "MODIS_NRT",
+            "VIIRS_NOAA20_NRT"
+          ],
+          "sha256": "8c6d16d36fbd31de5adf0e55e0b248d266167464cd634ecbc17ea440e836bbc1"
+        },
+        "sp": {
+          "coverage": {
+            "end": "2024-12-31",
+            "start": "2000-11-01"
+          },
+          "file": "pantanal-sp-dashboard-58285a8a8331.json",
+          "last_retrieval_utc": "2026-11-15T03:01:50.354027+00:00",
+          "observations": 1821713,
+          "products": [
+            "MODIS_SP",
+            "VIIRS_NOAA20_SP"
+          ],
+          "sha256": "58285a8a833179d140e81f7decae9392aefa54f43476fce04ff52629bba56aa2"
+        }
+      },
+      "adjustment": "full area, SP 2020\u20132024 only"
+    },
+    {
+      "id": "southern-amazon",
+      "name": "Southern Amazon",
+      "bounds_wsen": [
+        -65,
+        -13,
+        -48,
+        -5
+      ],
+      "geometry_type": "bounding box",
+      "datasets": {
+        "nrt": {
+          "coverage": {
+            "end": "2026-11-14",
+            "start": "2026-11-08"
+          },
+          "file": "southern-amazon-nrt-dashboard-bfc3b422d3b5.json",
+          "last_retrieval_utc": "2026-11-15T02:26:38.297339+00:00",
+          "observations": 2338,
+          "products": [
+            "MODIS_NRT",
+            "VIIRS_NOAA20_NRT"
+          ],
+          "sha256": "bfc3b422d3b52b1e365a94dad7540f588be7b37c0d673a20379d10eb96c8ac73"
+        },
+        "sp": {
+          "coverage": {
+            "end": "2024-09-30",
+            "start": "2024-09-01"
+          },
+          "file": "southern-amazon-sp-dashboard-7dcbc1ee11da.json",
+          "last_retrieval_utc": "2026-11-15T02:26:38.030492+00:00",
+          "observations": 393318,
+          "products": [
+            "MODIS_SP",
+            "VIIRS_NOAA20_SP"
+          ],
+          "sha256": "7dcbc1ee11da84c5a94d3b49f6d6c667f906a67c19d6be04e5af40b751af9b00"
+        }
+      },
+      "adjustment": "unavailable; local multi-year training/holdout missing"
+    },
+    {
+      "id": "cerrado",
+      "name": "Cerrado",
+      "bounds_wsen": [
+        -55,
+        -20,
+        -44,
+        -8
+      ],
+      "geometry_type": "bounding box",
+      "datasets": {
+        "nrt": {
+          "coverage": {
+            "end": "2026-11-14",
+            "start": "2026-11-08"
+          },
+          "file": "cerrado-nrt-dashboard-4f2d397811d2.json",
+          "last_retrieval_utc": "2026-11-15T02:26:41.171516+00:00",
+          "observations": 1327,
+          "products": [
+            "MODIS_NRT",
+            "VIIRS_NOAA20_NRT"
+          ],
+          "sha256": "4f2d397811d2359b27bd4ec578939e399e637df0bd4a104d018e61b3633e29cc"
+        },
+        "sp": {
+          "coverage": {
+            "end": "2024-09-30",
+            "start": "2024-09-01"
+          },
+          "file": "cerrado-sp-dashboard-f5d13e920b3c.json",
+          "last_retrieval_utc": "2026-11-15T02:26:45.337229+00:00",
+          "observations": 287585,
+          "products": [
+            "MODIS_SP",
+            "VIIRS_NOAA20_SP"
+          ],
+          "sha256": "f5d13e920b3c72dd49c0c9466cca3e37d3967d43735202b47b908019420e1046"
+        }
+      },
+      "adjustment": "unavailable; local multi-year training/holdout missing"
+    },
+    {
+      "id": "gran-chaco",
+      "name": "Gran Chaco",
+      "bounds_wsen": [
+        -66,
+        -32,
+        -57,
+        -17
+      ],
+      "geometry_type": "bounding box",
+      "datasets": {
+        "nrt": {
+          "coverage": {
+            "end": "2026-11-14",
+            "start": "2026-11-08"
+          },
+          "file": "gran-chaco-nrt-dashboard-3c90021c91ef.json",
+          "last_retrieval_utc": "2026-11-15T02:26:49.380721+00:00",
+          "observations": 12053,
+          "products": [
+            "MODIS_NRT",
+            "VIIRS_NOAA20_NRT"
+          ],
+          "sha256": "3c90021c91ef31ed9ba95059a6e2c5445c78790054a489342b12cb48b75772d8"
+        },
+        "sp": {
+          "coverage": {
+            "end": "2024-09-30",
+            "start": "2024-09-01"
+          },
+          "file": "gran-chaco-sp-dashboard-b651be41c86e.json",
+          "last_retrieval_utc": "2026-11-15T02:26:43.922526+00:00",
+          "observations": 185771,
+          "products": [
+            "MODIS_SP",
+            "VIIRS_NOAA20_SP"
+          ],
+          "sha256": "b651be41c86e0f52809d8be7edf874bf44052c22c465b427fcd135527666afab"
+        }
+      },
+      "adjustment": "unavailable; local multi-year training/holdout missing"
+    },
+    {
+      "id": "california",
+      "name": "California",
+      "bounds_wsen": [
+        -125,
+        32,
+        -114,
+        42.5
+      ],
+      "geometry_type": "bounding box",
+      "datasets": {
+        "nrt": {
+          "coverage": {
+            "end": "2026-11-14",
+            "start": "2026-11-08"
+          },
+          "file": "california-nrt-dashboard-a6ea802a6dea.json",
+          "last_retrieval_utc": "2026-11-15T02:26:56.051917+00:00",
+          "observations": 1432,
+          "products": [
+            "MODIS_NRT",
+            "VIIRS_NOAA20_NRT"
+          ],
+          "sha256": "a6ea802a6dea2784c7a3323958d99fea3f36ec1c804ce4b4a70a93ab4605eba7"
+        },
+        "sp": {
+          "coverage": {
+            "end": "2024-09-30",
+            "start": "2024-09-01"
+          },
+          "file": "california-sp-dashboard-5622a8c69b17.json",
+          "last_retrieval_utc": "2026-11-15T02:26:46.025187+00:00",
+          "observations": 9643,
+          "products": [
+            "MODIS_SP",
+            "VIIRS_NOAA20_SP"
+          ],
+          "sha256": "5622a8c69b172fb9565fed100aba9eb7dbad0fa2ef8410351fe6cb34c7f7e157"
+        }
+      },
+      "adjustment": "unavailable; local multi-year training/holdout missing"
+    },
+    {
+      "id": "southeastern-australia",
+      "name": "Southeastern Australia",
+      "bounds_wsen": [
+        140,
+        -44,
+        154,
+        -28
+      ],
+      "geometry_type": "bounding box",
+      "datasets": {
+        "nrt": {
+          "coverage": {
+            "end": "2026-11-14",
+            "start": "2026-11-08"
+          },
+          "file": "southeastern-australia-nrt-dashboard-b9e28ce5df77.json",
+          "last_retrieval_utc": "2026-11-15T02:26:48.666624+00:00",
+          "observations": 1482,
+          "products": [
+            "MODIS_NRT",
+            "VIIRS_NOAA20_NRT"
+          ],
+          "sha256": "b9e28ce5df7735fa04ca02d89331927376948d5ba18c50e3e7ca7abeef8560a2"
+        },
+        "sp": {
+          "coverage": {
+            "end": "2024-09-30",
+            "start": "2024-09-01"
+          },
+          "file": "southeastern-australia-sp-dashboard-e8407f5fba41.json",
+          "last_retrieval_utc": "2026-11-15T02:26:48.086970+00:00",
+          "observations": 9252,
+          "products": [
+            "MODIS_SP",
+            "VIIRS_NOAA20_SP"
+          ],
+          "sha256": "e8407f5fba417b0018a610e49ac784dd7fb07fb5a111a5e3d1f35e347d5dfb17"
+        }
+      },
+      "adjustment": "unavailable; local multi-year training/holdout missing"
+    },
+    {
+      "id": "iberian-peninsula",
+      "name": "Iberian Peninsula",
+      "bounds_wsen": [
+        -10,
+        35,
+        4,
+        44.5
+      ],
+      "geometry_type": "bounding box",
+      "datasets": {
+        "nrt": {
+          "coverage": {
+            "end": "2026-11-14",
+            "start": "2026-11-08"
+          },
+          "file": "iberian-peninsula-nrt-dashboard-758962a7b8cb.json",
+          "last_retrieval_utc": "2026-11-15T02:26:50.678733+00:00",
+          "observations": 229,
+          "products": [
+            "MODIS_NRT",
+            "VIIRS_NOAA20_NRT"
+          ],
+          "sha256": "758962a7b8cbab15b90485016d31638b2faa958a887932d80710cd114b7fbc07"
+        },
+        "sp": {
+          "coverage": {
+            "end": "2024-09-30",
+            "start": "2024-09-01"
+          },
+          "file": "iberian-peninsula-sp-dashboard-222883c100d3.json",
+          "last_retrieval_utc": "2026-11-15T02:26:50.258299+00:00",
+          "observations": 15373,
+          "products": [
+            "MODIS_SP",
+            "VIIRS_NOAA20_SP"
+          ],
+          "sha256": "222883c100d3b5c03aca29d468f7942e1ebb8ad8d66bc731c4a71909b1832bfd"
+        }
+      },
+      "adjustment": "unavailable; local multi-year training/holdout missing"
+    },
+    {
+      "id": "siberia",
+      "name": "Siberia",
+      "bounds_wsen": [
+        60,
+        50,
+        140,
+        72
+      ],
+      "geometry_type": "bounding box",
+      "datasets": {
+        "nrt": {
+          "coverage": {
+            "end": "2026-11-14",
+            "start": "2026-11-08"
+          },
+          "file": "siberia-nrt-dashboard-cf17c4815d4d.json",
+          "last_retrieval_utc": "2026-11-15T02:26:52.649736+00:00",
+          "observations": 805,
+          "products": [
+            "MODIS_NRT",
+            "VIIRS_NOAA20_NRT"
+          ],
+          "sha256": "cf17c4815d4dffe5c349ad5fef47852d5b714bb0eed9fa259d34163aa6421879"
+        },
+        "sp": {
+          "coverage": {
+            "end": "2024-09-30",
+            "start": "2024-09-01"
+          },
+          "file": "siberia-sp-dashboard-3aea51535b6f.json",
+          "last_retrieval_utc": "2026-11-15T02:26:52.327620+00:00",
+          "observations": 42711,
+          "products": [
+            "MODIS_SP",
+            "VIIRS_NOAA20_SP"
+          ],
+          "sha256": "3aea51535b6ff822247888a60ec7a797dece0270b041a1b7e96cd479aaac19f2"
+        }
+      },
+      "adjustment": "unavailable; local multi-year training/holdout missing"
+    }
+  ],
+  "total_region_observation_records": 2785862,
+  "total_count_caveat": "Per-region records; overlapping study areas/products/periods must not be interpreted as globally unique fires.",
+  "modis_history": {
+    "start": "2000-11-01",
+    "end": "2024-12-31",
+    "retrieved_days": 8827,
+    "older_windows": 1400,
+    "failed_windows": 0,
+    "fit_scope_unchanged": true
+  },
+  "metrics": {
+    "scalar": {
+      "bias": -54.344752118498505,
+      "mae": 175.32928712011548,
+      "n": 24
+    },
+    "seasonal": {
+      "bias": -123.96830007041311,
+      "mae": 199.6997313847094,
+      "n": 24
+    },
+    "unadjusted": {
+      "bias": 1021.7083333333334,
+      "mae": 1021.7083333333334,
+      "n": 24
+    }
+  },
+  "peak_months": [
+    "2024-08",
+    "2024-09",
+    "2023-11",
+    "2024-10",
+    "2024-06",
+    "2024-07"
+  ],
+  "peak_metrics": {
+    "scalar": {
+      "bias": -404.6017273725079,
+      "mae": 404.6017273725079,
+      "n": 6
+    },
+    "seasonal": {
+      "bias": -534.637304969327,
+      "mae": 534.637304969327,
+      "n": 6
+    },
+    "unadjusted": {
+      "bias": 2225.1666666666665,
+      "mae": 2225.1666666666665,
+      "n": 6
+    }
+  },
+  "scalar_factor": 0.5497999781946175,
+  "replay_cutoff": "2023-01",
+  "scenario_not_actual_source_end": true,
+  "fitting_scope": "full Pantanal study area; 2020\u20132022 only; 24 holdout months 2023\u20132024",
+  "future_method_selection": "Separate outer evaluation protocol required; frozen seasonal output retained.",
+  "tests": {
+    "python": 15,
+    "node_cases": 19,
+    "public_region_window_viewport_cases": 32,
+    "public_summary_checks": 2,
+    "application_http_errors": 0,
+    "javascript_errors": 0,
+    "all_eight_tile_fallback": true,
+    "full_history_calendar_months": 290,
+    "csv_identity_and_cell_totals": true,
+    "manifest_new_export_hashes": true,
+    "source_and_asset_exact_byte_checks": 39,
+    "pitch_pdf_pages": 9,
+    "video_seconds": 30,
+    "anonymous_media_playback": true,
+    "source_ci": "success",
+    "additional_demo_root_smoke": 18
+  },
+  "reports": [
+    "eight-region-check-public.json",
+    "transition-asset-check.json",
+    "transition-pipeline-reproduction.json",
+    "integrity-check.json",
+    "media-check.json",
+    "demo-presets-public.json"
+  ],
+  "https_system_ca_verified": true,
+  "browser_proxy_leaf_pins_system_validated": true,
+  "source_archives": {
+    "archives": 35,
+    "original_csv_manifest_files": 3032,
+    "byte_exact_member_hashes": true,
+    "changed_existing_sources_not_overwritten": true
+  },
+  "remaining_gaps": [
+    "Seven added areas: multi-year SP archives and independently evaluated local calibration",
+    "Independent outer evaluation before selecting scalar/seasonal replacement",
+    "SP/NRT transition and usable observation masks not evaluated",
+    "Ground truth and official biome/custom polygon analysis unavailable",
+    "Physical-device testing and human pitch rehearsal pending",
+    "Official guide/media format and eligibility unverified; current official pages returned 503",
+    "Team Owner confirms roster, accepts terms and submits for judging"
+  ],
+  "processing_vintage_limit": "As-of acquisition chronology only; historical publication/processing vintages are not reconstructed."
+}

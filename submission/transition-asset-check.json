@@ -1,0 +1,273 @@
+[
+  {
+    "path": "index.html",
+    "status": 200,
+    "sha256": "26cf8cebe46a0133c1b2edaab0cd65a099ad842302802f3a54c3e944eed5e905",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "app.js",
+    "status": 200,
+    "sha256": "c2722fe6437aead1712e56c58cdf589cc6ee1100c56838650204ee6b1fa1811e",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "model.mjs",
+    "status": 200,
+    "sha256": "959e7ee9abd5bb29d7c712fcbd5df86e90e282da56da5d55f9bccf9031354158",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "replay.mjs",
+    "status": 200,
+    "sha256": "ff28e6f71020950c7ca9d943385795eaa2eb53d06253eff370bafd38287ebabf",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "world-map.mjs",
+    "status": 200,
+    "sha256": "48139f4a6c7b0426d5be47e1c324d6bbc8b4c996b6cfca5ce57d5c40c738fa4e",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "pitch-content.mjs",
+    "status": 200,
+    "sha256": "2d6f4b3f84a1b2f458d7ee6b69c9b06001f02c17a0a9f1e5b2a78904d939d494",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "pitch.mjs",
+    "status": 200,
+    "sha256": "4624f75fd97769658bc4f44bdbd77b60a585eee39464c33ade7bb35ee2db9bdc",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "geographic-map.mjs",
+    "status": 200,
+    "sha256": "51ea79e2d1eed9860dc6e695aa4aec4e03c4abe464264a78aaf7adaaed78dd26",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data-loader.mjs",
+    "status": 200,
+    "sha256": "d08f08365b4a9903923da2445e158a9b26ccb281556c9bda919c033dfb78c8ca",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "url-state.mjs",
+    "status": 200,
+    "sha256": "eb30ea1dc80c8097b091610ce5909d7d79311b9e89829170d246dfbe3b90aab7",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "analysis.mjs",
+    "status": 200,
+    "sha256": "92605e310fbcf41120c85353b290ae9cd96a13795023cae7e917e9c0a1b96301",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "charts.mjs",
+    "status": 200,
+    "sha256": "d03a4e447e6334ad4404e42108bd2c1d4d33402eea4fed5abc0b1e0994d66812",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "style.css",
+    "status": 200,
+    "sha256": "c0894bf3b3f839e287563856e761f62d79d236825f2ac05f48f63432dcb87be4",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "assets/local-geography.json",
+    "status": 200,
+    "sha256": "efa09f5c7fb9bc61986bd6d4e6b3b7fa405017211b4392bc1ef80e0d91180a40",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "assets/dashboard-view.png",
+    "status": 200,
+    "sha256": "76cfb71d6782cd84a77fab86482fcd6ae64f45da26824f64b62577ed09c41202",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "assets/workflow-capture.mp4",
+    "status": 200,
+    "sha256": "c5c46db678342d2abd525808d07c3db2b7a5a670faa2ccf24dddde498b869f7a",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "assets/ember-atlas-pitch.pdf",
+    "status": 200,
+    "sha256": "51de218836be50f88a8d773edae671874fbe869831e5f5a2582f3a33f25d9ef6",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/regions.json",
+    "status": 200,
+    "sha256": "a3c4cf402029013c74018e7aa5b5ac05190db0ead3d96dc296bfd7c15c4c8db2",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/replay-evaluation.json",
+    "status": 200,
+    "sha256": "1738caaeb36eacf39cfaa532c5fc548fcd4ebbf494071235d7daf4ae7eea1230",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/replay-residuals.csv",
+    "status": 200,
+    "sha256": "ccae75f71fa0552b0deb10307dd788849cc76c33c9e2e379d7fd16290348ba4b",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/regions-903b27ca98b3.json",
+    "status": 200,
+    "sha256": "903b27ca98b3a2272166002c4941c76cbcfaed343e212f993890626f99fc55b2",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/pantanal-nrt-dashboard-8c6d16d36fbd.json",
+    "status": 200,
+    "sha256": "8c6d16d36fbd31de5adf0e55e0b248d266167464cd634ecbc17ea440e836bbc1",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/pantanal-sp-dashboard-58285a8a8331.json",
+    "status": 200,
+    "sha256": "58285a8a833179d140e81f7decae9392aefa54f43476fce04ff52629bba56aa2",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/southern-amazon-nrt-dashboard-bfc3b422d3b5.json",
+    "status": 200,
+    "sha256": "bfc3b422d3b52b1e365a94dad7540f588be7b37c0d673a20379d10eb96c8ac73",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/southern-amazon-sp-dashboard-7dcbc1ee11da.json",
+    "status": 200,
+    "sha256": "7dcbc1ee11da84c5a94d3b49f6d6c667f906a67c19d6be04e5af40b751af9b00",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/cerrado-nrt-dashboard-4f2d397811d2.json",
+    "status": 200,
+    "sha256": "4f2d397811d2359b27bd4ec578939e399e637df0bd4a104d018e61b3633e29cc",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/cerrado-sp-dashboard-f5d13e920b3c.json",
+    "status": 200,
+    "sha256": "f5d13e920b3c72dd49c0c9466cca3e37d3967d43735202b47b908019420e1046",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/gran-chaco-nrt-dashboard-3c90021c91ef.json",
+    "status": 200,
+    "sha256": "3c90021c91ef31ed9ba95059a6e2c5445c78790054a489342b12cb48b75772d8",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/gran-chaco-sp-dashboard-b651be41c86e.json",
+    "status": 200,
+    "sha256": "b651be41c86e0f52809d8be7edf874bf44052c22c465b427fcd135527666afab",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/california-nrt-dashboard-a6ea802a6dea.json",
+    "status": 200,
+    "sha256": "a6ea802a6dea2784c7a3323958d99fea3f36ec1c804ce4b4a70a93ab4605eba7",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/california-sp-dashboard-5622a8c69b17.json",
+    "status": 200,
+    "sha256": "5622a8c69b172fb9565fed100aba9eb7dbad0fa2ef8410351fe6cb34c7f7e157",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/southeastern-australia-nrt-dashboard-b9e28ce5df77.json",
+    "status": 200,
+    "sha256": "b9e28ce5df7735fa04ca02d89331927376948d5ba18c50e3e7ca7abeef8560a2",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/southeastern-australia-sp-dashboard-e8407f5fba41.json",
+    "status": 200,
+    "sha256": "e8407f5fba417b0018a610e49ac784dd7fb07fb5a111a5e3d1f35e347d5dfb17",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/iberian-peninsula-nrt-dashboard-758962a7b8cb.json",
+    "status": 200,
+    "sha256": "758962a7b8cbab15b90485016d31638b2faa958a887932d80710cd114b7fbc07",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/iberian-peninsula-sp-dashboard-222883c100d3.json",
+    "status": 200,
+    "sha256": "222883c100d3b5c03aca29d468f7942e1ebb8ad8d66bc731c4a71909b1832bfd",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/siberia-nrt-dashboard-cf17c4815d4d.json",
+    "status": 200,
+    "sha256": "cf17c4815d4dffe5c349ad5fef47852d5b714bb0eed9fa259d34163aa6421879",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/siberia-sp-dashboard-3aea51535b6f.json",
+    "status": 200,
+    "sha256": "3aea51535b6ff822247888a60ec7a797dece0270b041a1b7e96cd479aaac19f2",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "path": "data/replay-evaluation-7d4268256831.json",
+    "status": 200,
+    "sha256": "7d42682568315eba16bb6f62bae900ea28c76bd5c0c3aa3a590c4a2d1c973de0",
+    "matches_committed_bytes": true,
+    "anonymous_https": true
+  },
+  {
+    "url": "https://raw.githubusercontent.com/dshimo0/ember-atlas/work/data/source-archives/index.json",
+    "status": 200,
+    "source_archive_index_matches": true
+  }
+]

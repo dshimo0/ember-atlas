@@ -79,5 +79,7 @@
     "Confirm human roster and contributions",
     "Rehearse human pitch with navigation",
     "Review terms and personally submit for judging"
-  ]
+  ],
+  "superseded_by": "transition-release.json",
+  "status": "Historical release evidence; current release is transition-release.json"
 }

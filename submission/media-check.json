@@ -1,10 +1,10 @@
 {
-  "duration_seconds": 29.64,
+  "duration_seconds": 30,
   "playback_started": true,
   "ready_state": 4,
   "url": "https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4",
   "anonymous_context": true,
-  "file_checksum_matches_release": true,
-  "https_system_ca_verified": true,
-  "browser_uses_system_validated_leaf_pin": true
+  "source_commit": "ca8c7e94a571eefef645e6026b0c11b5281948c9",
+  "local_sha256": "c5c46db678342d2abd525808d07c3db2b7a5a670faa2ccf24dddde498b869f7a",
+  "audio_tracks_in_verified_source": 0
 }
