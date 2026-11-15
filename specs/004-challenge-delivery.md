@@ -1,5 +1,10 @@
 # Challenge delivery and Chilecito acceptance contract
 
+Follow-up: [005-history-continuity-and-product.md](005-history-continuity-and-product.md)
+records the author's November 13 reply, mirror feasibility, observation-schedule gates,
+heatmap design and repository presentation. Keep all nine regions; prioritize complete
+Pantanal and Chilecito workflows. New methods require a versioned protocol amendment.
+
 Status: implementation target, not a statement of completed capabilities.
 This addendum extends specs 001–003. Existing frozen Pantanal evidence remains immutable.
 Requirement basis: challenge-author video transcript supplied by the project owner,

@@ -1,5 +1,18 @@
 # Ember Atlas
 
+**Preserve historical fire-activity context as observations transition from MODIS to VIIRS.**
+
+Explore a monthly activity calendar, inspect the underlying observations and test a
+sensor-transition replay against held-out MODIS observations. The evaluated reference
+scale is occupied cell-days; this is not a forecast of future fires.
+
+![Ember Atlas calendar and analysis interface](submission/transition-calendar-mobile.png)
+
+Product direction and reviewed recommendations:
+[historical continuity, mirror ingestion and heatmap spec](specs/005-history-continuity-and-product.md).
+Chilecito and further regional calibration are implementation targets, not completed
+published results. The approved project logo still needs to be added to this checkout.
+
 Challenge delivery targets, Chilecito case study and release gates:
 [spec 004](specs/004-challenge-delivery.md).
 Run local acquisition and regional calibration on your PC using
