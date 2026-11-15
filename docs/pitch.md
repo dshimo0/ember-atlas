@@ -6,7 +6,7 @@ Nine sections follow the sensor change, continuity replay, observed holdout MODI
 
 Previous/Next, keyboard navigation, slide URLs, optional fullscreen, hidden notes and print/PDF are available. Mobile uses a scroll presentation. The local three-minute target is separate from the official Project Demonstration format, which remains unverified because current official pages return HTTP 503.
 
-Measured synthesized English read: **409 words, 183.0 seconds**, eSpeak NG at 180 wpm, from the actual route notes. This is measured audio duration, not human rehearsal, and excludes navigation. Timing audio is not published. The Team Owner must rehearse and confirm the current official format and eligibility.
+Measured synthesized English read: **406 words, 184.1 seconds**, eSpeak NG at 180 wpm, from the actual route notes. This is measured audio duration, not human rehearsal, and excludes navigation. Timing audio is not published. The Team Owner must rehearse and confirm the current official format and eligibility.
 
 ## Spoken script
 
@@ -28,7 +28,7 @@ Reveal that benchmark. September has 5,819 MODIS cell-days and 8,809 unadjusted 
 
 ### 5. A scalar is a stronger holdout baseline
 
-All three methods fit twenty twenty through twenty twenty-two and use the same twenty-four holdout months in twenty twenty-three and twenty twenty-four. Monthly mean absolute error is 1,021.7 unadjusted, 175.3 for the training-only least-squares scalar, and 199.7 for frozen seasonal factors. The scalar is stronger on this holdout. We retain the frozen publication; we do not use that result to reselect a method.
+All three methods fit twenty twenty through twenty twenty-two and use the same twenty-four holdout months in twenty twenty-three and twenty twenty-four. Monthly mean absolute error is 1,021.7 unadjusted, 175.3 for the training-only least-squares scalar, and 199.7 for frozen seasonal factors. The scalar is stronger here; the frozen method stays. MODIS version labels change across the split, limiting sensor-only interpretation.
 
 ### 6. Remaining error during active months
 
@@ -55,3 +55,5 @@ Regional method selection uses twenty twenty-two only, followed by a fixed refit
 - **Does a retrieved zero mean no fire?** No. It means no reported detections in the retrieved source window. Usable swath/cloud coverage, independent fire events and burned area are unmeasured.
 - **Can NRT and SP be joined?** Current same-sensor availability has zero overlap. Preserve NRT vintages and later retrieve coincident SP windows before independent processing-transition evaluation.
 - **What remains for the Team Owner?** Human roster/contributions, rehearsal, current portal/media/eligibility checks, terms and final submission. No completed partnership, interview or operational impact is asserted.
+
+Reported MODIS versions differ across the registered split (6.03 training, 61.03 holdout). The headline measures agreement with the as-delivered reference; isolated sensor effects and processing-vintage continuity remain unverified. The global source-field audit is linked beside the headline and in monthly exports.

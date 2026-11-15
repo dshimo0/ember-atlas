@@ -286,7 +286,7 @@ async function applyLocation(scroll=false) {
   const s=readURL(location.href,summary.coverage),defaults=datasetDefaults(region.datasets[preliminary.mode],region.id,preliminary.mode),query=new URL(location.href).searchParams;if(!['start','end','month'].some(k=>query.has(k))){s.start=defaults.start;s.end=defaults.end;}selected=s.month;view=s.view;guideStep=s.step;pitchSlide=s.slide;$('showBenchmark').checked=s.benchmark;
   for(const id of ['area','sensor','start','end'])$(id).value=s[id];if(region.id!=='pantanal')$('area').value='all';
   const isPitch=currentRoute()==='/pitch';document.documentElement.dataset.route=isPitch?'pitch':'analysis';document.body.dataset.page=currentRoute().slice(1)||'explore';
-  $('analysisPage').hidden=isPitch;$('pitchPage').hidden=!isPitch;$('filterFold').open=!(currentRoute()==='/demo'&&matchMedia('(max-width:700px)').matches);
+  $('analysisPage').hidden=isPitch;$('pitchPage').hidden=!isPitch;$('filterFold').open=!matchMedia('(max-width:700px)').matches;
   document.title=`Ember Atlas · ${isPitch?'Pitch':region.name+' study area'}`;
   if(isPitch)pitch.setSlide(pitchSlide,scroll);else{if(!geographicMap)geographicMap=createGeographicMap($('map'),geography);geographicMap.resize?.();render();}
   history.replaceState(null,'',stateURL(currentRoute(),allState(),location.hash));updateLinks();
@@ -308,7 +308,7 @@ for(const id of ['area','start','end','sensor'])$(id).addEventListener('change',
 $('monthSelect').onchange=e=>{selected=e.target.value;commitSelection();};
 $('calendarView').onchange=e=>{view=e.target.value;commitSelection();};
 $('stepBack').onclick=()=>goStep(guideStep-1);$('stepNext').onclick=()=>goStep(guideStep+1);
-$('resetDemo').onclick=()=>{const ref=release.registry.regions[0].datasets.sp;history.pushState(null,'',stateURL('/demo',datasetDefaults(ref,'pantanal')));$('layerModis').checked=true;$('layerViirs').checked=true;applyLocation();};
+$('resetDemo').onclick=()=>{const ref=release.registry.regions[0].datasets.sp;history.pushState(null,'',stateURL('/demo',datasetDefaults(ref,'pantanal')));$('layerModis').checked=true;$('layerViirs').checked=true;$('showGrid').checked=true;$('showPoints').checked=false;$('mapProduct').value='VIIRS_NOAA20_SP';applyLocation().then(()=>$('fitStudyArea').click());};
 $('useFullArea').onclick=()=>{$('region').value='pantanal';$('dataMode').value='sp';switchDataset();};
 $('map').addEventListener('mapdisplaychange',e=>{if(loadedSelection===selectionKey(state())){$('mapLoading').textContent=!e.detail.gridAvailable?`${e.detail.product}: occupancy unavailable; no retrieval. ${number(e.detail.total)} records from other selected products.`:`${number(e.detail.gridCells)} occupied cells · ${number(e.detail.cellDays)} cell-days · ${number(e.detail.shown)} sampled detections shown / ${number(e.detail.total)} matching observations.`;$('downloadCells').disabled=!e.detail.gridAvailable;$('gridLegend').textContent=!e.detail.gridAvailable?`${e.detail.product}: occupancy unavailable; no retrieval for this sensor/window.`:`${e.detail.product} · occupied UTC days per 0.05° cell · ${e.detail.periodDays} selected UTC days; darker = more occupied days.`;}});
 $('shareSelection').onclick=async()=>{const url=new URL(stateURL(currentRoute(),allState()),location.origin).href;try{await navigator.clipboard.writeText(url);$('shareStatus').textContent='Selection link copied.';}catch{$('shareStatus').innerHTML=`<a href="${url}">${escapeHTML(url)}</a>`;}};

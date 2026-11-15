@@ -27,3 +27,5 @@
  .map-panel .panel-heading>div{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.map-panel .panel-heading p{margin:0;font-size:11px}.map-panel .panel-heading h3{font-size:16px}
  .grid-controls select,.grid-controls label{min-height:44px}
 }
+
+@media(max-width:700px){body[data-page=explore] .filter-fold>summary{display:block}}

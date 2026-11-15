@@ -1,9 +1,9 @@
 {
   "url": "https://ember-atlas-opal.vercel.app",
-  "checked_utc": "2026-11-15T03:28:11.526392+00:00",
+  "checked_utc": "2026-11-15T05:42:08.244460+00:00",
   "registry": {
-    "file": "regions-903b27ca98b3.json",
-    "sha256": "903b27ca98b3a2272166002c4941c76cbcfaed343e212f993890626f99fc55b2"
+    "file": "regions-9e4c20518f99.json",
+    "sha256": "9e4c20518f99fab08943a4ba365dbdd0e4b869595820ece07222fc7957ccdf30"
   },
   "checks": [
     {
@@ -216,19 +216,33 @@
     },
     {
       "viewport": "desktop",
+      "region": "pantanal",
+      "new_sp_month": "2025-01",
+      "rows": 2047,
+      "source_url": null,
+      "csv_matches_new_shard": true,
+      "adjustment_supported_in_new_month": false,
+      "single_sensor_no_replay": true,
+      "manual_date_clipped_and_adjustment_disabled": true,
+      "refresh": true
+    },
+    {
+      "viewport": "desktop",
       "replay_cutoff_sources": true,
-      "benchmark_shared_state": "https://ember-atlas-opal.vercel.app/demo?region=pantanal&mode=sp&benchmark=1&month=2023-01&area=all&sensor=both&start=2020-01-01&end=2024-12-31&view=replay&step=1",
+      "benchmark_shared_state": "https://ember-atlas-opal.vercel.app/demo?region=pantanal&mode=sp&benchmark=1&month=2023-01&area=all&sensor=both&start=2020-01-01&end=2026-07-31&view=replay&step=1",
       "replay_csv_matches_display": true,
       "new_export_manifest_hashes": true,
       "no_subarea_transfer": true,
       "zero_vs_missing": true,
-      "full_modis_archive_months": 290,
+      "full_modis_archive_months": 309,
       "early_unavailable_viirs_blank": true,
       "unretrieved_map_sensor_not_zero": true,
       "world_map_links": 8,
+      "world_map_keyboard_links_navigate": 8,
       "all_regions_tile_fallback": true,
       "javascript_errors": [],
-      "application_http_errors": []
+      "application_http_errors": [],
+      "unexpected_console_errors": []
     },
     {
       "viewport": "mobile",
@@ -440,19 +454,33 @@
     },
     {
       "viewport": "mobile",
+      "region": "pantanal",
+      "new_sp_month": "2025-01",
+      "rows": 2047,
+      "source_url": null,
+      "csv_matches_new_shard": true,
+      "adjustment_supported_in_new_month": false,
+      "single_sensor_no_replay": true,
+      "manual_date_clipped_and_adjustment_disabled": true,
+      "refresh": true
+    },
+    {
+      "viewport": "mobile",
       "replay_cutoff_sources": true,
-      "benchmark_shared_state": "https://ember-atlas-opal.vercel.app/demo?region=pantanal&mode=sp&benchmark=1&month=2023-01&area=all&sensor=both&start=2020-01-01&end=2024-12-31&view=replay&step=1",
+      "benchmark_shared_state": "https://ember-atlas-opal.vercel.app/demo?region=pantanal&mode=sp&benchmark=1&month=2023-01&area=all&sensor=both&start=2020-01-01&end=2026-07-31&view=replay&step=1",
       "replay_csv_matches_display": true,
       "new_export_manifest_hashes": true,
       "no_subarea_transfer": true,
       "zero_vs_missing": true,
-      "full_modis_archive_months": 290,
+      "full_modis_archive_months": 309,
       "early_unavailable_viirs_blank": true,
       "unretrieved_map_sensor_not_zero": true,
       "world_map_links": 8,
+      "world_map_keyboard_links_navigate": 8,
       "all_regions_tile_fallback": true,
       "javascript_errors": [],
-      "application_http_errors": []
+      "application_http_errors": [],
+      "unexpected_console_errors": []
     }
   ]
 }

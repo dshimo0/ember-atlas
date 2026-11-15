@@ -1,36 +1,21 @@
-# Eight-region transition release checklist
+# Release verification checklist
 
-Authoritative identity and executed evidence: [transition-release.json](../submission/transition-release.json). Inspect [eight-region-check-public.json](../submission/eight-region-check-public.json) for per-region/window counts and actual deployed execution. The prior one-area release evidence remains historical. The deployed source `ca8c7e9` passed all 34 main browser groups, 18 additional /demo/root checks, 39 exact-byte public checks and anonymous video playback. GitHub CI passed.
+Authoritative executed identity: [transition-release.json](../submission/transition-release.json). Distinguish source commit from immutable data commit. The prior public Pantanal expansion at `a792e07` remains in history; current public execution is recorded after deployment.
 
-| Gate | Evidence / scope |
-| --- | --- |
-| Frozen science preserved | Original snapshot, validation, daily fit input and factors retain their hashes. No fitting on holdout. |
-| Three methods | Training-only scalar, frozen seasonal and unadjusted evaluated on identical 24 paired months; all residuals and reference-selected peak-six metrics published. |
-| Replay | Derived January 2023 scenario cutoff; month source and adjustment; separate observed holdout MODIS; source-tagged monthly CSV. |
-| Eight snapshots | All eight ordered rectangles have real SP and separate NRT observations, provenance, maps and exports without a visitor key. |
-| Earlier archive | All 1,400 older MODIS windows retrieved; full MODIS coverage 2000-11-01–2024-12-31, paired calibration 2020–2024 only. |
-| Map | Full-data cell occupancy matches common-grid totals and cell CSV; sampled points separate; OSM and local fallback cover every extent. |
-| State and exports | Desktop/mobile direct loads/refresh, region/mode/month/sensor/area changes, URL restoration and stale-response guards. CSV exact-record and cell-count reconciliation. |
-| Missingness | Pre-archive missing periods blank; actual retrieved zero day numeric/exportable zero; NRT partial-month status explicit. |
-| Reproducibility | Deterministic source packages, all member hashes verified, reconstruction refuses to overwrite changed files; versioned inventories and checksum-verified shards. |
-| Tests | Fifteen Python tests and nineteen Node cases, plus the signed-out eight-region browser suite and print-page check. |
-| Secrets | Actual ingestion key and keyed-URL patterns scanned without printing; compressed public data and source archives included. No key required by frontend. |
-| Presentation | Nine interactive sections and eight world-map links; source-derived figures; actual product screenshot; current script/timing record. |
-| Owner pending | Current official demonstration format/event eligibility, human roster, physical/human delivery rehearsal, rights wording, terms and final Submit for Judging action. |
+- [x] Eight fixed study geometries and real precomputed SP/NRT observations.
+- [x] 79 complete paired SP months per region; full snapshot/native/grid/flag reconciliation for 16 datasets.
+- [x] All eight regional evaluation artifacts reproduced; seven local inner choices passed each registered independent gate.
+- [x] Original Pantanal files/factors unchanged; extra 19 months remain an audit outside its published adjustment domain.
+- [x] All candidate metrics, residuals and reference-selected peaks retained; no outcome-based method switch.
+- [x] Literal versions/types retained, including verified joins to frozen source records; reference label change visibly qualified.
+- [x] Local desktop/mobile workflow, exports, source fields, SVG keyboard links, missing/zero/partial states and tile/shard-failure recovery exercised.
+- [x] Original local data URLs protected; initial SP/NRT views local; other observations pinned to immutable public Git bytes with SHA verification.
+- [x] Unit tests, frozen-file/credential checks, real recording and nine-page print executed locally.
+- [ ] Current pinned production source deployed and signed-out public workflow retested; see executed identity report.
+- [ ] Official Project Demonstration format, eligibility/deadline and media restrictions confirmed by Team Owner (official pages returned 503).
+- [ ] Human roster/contributions, physical-device check and human pitch rehearsal completed by Team Owner.
+- [ ] Terms accepted and final Submit for Judging performed by Team Owner.
 
-The scalar outperforms seasonal on this existing evaluation; a replacement cannot be selected using the same holdout. Regional adjustment is unavailable wherever multi-year local evaluation is missing. NRT is not joined to SP. Source rectangles are not biome masks. Broader challenge ambitions remain explicit in [traceability](challenge-traceability.md).
+Scientific limits remain explicit: all reported thermal types, unverified reference-vintage homogeneity/VIIRS code interpretation, unknown usable observation opportunity, no ground-truth accuracy, no SP/NRT join, no factor transfer to smaller masks, and no pre-2020 archive outside Pantanal. These limits are not replaced by a generic banner.
 
-Run `python -m unittest discover -s tests`, `node --test tests/test_*.mjs`, and `BASE_URL=… python scripts/check_eight_regions.py`. Use `python scripts/serve.py` locally. Browser checks require Playwright, Chromium and pdfinfo. Official terms and final portal submission are deliberately not automated.
-
-## Expansion checks pending execution
-
-The regional protocol was registered at `17403f3`; source-preserving query amendment at `b13d46c`. Acquisition and implementation are in progress. Do not treat these entries as executed evidence.
-
-- [ ] Complete matched regional SP history and preserve raw archives.
-- [ ] Reproduce each regional inner choice and all independent gate outcomes.
-- [ ] Keep original Pantanal hashes/domain unchanged; inspect fresh-month audit.
-- [ ] Verify immutable public shard origin, CORS and SHA checks through signed-out browsers.
-- [ ] Reconcile selected dates, map cells and CSV for all eight regions on desktop/mobile.
-- [ ] Confirm failed regional gates, subareas and NRT cannot inherit any calibration.
-- [ ] Deploy and record the tested source/data commits and actual public route results.
-- [ ] Verify current official media requirements; owner retains terms and final submission.
+Commands: `python -m unittest discover -s tests`; `node --test tests/*.mjs`; `python scripts/verify_regional_artifacts.py`; `python scripts/check_release_integrity.py`; `BASE_URL=… python scripts/check_eight_regions.py`. Use `python scripts/serve.py --port 8930` for local route parity. Deployment procedure is in DEPLOYMENT.md. Owner portal actions are deliberately not automated.

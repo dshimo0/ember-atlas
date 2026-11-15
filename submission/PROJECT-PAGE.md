@@ -2,7 +2,7 @@
 
 Project name: Ember Atlas
 
-Summary: Ember Atlas makes a satellite sensor transition inspectable. A Pantanal replay changes from observed MODIS to adjusted VIIRS, reveals independent fitting-period MODIS holdout observations, and exports source-tagged evidence. Eight study-area presets provide real observed maps and data downloads.
+Summary: Ember Atlas makes a satellite sensor transition inspectable. A Pantanal replay changes from observed MODIS to adjusted VIIRS, reveals observed MODIS reference observations excluded from fitting, and exports source-tagged evidence. Eight study-area presets provide real observed maps and data downloads.
 
 Project URL: https://ember-atlas-opal.vercel.app/
 
@@ -18,7 +18,9 @@ The primary Pantanal calendar replays a source change at January 2023, after the
 
 On the same 24 complete paired holdout months and study area, common-grid monthly MAE against MODIS is 1,021.7 cell-days unadjusted, 175.3 with a training-only scalar, and 199.7 with the existing frozen seasonal factors. The scalar is better on this evidence; no replacement was selected on the same holdout. For the six months with greatest observed MODIS activity, scalar/seasonal MAE is 404.6/534.6 cell-days/month. All residuals are published. MODIS is a comparison reference, not ground truth.
 
-The observed MODIS archive spans November 2000–December 2024 for the same Pantanal study geometry. Calibration remains evaluated only in 2020–2024. Southern Amazon, Cerrado, Gran Chaco, California, Southeastern Australia, Iberian Peninsula and Siberia have real matched September 2024 SP snapshots and no inherited calibration. All eight have a separate recent NRT window. Each explicitly bounded study area has an interactive map, source/coverage labels and matching exports.
+Pantanal MODIS spans November 2000–July 2026. All eight study rectangles have 79 complete paired SP months in January 2020–July 2026. Seven new regions publish independently evaluated local quarterly adjustments after registered inner selection and fixed refitting. The original Pantanal publication remains 2020–2024; its 19 fresh months are a separate audit, below its 24-month extension gate. NRT remains a separate product-specific recent view.
+
+Literal source-version/type fields are exported. MODIS reported labels differ between training (6.03) and holdout (61.03); homogeneous reference processing and isolated sensor effects are not established. All reported thermal types remain included. The results measure agreement with MODIS_SP as delivered.
 
 Map occupancy uses full matching observations: occupied UTC days per 0.05° cell for a named sensor. Sampled detections are optional. NRT stays separate from Standard Processing. Retrieval completeness does not establish usable satellite observation; thermal anomalies and cell-days are not unique fires or burned area.
 

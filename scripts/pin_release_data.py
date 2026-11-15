@@ -36,7 +36,7 @@ def pin(commit):
     if path not in old:
      if path not in files:raise ValueError('Shard missing from data commit: '+path)
      if subprocess.check_output(['git','show',commit+':'+path])!=(ROOT/shard['file']).read_bytes():raise ValueError('Data commit content differs')
-     if path in protected or(region['id']=='pantanal'and mode=='sp'and month=='2024-09'):shard.pop('url',None)
+     if path in protected or(mode=='sp'and month=='2024-09')or(mode=='nrt'and month==summary['coverage']['end'][:7]):shard.pop('url',None)
      else:shard['url']='https://raw.githubusercontent.com/dshimo0/ember-atlas/'+commit+'/'+path;remote.add(path)
    updated=publish(region['id']+'-'+mode+'-dashboard',summary);region['datasets'][mode]=dict(ref,**updated)
  ref=publish('regions',registry);atomic_write(ROOT/'regions.json',encode(ref))

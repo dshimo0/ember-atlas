@@ -9,4 +9,6 @@ Start with the Pantanal map and September 2024 evidence. MODIS records 5,819 occ
 5. Inspect the separate January 2025–July 2026 Pantanal audit: n=19; raw/scalar/seasonal MAE 399.4/89.7/70.8; seasonal bias +67.4. Keep the published adjustment domain at 2020–2024 until its registered extension gate is met.
 6. Open the eight-area world map. Follow a region link and inspect its actual source coverage and independent adjustment status. Export the selected observations, aggregates, occupied-day cells and provenance.
 
-The [route script and judge questions](pitch.md) are the presentation source of truth. Its synthesized read is measured at 183.0 seconds; human delivery remains unmeasured. The nine-section pitch and local three-minute target do not establish compliance with the official Project Demonstration media format. Current official guidance remains an owner check after HTTP 503 responses.
+The [route script and judge questions](pitch.md) are the presentation source of truth. Its synthesized read is measured at 184.1 seconds; human delivery remains unmeasured. The nine-section pitch and local three-minute target do not establish compliance with the official Project Demonstration media format. Current official guidance remains an owner check after HTTP 503 responses.
+
+The reference-version change (6.03 → 61.03 across train/holdout) is a visible qualification. Explain the numerical agreement against MODIS_SP as delivered, without claiming isolated sensor correction or wildfire-event accuracy.
