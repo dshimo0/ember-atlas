@@ -12,3 +12,87 @@
 @media(max-width:700px){.page-heading{padding-top:16px}.validation-summary{padding:10px 12px}.selection{padding:8px 0;gap:6px 10px}.month-heading{margin:12px 0 6px}.map-panel .panel-heading{margin-bottom:8px}}
 .world-regions a{font-size:12px;text-decoration:none;line-height:1.4}.world-regions b{text-decoration:underline}.world-regions small{display:block;font-size:10px;color:var(--muted)}@media print{.world-map{max-height:60mm;background:white}.world-regions a{font-size:9pt}.world-regions small{font-size:8pt;color:#333}}
 @media print{.world-map>path{fill:#eee;stroke:#888}.world-map a rect{fill:none;stroke:#684015}.world-map a circle{fill:white;stroke:#684015}.world-map text{fill:#111}}
+
+/* Explore uses a light map workspace. Pitch keeps its presentation palette. */
+#analysisPage {
+  --panel: #fffdf7;
+  --edge: #dbcfbe;
+  --text: #28231d;
+  --muted: #645a50;
+  --gold: #963817;
+  --cyan: #176c68;
+  --violet: #63478a;
+  color: var(--text);
+  color-scheme: light;
+}
+html[data-route=analysis] body { background: #f2ebe0; color: #28231d; }
+html[data-route=analysis] .masthead { background: #26201a; color: #fff9ee; }
+html[data-route=analysis] .masthead a { color: #fff9ee; }
+#analysisPage .page-heading h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  letter-spacing: -.035em;
+  line-height: 1.06;
+}
+#analysisPage :is(button, select, input[type=date]) {
+  background: #fffaf1;
+  color: var(--text);
+  border-color: #c7b8a4;
+}
+#analysisPage :is(button, select):hover { background: #e9dfcf; }
+#analysisPage button.primary { background: #913616; color: white; border-color: #913616; }
+#analysisPage a { color: var(--gold); }
+.region-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 16px 0 10px;
+}
+#analysisPage .region-grid button {
+  display: grid;
+  gap: 3px;
+  text-align: start;
+  align-content: center;
+  min-height: 54px;
+}
+.region-grid small { font-size: .78rem; font-weight: 500; }
+#analysisPage .region-grid button[aria-pressed=true] {
+  background: #30251d;
+  border-color: #30251d;
+  color: #fff8ed;
+}
+#analysisPage .dataset-controls { grid-template-columns: minmax(0, 260px); margin: 10px 0; }
+#analysisPage .dataset-controls > label:first-child,
+#analysisPage #selection { display: none; }
+#analysisPage .filter-fold { margin: 0 0 10px; }
+#analysisPage .dashboard-grid { grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr); }
+#analysisPage :is(.map-panel,.comparison-panel,.history,.walkthrough,.validation-summary,.replay-intro,.methodology) {
+  background: var(--panel);
+  border-color: var(--edge);
+  color: var(--text);
+}
+#analysisPage .panel-heading h3, #analysisPage .history h2 { font-family: Georgia, serif; }
+#analysisPage #map { min-height: clamp(340px, 52vh, 620px); }
+#analysisPage .validation-summary { margin-top: 20px; }
+#analysisPage #datasetPending { padding: 14px 0; color: var(--muted); }
+#analysisPage:has(#explore[data-pending=true]) :is(.month-heading,.takeaway,#selectedSource,.dashboard-grid,#history,.validation-summary) {
+  display: none;
+}
+@media (max-width: 850px) {
+  #analysisPage .dashboard-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .region-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+#analysisPage :is(.validation-main strong,.takeaway) { color: var(--text); }
+#analysisPage :is(.scope-notice.warning,.error,.underperforms) { background: #f7e8df; color: #62301f; }
+#analysisPage .bar-track { background: #e9dfd0; }
+#analysisPage .month:not(.missing) {
+  background: color-mix(in srgb, #d99170 var(--activity-color, 0%), #fffaf1);
+}
+#analysisPage .month[aria-pressed=true] { border-color: #913616; box-shadow: inset 0 0 0 1px #913616; }
+#analysisPage .step-rail [aria-current=step] { background: #eadbcc; }
+#analysisPage .calendar-shading { color: var(--muted); font-size: .83rem; }
+#analysisPage #timeSeries svg text { fill: var(--muted); }
+html[data-route=analysis] body > footer a { color: #963817; }
+#analysisPage #methodComparison { max-width: 100%; overflow-x: auto; }

@@ -1,0 +1,139 @@
+﻿<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ember Atlas - Harmonized Burning Activity Calendar</title>
+<style>
+body{font:15px/1.5 system-ui,Segoe UI,Arial,sans-serif;margin:0;color:#1a1a1a;background:#fafafa}
+header{background:#1b1b1f;color:#fff;padding:22px 26px}
+h1{margin:0;font-size:26px}header p{margin:6px 0 0;color:#c9c9d1}
+main{max-width:1080px;margin:0 auto;padding:20px 26px 60px}
+h2{font-size:18px;margin:30px 0 10px;border-bottom:1px solid #e2e2e2;padding-bottom:6px}
+h3{font-size:14px;margin:0 0 6px;color:#444}
+.bar{display:flex;gap:14px;flex-wrap:wrap;align-items:end;margin:18px 0}
+select,button{font:14px system-ui;padding:7px 10px;border:1px solid #bbb;border-radius:6px;background:#fff}
+button{cursor:pointer}button:hover{background:#f0f0f0}
+label{display:flex;flex-direction:column;font-size:12px;color:#555;gap:4px}
+#cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.card{background:#fff;border:1px solid #e4e4e4;border-radius:8px;padding:12px}
+.ct{font-size:12px;color:#666;text-transform:uppercase;letter-spacing:.4px}
+.cv{font-size:22px;font-weight:600;margin:4px 0;color:#b3401f}
+.cd{font-size:12px;color:#555}
+table{border-collapse:collapse;width:100%;background:#fff;font-size:11px}
+th{font-weight:600;color:#555;padding:3px}
+td{text-align:center;padding:5px 2px;border:1px solid #fff;min-width:34px}
+td:focus{outline:2px solid #000;outline-offset:-2px}
+td.na{background:#eee}
+#legend{font-size:12px;color:#666;margin-top:8px}
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.lg{font-size:12px;color:#555;display:flex;gap:14px}
+.box{background:#fff;border:1px solid #e4e4e4;border-radius:8px;padding:14px;font-size:14px}
+footer{font-size:12px;color:#666;border-top:1px solid #e2e2e2;margin-top:34px;padding-top:14px}
+@media(max-width:800px){.charts{grid-template-columns:1fr}}
+</style></head><body>
+<header><h1>Ember Atlas</h1><p>One burning-activity calendar, 2000 to today, that does not jump when the satellites change.</p></header>
+<main>
+<div class="bar">
+<label>Region<select id="reg"></select></label>
+<label>View<select id="view"><option value="count">Harmonized detections</option><option value="anom">Anomaly vs monthly median</option></select></label>
+<button id="csv">Download CSV</button>
+</div>
+<div id="cards"></div>
+<h2>Burning activity calendar</h2>
+<div id="cal"></div><div id="legend"></div>
+<h2>Why harmonization is needed</h2>
+<div class="charts">
+<div><h3>Overpass drift, local solar time</h3><div id="drift"></div></div>
+<div><h3>Annual detections: raw vs harmonized</h3><div id="step"></div></div>
+</div>
+<h2>Method</h2>
+<div class="box">
+<p>Every detection comes from NASA FIRMS (MODIS C6.1 and VIIRS 375 m C2, on Terra, Aqua, Suomi-NPP, NOAA-20 and NOAA-21). Counts are aggregated per calendar month, per platform, day and night apart.</p>
+<p>We fit a Poisson panel with three separate effects: <b>year-month</b> (the real fire activity), <b>platform</b> (sensor sensitivity and footprint), and a <b>per-platform slope in local solar time</b> (the orbital drift). The reference is Aqua afternoon, so the published series is MODIS-equivalent and the pre-2012 decade is placed on the same scale as the VIIRS era.</p>
+<p>The drift slope is identified because Terra and Aqua slide in opposite directions after 2022 while NOAA-20 and NOAA-21 hold their overpass time. That fixed platform anchors the year-month effect, which is what lets us separate "the fire changed" from "the satellite changed".</p>
+<p>Science-quality (SP) rows fit the model. Near-real-time rows are only used for the most recent months and are flagged <i>nrt</i> in every export.</p>
+</div>
+<h2>Limitations</h2>
+<div class="box"><ul>
+<li>No cloud-cover correction yet: a cloudy month looks like a quiet month.</li>
+<li>South-east Australia is poorly reconstructed. The 2019-20 Black Summer is outside the calibration distribution.</li>
+<li>Chilecito is sparse (about 29 thousand detections in 26 years), so monthly values carry wide intervals.</li>
+<li>Northern California shows no detectable diurnal slope; large wildfires burn through the overpass window.</li>
+<li>The MODIS-denial test trains before 2018, so it cannot exercise the drift correction itself.</li>
+<li>Detections are pixel centres, not ignition points, and counts are not burned area.</li>
+</ul></div>
+<footer>NASA Space Apps Challenge 2026, Sao Paulo. Challenge: Harmonization of MODIS and VIIRS Hot Spots. Data: NASA FIRMS / LANCE, MODIS C6.1 and VIIRS 375 m C2. Built with AI-assisted coding, declared in the submission.</footer>
+</main>
+<script>
+var D=__DATA__;var R=D.regions;
+function $(s){return document.querySelector(s);}
+var MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+var VIR=["#440154","#443983","#31688e","#21918c","#35b779","#90d743","#fde725"];
+var DIV=["#2166ac","#67a9cf","#d1e5f0","#f7f7f7","#fddbc7","#ef8a62","#b2182b"];
+function ramp(c,t){t=Math.max(0,Math.min(0.999,t));return c[Math.floor(t*c.length)];}
+function lum(h){return 0.299*parseInt(h.substr(1,2),16)+0.587*parseInt(h.substr(3,2),16)+0.114*parseInt(h.substr(5,2),16);}
+function med(a){if(!a.length)return 0;var s=a.slice().sort(function(x,y){return x-y;});return s[Math.floor(s.length/2)];}
+function mad(a,m){return med(a.map(function(x){return Math.abs(x-m);}));}
+var sel=$("#reg");
+Object.keys(R).forEach(function(k){var o=document.createElement("option");o.value=k;o.textContent=R[k].label;sel.appendChild(o);});
+sel.value="pantanal";sel.onchange=render;$("#view").onchange=render;$("#csv").onclick=dl;
+function stats(r){var b={},i;for(i=1;i<=12;i++)b[i]=[];r.months.forEach(function(m){b[m[1]].push(m[2]);});
+var mm={},md={};for(i=1;i<=12;i++){mm[i]=med(b[i]);md[i]=1.4826*mad(b[i],mm[i]);}return{mm:mm,md:md};}
+function render(){
+var k=sel.value,r=R[k],mode=$("#view").value,S=stats(r),map={},years=[];
+r.months.forEach(function(m){map[m[0]*100+m[1]]=m;if(years.indexOf(m[0])<0)years.push(m[0]);});
+years.sort(function(a,b){return a-b;});
+var pos=r.months.map(function(m){return m[2];}).filter(function(v){return v>0;}).sort(function(a,b){return a-b;});
+var p95=pos.length?pos[Math.floor(pos.length*0.95)]:1;
+var h='<table><thead><tr><th>Year</th>';
+MON.forEach(function(x){h+='<th>'+x+'</th>';});h+='</tr></thead><tbody>';
+years.forEach(function(y){h+='<tr><th>'+y+'</th>';
+for(var mo=1;mo<=12;mo++){var m=map[y*100+mo];
+if(!m){h+='<td class="na"></td>';continue;}
+var v=m[2],c;
+if(mode==="count"){c=ramp(VIR,Math.log1p(v)/Math.log1p(p95));}
+else{var z=(v-S.mm[mo])/Math.max(1,S.md[mo]);z=Math.max(-3,Math.min(3,z));c=ramp(DIV,(z+3)/6);}
+var lab=y+" "+MON[mo-1]+": "+Math.round(v)+" harmonized detections, 95% interval "+Math.round(m[3])+" to "+Math.round(m[4])+", "+m[5];
+h+='<td tabindex="0" title="'+lab+'" aria-label="'+lab+'" style="background:'+c+';color:'+(lum(c)<140?"#fff":"#111")+'">'+Math.round(v)+'</td>';}
+h+='</tr>';});
+h+='</tbody></table>';$("#cal").innerHTML=h;
+$("#legend").innerHTML=mode==="count"?"Colour: log scale of harmonized detections, capped at the region 95th percentile ("+Math.round(p95)+"). Dark = few, yellow = many. Grey = no data.":"Colour: standardized anomaly against that month own history. Blue = below median, red = above. Grey = no data.";
+cards(k,r);charts(r);}
+function cards(k,r){
+var s=(D.summary||[]).filter(function(x){return x.region===k;})[0]||{};
+var ar=r.annual_raw,ah=r.annual_harm;
+var r12=(ar[2012]||0)/Math.max(1,ar[2011]||0),h12=(ah[2012]||0)/Math.max(0.001,ah[2011]||0);
+var c=[["Orbit-drift artefact, Terra",(r.terra_loss_pct==null?"n/a":r.terra_loss_pct+"%"),"Share of Terra detections lost by 2026 purely because its overpass drifted earlier. This is not fire."],
+["Sensor step at 2012","raw x"+r12.toFixed(1)+" to x"+h12.toFixed(1),"Raw counts jump when VIIRS joins the fleet. The harmonized record removes the instrument change."],
+["MODIS-denial test",(s.neg_pre==null?"n/a":s.neg_pre+"% / "+s.neg_pos+"%"),"Calibrate to 2018, rebuild 2019+ from VIIRS alone, compare with observed Aqua. Median annual error, pre-drift / drift era."]];
+var h="";c.forEach(function(x){h+='<div class="card"><div class="ct">'+x[0]+'</div><div class="cv">'+x[1]+'</div><div class="cd">'+x[2]+'</div></div>';});
+$("#cards").innerHTML=h;}
+function pl(p,c,w){return '<polyline fill="none" stroke="'+c+'" stroke-width="'+w+'" points="'+p.map(function(q){return q[0].toFixed(1)+","+q[1].toFixed(1);}).join(" ")+'"/>';}
+function charts(r){
+var W=460,H=220,L=44,B=28;
+var ys=r.drift.map(function(d){return d.yr;}),y0=Math.min.apply(null,ys),y1=Math.max.apply(null,ys);
+function X(y){return L+(y-y0)/Math.max(1,y1-y0)*(W-L-10);}
+function Y(v){return H-B-(v-7)/10*(H-B-12);}
+var s='<svg viewBox="0 0 '+W+' '+H+'" width="100%">';
+[8,10,12,14,16].forEach(function(v){s+='<line x1="'+L+'" x2="'+(W-10)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="#eee"/><text x="4" y="'+(Y(v)+4)+'" font-size="10" fill="#666">'+v+'h</text>';});
+[["terra","#d62728"],["aqua","#1f77b4"],["noaa20","#2ca02c"]].forEach(function(p){
+var pts=r.drift.filter(function(d){return d[p[0]]!=null;}).map(function(d){return [X(d.yr),Y(d[p[0]])];});
+if(pts.length>1)s+=pl(pts,p[1],2.2);});
+s+='<text x="'+L+'" y="'+(H-6)+'" font-size="10" fill="#666">'+y0+'</text><text x="'+(W-40)+'" y="'+(H-6)+'" font-size="10" fill="#666">'+y1+'</text></svg>';
+s+='<div class="lg"><span style="color:#d62728">Terra</span><span style="color:#1f77b4">Aqua</span><span style="color:#2ca02c">NOAA-20</span></div>';
+$("#drift").innerHTML=s;
+var yr=Object.keys(r.annual_raw).map(Number).sort(function(a,b){return a-b;});
+var mx=Math.max.apply(null,yr.map(function(y){return r.annual_raw[y]||0;}));
+function X2(y){return L+(y-yr[0])/Math.max(1,yr[yr.length-1]-yr[0])*(W-L-10);}
+function Y2(v){return H-B-Math.log10(1+v)/Math.log10(1+mx)*(H-B-12);}
+var t='<svg viewBox="0 0 '+W+' '+H+'" width="100%">';
+t+='<line x1="'+X2(2012)+'" x2="'+X2(2012)+'" y1="12" y2="'+(H-B)+'" stroke="#bbb" stroke-dasharray="3 3"/>';
+t+=pl(yr.map(function(y){return [X2(y),Y2(r.annual_raw[y]||0)];}),"#999",2);
+t+=pl(yr.map(function(y){return [X2(y),Y2(r.annual_harm[y]||0)];}),"#e4572e",2.4);
+t+='<text x="'+L+'" y="'+(H-6)+'" font-size="10" fill="#666">'+yr[0]+'</text><text x="'+(W-40)+'" y="'+(H-6)+'" font-size="10" fill="#666">'+yr[yr.length-1]+'</text></svg>';
+t+='<div class="lg"><span style="color:#999">raw, all satellites</span><span style="color:#e4572e">harmonized</span><span>log scale</span></div>';
+$("#step").innerHTML=t;}
+function dl(){var k=sel.value,r=R[k],rows=[["year","month","harmonized_detections","ci_low","ci_high","quality"]];
+r.months.forEach(function(m){rows.push([m[0],m[1],m[2],m[3],m[4],m[5]]);});
+var b=new Blob([rows.map(function(x){return x.join(",");}).join("\n")],{type:"text/csv"});
+var u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="ember_atlas_"+k+".csv";a.click();URL.revokeObjectURL(u);}
+render();
+</script></body></html>

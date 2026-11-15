@@ -36,6 +36,7 @@ function calendar(s) {
   for (const m of months) { const y = m.slice(0, 4); if (!byYear.has(y)) byYear.set(y, []); byYear.get(y).push(m); }
   const header = ['<div class="calendar-corner"></div>', ...Array.from({length: 12}, (_, i) => `<div class="month-header">${new Date(Date.UTC(2024, i, 1)).toLocaleDateString('en-US', {month: 'short', timeZone: 'UTC'})}</div>`)];
   const selectedSensors = selectedProducts(s.sensor,s.mode);
+  const cellsByMonth = new Map();
   for (const [year, available] of byYear) {
     const phase = !supportsReplay(s)?'Observed '+s.mode.toUpperCase():validation.train_years.includes(+year) ? 'Training' : validation.holdout_years.includes(+year) ? 'Holdout' : 'Archive context';
     header.push(`<div class="calendar-year"><div class="year-label"><strong>${year}</strong><small>${phase}</small></div>`);
@@ -47,6 +48,8 @@ function calendar(s) {
       const viirs=row(m,'VIIRS_NOAA20_SP',s),a=adjustment(viirs,s,validation),replayed=replayMonth(index,m,s,validation);
       const replay=view==='replay'&&supportsReplay(s);
       const values=replay?[{...replayed,cells:replayed.value,product:replayed.source}]:ref?[{...viirs,cells:a?.value??null,product:'VIIRS_NOAA20_SP'}]:original;
+      const cells = values.map(v=>v.cells).filter(Number.isFinite);
+      if(cells.length)cellsByMonth.set(m,Math.max(...cells));
       const unavailable = values.every(r => !r.retrieved), partial = !unavailable && values.some(r => !r.complete);
       const symbol = unavailable ? '—' : partial ? '◐' : '✓';
       const label = `${monthName(m)}. ${phase}. ${values.map(v => `${replay?SENSOR_NAMES[v.product]+' · '+replayed.adjustment:ref?'Adjusted VIIRS':SENSOR_NAMES[v.product]}: ${v.cells === null ? 'Data unavailable' : `${number(v.cells)} cell-days, ${v.status}`}`).join('. ')}`;
@@ -55,7 +58,10 @@ function calendar(s) {
     header.push('</div>');
   }
   $('calendar').innerHTML = header.join('');
+  const peak = Math.max(1,...cellsByMonth.values());
   for (const button of $('calendar').querySelectorAll('[data-month]')) {
+    const cells=cellsByMonth.get(button.dataset.month);
+    if(cells!==undefined)button.style.setProperty('--activity-color', (60*cells/peak).toFixed(1)+'%');
     button.addEventListener('click', () => { selected = button.dataset.month; commitSelection(); $('calendar').querySelector(`[data-month="${selected}"]`)?.focus({preventScroll: true}); });
     button.addEventListener('keydown', event => {
       const columns = matchMedia('(max-width:700px)').matches ? 4 : 12;
@@ -78,7 +84,7 @@ function baselineView(s, values) {
 
   const baselines = values.map(v => ({...v, baseline: historicalBaseline(index, selected, v.product, s, validation)}));
   const valid = baselines.every(v => v.baseline);
-  if (valid) {
+  if (valid && baselines.length) {
     const allAbove = baselines.every(v => v.baseline.difference > 0), allBelow = baselines.every(v => v.baseline.difference < 0);
     const years = yearsLabel(baselines[0].baseline.entries.map(e => e.year));
     const calendarMonth = new Date(selected+'-01T00:00:00Z').toLocaleDateString('en-US',{month:'long',timeZone:'UTC'});
@@ -263,18 +269,24 @@ async function applyLocation(scroll=false) {
  if(!ready)return;const token=++datasetToken;
  const preliminary=readURL(location.href),region=release.registry.regions.find(r=>r.id===preliminary.region)||release.registry.regions[0];
  $('region').value=region.id;$('dataMode').value=preliminary.mode;
+ for(const button of $('regionPresets').querySelectorAll('button')){
+   button.setAttribute('aria-pressed',String(button.dataset.region===region.id));
+ }
+ $('explore').dataset.pending='true';$('datasetPending').hidden=false;$('error').hidden=true;
  $('download').disabled=true;$('downloadCells').disabled=true;$('aggregateDownload').disabled=true;$('downloadReplay').disabled=true;$('downloadManifest').disabled=true;$('status').textContent='Loading selected dataset…';selectionToken++;
  try{
   const data=await loadDataset(region.id,preliminary.mode);if(token!==datasetToken)return;summary=data;index=makeIndex(summary);
   const s=readURL(location.href,summary.coverage);selected=s.month;view=s.view;guideStep=s.step;pitchSlide=s.slide;$('showBenchmark').checked=s.benchmark;
   for(const id of ['area','sensor','start','end'])$(id).value=s[id];if(region.id!=='pantanal')$('area').value='all';
   const isPitch=currentRoute()==='/pitch';document.documentElement.dataset.route=isPitch?'pitch':'analysis';document.body.dataset.page=currentRoute().slice(1)||'explore';
-  $('analysisPage').hidden=isPitch;$('pitchPage').hidden=!isPitch;$('filterFold').open=!(currentRoute()==='/demo'&&matchMedia('(max-width:700px)').matches);
+  $('analysisPage').hidden=isPitch;$('pitchPage').hidden=!isPitch;
   document.title=`Ember Atlas · ${isPitch?'Pitch':region.name+' study area'}`;
+  $('explore').dataset.pending='false';
   if(isPitch)pitch.setSlide(pitchSlide,scroll);else{if(!geographicMap)geographicMap=createGeographicMap($('map'),geography);geographicMap.resize?.();render();}
   history.replaceState(null,'',stateURL(currentRoute(),allState(),location.hash));updateLinks();
   if(location.hash&&!isPitch)requestAnimationFrame(()=>document.getElementById(location.hash.slice(1))?.scrollIntoView());
- }catch(error){if(token!==datasetToken)return;console.error(error);$('error').hidden=false;$('error').textContent='Selected regional dataset unavailable. No replacement observations are shown.';}
+ }catch(error){if(token!==datasetToken)return;$('explore').dataset.pending='true';console.error(error);$('error').hidden=false;$('error').textContent='Could not load '+region.name+' data. Select the region again to retry.';}
+ finally{if(token===datasetToken)$('datasetPending').hidden=true;}
 }
 function switchDataset(){
  const region=release.registry.regions.find(r=>r.id===$('region').value),mode=$('dataMode').value,ref=region.datasets[mode];
@@ -323,6 +335,23 @@ document.addEventListener('click',event=>{
  try {
   release=await loadRelease();({summary,validation,geography}=release);evaluation=evaluateValidation(validation);index=makeIndex(summary);ready=true;
   $('region').innerHTML=release.registry.regions.map(r=>`<option value="${r.id}">${r.name}</option>`).join('');
+  for(const region of release.registry.regions){
+    const button=document.createElement('button');
+    button.type='button';
+    button.dataset.region=region.id;
+    button.setAttribute('aria-pressed','false');
+    const name=document.createElement('strong');
+    name.textContent=region.name;
+    const coverage=document.createElement('small');
+    const {start,end}=region.datasets.sp.coverage;
+    coverage.textContent=start.slice(0,7)===end.slice(0,7)
+      ? monthName(start.slice(0,7))+' archive'
+      : start.slice(0,4)+'–'+end.slice(0,4)+' archive';
+    button.append(name,coverage);
+    button.onclick=()=>{$('region').value=region.id;switchDataset();};
+    $('regionPresets').append(button);
+  }
+
   $('start').value=summary.coverage.start;$('end').value=summary.coverage.end;
   pitch=createPitch($('pitchPage'),release,n=>{pitchSlide=n;history.pushState(null,'',stateURL('/pitch',allState()));pitch.setSlide(n,true);updateLinks();});
   publishedMetrics();residualView();applyLocation();

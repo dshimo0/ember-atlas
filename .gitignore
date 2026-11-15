@@ -10,3 +10,6 @@ build/
 /data/history/
 /data/regions/
 /data/local-calibration/
+
+/backfill/data/
+/backfill/out/

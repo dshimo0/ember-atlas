@@ -22,4 +22,4 @@ export function loadRelease() {
 }
 
 const datasets=new Map();
-export async function loadDataset(region,mode){const release=await loadRelease(),r=release.registry.regions.find(r=>r.id===region);if(!r?.datasets[mode])throw new Error('Regional dataset unavailable');const ref=r.datasets[mode];if(!datasets.has(ref.file))datasets.set(ref.file,verifiedJSON(ref));const summary=await datasets.get(ref.file);if(summary.region!==region||summary.processing_class!==mode.toUpperCase())throw new Error('Regional scope mismatch');return summary;}
+export async function loadDataset(region,mode){const release=await loadRelease(),r=release.registry.regions.find(r=>r.id===region);if(!r?.datasets[mode])throw new Error('Regional dataset unavailable');const ref=r.datasets[mode];if(!datasets.has(ref.file))datasets.set(ref.file,verifiedJSON(ref).catch(error=>{datasets.delete(ref.file);throw error;}));const summary=await datasets.get(ref.file);if(summary.region!==region||summary.processing_class!==mode.toUpperCase())throw new Error('Regional scope mismatch');return summary;}
