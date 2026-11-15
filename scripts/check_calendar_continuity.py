@@ -11,6 +11,7 @@ with sync_playwright() as p:
    page.goto(base+route);page.reload();page.wait_for_load_state('networkidle');assert not page.evaluate('document.documentElement.scrollWidth>innerWidth'),(device,route)
    if route in ['/','/demo']:
     page.wait_for_function("!document.querySelector('#download').disabled",timeout=120000)
+    assert page.locator('.calendar-scroll').evaluate('(e)=>e.compareDocumentPosition(document.querySelector("#replayIntro")) & Node.DOCUMENT_POSITION_FOLLOWING')
     assert page.locator('#history').evaluate('(e)=>e.nextElementSibling.classList.contains("dashboard-grid")')
    report['checks'].append({'device':device,'route':route,'refresh':True,'overflow':False})
   page.goto(base+'/?encoding=anomaly&month=2024-09&theme=light&lang=en');page.wait_for_function("!document.querySelector('#download').disabled",timeout=120000)

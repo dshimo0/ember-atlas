@@ -6,7 +6,7 @@ Nine sections follow the measurement problem, observed September case, continuit
 
 Desktop uses a 16:9 stage with Previous/Next, keyboard navigation, optional fullscreen, hidden notes and print/PDF. Mobile scroll updates the counter and shareable slide URL. The regional world map remains on slide 7, with individually accessible study-area links and separate text alternatives.
 
-The prior 395-word script had a 176.2-second synthesized read at 180 wpm. The calendar-first revision changes the workflow narration; that earlier timing is historical and must not be presented as a new human rehearsal. Timing audio is not published. The three-minute local target is separate from the official Project Demonstration format, whose current guidance remains unverified.
+The current English presenter notes contain 407 words. The prior 395-word script had a 176.2-second synthesized read at 180 wpm. The calendar-first revision changes the workflow narration; that earlier timing is historical and must not be presented as a new human rehearsal. Timing audio is not published. The three-minute local target is separate from the official Project Demonstration format, whose current guidance remains unverified.
 
 ## Spoken script
 
