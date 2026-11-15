@@ -25,3 +25,7 @@ The selected region's own validation artifact controls adjustment availability. 
 The transition replay requires both source products. Selecting MODIS alone switches to raw MODIS; selecting VIIRS alone switches to its reference-scale view when supported. A single-sensor filter cannot silently export the other sensor as part of a replay. Raw historical takeaway text uses each sensor's own baseline years/sample size and does not attribute the longer MODIS baseline to VIIRS.
 
 Source flags are one click from the selected comparison and present in observation tooltips and exports. Literal version strings and reported type counts are labeled as source metadata. Counts by type describe native detections, not additive grid-cell-day contributions. Observation loading/network failure leaves map occupancy unavailable rather than zero, while aggregate exports and a provenance manifest remain usable.
+
+## About the team
+
+`/about` identifies Diego Shimohama as the sole creator, as confirmed by the owner. Main navigation and the final pitch section link to it. The page has direct-load/refresh support, keyboard-accessible links, responsive layout and source/data credits. It makes no claim of additional members, credentials, partners or NASA affiliation. About content remains readable without JavaScript or loading analytical snapshots. Adding a supplied visual requires its original accessible asset; no substitute logo or portrait is fabricated.

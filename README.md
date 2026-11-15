@@ -1,6 +1,6 @@
 # Ember Atlas
 
-[Explore](https://ember-atlas-opal.vercel.app/) · [Sensor transition replay](https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&benchmark=1&month=2024-09) · [Pitch](https://ember-atlas-opal.vercel.app/pitch)
+[Explore](https://ember-atlas-opal.vercel.app/) · [Sensor transition replay](https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&benchmark=1&month=2024-09) · [Pitch](https://ember-atlas-opal.vercel.app/pitch) · [About the team](https://ember-atlas-opal.vercel.app/about)
 
 Ember Atlas serves observed NASA FIRMS fire activity for eight explicitly bounded study areas. Pantanal is the default scientific walkthrough. All initial observations, daily summaries and exports are versioned snapshots; visitors do not supply a FIRMS key. The interactive OpenStreetMap basemap has an attributed local Natural Earth fallback.
 
@@ -96,3 +96,7 @@ Units: occupied cell-days/month; full named study rectangle, SP only. Inner choi
 <!-- REGIONAL-EVALUATION:END -->
 
 Release verification: deployed source [`1018c678`](https://github.com/dshimo0/ember-atlas/commit/1018c678d7be5efb97efce5aaf221e155c6a8e24), immutable observation data [`a9bc9c9b`](https://github.com/dshimo0/ember-atlas/commit/a9bc9c9b4b9da44159cc6fc0fe4f443bf9585391). All 50 signed-out desktop/mobile workflow groups passed; 16 datasets and eight regional evaluations were reconciled. See the [executed release evidence](submission/transition-release.json) and [remaining release items](docs/release-checklist.md).
+
+## Creator
+
+Ember Atlas is an individual project by **Diego Shimohama**. The [About page](https://ember-atlas-opal.vercel.app/about) identifies the creator and links to the project, reproducible evidence and data credits. AI assistance and submission-specific disclosures are recorded in the submission materials.

@@ -30,4 +30,6 @@ Use of Artificial Intelligence:
 
 OpenAI Codex assisted with implementation, scientific analysis code, tests and English documentation. NASA FIRMS observations are real. Product figures are computed from versioned data or actual screen captures. Temporary synthesized English speech measured script duration; no generated audio is published. Human review, current portal AI wording and actual team contributions require Team Owner confirmation.
 
-NASA and third-party resources: use the named public links and product list in RESOURCES.md. Human roster, eligibility, media format, terms and final submission remain owner actions.
+NASA and third-party resources: use the named public links and product list in RESOURCES.md. Diego Shimohama is the sole human creator, as confirmed by the owner. Eligibility, media format, terms and final submission remain owner actions.
+
+Team: Diego Shimohama — sole creator; project direction, implementation and release coordination. About: https://ember-atlas-opal.vercel.app/about . Detailed contribution wording and current portal fields remain subject to owner review.

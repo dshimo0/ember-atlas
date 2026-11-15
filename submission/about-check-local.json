@@ -1,0 +1,31 @@
+{
+  "url": "http://127.0.0.1:8931/about",
+  "checks": [
+    {
+      "viewport": "desktop",
+      "direct_load_refresh": true,
+      "no_horizontal_overflow": true,
+      "keyboard_skip_link": true,
+      "analytical_state_preserved_by_browser_back": true,
+      "unexpected_page_errors": []
+    },
+    {
+      "viewport": "mobile",
+      "direct_load_refresh": true,
+      "no_horizontal_overflow": true,
+      "keyboard_skip_link": true,
+      "analytical_state_preserved_by_browser_back": true,
+      "unexpected_page_errors": []
+    },
+    {
+      "viewport": "small-mobile",
+      "direct_load_refresh": true,
+      "no_horizontal_overflow": true,
+      "keyboard_skip_link": true,
+      "analytical_state_preserved_by_browser_back": false,
+      "unexpected_page_errors": []
+    }
+  ],
+  "readable_without_javascript": true,
+  "creator_confirmed_by_owner": "Diego Shimohama; sole creator"
+}

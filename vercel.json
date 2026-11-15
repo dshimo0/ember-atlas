@@ -12,6 +12,10 @@
     {
       "source": "/pitch",
       "destination": "/index.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html"
     }
   ]
 }

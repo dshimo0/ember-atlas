@@ -7,6 +7,8 @@ from urllib.parse import urlsplit
 ROOT=Path(__file__).resolve().parents[1]/'web'
 class Handler(SimpleHTTPRequestHandler):
     def translate_path(self,path):
+        if urlsplit(path).path.rstrip('/') == '/about':
+            return str(ROOT/'about.html')
         if urlsplit(path).path.rstrip('/') in ['/demo','/pitch']:
             return str(ROOT/'index.html')
         return super().translate_path(path)
