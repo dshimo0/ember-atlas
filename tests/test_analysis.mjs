@@ -32,7 +32,7 @@ test('reference-scale series preserves sources, zero, missing and sensor selecti
 });
 test('share URL roundtrips area/month/sensor/dates/view/step/slide and rejects invalid inputs',()=>{
  const selected={...s,area:'north',month:'2024-08',sensor:'MODIS_SP',step:4,slide:6,view:'raw'};
- assert.deepEqual(readURL(stateURL('/demo',selected),summary.coverage),{...selected,slide:1});
+ assert.deepEqual(readURL(stateURL('/demo',selected),summary.coverage),{...selected,slide:1,encoding:'activity'});
  assert.equal(readURL(stateURL('/pitch',selected),summary.coverage).slide,6);
  const invalid=readURL('/demo?area=bogus&start=2024-02-31&month=2025-99&step=100',summary.coverage);assert.equal(invalid.area,'all');assert.equal(invalid.start,s.start);assert.equal(invalid.month,'2024-09');assert.equal(invalid.step,5);
 });
@@ -40,3 +40,5 @@ test('sensitivity summary uses real product-specific confidence and grid diagnos
  const d=JSON.parse(fs.readFileSync('web/data/diagnostics.json')),rows=sensitivitySummary(d);
  assert.equal(rows.length,2);for(const r of rows){assert(r.finerPercent>0);assert(r.coarserPercent<0);assert(r.highConfidencePercent>0&&r.highConfidencePercent<=100);}
 });
+
+test('calendar encoding roundtrips independently of analytical filters',()=>{const a={...s,month:'2024-09',view:'replay',encoding:'anomaly'};const restored=readURL(stateURL('/',a),summary.coverage);assert.equal(restored.encoding,'anomaly');assert.equal(restored.sensor,a.sensor);assert.equal(readURL('/?encoding=invalid').encoding,'activity');});

@@ -97,19 +97,7 @@
       "theme": "light",
       "lang": "en",
       "route": "about",
-      "axe": [
-        {
-          "id": "color-contrast",
-          "nodes": [
-            {
-              "target": [
-                ".creator-initials"
-              ],
-              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.31 (foreground color: #965000, background color: #2b2c24, font size: 19.5pt (26px), font weight: normal). Expected contrast ratio of 3:1"
-            }
-          ]
-        }
-      ]
+      "axe": []
     },
     {
       "viewport": "desktop",
@@ -144,19 +132,7 @@
       "theme": "light",
       "lang": "pt-BR",
       "route": "about",
-      "axe": [
-        {
-          "id": "color-contrast",
-          "nodes": [
-            {
-              "target": [
-                ".creator-initials"
-              ],
-              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.31 (foreground color: #965000, background color: #2b2c24, font size: 19.5pt (26px), font weight: normal). Expected contrast ratio of 3:1"
-            }
-          ]
-        }
-      ]
+      "axe": []
     },
     {
       "viewport": "desktop",
@@ -261,19 +237,7 @@
       "theme": "light",
       "lang": "en",
       "route": "about",
-      "axe": [
-        {
-          "id": "color-contrast",
-          "nodes": [
-            {
-              "target": [
-                ".creator-initials"
-              ],
-              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.31 (foreground color: #965000, background color: #2b2c24, font size: 19.5pt (26px), font weight: normal). Expected contrast ratio of 3:1"
-            }
-          ]
-        }
-      ]
+      "axe": []
     },
     {
       "viewport": "mobile",
@@ -308,19 +272,7 @@
       "theme": "light",
       "lang": "pt-BR",
       "route": "about",
-      "axe": [
-        {
-          "id": "color-contrast",
-          "nodes": [
-            {
-              "target": [
-                ".creator-initials"
-              ],
-              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.31 (foreground color: #965000, background color: #2b2c24, font size: 19.5pt (26px), font weight: normal). Expected contrast ratio of 3:1"
-            }
-          ]
-        }
-      ]
+      "axe": []
     },
     {
       "viewport": "mobile",
@@ -330,6 +282,7 @@
       "axe": []
     }
   ],
+  "axe_violation_count": 0,
   "chart_selection_and_csv_scope": true,
   "language_preserves_export_bytes": true,
   "subregion_adjustment_withheld": true

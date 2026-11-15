@@ -6,7 +6,7 @@ Nine sections follow the measurement problem, observed September case, continuit
 
 Desktop uses a 16:9 stage with Previous/Next, keyboard navigation, optional fullscreen, hidden notes and print/PDF. Mobile scroll updates the counter and shareable slide URL. The regional world map remains on slide 7, with individually accessible study-area links and separate text alternatives.
 
-Actual English notes contain **395 words**. Measured synthesized read: **176.2 seconds**, eSpeak NG at 180 wpm. This is synthesized audio duration, not human rehearsal; navigation time is excluded. Timing audio is not published. The three-minute local target is separate from the official Project Demonstration format, whose current guidance remains unverified.
+The prior 395-word script had a 176.2-second synthesized read at 180 wpm. The calendar-first revision changes the workflow narration; that earlier timing is historical and must not be presented as a new human rehearsal. Timing audio is not published. The three-minute local target is separate from the official Project Demonstration format, whose current guidance remains unverified.
 
 ## Spoken script
 
@@ -32,7 +32,7 @@ All three methods use twenty twenty through twenty twenty-two for training and t
 
 ### 6. Move from place and time to reproducible evidence.
 
-Region and month selection update the map, calendar, comparison and CSV. Earlier complete same-month values provide historical context with explicit years and sample sizes. Inspect full grid occupancy or sampled detections, then download observations, aggregates and provenance. Visitors need no API key.
+Start with the selected month in the calendar, then inspect the map and sensor comparison. Region and month selection keep the CSV synchronized. Earlier complete same-month values provide historical context with explicit years and sample sizes. Inspect full grid occupancy or sampled detections, then download observations, aggregates and provenance. Visitors need no API key.
 
 ### 7. One workflow. Local evidence.
 
@@ -63,3 +63,7 @@ The nine-section rail selects the same shared slide state as Previous/Next and k
 ## Evidence workspace revision
 
 The measurement slide uses the selected-month common-axis dot plot; the validation slide pairs all three MAEs with actual monthly residuals. The continuity slide uses the versioned monthly series with a visible cutoff. English and Portuguese presentation text are selectable, with dark/light palettes. The English script remains the submission reference; earlier synthesized timing applies to that unchanged English script, not the Portuguese translation. Each language was checked for nine-page print output.
+
+## Calendar-first walkthrough
+
+Start with September 2024 in Pantanal: read the selected result, locate the month in the calendar, inspect the map, then expand the historical trend and reveal observed holdout MODIS. Show raw, scalar and frozen seasonal errors and peak residuals. Link to /demo?month=2024-09&view=replay. The 3-minute local pitch is distinct from official submission media rules. No new backfill or orbital correction result is claimed.

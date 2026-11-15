@@ -215,3 +215,9 @@ The pitch includes direct navigation across its nine sections. Typography uses a
 ### Evidence workspace · EN / PT-BR · dark / light
 
 The header provides language and appearance controls across Explore, Guided demo, Methods, About and Pitch. [Light interface](https://ember-atlas-opal.vercel.app/?theme=light&lang=en) · [Português](https://ember-atlas-opal.vercel.app/?lang=pt-BR&theme=light). Select a month directly on the time-series plot to update the map, comparison and exports. Methods includes observed-versus-adjusted scatter and three-method holdout residuals. [Presentation and language contract](docs/evidence-workspace.md).
+
+## Calendar-first workflow
+
+Choose a region and month, inspect the monthly calendar, switch Activity / Difference from earlier median, then inspect the map and sensor comparison. Expand the time series for source history. Download evidence from its selected scope. [Marina requirements](specs/006-marina-challenge.md) · [Backfill gates](specs/007-calendar-backfill.md) · [Research status](backfill/README.md). Experimental backfill inputs remain unavailable; no new adjusted history is published.
+
+The [backfill integration review](docs/backfill-review.md) separates adopted presentation ideas from unpublished scientific experiments. The availability attachment is archived with its own provenance and does not extend the public registry automatically.

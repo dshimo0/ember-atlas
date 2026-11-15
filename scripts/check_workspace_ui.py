@@ -26,6 +26,7 @@ with sync_playwright()as p:
       report['checks'].append({'viewport':name,'theme':theme,'lang':lang,'route':route or'/','axe':violations});print(name,theme,lang,route,'axe',len(violations),flush=True)
   page.goto(BASE+'/?lang=en&theme=light');page.wait_for_function("!document.querySelector('#download').disabled",timeout=120000)
   assert float(page.locator('#comparison [data-series=modis]').get_attribute('data-value'))==5819
+  page.locator('.historical-trend').evaluate('(e)=>e.open=true')
   page.locator('#timeSeries [data-plot-month="2023-01"]').focus();page.keyboard.press('Enter');page.wait_for_function("document.querySelector('#map').dataset.month==='2023-01'&&!document.querySelector('#download').disabled",timeout=120000);assert page.locator('#monthSelect').input_value()=='2023-01'
   with page.expect_download()as d:page.locator('#download').click()
   csv_en=Path(d.value.path()).read_bytes();rows=list(csv.DictReader(io.StringIO(csv_en.decode())));assert rows and all(r['date_utc'].startswith('2023-01')for r in rows)

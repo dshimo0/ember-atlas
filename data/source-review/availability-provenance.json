@@ -1,0 +1,10 @@
+{
+  "file": "user-provided-availability-2026-11-15.csv",
+  "sha256": "7606e2d28d402e5d6dd15675a391bcc22647fa7ca366f2b965b34d16a20ae12e",
+  "received_utc_date": "2026-11-15",
+  "source": "Owner upload data-availability.csv",
+  "upstream_retrieval_time": null,
+  "independently_verified": false,
+  "meaning": "Reported provider-level product date bounds, not acquired regional observations or usable observation coverage",
+  "publication_registry_changed": false
+}

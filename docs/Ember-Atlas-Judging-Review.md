@@ -40,3 +40,7 @@ Self-hosted typography, optional brief transitions, a dated eight-area NASA cont
 The next revision replaces progress-style selected-month bars with a shared-axis dot plot, brings actual holdout scatter and three-method residuals to the Methods introduction, and makes monthly time-series marks select the existing application month. Explore gives the map more width; the guide introduces the same evidence with a compact rail. The pitch now shows a residual time series rather than only three summary bars. About presents the eight dated geographic images at readable scale.
 
 Dark/light and EN/PT-BR controls are available across routes. English remains the submission reference and original artifacts/export schemas remain canonical. Translation is presentation-only, with byte-identical observation exports checked across languages. Public execution identity is recorded in `submission/workspace-release.json`. Human Portuguese scientific copy review and physical-device checks remain visible limitations.
+
+## Calendar continuity revision
+
+Calendar-first layout and shareable activity/anomaly colour modes reuse released observations. Backfill review exposed unverified inputs and unsupported intervals; generators are blocked and no experimental result is deployed. Current run evidence is recorded in submission/calendar-continuity-check.json. Translation and physical assistive-technology review remain separate checks.

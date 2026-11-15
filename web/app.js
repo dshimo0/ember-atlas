@@ -15,7 +15,7 @@ const state = () => ({region:$('region').value||'pantanal',mode:$('dataMode').va
 let datasetToken=0,currentComparison,externalAudit;
 let view='replay',guideStep=1,pitchSlide=1,pitch,release,evaluation,detail='general';
 const currentRoute=()=>location.pathname.replace(/\/$/,'')||'/';
-const allState=()=>({...state(),month:selected,view,benchmark:$('showBenchmark').checked,step:guideStep,slide:pitchSlide,detail});
+const allState=()=>({...state(),month:selected,view,encoding:$('calendarEncoding').value,benchmark:$('showBenchmark').checked,step:guideStep,slide:pitchSlide,detail});
 const selectionKey = s => [s.region,s.mode,selected, s.area, s.sensor, s.start, s.end].join('|');
 function row(month, product, s = state()) { return aggregateMonth(index, month, product, s); }
 function publishedMetrics() {
@@ -54,12 +54,19 @@ function calendar(s) {
       const unavailable = values.every(r => !r.retrieved), partial = !unavailable && values.some(r => !r.complete);
       const unsupported=!unavailable&&!partial&&values.every(v=>v.cells===null);
       const symbol = unavailable ? '—' : partial ? '◐' : unsupported?'⊘':'✓';
-      const label = `${monthName(m)}. ${phase}. ${values.map(v => `${replay?SENSOR_NAMES[v.product]+' · '+replayed.adjustment:ref?'Adjusted VIIRS':SENSOR_NAMES[v.product]}: ${v.cells === null ? (v.retrieved?'Adjustment unavailable; source data retrieved':'Data unavailable') : `${number(v.cells,v.cells%1?1:0)} cell-days, ${v.status}`}`).join('. ')}`;
-      header.push(`<button class="month ${unavailable ? 'missing' : partial ? 'partial' : ''}" data-month="${m}" data-source="${replay?replayed.source:values.map(v=>v.product).join(',')}" data-adjustment="${replay?replayed.adjustment:ref?(validation.selected_method||'frozen seasonal'):'none'}" title="${label}" style="--activity:${Math.max(0,...values.map(v=>(v.cells??0)/activityMax))}" aria-label="${label}" aria-pressed="${m === selected}"><em class="mobile-month">${new Date(m+'-01T00:00:00Z').toLocaleDateString('en-US',{month:'short',timeZone:'UTC'})}</em>${values.map(v => `<span class="${replay?(replayed.source==='MODIS_SP'?'m':'a'):ref?'a':v.product.startsWith('MODIS')?'m':'v'}">${replay?(replayed.source==='MODIS_SP'?'○ M':'▲ A'):ref?'▲ A':v.product.startsWith('MODIS')?'○ M':'◇ V'} <b>${compact(v.cells)}</b></span>`).join('')}<span class="coverage-symbol" aria-hidden="true">${symbol}</span></button>`);
+      const baselines=values.map(v=>{const b=replay?replayBaseline(index,m,s,validation):historicalBaseline(index,m,v.product,s,validation);return ref&&b&&a?{...b,median:b.median*a.factor,entries:b.entries.map(e=>({...e,value:e.value*a.factor}))}:b;});
+      const anomaly=$('calendarEncoding').value==='anomaly';
+      const validBaseline=!partial&&!unsupported&&baselines.every(b=>b&&b.percent!==null);
+      const delta=validBaseline?baselines.reduce((sum,b)=>sum+b.percent,0)/baselines.length:null;
+      const baselineLabel=anomaly?' '+baselines.map((b,i)=>`${values[i].product}: ${b?`earlier median ${number(b.median,1)} cell-days; years ${yearsLabel(b.entries.map(e=>e.year))}; n=${b.n}; difference ${b.percent===null?'undefined (zero median)':signed(b.percent)+'%'}`:'historical baseline unavailable'}`).join('. '):'';
+      const label = `${monthName(m)}. ${phase}. ${values.map(v => `${replay?SENSOR_NAMES[v.product]+' · '+replayed.adjustment:ref?'Adjusted VIIRS':SENSOR_NAMES[v.product]}: ${v.cells === null ? (v.retrieved?'Adjustment unavailable; source data retrieved':'Data unavailable') : `${number(v.cells,v.cells%1?1:0)} cell-days, ${v.status}`}`).join('. ')}${baselineLabel}`;
+      header.push(`<button class="month ${anomaly?'anomaly-month':''} ${unavailable ? 'missing' : partial ? 'partial' : ''}" data-month="${m}" data-source="${replay?replayed.source:values.map(v=>v.product).join(',')}" data-adjustment="${replay?replayed.adjustment:ref?(validation.selected_method||'frozen seasonal'):'none'}" title="${label}" style="${anomaly?`--anomaly-color:${delta===null?'var(--soft)':delta<0?'#236a91':delta>0?'#9b4c27':'var(--soft)'};`: ""}--activity:${Math.max(0,...values.map(v=>(v.cells??0)/activityMax))}" aria-label="${label}" aria-pressed="${m === selected}"><em class="mobile-month">${new Date(m+'-01T00:00:00Z').toLocaleDateString('en-US',{month:'short',timeZone:'UTC'})}</em>${values.map(v => `<span class="${replay?(replayed.source==='MODIS_SP'?'m':'a'):ref?'a':v.product.startsWith('MODIS')?'m':'v'}">${replay?(replayed.source==='MODIS_SP'?'○ M':'▲ A'):ref?'▲ A':v.product.startsWith('MODIS')?'○ M':'◇ V'} <b>${compact(v.cells)}</b></span>`).join('')}${anomaly?`<small class="anomaly-value">${delta===null?'— baseline':signed(delta)+'%'}</small>`:''}<span class="coverage-symbol" aria-hidden="true">${symbol}</span></button>`);
     }
     header.push('</div>');
   }
   $('calendar').innerHTML = header.join('');
+  $('calendarEncodingNote').textContent=$('calendarEncoding').value==='anomaly'?'Colour: blue below, brown above the earlier same-month median; neutral means no supported baseline or equal activity. Raw multi-sensor cells use the mean of supported sensor percentage differences; individual baselines are in each month tooltip. At least three complete prior years; zero medians have no percentage. Adjusted-only values use their own sensor baseline on the same seasonal scale.':'Colour: activity relative to the largest displayed monthly value. Values and source products remain inspectable.';
+  document.querySelector('.calendar-scale').hidden=$('calendarEncoding').value==='anomaly';
   for (const button of $('calendar').querySelectorAll('[data-month]')) {
     button.addEventListener('click', () => { selected = button.dataset.month; commitSelection(); $('calendar').querySelector(`[data-month="${selected}"]`)?.focus({preventScroll: true}); });
     button.addEventListener('keydown', event => {
@@ -265,7 +272,7 @@ function guideView(){
  const active=currentRoute()==='/demo';$('walkthrough').hidden=!active;const disclosure=$('validationDisclosure');if(active)$('analysisPage').append(disclosure);else document.querySelector('.page-heading').after(disclosure);
  document.body.dataset.step=String(guideStep);
  // Reorder the same calendar, never create a second analytical state.
- const history=$('history'),explore=$('explore');if(active&&guideStep===2)explore.insertBefore(history,explore.querySelector('.dashboard-grid'));else if(history.parentElement===explore)explore.after(history);
+ const history=$('history'),explore=$('explore');if(currentRoute()==='/'||active)explore.insertBefore(history,explore.querySelector('.dashboard-grid'));else if(history.parentElement===explore)explore.after(history);
  if(!active)return;
  const scene=scenes[guideStep-1],s=state(),m=row(selected,s.mode==='nrt'?'MODIS_NRT':'MODIS_SP',s),v=row(selected,s.mode==='nrt'?'VIIRS_NOAA20_NRT':'VIIRS_NOAA20_SP',s),a=s.sensor==='MODIS_SP'?null:adjustment(v,s,validation);
  $('stepTitle').textContent=scene[0];$('stepDescription').textContent=scene[1];$('stepProgress').textContent=`Step ${guideStep} of 5`;$('stepBack').disabled=guideStep===1;$('stepNext').disabled=guideStep===5;
@@ -307,7 +314,7 @@ async function applyLocation(scroll=false) {
  $('download').disabled=true;$('downloadCells').disabled=true;$('aggregateDownload').disabled=true;$('downloadReplay').disabled=true;$('downloadManifest').disabled=true;$('status').textContent='Loading selected dataset…';selectionToken++;
  try{
   const data=await loadDataset(region.id,preliminary.mode);const [v,c,a]=await Promise.all([verifiedJSON(data.validation),data.comparison?verifiedJSON(data.comparison):Promise.resolve(release.replayEvaluation),data.external_audit?verifiedJSON(data.external_audit):Promise.resolve(null)]);if(token!==datasetToken)return;summary=data;validation=v;currentComparison=c;externalAudit=a;evaluation=evaluateValidation(validation);index=makeIndex(summary);publishedMetrics();residualView();externalView();
-  const s=readURL(location.href,summary.coverage),defaults=datasetDefaults(region.datasets[preliminary.mode],region.id,preliminary.mode),query=new URL(location.href).searchParams;if(!['start','end','month'].some(k=>query.has(k))){s.start=defaults.start;s.end=defaults.end;}selected=s.month;view=s.view;guideStep=s.step;pitchSlide=s.slide;detail=s.detail;$('showBenchmark').checked=s.benchmark;
+  const s=readURL(location.href,summary.coverage),defaults=datasetDefaults(region.datasets[preliminary.mode],region.id,preliminary.mode),query=new URL(location.href).searchParams;if(!['start','end','month'].some(k=>query.has(k))){s.start=defaults.start;s.end=defaults.end;}selected=s.month;view=s.view;$('calendarEncoding').value=s.encoding||'activity';guideStep=s.step;pitchSlide=s.slide;detail=s.detail;$('showBenchmark').checked=s.benchmark;
   for(const id of ['area','sensor','start','end'])$(id).value=s[id];for(const d of document.querySelectorAll('.native-details,.source-flags,.series-table'))d.open=detail==='scientific';if(region.id!=='pantanal')$('area').value='all';
   const isPitch=currentRoute()==='/pitch',isMethods=currentRoute()==='/methods';document.documentElement.dataset.route=isPitch?'pitch':'analysis';document.body.dataset.page=currentRoute().slice(1)||'explore';
   document.querySelector('.skip').href=isPitch?'#pitchPage':isMethods?'#methodsPage':currentRoute()==='/demo'?'#walkthrough':'#explore';
@@ -338,6 +345,7 @@ $('downloadReplay').onclick=()=>download(replayCSV(index,state(),validation,summ
 $('downloadCells').onclick=()=>{const s=state(),dates=scope(selected,s),product=$('mapProduct').value.replace('_SP',s.mode==='nrt'?'_NRT':'_SP');download(cellCSV(observations,product,{...s,from:dates.from,to:dates.to},summary.snapshot.sha256),`ember-cells-${s.region}-${selected}-${product}.csv`);};
 for(const id of ['area','start','end','sensor'])$(id).addEventListener('change',commitSelection);
 $('monthSelect').onchange=e=>{selected=e.target.value;commitSelection();};
+$('calendarEncoding').onchange=()=>commitSelection();
 $('calendarView').onchange=e=>{view=e.target.value;commitSelection();};
 $('stepBack').onclick=()=>goStep(guideStep-1);$('stepNext').onclick=()=>goStep(guideStep+1);
 $('resetDemo').onclick=()=>{const ref=release.registry.regions[0].datasets.sp;history.pushState(null,'',stateURL('/demo',datasetDefaults(ref,'pantanal')));$('layerModis').checked=true;$('layerViirs').checked=true;$('showGrid').checked=true;$('showPoints').checked=false;$('mapProduct').value='VIIRS_NOAA20_SP';applyLocation().then(()=>$('fitStudyArea').click());};

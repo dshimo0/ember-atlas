@@ -36,3 +36,7 @@ Preserve each reported `version` and `type` string in current observation shards
 ## Presentation invariants
 
 The P0/P1 redesign does not refit factors, alter the grid, filter thermal types, extend any publication domain or rewrite observation shards. Calendar intensity is a view-relative encoding, not a percentile or anomaly estimate. Compact formatting applies only to display labels. The original monthly and observation exports retain numerical precision and provenance. NASA photographs/composites are editorial context with an independent image inventory, not evidence added to the quantitative evaluation.
+
+## Experimental archive publication gates
+
+Backfill detection-count research is isolated from the frozen cell-day release. See [spec 007](007-calendar-backfill.md). Product availability alone is not retrieval completeness or usable satellite coverage.

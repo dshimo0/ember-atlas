@@ -55,3 +55,7 @@ Source flags are one click from the selected comparison and present in observati
 - Quantitative time series with axes, missing-data gaps, selectable months and replay cutoff; holdout scatter with identity line and three-method residual diagnostic from existing validation rows.
 - Explicit dark/light appearance and English/Português (Brasil) controls, persistent locally; English remains initial/default submission language. Scientific source identifiers, raw artifacts and CSV schema remain canonical English. Translation must not change numbers, factors or data scope.
 - Responsive analytical and editorial layouts; both themes need readable controls, chart labels, map attribution and print. User visual preferences are independent of analytical filter state.
+
+## Calendar-first continuity
+
+Explore and Guided demo prioritize the selected month, takeaway and monthly calendar before the map/comparison. Activity/anomaly encoding restores from URLs. Time series and monthly source table are expandable. See [spec 007](007-calendar-backfill.md) and [Marina traceability](006-marina-challenge.md). This supersedes earlier map-first ordering criteria.

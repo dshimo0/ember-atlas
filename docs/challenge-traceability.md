@@ -69,3 +69,7 @@ The owner chose deeper presentation, not expanded science scope. Eight dated NAS
 ## Evidence workspace and bilingual presentation
 
 Actual holdout scatter, three-method residuals, interactive monthly history and common-axis selected-month comparison expose the existing evidence. Light/dark and EN/PT-BR settings support exploration without changing analytical state or raw exports. Public verification: `submission/workspace-release.json`. Canonical scientific artifacts and English submission materials remain authoritative. Portuguese domain review, physical devices and inaccessible owner backfill files remain open checks.
+
+## Marina and continuity requirements
+
+The timestamped owner-supplied video transcript is mapped in [spec 006](../specs/006-marina-challenge.md). Calendar-first acceptance and experimental publication gates are in [spec 007](../specs/007-calendar-backfill.md). Historical continuity remains partial: observed archive context and evaluated replay are available, but a validated 2000–present multi-platform fused series is not claimed. Backfill source Parquets/manifests and audiovisual verification remain open.

@@ -945,3 +945,5 @@ data-availability.csv
 /web/data/southern-amazon-sp-observations-2026-07-efdb728a570b.json.gz
 
 requirements-dev.txt
+
+backfill/

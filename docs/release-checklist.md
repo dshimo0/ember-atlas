@@ -31,3 +31,7 @@ Commands: `python -m unittest discover -s tests`; `node --test tests/*.mjs`; `py
 
 - [x] Five routes, two themes, two interface languages and two viewport sizes checked publicly; plot/month/map/export synchronization and language-invariant CSV verified.
 - [ ] Portuguese scientific wording reviewed by a native domain reviewer.
+
+## Continuity release checks
+
+Verify calendar-first order, anomaly URL restoration, earlier baseline support, month/map/export agreement and local basemap fallback. Confirm experimental scripts exit without outputs and frozen artifacts remain unchanged. Owner still handles final terms and judging submission.

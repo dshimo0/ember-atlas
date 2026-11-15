@@ -96,3 +96,7 @@ Units: occupied cell-days/month; full named study rectangle, SP only. Inner choi
 <!-- REGIONAL-EVALUATION:END -->
 
 The literal MODIS label split is systematic in this archive: 6.03 for training, 61.03 for outer/fresh evaluation. Source-field audit files record native counts by product/version/type and split. Factors target the as-delivered training MODIS_SP scale; holdout comparison uses the as-delivered later reference. Numerical agreement does not isolate sensor effects or establish homogeneous processing continuity. The monthly replay remains an explicitly labeled scenario.
+
+## Backfill and anomaly presentation
+
+The calendar colour mode does not change numerical exports. Earlier same-month baselines require three complete prior years. Raw multi-sensor colour averages supported per-sensor percentage differences; individual baseline years/n are in tooltips. Zero medians have no percentage anomaly. Backfill counts use a separate research model and remain unpublished; see spec 007.

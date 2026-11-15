@@ -1,0 +1,85 @@
+{
+  "url": "http://127.0.0.1:8932",
+  "checks": [
+    {
+      "device": "desktop",
+      "route": "/",
+      "refresh": true,
+      "overflow": false
+    },
+    {
+      "device": "desktop",
+      "route": "/demo",
+      "refresh": true,
+      "overflow": false
+    },
+    {
+      "device": "desktop",
+      "route": "/methods",
+      "refresh": true,
+      "overflow": false
+    },
+    {
+      "device": "desktop",
+      "route": "/about",
+      "refresh": true,
+      "overflow": false
+    },
+    {
+      "device": "desktop",
+      "route": "/pitch",
+      "refresh": true,
+      "overflow": false
+    },
+    {
+      "device": "desktop",
+      "anomaly_prior_n": 4,
+      "export_month": "2024-08",
+      "csv_rows": 129280,
+      "local_basemap": true,
+      "subregion_raw": true,
+      "keyboard_chart": true,
+      "pageerrors": []
+    },
+    {
+      "device": "mobile",
+      "route": "/",
+      "refresh": true,
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "route": "/demo",
+      "refresh": true,
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "route": "/methods",
+      "refresh": true,
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "route": "/about",
+      "refresh": true,
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "route": "/pitch",
+      "refresh": true,
+      "overflow": false
+    },
+    {
+      "device": "mobile",
+      "anomaly_prior_n": 4,
+      "export_month": "2024-08",
+      "csv_rows": 129280,
+      "local_basemap": true,
+      "subregion_raw": true,
+      "keyboard_chart": true,
+      "pageerrors": []
+    }
+  ]
+}
