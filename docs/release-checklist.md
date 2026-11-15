@@ -57,3 +57,5 @@ Reports: `submission/discover-release.json`, `discover-check.json`, `discover-ex
 - [ ] Owner supplies original logo/photo files and confirms logo generation provenance; mark any generated media as the guide requires.
 - [ ] Owner confirms local-event membership eligibility (pasted Universal Event rules specify at least two members).
 - [ ] Owner confirms final portal requirements, accepts terms and submits for judging.
+
+Production verification: see `submission/refinement-release.json` for tested source, anonymous asset checks, map/fallback and CSV results. No terms were accepted or final submission sent.

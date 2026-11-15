@@ -1,6 +1,6 @@
 {
   "spec": "009-evidence-presentation",
-  "status": "local checks passed; deployment pending",
+  "status": "production verified anonymously",
   "python_tests": 26,
   "node_test_modules": 6,
   "route_checks": "12 desktop/mobile direct and refreshed loads; zero axe findings in selected rules",
@@ -15,5 +15,12 @@
     "Original logo/photo files and logo provenance",
     "Team Owner event eligibility, terms and final submission",
     "Human accessibility, translation and presentation review"
-  ]
+  ],
+  "deployed_commit": "d3ac2d0c9305829cd93a07d7a735620fdcd0b31b",
+  "deployment": "dpl_4xPNeCDkFZRmhDra8RCBEre5AoS4",
+  "public_url": "https://ember-atlas-opal.vercel.app",
+  "public_assets_exact_matches": 15,
+  "public_route_results": "submission/discover-check.json",
+  "public_preferences_results": "submission/discover-extra-check.json",
+  "public_map_and_csv_results": "submission/refinement/checks.json"
 }

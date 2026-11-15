@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://ember-atlas-opal.vercel.app/",
+    "status": 200,
+    "sha256": "1839a8f9b02a58f0636bab8b74b618340e7df9b24ac6a66577a1c52505965615",
+    "matches_commit_file": true
+  },
+  {
+    "url": "https://ember-atlas-opal.vercel.app/explore",
+    "status": 200,
+    "sha256": "d3dd23096d4a0089f6b528f93c389c14daa5a8579945e45198c0f8303577c99d",
+    "matches_commit_file": true
+  },
+  {
+    "url": "https://ember-atlas-opal.vercel.app/demo",
+    "status": 200,
+    "sha256": "d3dd23096d4a0089f6b528f93c389c14daa5a8579945e45198c0f8303577c99d",
+    "matches_commit_file": true
+  },
+  {
+    "url": "https://ember-atlas-opal.vercel.app/methods",
+    "status": 200,
+    "sha256": "d3dd23096d4a0089f6b528f93c389c14daa5a8579945e45198c0f8303577c99d",
+    "matches_commit_file": true
+  },
+  {
+    "url": "https://ember-atlas-opal.vercel.app/pitch",
+    "status": 200,
+    "sha256": "d3dd23096d4a0089f6b528f93c389c14daa5a8579945e45198c0f8303577c99d",
+    "matches_commit_file": true
+  },
+  {
+    "url": "https://ember-atlas-opal.vercel.app/about",
+    "status": 200,
+    "sha256": "106fc1793d0f287b1a43989300fb823c970896541f1fb7d185b0852d4dc9cc85",
+    "matches_commit_file": true
+  },
+  {
+    "url": "https://ember-atlas-opal.vercel.app/credits.html",
+    "status": 200,
+    "sha256": "83b37b75c63df716a1355b5d97b2f99d781232c2e121e3d5b75f6b88baee8ea6",
+    "matches_commit_file": true
+  },
+  {
+    "url": "https://ember-atlas-opal.vercel.app/ai-disclosure.json",
+    "status": 200,
+    "sha256": "6ab0b5de79d9edca1f178b832f24c7b87ede856b256c04c4e1f235fc92502b23",
+    "matches_commit_file": true
+  },
+  {
+    "url": "https://ember-atlas-opal.vercel.app/refinement.css",
+    "status": 200,
+    "sha256": "1b9c9f797050d17de73ee4f7e1e00b5c7aced67a59cb92f00b0fdc1282655905",
+    "matches_commit_file": true
+  },
+  {
+    "url": "https://ember-atlas-opal.vercel.app/evidence-charts.mjs",
+    "status": 200,
+    "sha256": "6014d6519de90e4e107a3b87a8fe8998816b4f6f17b014b1c7b5e7695643b8c4",
+    "matches_commit_file": true
+  },
+  {
+    "url": "https://ember-atlas-opal.vercel.app/geographic-map.mjs",
+    "status": 200,
+    "sha256": "ff6187b6f352c053475999fb938a891a6ac22b2d593459d9ed789dc8234e47e1",
+    "matches_commit_file": true
+  },
+  {
+    "url": "https://ember-atlas-opal.vercel.app/pitch-content.mjs",
+    "status": 200,
+    "sha256": "e43a853bb5a3946fcd003d161ae31fe7804e3f15d27d65b0777be4780eacf1f5",
+    "matches_commit_file": true
+  },
+  {
+    "url": "https://ember-atlas-opal.vercel.app/assets/ember-atlas-pitch.pdf",
+    "status": 200,
+    "sha256": "47c05f6f60b898aa5e0b80b44299ec1299163f64521fac04ecc153de79cc4c49",
+    "matches_commit_file": true
+  },
+  {
+    "url": "https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4",
+    "status": 200,
+    "sha256": "70598bd29db8640a843f497a1fcc7e16efce3f5a751f20ab46c8939a33ffc615",
+    "matches_commit_file": true
+  },
+  {
+    "url": "https://ember-atlas-opal.vercel.app/assets/dashboard-view.png",
+    "status": 200,
+    "sha256": "87bcd8fc7d17e79deecb61af75fcfec4e6a719c759b19e2019dd8e11eb527153",
+    "matches_commit_file": true
+  }
+]
