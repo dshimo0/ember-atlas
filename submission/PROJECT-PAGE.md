@@ -2,30 +2,30 @@
 
 Project name: Ember Atlas
 
-Summary: Ember Atlas helps regional fire and land managers inspect sensor changes in NASA FIRMS observations. A Pantanal study-area calendar links native MODIS and NOAA-20 VIIRS detections, common-grid activity, historical same-month comparisons and downloadable evidence.
+Summary: Ember Atlas makes a satellite sensor transition inspectable. A Pantanal replay changes from observed MODIS to adjusted VIIRS, reveals independent fitting-period MODIS holdout observations, and exports source-tagged evidence. Eight study-area presets provide real observed maps and data downloads.
 
-Project URL: https://ember-atlas-opal.vercel.app
+Project URL: https://ember-atlas-opal.vercel.app/
 
-Guided exploration: https://ember-atlas-opal.vercel.app/demo
+Guided exploration: https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&benchmark=1&month=2024-09
 
-Presentation: https://ember-atlas-opal.vercel.app/pitch (nine slides; separate from the unverified official demonstration format)
+Presentation: https://ember-atlas-opal.vercel.app/pitch
 
 Source: https://github.com/dshimo0/ember-atlas
 
-Project Demonstration URL: https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4
-
-This is an actual 29.64-second silent screen recording. The Team Owner must confirm acceptance under the current official guide before using it in the portal; the separate three-minute pitch does not establish compliance.
-
 Project Details:
 
-Ember Atlas displays Pantanal fire activity from NASA FIRMS on an interactive geographic map and monthly calendar. Both products use the same globally anchored 0.05-degree WGS84 grid, counting each occupied cell once per UTC day. Analysts select the full Pantanal study rectangle or its northern/southern halves, choose dates and a month, inspect both products and export matching observations with provenance. Complete prior same-month years support sensor-specific medians; unsupported baselines are withheld.
+The primary Pantanal calendar replays a source change at January 2023, after the frozen 2020–2022 training window. It uses observed MODIS beforehand and seasonally adjusted NOAA-20 VIIRS on the MODIS-reference scale afterward. MODIS actually continues: its 2023–2024 observations are a separate benchmark excluded from fitting. Every exported replay month records source, adjustment, factor, UTC scope and snapshot identity.
 
-The release uses real MODIS C6.1 SP and VIIRS NOAA-20 SP observations. Training was frozen at 2020–2022 and holdout at 2023–2024. All 24 paired holdout months are now retrieved. Monthly MAE against the MODIS reference was 1021.71 cell-days, versus 199.70 after the frozen seasonal adjustment: 80.5% lower. Adjusted bias remains −123.97 cell-days/month; adjustment worsens February and March 2023. This is sensor agreement rather than ground-truth accuracy. Adjustment publication is supported within the full study rectangle and evaluated 2020–2024 domain. Exact periods, sample sizes and errors are in RESULTS.md and the machine-readable validation output. Hotspots are thermal anomalies, not burned area or independent fires. Clouds and overpass sampling remain unmeasured without usable-observation masks.
+On the same 24 complete paired holdout months and study area, common-grid monthly MAE against MODIS is 1,021.7 cell-days unadjusted, 175.3 with a training-only scalar, and 199.7 with the existing frozen seasonal factors. The scalar is better on this evidence; no replacement was selected on the same holdout. For the six months with greatest observed MODIS activity, scalar/seasonal MAE is 404.6/534.6 cell-days/month. All residuals are published. MODIS is a comparison reference, not ground truth.
 
-Reproduce: open /demo, follow the five actual-state steps for September 2024, inspect raw and MODIS-reference-scale calendars, prior same-month values and all holdout residuals, then download the selected observations, period aggregates and checksum manifest. Regional medians use their own spatial masks; full-area adjustment remains unavailable there. The complete flow was verified on the anonymous public HTTPS application.
+The observed MODIS archive spans November 2000–December 2024 for the same Pantanal study geometry. Calibration remains evaluated only in 2020–2024. Southern Amazon, Cerrado, Gran Chaco, California, Southeastern Australia, Iberian Peninsula and Siberia have real matched September 2024 SP snapshots and no inherited calibration. All eight have a separate recent NRT window. Each explicitly bounded study area has an interactive map, source/coverage labels and matching exports.
+
+Map occupancy uses full matching observations: occupied UTC days per 0.05° cell for a named sensor. Sampled detections are optional. NRT stays separate from Standard Processing. Retrieval completeness does not establish usable satellite observation; thermal anomalies and cell-days are not unique fires or burned area.
+
+Project Demonstration: the current silent screen recording is https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4 . It shows the actual replay, observed benchmark, region change and eight-area world map. The Team Owner must verify the current official demonstration format and choose or update the compliant asset. The nine-slide pitch is separate and is not asserted to meet an official cap.
 
 Use of Artificial Intelligence:
 
-OpenAI Codex assisted with implementation, scientific analysis code, tests and English documentation. Automated tests and browser checks were run; team review remains required. Satellite observations were acquired from NASA FIRMS. No synthetic observations or generated imagery are included in the product. This disclosure must be checked against the current portal's AI requirements.
+OpenAI Codex assisted with implementation, scientific analysis code, tests and English documentation. NASA FIRMS observations are real. Product figures are computed from versioned data or actual screen captures. Temporary synthesized English speech measured script duration; no generated audio is published. Human review, current portal AI wording and actual team contributions require Team Owner confirmation.
 
-NASA Data and Other Resources: use named absolute links from RESOURCES.md, retaining only products actually used. Team contributions: Codex-assisted engineering is documented here; Team Owner must provide the actual human roster and contributions before submission.
+NASA and third-party resources: use the named public links and product list in RESOURCES.md. Human roster, eligibility, media format, terms and final submission remain owner actions.

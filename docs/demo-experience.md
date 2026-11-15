@@ -1,21 +1,15 @@
-# Guided exploration
+# Sensor transition exploration
 
-Public route: https://ember-atlas-opal.vercel.app/demo
+Default: https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&month=2024-09
 
-The walkthrough uses the root dashboard's loader, daily summary, observation shards, map, comparison, calendar, baselines and exports. It opens on the full Pantanal study rectangle and September 2024. The header states actual UTC coverage. Five inline steps preserve free exploration; Back, Next, numbered steps and Reset walkthrough are available without a modal overlay.
+The primary Pantanal calendar and time series replay observed MODIS before January 2023 and frozen seasonal VIIRS afterward. The cutoff is a scenario. Toggle observed holdout MODIS as a separate benchmark; select December 2022 and January 2023 to verify the source change. Each month/table/CSV retains source and adjustment. The selected-month comparison remains real sensor evidence.
 
-| Step | Working evidence |
-| --- | --- |
-| Select area and month | Full/northern/southern presets; selected-month control; dates define calendar and aggregate period |
-| Compare common support | MODIS and NOAA-20 VIIRS on the same 0.05° WGS84 / UTC-day basis; native detections remain separate |
-| Inspect adjusted VIIRS | Accepted full-area quarterly adjustment and explicit reference-scale history; subregions show the limitation and a full-rectangle action |
-| Compare prior years | Each sensor's own fixed-mask same-month median; complete prior years only, at least three; selected/future years excluded |
-| Export evidence | Selected-month observations, selected-period aggregates, checksum manifest and share link |
+The ordered eight-region selector loads immutable source-specific SP or separate NRT snapshots. Full available archive selection exposes older MODIS and missing periods. Dates bound the calendar/period export, while the selected month bounds observations and map cells. Area/sensor/month/processing changes use the same mask and invalidate stale asynchronous responses. URLs preserve the complete selection and benchmark state.
 
-Month, area, product, dates, history view and walkthrough step are represented in URL parameters. Browser refresh and back/forward restore the state. A changed sensor updates calendar, time series, map and both CSVs. Map layer checkboxes change display visibility only, as stated next to the sample disclosure. Pan/zoom also leave the analytical mask unchanged.
+The map retains OSM, attribution, pan/zoom/scale/fit and a global local Natural Earth fallback. Its primary analytical layer uses all observations for occupied UTC days/cell and a named sensor. Optional sampled detections and sensor visibility controls are under Map inspection layers. They affect display only. Cells and observations have separate CSVs; cell occupancies sum to common-grid totals. Monthly factors never modify spatial coordinates or occupancy.
 
-Desktop places the map at about 60% of the analytical row, beside the comparison. Mobile stacks the selected-month result, map and comparison, with a collapsible filter toolbar and compact stepper. The month grid wraps to four columns; a monthly source/value table is also available. Charts have text labels, missing gaps and an accessible table. Focus outlines, 44-pixel primary controls, keyboard month navigation and native form controls support keyboard and touch use.
+Reference-scale historical context uses complete earlier same-month entries in the matched 2020–2024 domain, with n/years/source exposed and a minimum of three. Older MODIS is observational context. Missing, partial and zero retrieval states remain distinct; NRT is not joined to SP or compared against entire historical months.
 
-The global validation strip and residuals always describe the full study rectangle, regardless of selected subregion. Regional historical medians are descriptive sensor-specific comparisons; they never inherit a calibration factor. No official biome geometry is implied. OpenStreetMap and Natural Earth are attributed on the map and in Methods & data.
+The five inline exploration steps remain available after the analytical row. Free exploration and reset remain available. Mobile uses compact region/data controls, collapsible detailed filters and a readable month/table alternative. Independent full-area validation stays clearly labeled as Pantanal evidence when another study area is selected.
 
-Acceptance evidence: [route checks](../submission/routes-check-public.json), [filter/export checks](../submission/judging-check-public.json), [desktop capture](../submission/demo-desktop.png), [mobile capture](../submission/demo-mobile.png). Mobile checks use browser emulation, not a physical device. The release checklist records deployment and owner gates.
+Verification: submission/eight-region-check-public.json records desktop/touch-emulated mobile direct loads, refresh, all eight geometries/observations/CSVs, SP/NRT separation, replay cutoff, filter state, cell reconciliation and forced tile fallback. No physical-device verification is implied.

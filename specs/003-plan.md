@@ -22,3 +22,7 @@ After the environment configuration was published, FIRMS availability and bounde
 ## Production hosting closeout
 
 After user-completed CLI authentication, project creation and static production deployment succeeded in the existing Vercel Hobby team. https://ember-atlas-opal.vercel.app serves the pinned observations anonymously. Deployment inputs were checked to exclude ingestion and raw data. Complete public browser flow, CSV downloads and mobile checks passed; official portal guide verification and final owner submission remain separate pending gates.
+
+## Current release closeout
+
+The earlier dated access/hosting statements above are historical. The current release adds eight observed SP/NRT presets, a 2000–2024 Pantanal MODIS archive, the January 2023 continuity replay, independent holdout benchmark, scalar/seasonal/unadjusted comparison and full-data map cells. See docs/challenge-traceability.md and submission/transition-release.json for current implementation and deployed evidence. No regional adjustment is published without local multi-year evaluation, and final portal submission remains with the Team Owner.

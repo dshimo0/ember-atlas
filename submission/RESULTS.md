@@ -1,40 +1,19 @@
-# Measured evidence — completed overlap
+# Measured transition evidence
 
-NASA FIRMS acquisition resumed successfully after the environment configuration was published. All UTC days from 2020-01-01 through 2024-12-31 are retrieved for MODIS_SP (MODIS C6.1 Terra/Aqua pooled) and VIIRS_NOAA20_SP (375 m). The canonical snapshot contains 1,213,587 deduplicated observations and 737 original window manifests. Earlier invalid-key responses are recorded as a recovered access interruption; their cause is unconfirmed.
+The versioned replay evaluation and regional registry are addressed by `web/data/replay-evaluation.json` and `web/data/regions.json`. Original Pantanal input snapshot, daily fit CSV, frozen factors and validation remain unchanged.
 
-## Frozen evaluation
+Training: 36 complete paired months in 2020–2022. Evaluation: 24 complete paired months in 2023–2024, full Pantanal study area. All methods use the same globally anchored 0.05° WGS84 / UTC-day occupied-cell metric.
 
-Training: 36 complete paired months, 2020–2022. Holdout: 24 complete paired months, 2023–2024. Grid: globally anchored 0.05° WGS84 per UTC day. Factors were fit only to training data; no thresholds or seasonal settings were tuned on the expanded holdout. Publication is supported within the full study rectangle and evaluated 2020–2024 domain.
+| Method | Monthly MAE | Signed bias | Peak-six MAE | Peak-six bias |
+| --- | ---: | ---: | ---: | ---: |
+| Unadjusted common-grid VIIRS | 1021.708333 | +1021.708333 | 2225.166667 | +2225.166667 |
+| Training-only least-squares scalar | 175.329287 | −54.344752 | 404.601727 | −404.601727 |
+| Frozen quarterly factors | 199.699731 | −123.968300 | 534.637305 | −534.637305 |
 
-| Monthly metric, same 24 holdout months | Unadjusted grid | Candidate adjustment |
-| --- | ---: | ---: |
-| MAE, occupied cell-days | 1021.71 | 199.70 |
-| Signed bias, VIIRS minus MODIS cell-days/month | +1021.71 | -123.97 |
+Units: occupied cell-days/month. Scalar factor 0.5497999781946175 minimizes training-only through-origin squared residuals. Peak six are ranked by observed MODIS activity, not candidate residual: 2024-08, 2024-09, 2023-11, 2024-10, 2024-06, 2024-07. Every monthly residual is in the immutable artifact and public CSV. The scalar is stronger on this existing holdout; later method selection requires separate evaluation.
 
-## Seasonal holdout results
+January 2023 is a source-change replay scenario. MODIS remains observed after the cutoff. September 2024 MODIS is 5,819 cell-days, VIIRS common grid 8,809, seasonal replay 4,879.052992: residual −939.947008, −16.1531%. This measures reference agreement, not ground-truth or detection accuracy.
 
-| Quarter | n | Baseline MAE | Adjusted MAE | Baseline bias | Adjusted bias |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Q1 | 6 | 374.50 | 75.45 | +374.50 | -30.69 |
-| Q2 | 6 | 724.50 | 118.97 | +724.50 | -32.10 |
-| Q3 | 6 | 1801.33 | 365.44 | +1801.33 | -232.27 |
-| Q4 | 6 | 1186.50 | 238.94 | +1186.50 | -200.81 |
+The older Pantanal MODIS backfill comprises 1,400 verified original windows, extending MODIS to 2000-11-01–2024-12-31 with 8,827 retrieved UTC days. NOAA-20 SP paired publication remains 2020–2024. New source files/manifests are preserved in deterministic archives with member checksums. Older platform mix is not independently harmonized; replay historical baselines use earlier complete matched-domain months only.
 
-## September 2024
-
-| Product | Native detections | Occupied cell-days | Prior September median | Prior years (n) | Difference |
-| --- | ---: | ---: | ---: | --- | ---: |
-| MODIS_SP | 23396 | 5819 | 2532.0 | 2020–2023 (4) | +129.82% |
-| VIIRS_NOAA20_SP | 101659 | 8809 | 4782.0 | 2020–2023 (4) | +84.21% |
-
-Native-unit differences are diagnostics, not common-grid errors. The prior-year median is sensor-specific; the adjusted estimate is a MODIS-reference comparability measure. Neither identifies unique fires, burned area or ground truth. Two independent holdout years do not support a precise uncertainty interval; none is published. The release presents overlap and does not claim a validated legacy-to-VIIRS transition outside 2020–2024.
-
-Descriptive diagnostics include 0.025/0.05/0.1-degree grids, high confidence using sensor-specific thresholds, platform mix and day/night. These are not independent validation for another AOI. Physical cell area varies with latitude. Swath/cloud observation coverage remains unknown even though daily retrieval is complete. Raw extracts and checksum manifests remain committed; the public app requires no FIRMS key.
-
-Anonymous production HTTPS is verified at https://ember-atlas-opal.vercel.app after CLI authentication resolved the earlier Vercel creation blocker. The full public browser flow and CSV exports passed; see judging-check-public.json, routes-check-public.json and docs/DEPLOYMENT.md. Official Space Apps resources still return HTTP 503; portal demonstration format must be verified by the Team Owner.
-
-## Final product evidence
-
-The original daily calendar and validation were reproduced exactly from committed raw manifests for the final presentation release. No factors or acceptance rules changed. Recomputed holdout RMSE is 1334.5146 → 317.6660 cell-days/month. February and March 2023 have larger absolute residuals after adjustment; all 24 residuals are exposed. The explicit history is adjusted VIIRS on the MODIS-reference scale, separately from MODIS, with no fused source transition.
-
-The `/demo` journey, `/pitch` presentation, shared selection URLs, regional own-mask historical medians and exact CSV-checksum manifest are documented in docs/demo-experience.md and docs/pitch.md. Final execution/deployment evidence is recorded in product-release.json and routes-check-public.json. Regional adjustment remains unavailable.
+[Eight-row coverage inventory](eight-region-coverage.md) lists all released study extents, products and dates. Seven added regions have one complete matched SP month, not independently evaluated regional adjustment. Separate NRT snapshots are partial-month windows. Usable swath/cloud observation coverage remains unknown. [Release evidence](transition-release.json) and [public browser execution](eight-region-check-public.json) record the tested source and per-region CSV counts.

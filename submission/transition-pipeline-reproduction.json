@@ -1,0 +1,7 @@
+{
+  "calendar_byte_identical": true,
+  "validation_identical": true,
+  "calendar_sha256": "62bfec91c0d8969c8dacf887618164f22561186263839264de0472c7db5d3bef",
+  "validation_sha256": "e17b5f4c9e90e163104aa0acbac9bfac5035999aa0db1c86e87e7ca00ec0d2fe",
+  "older_modis_and_new_regions_included_in_fit": false
+}

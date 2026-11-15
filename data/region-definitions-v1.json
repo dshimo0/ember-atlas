@@ -1,0 +1,16 @@
+{
+  "schema": "ember-regions-1",
+  "crs": "EPSG:4326",
+  "geometry_source": "Ember Atlas project-defined study extents, version 1. Rectangles are analytical selections, not official biome or administrative boundaries.",
+  "source_url": "https://github.com/dshimo0/ember-atlas/blob/work/data/region-definitions-v1.json",
+  "regions": [
+    {"id":"pantanal","name":"Pantanal","bounds":[-59,-23,-54,-15],"extent_note":"59–54°W, 23–15°S; preserves the evaluated Pantanal study area."},
+    {"id":"southern-amazon","name":"Southern Amazon","bounds":[-65,-13,-48,-5],"extent_note":"Southern Amazon study area: 65–48°W, 13–5°S; a rectangular southern-arc selection."},
+    {"id":"cerrado","name":"Cerrado","bounds":[-55,-20,-44,-8],"extent_note":"Cerrado study area: 55–44°W, 20–8°S; not the official biome mask."},
+    {"id":"gran-chaco","name":"Gran Chaco","bounds":[-66,-32,-57,-17],"extent_note":"Gran Chaco study area: 66–57°W, 32–17°S; includes parts of Argentina, Bolivia and Paraguay."},
+    {"id":"california","name":"California","bounds":[-125,32,-114,42.5],"extent_note":"California study area: 125–114°W, 32–42.5°N; a box including adjacent land and ocean, not a state mask."},
+    {"id":"southeastern-australia","name":"Southeastern Australia","bounds":[140,-44,154,-28],"extent_note":"140–154°E, 44–28°S; southeast mainland and Tasmania, including adjacent land/ocean."},
+    {"id":"iberian-peninsula","name":"Iberian Peninsula","bounds":[-10,35,4,44.5],"extent_note":"Iberian study area: 10°W–4°E, 35–44.5°N; includes adjacent land and ocean."},
+    {"id":"siberia","name":"Siberia","bounds":[60,50,140,72],"extent_note":"Siberia study area: 60–140°E, 50–72°N; a broad central/eastern Russian selection, not all Siberia or Russia."}
+  ]
+}

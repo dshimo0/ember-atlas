@@ -11,7 +11,7 @@ for name in paths:
  if not p.is_file():continue
  data=p.read_bytes();scanned+=1
  if (key and key in data)or pattern.search(data):failures.append(name)
- if name.startswith('web/') and name.endswith('.gz'):
+ if name.endswith('.gz'):
   decoded=gzip.decompress(data)
   if (key and key in decoded)or pattern.search(decoded):failures.append(name+' (decompressed)')
 assert not failures,'Credential pattern detected in: '+', '.join(failures)

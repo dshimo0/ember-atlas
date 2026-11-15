@@ -1,37 +1,19 @@
-# Product requirements
+# Product acceptance contract
 
-The dashboard supports regional review of satellite-observed fire activity in the Pantanal study rectangle, WGS84 `-59,-23,-54,-15`. Released coverage is 2020–2024. Earlier MODIS history, NRT layers, geographic transfer and a calibrated legacy handoff are outside this release.
-
-| ID | Acceptance criterion |
-| --- | --- |
-| P1 Landing | English title “Pantanal fire activity, 2020–2024,” compact validation result, study-area/sensor/date controls and September 2024 selected. No rhetorical hero or promotional headings. |
-| P2 Validation | The percentage is derived from the unchanged unrounded validation metrics. Holdout size, years and full-area geographic scope appear beside it. Detailed factors, bias and limitations are in Methods & data. |
-| P3 Layout | Desktop places the interactive geographic map beside the selected-month comparison. Mobile places the map directly after the selected month and its finding. The full calendar follows the dashboard. |
-| P4 Map | An attributed OpenStreetMap basemap supplies rivers, settlements and boundaries. Zoom, pan, metric scale and fit-to-study-area work by pointer/keyboard and touch-compatible controls. |
-| P5 Fallback | Failed or stalled external tiles activate a locally served Natural Earth map with country boundaries, rivers and settlements. Navigation, FIRMS overlays and exports continue to work. |
-| P6 Geometry | The actual study rectangle remains visible and distinct from geographic boundaries. A selected half has its own outline. No biome boundary is shown without verified attributed geometry; the current release omits it. |
-| P7 Observations | The sensor legend, active month and sampling disclosure stay beside the map. Up to 4,000 points are shown; exports contain all matching observations. Map pan/zoom do not change the filter scope. |
-| P8 Comparison | MODIS, common-grid VIIRS and eligible adjusted VIIRS use occupied cell-days. Native detection counts are separate. The selected-month finding is stated once beside the evidence. Prior baseline years, n and underlying values are accessible. |
-| P9 Scope | Full-area factors never apply to a subregion or partial month. The comparison gives a concise reason when adjustment is unavailable. Historical comparisons require three complete prior same-month years. |
-| P10 State | Month, area, sensor and selected UTC interval remain synchronized across the map, comparison and observation export. Date controls determine calendar/aggregate coverage. Stale asynchronous responses cannot replace a newer selection. |
-| P11 Observation CSV | Located beside the map; covers selected month intersected with dates, area and sensors. Includes coordinates, UTC acquisition time, product/platform, confidence, FRP, original source and snapshot identity. |
-| P12 Aggregate CSV | Located beside the calendar; covers the entire selected period with one row per month/product. Includes exact dates, native/grid counts, retrieval status, method, units and eligible adjustment. |
-| P13 Missingness | Missing retrieval has blank numeric values and unavailable observation export. Retrieved zero detections are numeric zero; partial months are labeled and receive no adjustment. |
-| P14 Calendar | All 60 released months are available, with text labels for training and holdout years, visible/accessible selected states and keyboard month navigation. Mobile months wrap without document overflow. |
-| P15 Copy | Plain labels such as Study area, Sensor comparison, Monthly calendar and Methods & data. Limitations appear where they affect interpretation; complete methodology is in details. |
-| P16 Reproduction | Original snapshot, validation, frozen split, acceptance rules and export calculations remain unchanged. Locally vendored Leaflet and geographic inputs have licenses/source checksums. No FIRMS credentials are served. |
-| P17 Verification | Signed-out desktop/mobile checks cover initial load, zoom/pan/scale/fit, month/area/sensor changes, both CSVs, subregion withholding and forced tile failure. One displayed grid total and downloaded records reconcile with the pinned source. |
-
-## Final presentation acceptance criteria
+English static application with shared Explore, Guided demo, Pitch and Methods & data navigation. Preserve root and existing data/media links; `/`, `/demo`, `/pitch` support direct load, refresh and browser history. No framework migration, authentication or visitor-supplied FIRMS key.
 
 | ID | Acceptance criterion |
 | --- | --- |
-| P18 Routes | `/`, `/demo`, `/pitch` load directly and after refresh on Vercel. Shared Explore / Guided demo / Pitch / Methods & data navigation preserves analytical state. |
-| P19 Guided case | Five inline actual-state steps, Back/Next, numbered selection and reset. Default September 2024 supported by the release; free exploration is never blocked. Mobile filters fold while selected place/month/result remain visible. |
-| P20 Reference scale | Explicit adjusted VIIRS on MODIS-reference scale calendar and time series, beside raw common-grid mode. Distinct purple/triangle treatment and units. No sensor sum, source handoff or adjusted point coordinates. Subregions and MODIS-only mode expose raw history. |
-| P21 Residuals | Full-area validation remains visibly separate from selected-area metrics. Recompute all 24 holdout residuals, MAE, bias and RMSE; expose underperforming months without changing factors. |
-| P22 Regional baselines | Full/north/south use the same fixed spatial masks in observations, daily totals and historical medians. At least three complete prior same-month years; exclude missing/partial/target/future periods. No regional calibration. |
-| P23 URLs | Month, area, product, dates, metric mode and route progress restore through shared URLs, refresh and browser back/forward. Invalid inputs use validated defaults. |
-| P24 Evidence manifest | JSON records current selection, immutable input/validation/source hashes and exact CSV checksums. Its adjustment applicability matches analytical scope. No credentials. |
-| P25 Pitch | Nine concise desktop slides; previous/next and keyboard operation, counter, optional fullscreen, notes hidden initially, mobile scroll order, nine-page readable landscape PDF. Shared metrics/artifacts, real product screenshots and verified ownership only. |
-| P26 Acceptance evidence | Nine Python and 13 Node checks; signed-out desktop/mobile route and analytical-flow suites; screenshots, normal network checks and isolated tile-failure tests. Printed PDF page count verified. Human rehearsal and official media compliance remain explicitly pending. |
+| P1 Presets | Explore and /demo list Pantanal, Southern Amazon, Cerrado, Gran Chaco, California, Southeastern Australia, Iberian Peninsula and Siberia in that order. Default to Pantanal and September 2024. |
+| P2 Scope | Display actual dataset/product coverage, processing class, UTC window, retrieval time and explicit rectangle extent. Selected geography is called a study area, not an official biome. |
+| P3 Calendar | Reference-scale sensor-transition replay is the primary Pantanal view. Raw comparison and adjusted-only views remain available; unsupported region/processing/mask disables adjustment. Month selection synchronizes map, comparison, context and exports. |
+| P4 Replay | Show January 2023 scenario cutoff and selected month source/adjustment. Reveal observed holdout MODIS with a separate toggle. Per-month source and adjustment appear in calendar/table/CSV. |
+| P5 History | Earlier complete matched-domain baseline years, n and values are inspectable. Full available MODIS archive can be selected; missing retrieval is distinct from zero and not converted to calibrated history. |
+| P6 Map | Preserve attributed OSM basemap, zoom/pan/scale/fit and accurate local fallback for all eight extents. Show full-data occupied days/cell for a named sensor and optional sampled detections. No spatial relocation or adjusted-point claim. |
+| P7 State | Region, SP/NRT, dates, month, sensor, area, view, benchmark and route progress restore from URLs. Stale async requests cannot overwrite another region or re-enable mismatched exports. |
+| P8 Evidence | Observation CSV, period aggregates, occupied-day cells, source-tagged replay months and provenance manifest match selected scope. Cells reconcile to grid totals; zero-record retrieved CSV is exportable; missing observation CSV unavailable. |
+| P9 Recent | Separate NRT partial-period view with real products/window/last retrieval. No unsupported SP/NRT join or whole-month historical comparison. |
+| P10 Validation | Full Pantanal validation is visibly scoped, including the stronger scalar baseline, all residuals and peak-six results. Show seasonal remaining bias; no accuracy/ground-truth/global claim or holdout-based reselection. |
+| P11 Pitch | Nine concise interactive sections tell sensor change → continuity replay → observed benchmark → scalar comparison → peak residual → eight-region evidence. Exact demo-state/evidence links, keyboard controls, notes, mobile scroll and readable print. |
+| P12 Access | Keyboard focus, native form controls, readable table alternative, touch targets and no document overflow. Desktop map beside comparison; mobile selected-month result before map. Compact introductory copy. |
+| P13 Verification | Test all eight bounds, real observations and matching CSV on deployed desktop/mobile; direct loads, refresh, filters, replay cutoff, map fallback, missing/zero and print. Report actual commit and unresolved datasets/calibration gaps. |

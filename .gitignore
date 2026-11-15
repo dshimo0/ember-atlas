@@ -5,3 +5,7 @@ node_modules/
 .venv/
 build/
 *.zip
+
+# New FIRMS inputs are preserved byte-for-byte in data/source-archives/.
+/data/history/
+/data/regions/

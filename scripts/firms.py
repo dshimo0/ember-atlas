@@ -67,6 +67,10 @@ def download(path):
             with urlopen(request, timeout=45) as response:
                 return response.read()
         except HTTPError as error:
+            if error.code == 400:
+                reason=error.read().lower()
+                if b"transaction" in reason and b"limit" in reason:
+                    raise ValueError("FIRMS transaction quota exceeded; retry after the 10-minute window resets") from None
             if error.code not in {429, 500, 502, 503, 504} or attempt == 2:
                 raise ValueError(f"FIRMS returned HTTP {error.code}") from None
             retry_after = error.headers.get("Retry-After", "")

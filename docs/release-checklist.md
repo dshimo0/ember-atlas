@@ -1,26 +1,23 @@
-# Product and presentation release checklist
+# Eight-region transition release checklist
 
-Scientific input: `snapshot-19621fa88d40.json.gz`; validation: `validation-ba55acfc7909.json`. Input source branch `work` at `6fb056e95e11c4a0668e9a73431c0c2f68b76662`. Deployment source and final public evidence are recorded in [product-release.json](../submission/product-release.json).
+Authoritative identity and executed evidence: [transition-release.json](../submission/transition-release.json). Inspect [eight-region-check-public.json](../submission/eight-region-check-public.json) for per-region/window counts and actual deployed execution. The prior one-area release evidence remains historical.
 
-| Status | Requirement | Evidence |
-| --- | --- | --- |
-| Verified | Preserve science and stack | Static native modules/Leaflet; original input/validation bytes retained; daily calendar and validation reproduced exactly from committed manifests |
-| Verified | Recompute claim without refitting | 24 holdout residuals recomputed from frozen quarterly factors; MAE, bias and RMSE reconcile; 13 Node tests |
-| Verified | Routes and state | `/`, `/demo`, `/pitch` direct loads/refreshes; shared nav; URL/back/forward tests |
-| Verified | Complete guided case | Five actual-state steps, reset, raw/reference history and matching exports |
-| Verified | Regional analysis | Own-mask prior-year medians; no inherited adjustment; north/south tests |
-| Verified | Map | OSM, source/time/FRP/confidence tooltips, circle/diamond markers, display-only layer switches, fit/scale/pan/zoom; forced failure activates local geography |
-| Verified | Evidence downloads | 125,055 September observations; 120 full-period aggregate rows; record and cell-day equality with pinned observations; manifest hashes equal actual downloaded CSV bytes |
-| Verified | Missingness | Retrieved zero, partial September interval and missing December 2019 remain distinct |
-| Verified | Presentation | Nine sections, previous/next, keyboard, slide URLs, notes, fullscreen, mobile scroll, nine-page print PDF |
-| Verified | Desktop/mobile execution | Fresh signed-out Chromium contexts; screenshots and JSON reports in submission/; mobile is touch/viewport emulation |
-| Verified | Pipeline checks | Nine Python tests; exact reproduction; frozen source hashes and credential checks recorded in product-release.json |
-| Verified | Timed script | 454 words; synthesized English read 184.646 seconds at eSpeak NG 1.51, 180 wpm; no audio published |
-| Pending — Team Owner | Human pitch rehearsal | Time delivery with slide navigation and adapt pacing to the permitted event format |
-| Pending — Team Owner | Official submission guidance | Current challenge, resources, event and legal pages returned 503; do not infer deadline or official media duration/slide count |
-| Pending — Team Owner | Roster, eligibility and rights | Confirm human contributions, member/event registration, pre-existing-work eligibility, repository license and required portal resource wording |
-| Pending — Team Owner only | Terms and submission | Review current guide, confirm demonstration format, accept terms and personally submit for judging; verify success state |
+| Gate | Evidence / scope |
+| --- | --- |
+| Frozen science preserved | Original snapshot, validation, daily fit input and factors retain their hashes. No fitting on holdout. |
+| Three methods | Training-only scalar, frozen seasonal and unadjusted evaluated on identical 24 paired months; all residuals and reference-selected peak-six metrics published. |
+| Replay | Derived January 2023 scenario cutoff; month source and adjustment; separate observed holdout MODIS; source-tagged monthly CSV. |
+| Eight snapshots | All eight ordered rectangles have real SP and separate NRT observations, provenance, maps and exports without a visitor key. |
+| Earlier archive | All 1,400 older MODIS windows retrieved; full MODIS coverage 2000-11-01–2024-12-31, paired calibration 2020–2024 only. |
+| Map | Full-data cell occupancy matches common-grid totals and cell CSV; sampled points separate; OSM and local fallback cover every extent. |
+| State and exports | Desktop/mobile direct loads/refresh, region/mode/month/sensor/area changes, URL restoration and stale-response guards. CSV exact-record and cell-count reconciliation. |
+| Missingness | Pre-archive missing periods blank; actual retrieved zero day numeric/exportable zero; NRT partial-month status explicit. |
+| Reproducibility | Deterministic source packages, all member hashes verified, reconstruction refuses to overwrite changed files; versioned inventories and checksum-verified shards. |
+| Tests | Fifteen Python tests and nineteen Node cases, plus the signed-out eight-region browser suite and print-page check. |
+| Secrets | Actual ingestion key and keyed-URL patterns scanned without printing; compressed public data and source archives included. No key required by frontend. |
+| Presentation | Nine interactive sections and eight world-map links; source-derived figures; actual product screenshot; current script/timing record. |
+| Owner pending | Current official demonstration format/event eligibility, human roster, physical/human delivery rehearsal, rights wording, terms and final Submit for Judging action. |
 
-The three-minute pitch and nine-page PDF are presentation materials. Neither is asserted to satisfy the official Project Demonstration format. [Resource check](../submission/resource-check.json) records actual HTTP outcomes and the current unresolved guidance. Existing [submission gates](../submission/RELEASE-CHECKLIST.md) remain applicable.
+The scalar outperforms seasonal on this existing evaluation; a replacement cannot be selected using the same holdout. Regional adjustment is unavailable wherever multi-year local evaluation is missing. NRT is not joined to SP. Source rectangles are not biome masks. Broader challenge ambitions remain explicit in [traceability](challenge-traceability.md).
 
-Re-run locally with `python scripts/serve.py`, `python -m unittest discover -s tests`, `node --test tests/test_*.mjs`, `BASE_URL=http://127.0.0.1:8000 python scripts/check_judging_flow.py`, and `BASE_URL=http://127.0.0.1:8000 python scripts/check_routes.py`. Browser checks require Playwright, Chromium and pdfinfo. Use the deployed HTTPS origin for the release retest. Intentional tile aborts are isolated from normal network checks.
+Run `python -m unittest discover -s tests`, `node --test tests/test_*.mjs`, and `BASE_URL=… python scripts/check_eight_regions.py`. Use `python scripts/serve.py` locally. Browser checks require Playwright, Chromium and pdfinfo. Official terms and final portal submission are deliberately not automated.

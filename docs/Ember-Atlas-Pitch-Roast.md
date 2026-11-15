@@ -1,7 +1,7 @@
-# Ember Atlas presentation
+# Ember Atlas pitch
 
-The current nine-slide presentation and spoken script are maintained in [pitch.md](pitch.md), with the live deck at https://ember-atlas-opal.vercel.app/pitch and the real guided case at https://ember-atlas-opal.vercel.app/demo .
+The current script and scientific questions are maintained in [pitch.md](pitch.md). The live presentation is https://ember-atlas-opal.vercel.app/pitch .
 
-Open on the Pantanal map and September 2024: both sensor records exceed their own prior September medians. The comparison shows 5,819 MODIS, 8,809 common-grid VIIRS and 4,879.1 adjusted VIIRS occupied cell-days. The adjusted estimate remains 16.2% below MODIS. Then show the training-only quarterly method and 80.5% lower holdout monthly MAE against MODIS, 1,021.7 → 199.7 cell-days/month, over 24 paired months in 2023–2024 for the full rectangle.
+Open with the Pantanal sensor-change replay, not a generic product claim. The January 2023 cutoff is a scenario: observed MODIS remains available as the holdout reference. Show its September 2024 comparison and then the three-method result: unadjusted MAE 1,021.7, training-only scalar 175.3 and frozen seasonal 199.7 occupied cell-days/month on 24 identical holdout months. Explain that the scalar is better on this evidence and no replacement was selected using the existing holdout.
 
-The deck exposes remaining bias, worse holdout months, regional limitations and evidence links. The three-minute local target is separate from the unverified official Project Demonstration format. The measured synthesized script read is 3:05; a human rehearsal and Team Owner format check remain pending. No competition outcome or operational benefit is claimed.
+Show peak activity: six highest observed MODIS holdout months, with scalar/seasonal MAE 404.6/534.6. End with the eight-region world map, actual coverage and the need for independent regional evaluation. The approximately three-minute local explanation and nine slides are separate from the unverified official demonstration format.

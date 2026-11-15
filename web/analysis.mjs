@@ -11,8 +11,8 @@ export function evaluateValidation(v) {
 }
 export function referenceRows(index,s,v) {
   return monthsBetween(s.start,s.end).map(month=>{
-    const m=aggregateMonth(index,month,'MODIS_SP',s),r=aggregateMonth(index,month,'VIIRS_NOAA20_SP',s),a=adjustment(r,s,v);
-    return {month,reference:s.sensor!=='VIIRS_NOAA20_SP'&&m.complete?m.cells:null,viirs:s.sensor!=='MODIS_SP'&&r.complete?r.cells:null,adjusted:s.sensor!=='MODIS_SP'?(a?.value??null):null,status:!r.retrieved?'Data unavailable':!r.complete?'Partial month':a?'Supported':'Adjustment unavailable',phase:v.train_years.includes(+month.slice(0,4))?'Training':v.holdout_years.includes(+month.slice(0,4))?'Holdout':'Outside release',source:'VIIRS_NOAA20_SP',reference_source:'MODIS_SP'};
+    const m=aggregateMonth(index,month,s.mode==='nrt'?'MODIS_NRT':'MODIS_SP',s),r=aggregateMonth(index,month,s.mode==='nrt'?'VIIRS_NOAA20_NRT':'VIIRS_NOAA20_SP',s),a=adjustment(r,s,v);
+    return {month,reference:s.sensor!=='VIIRS_NOAA20_SP'&&m.retrieved?m.cells:null,viirs:s.sensor!=='MODIS_SP'&&r.retrieved?r.cells:null,adjusted:s.sensor!=='MODIS_SP'?(a?.value??null):null,status:!r.retrieved?'Data unavailable':!r.complete?'Partial month':a?'Supported':'Adjustment unavailable',phase:s.mode==='nrt'?'Partial NRT window':(s.region&&s.region!=='pantanal')||s.area!=='all'?'Observed SP window':v.train_years.includes(+month.slice(0,4))?'Training':v.holdout_years.includes(+month.slice(0,4))?'Holdout':'Archive context',source:'VIIRS_NOAA20_SP',reference_source:'MODIS_SP'};
   });
 }
 export function sensitivitySummary(d) {

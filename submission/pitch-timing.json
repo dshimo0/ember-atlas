@@ -1,13 +1,11 @@
 {
-  "script_words": 454,
-  "script_sha256": "5e5295432fc885706e8f0b6eb54ee97b8264465fddac3c4715d8fd2edaef47ce",
-  "timing_type": "synthesized English read; human delivery not measured",
+  "type": "synthesized English read; human rehearsal pending",
+  "script_words": 444,
+  "script_sha256": "7a2505f429891d1a1992b8a0b2da7eca43a69c68586e171b2b9698ebca875ebc",
   "engine": "eSpeak NG 1.51",
-  "voice": "en-us",
   "rate_wpm": 180,
-  "audio_duration_seconds": 184.64621315192744,
-  "slide_navigation_time_included": false,
-  "human_rehearsal": "pending Team Owner",
-  "published_audio": false,
-  "official_pitch_duration_verified": false
+  "duration_seconds": 187.81174603174603,
+  "navigation_pauses_included": false,
+  "audio_published": false,
+  "official_time_rule_verified": false
 }

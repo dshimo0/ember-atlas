@@ -1,3 +1,4 @@
+import {occupiedDays} from './model.mjs';
 import './vendor/leaflet/leaflet.js';
 const L = globalThis.L;
 const STUDY = [[-23, -59], [-15, -54]];
@@ -13,14 +14,14 @@ const DiamondCanvas=L.Canvas.extend({
 });
 const DiamondMarker=L.CircleMarker.extend({_updatePath(){this._renderer._updateDiamond(this);}});
 export function createGeographicMap(element, geography) {
-  const map = L.map(element, {preferCanvas: true, scrollWheelZoom: false, minZoom: 3, maxZoom: 17, zoomControl: true});
+  const map = L.map(element, {preferCanvas: true, scrollWheelZoom: false, minZoom: 1, maxZoom: 17, zoomControl: true});
   map.createPane('local-geography'); map.getPane('local-geography').style.zIndex = 180;
   map.createPane('local-labels'); map.getPane('local-labels').style.zIndex = 185;
   L.control.scale({imperial: false, maxWidth: 100}).addTo(map);
   map.attributionControl.addAttribution('<a href="https://www.naturalearthdata.com/about/terms-of-use/">Local: Natural Earth</a>');
   L.geoJSON(geography.countries, {pane: 'local-geography', interactive: false, style: {color: '#9baea3', weight: 1, fillColor: '#edf0e4', fillOpacity: 1}}).addTo(map);
   L.geoJSON(geography.rivers, {pane: 'local-geography', interactive: false, style: {color: '#63a0bc', weight: 1.5, opacity: .9}}).addTo(map);
-  const countries = new Set(['Brazil', 'Bolivia', 'Paraguay']);
+  const countries = new Set(geography.countries.features.map(f=>f.properties.ADMIN));
   for (const feature of geography.countries.features) if (countries.has(feature.properties.ADMIN)) {
     L.tooltip({permanent: true, pane: 'local-labels', className: 'local-country-label', direction: 'center'})
       .setLatLng([feature.properties.LABEL_Y, feature.properties.LABEL_X]).setContent(feature.properties.ADMIN).addTo(map);
@@ -42,8 +43,9 @@ export function createGeographicMap(element, geography) {
   }}).addTo(map);
   const sensorRenderer=new DiamondCanvas({padding:.2});
   let lastRows=[],lastSelection=null;
+  let studyBounds=STUDY;
   const study = L.rectangle(STUDY, {color: '#8e3a19', weight: 2.5, dashArray: '8 4', fill: false, interactive: false}).addTo(map);
-  let areaLayer = null, pointLayer = L.layerGroup().addTo(map), tileLayer = null, timer = null, generation = 0, lastArea = 'all';
+  let areaLayer = null, pointLayer = L.layerGroup().addTo(map), tileLayer = null, timer = null, generation = 0, lastArea = 'pantanal|all';
   const modeSelect = document.getElementById('basemapMode'), status = document.getElementById('basemapStatus');
   function local(unavailable = false) {
     generation++; clearTimeout(timer);
@@ -71,7 +73,7 @@ export function createGeographicMap(element, geography) {
     element.dataset.bounds = JSON.stringify([[map.getBounds().getSouth(), map.getBounds().getWest()], [map.getBounds().getNorth(), map.getBounds().getEast()]]);
   }
   map.on('moveend zoomend', publishView);
-  function fit() {map.fitBounds(STUDY, {padding: [20, 20], animate: false});}
+  function fit() {map.fitBounds(studyBounds, {padding: [20, 20], animate: false});}
   document.getElementById('fitStudyArea').addEventListener('click', fit);
   fit(); street();
   new ResizeObserver(() => map.invalidateSize({pan: false})).observe(element);
@@ -79,10 +81,12 @@ export function createGeographicMap(element, geography) {
   element.setAttribute('aria-label', 'Study area map. Arrow keys pan; plus and minus zoom.');
   function update(rows, selection) {
       lastRows=rows;lastSelection=selection;
+      const bounds=selection.bounds||[-59,-23,-54,-15];studyBounds=[[bounds[1],bounds[0]],[bounds[3],bounds[2]]];study.setBounds(studyBounds);
       pointLayer.clearLayers();
       const stride = Math.max(1, Math.ceil(rows.length / 4000));
       for (let i = 0; i < rows.length; i += stride) {
-        const r = rows[i], modis = r.product === 'MODIS_SP';
+        const r = rows[i], modis = r.product.startsWith('MODIS');
+        if(!document.getElementById('showPoints').checked)continue;
         if(!(modis?document.getElementById('layerModis').checked:document.getElementById('layerViirs').checked))continue;
         const marker=(modis?L.circleMarker:(latlng,options)=>new DiamondMarker(latlng,options));
         const tooltip=document.createElement('div');
@@ -90,17 +94,26 @@ export function createGeographicMap(element, geography) {
         marker([r.latitude, r.longitude], {renderer:sensorRenderer,radius: modis ? 2.7 : 3.5, color: modis ? '#6e3b16' : '#15677c', weight: modis ? .6 : 1.1, fillColor: modis ? '#e6802a' : '#66c9da', fillOpacity: modis ? .85 : .28, product: r.product})
           .bindTooltip(tooltip,{className:'observation-tooltip'}).bindPopup(tooltip.cloneNode(true)).addTo(pointLayer);
       }
-      if (areaLayer) {map.removeLayer(areaLayer); areaLayer = null;}
-      if (selection.area !== 'all') areaLayer = L.rectangle(AREA_BOUNDS[selection.area], {color: '#183d6a', weight: 2.5, fillColor: '#5c9dc1', fillOpacity: .08, interactive: false}).addTo(map);
-      study.bringToFront();
-      if (selection.area !== lastArea) {map.fitBounds(AREA_BOUNDS[selection.area], {padding: [25,25], animate: false}); lastArea = selection.area;}
-      const layers = pointLayer.getLayers(), first = layers[0];
-      element.dataset.points = String(layers.length); element.dataset.observations = String(rows.length);
+      const pointCount=pointLayer.getLayers().length;
+      const product=document.getElementById('mapProduct').value.replace('_SP',selection.mode==='nrt'?'_NRT':'_SP');
+      const grid=occupiedDays(rows,product),gridAvailable=selection.retrieved_products?selection.retrieved_products.includes(product):true;
+      if(document.getElementById('showGrid').checked)for(const c of grid){
+        L.rectangle([[c.lat*.05,c.lon*.05],[(c.lat+1)*.05,(c.lon+1)*.05]],{renderer:sensorRenderer,color:product.startsWith('MODIS')?'#8a5718':'#147185',weight:.25,fillColor:product.startsWith('MODIS')?'#ed9d30':'#159caf',fillOpacity:.18+.72*c.occupied_days/Math.max(1,selection.period_days||31)})
+         .bindTooltip(`${product}: ${c.occupied_days} occupied UTC days in this 0.05° cell. ${c.dates.join(', ')}. Observed occupancy, no spatial adjustment.`).addTo(pointLayer);
+      }
+      if (areaLayer) {map.removeLayer(areaLayer);areaLayer=null;}
+      const selectedBounds=selection.area==='all'?studyBounds:AREA_BOUNDS[selection.area];
+      if(selection.area!=='all')areaLayer=L.rectangle(selectedBounds,{color:'#183d6a',weight:2.5,fill:false,interactive:false}).addTo(map);
+      study.bringToFront();const areaKey=(selection.region||'pantanal')+'|'+selection.area;
+      if(areaKey!==lastArea){map.fitBounds(selectedBounds,{padding:[25,25],animate:false});lastArea=areaKey;}
+      const layers = pointLayer.getLayers(), first = pointCount?layers[0]:null;
+      element.dataset.points = String(pointCount); element.dataset.observations = String(rows.length);
+      element.dataset.region=selection.region||'pantanal';element.dataset.gridCells=String(grid.length);element.dataset.gridAvailable=String(gridAvailable);element.dataset.cellDays=!gridAvailable?'':String(grid.reduce((n,c)=>n+c.occupied_days,0));element.dataset.gridProduct=product;
       element.dataset.area = selection.area; element.dataset.sensor = selection.sensor; element.dataset.month = selection.month;
       element.dataset.sample = first ? JSON.stringify({latitude: first.getLatLng().lat, longitude: first.getLatLng().lng, product: first.options.product}) : '';
-      element.dispatchEvent(new CustomEvent('mapdisplaychange',{detail:{shown:layers.length,total:rows.length}}));
-      return layers.length;
+      element.dispatchEvent(new CustomEvent('mapdisplaychange',{detail:{shown:pointCount,total:rows.length,gridCells:grid.length,cellDays:grid.reduce((n,c)=>n+c.occupied_days,0),product,periodDays:selection.period_days||31,gridAvailable:gridAvailable}}));
+      return pointCount;
   }
-  for(const id of ['layerModis','layerViirs'])document.getElementById(id).addEventListener('change',()=>{if(lastSelection)update(lastRows,lastSelection);});
+  for(const id of ['layerModis','layerViirs','showGrid','showPoints','mapProduct'])document.getElementById(id).addEventListener('change',()=>{if(lastSelection)update(lastRows,lastSelection);});
   return {update,resize(){map.invalidateSize({pan:false});}};
 }

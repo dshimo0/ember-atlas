@@ -1,22 +1,16 @@
 # Project demonstration
 
-Application: https://ember-atlas-opal.vercel.app/
+[Actual silent screen recording](https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4) · [Interactive replay](https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&benchmark=1&month=2024-09)
 
-The recording below predates the final guided and presentation routes. The current interactive walkthrough is https://ember-atlas-opal.vercel.app/demo and the separate nine-slide presentation is https://ember-atlas-opal.vercel.app/pitch . The official demonstration format remains unverified.
+The current recording captures the actual English interface and versioned observations. It contains no people or audio. It shows the selected Pantanal map and September comparison, source-change replay calendar, observed MODIS benchmark, January 2023 source, another study area and the eight-area world map. Runtime and anonymous playback are recorded in transition-release.json/media-check.json.
 
-Screen recording: https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4
-
-The current demonstration format and local pitch duration require confirmation from the official portal and São Paulo instructions. The three-minute presentation in `docs/Ember-Atlas-Pitch-Roast.md` is a separate script.
-
-## Thirty-second screen sequence
-
-| Time | Screen |
+| Approximate time | Observed screen |
 | --- | --- |
-| 0–8 s | Pantanal map, September 2024 observations, study rectangle and sensor comparison. |
-| 8–13 s | Validation summary: 80.5% lower monthly error against MODIS over 24 holdout months, with full-area scope. |
-| 13–21 s | Map zoom, pan, scale and fit; full monthly calendar. |
-| 21–30 s | Selected-month observation export and selected-period aggregate export. |
+| 0–6 s | September 2024 map, source and comparison |
+| 6–12 s | Reference-scale replay calendar/time series |
+| 12–16 s | Observed holdout MODIS revealed separately |
+| 16–21 s | January 2023, the first post-cutoff scenario month |
+| 21–25 s | California study area with actual observations |
+| 25–30 s | Eight-region world map with actual coverage |
 
-The recording contains the English application screen and no people or audio. Runtime and public playback verification are recorded in `submission/media-check.json`.
-
-Current recording runtime: 29.64 seconds. It shows the geographic dashboard, September observations, validation summary, map navigation and both downloads. Public playback and source-file matching are recorded in media-check.json.
+The nine-slide pitch and spoken script are separate presentation materials. Current official Project Demonstration duration, slide count, eligibility and media restrictions still require Team Owner confirmation; official pages returned 503. No format compliance or final submission is inferred from a working public video link.

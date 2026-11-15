@@ -1,50 +1,41 @@
 # Challenge traceability
 
-## Inspection baseline
+Inspected input: branch `work`, commit `f695d772f6e8eaceec0d159ebbbef04a2da2b59b`. Existing production source was `ddefa36`. Root, /demo and /pitch were working; only Pantanal had observed snapshots. The stack remains static HTML/CSS, native modules and Leaflet, with the established Vercel deployment workflow.
 
-Input branch: `work`, commit `6fb056e95e11c4a0668e9a73431c0c2f68b76662`. Stack: static HTML/CSS, native JavaScript modules and locally vendored Leaflet 1.9.4. Deployment: Vercel project `ember-atlas`, explicit CLI production deployments from `work`; Git auto-deployment is disabled.
-
-| Requirement | Initial status | Observed evidence |
+| Requirement | Implementation and evidence | Remaining scope |
 | --- | --- | --- |
-| Root map, filters and CSV | Implemented and verified | Existing signed-out reports; root HTTP 200; preserved source and snapshot |
-| 2020–2024 paired SP observations | Implemented and verified | Snapshot SHA, daily manifests, 60 paired months |
-| Holdout claim | Implemented and verified | Reproduced daily CSV and validation JSON exactly from raw manifests |
-| /demo and /pitch | Missing | Both public routes returned 404 during inspection |
-| Selected-month adjusted VIIRS | Implemented and verified | Existing three-series comparison and model tests |
-| Explicit reference-scale calendar/time series | Missing | Existing calendar contained separate unscaled sensor counts |
-| Regional historical comparison | Missing | Code explicitly withheld subregion baselines despite complete regional daily summaries |
-| Regional calibration | Deferred | Full-area factors are not independently validated on either subregion |
-| Monthly holdout residuals | Precomputed but not exposed | Source supports all residuals; adjustment worsens February/March 2023 |
-| Guided state, share URLs, slide navigation | Missing | No route/state controller |
-| Sensitivity diagnostics | Implemented but presentation unverified | Existing diagnostics JSON; no concise UI summary |
-| Arbitrary polygons / earlier record | Deferred | Fixed preset workflow and validated 2020–2024 domain take priority |
+| Demonstrate a sensor transition | January 2023 replay; observed MODIS before and frozen seasonal VIIRS afterward; source/adjustment per month; separate holdout MODIS toggle | Replay scenario, not actual source end or validated future operational handoff |
+| Compare harmonization baselines | Versioned Python evaluation and browser recomputation: unadjusted, training-only scalar, original seasonal; identical 36/24 month split and area | Scalar beats seasonal on this evidence; no replacement selected on the existing holdout |
+| Peak behavior | Six highest observed MODIS holdout months, no residual-based selection; all methods' MAE/bias and every monthly residual | Independent outer evaluation required for later method selection |
+| Primary reference-scale calendar | Source-labeled replay calendar/time series; month drives comparison, map, earlier context and exports | Older MODIS is archive context; replay baselines use earlier complete paired-domain months only |
+| Eight observed regions | Ordered registry with explicit geometry/source/products and immutable initial SP/NRT snapshots | Seven areas need multi-year archives and independently evaluated regional calibration |
+| Spatial evidence | Full-data occupied UTC days/cell for named product; optional sampled detections; same mask/grid/export | No adjusted coordinates, burned area, unique-fire or complete-observation claim |
+| Earliest MODIS | Manifest-verified Pantanal backfill from available November 2000; successful empty days and missing windows distinguished | Older platform mix not independently harmonized; public SP record ends in 2024 |
+| Recent activity | Separate source-tagged NRT snapshots, actual UTC dates/retrieval and partial-month status | NRT/SP joining and matched-window historical NRT comparison not validated |
+| Maps and geography | OSM, scale/pan/zoom/fit; global Natural Earth fallback; exact project-defined study boxes | No official biome mask; changing it requires recomputation/evaluation |
+| Reproducible evidence | Observations, raw aggregates, cell occupancies, replay months, immutable manifests and exact CSV checksums | No usable swath/cloud masks or ground truth |
+| Presentation | Nine interactive sections follow source change, replay, benchmark, stronger scalar, peak residual and eight-area world map | Human rehearsal, roster and official demonstration format need owner confirmation |
+| Delivery | Local and deployed eight-region desktop/mobile tests, route refresh/filter/cutoff/fallback/CSV checks; release identity in transition-release.json | Mobile is browser emulation; owner submits for judging |
 
-## Method contract before presentation changes
+## Published eight-area inventory
 
-Target quantity: monthly occupied cell-days. Each globally anchored 0.05° WGS84 cell counts once per UTC day and product, then daily occupied counts are summed. Reference: MODIS C6.1 SP (Terra/Aqua pooled). Candidate: NOAA-20 VIIRS SP multiplied by the frozen quarterly training ratio MODIS / VIIRS. Training: 2020–2022, 36 complete paired months; holdout: 2023–2024, 24 complete paired months. Acceptance requires lower monthly MAE and no worse absolute bias on identical holdout months, with unchanged minimum support. Applicability is the full Pantanal study rectangle, complete months only.
+<!-- COVERAGE:START -->
+| Study area (W/S/E/N) | Observed SP coverage | Recent NRT UTC window | Adjustment |
+| --- | --- | --- | --- |
+| Pantanal (-59, -23, -54, -15) | MODIS_SP: 2000-11-01–2024-12-31 (8827 retrieved days); VIIRS_NOAA20_SP: 2020-01-01–2024-12-31 (1827 retrieved days) | 2026-11-08–2026-11-14 | Evaluated full area, SP 2020–2024 only |
+| Southern Amazon (-65, -13, -48, -5) | MODIS_SP: 2024-09-01–2024-09-30 (30 retrieved days); VIIRS_NOAA20_SP: 2024-09-01–2024-09-30 (30 retrieved days) | 2026-11-08–2026-11-14 | Unavailable; multi-year regional evaluation missing |
+| Cerrado (-55, -20, -44, -8) | MODIS_SP: 2024-09-01–2024-09-30 (30 retrieved days); VIIRS_NOAA20_SP: 2024-09-01–2024-09-30 (30 retrieved days) | 2026-11-08–2026-11-14 | Unavailable; multi-year regional evaluation missing |
+| Gran Chaco (-66, -32, -57, -17) | MODIS_SP: 2024-09-01–2024-09-30 (30 retrieved days); VIIRS_NOAA20_SP: 2024-09-01–2024-09-30 (30 retrieved days) | 2026-11-08–2026-11-14 | Unavailable; multi-year regional evaluation missing |
+| California (-125, 32, -114, 42.5) | MODIS_SP: 2024-09-01–2024-09-30 (30 retrieved days); VIIRS_NOAA20_SP: 2024-09-01–2024-09-30 (30 retrieved days) | 2026-11-08–2026-11-14 | Unavailable; multi-year regional evaluation missing |
+| Southeastern Australia (140, -44, 154, -28) | MODIS_SP: 2024-09-01–2024-09-30 (30 retrieved days); VIIRS_NOAA20_SP: 2024-09-01–2024-09-30 (30 retrieved days) | 2026-11-08–2026-11-14 | Unavailable; multi-year regional evaluation missing |
+| Iberian Peninsula (-10, 35, 4, 44.5) | MODIS_SP: 2024-09-01–2024-09-30 (30 retrieved days); VIIRS_NOAA20_SP: 2024-09-01–2024-09-30 (30 retrieved days) | 2026-11-08–2026-11-14 | Unavailable; multi-year regional evaluation missing |
+| Siberia (60, 50, 140, 72) | MODIS_SP: 2024-09-01–2024-09-30 (30 retrieved days); VIIRS_NOAA20_SP: 2024-09-01–2024-09-30 (30 retrieved days) | 2026-11-08–2026-11-14 | Unavailable; multi-year regional evaluation missing |
+<!-- COVERAGE:END -->
 
-The reference-scale output is adjusted VIIRS on the MODIS-reference scale. MODIS and VIIRS are not summed or averaged. There is no source transition or fused multi-decade record. Missing retrieval remains null; partial months have no adjustment. Raw point coordinates are never adjusted. Subregion baselines may be descriptive within-sensor comparisons on their own fixed masks; regional calibration remains withheld.
+All eight initial presets contain real observations, interactive maps and exports without a visitor key. The broader challenge ambition exceeds this release's independently evaluated calibration scope. There is no full globally harmonized multi-decade record. A full archive and local evaluation for the seven added study areas remain explicit open dataset/science items.
 
-## Official guidance check
+## Verification and external gates
 
-On 2026-11-15 UTC the official challenge URL and resources page returned HTTP 503. The current guide, deadline, event eligibility and official demonstration format were not verified. The three-minute pitch is a product presentation target, not a confirmed portal rule. Existing owner submission gates remain in submission/RELEASE-CHECKLIST.md. Final implementation and execution evidence will be recorded in docs/release-checklist.md.
+Execution reports: [eight-region-check-public.json](../submission/eight-region-check-public.json), [transition-release.json](../submission/transition-release.json), [immutable evaluation pointer](../web/data/replay-evaluation.json), [registry pointer](../web/data/regions.json). New raw payloads and retrieval manifests are committed byte-for-byte in `data/source-archives/`, with member hashes and deterministic restoration to `data/history` and `data/regions`. Original `data/matched` inputs remain unchanged.
 
-## Delivery evidence
-
-| Requirement | Final status | Working evidence |
-| --- | --- | --- |
-| Three public routes and shared state | Implemented and verified | Native shared loader/model/charts; Vercel rewrites; direct-load/refresh/back/forward checks |
-| Five-step guided case | Implemented and verified | Actual controls, reset, raw/reference history, prior-year breakdown and downloads |
-| Explicit harmonized quantity | Implemented and verified | Adjusted VIIRS on MODIS-reference scale; 60-month calendar and time series; no product sum or source handoff |
-| Reproducible validation claims | Implemented and verified | Exact pipeline reproduction; all 24 residuals recomputed; MAE/bias/RMSE and two worse months |
-| Regional descriptive history | Implemented and verified | Full-data summaries; own fixed mask, complete prior years and minimum n=3; independent oracle tests |
-| Regional calibration | Deferred with reason | No independent regional fit/holdout evidence; full-area adjustment remains unavailable |
-| Map and evidence consistency | Implemented and verified | Same month/area/product mask; exact CSV equality; display-only layers; local fallback |
-| Export provenance | Implemented and verified | Immutable source refs and exact downloaded CSV SHA-256 values in manifest |
-| Interactive and printable pitch | Implemented and verified | Nine desktop slides; mobile scroll; keyboard, counter, notes, fullscreen; nine-page PDF |
-| Human delivery timing | Implemented script, human read unverified | Measured synthesized read 3:05; Team Owner must rehearse human delivery with navigation |
-| Official challenge/media compliance | Unverified / owner action | Current official pages return 503; no old deadline or slide cap treated as verified |
-| Multi-decade transition, ground truth, arbitrary polygons | Deferred with reason | Current matched five-year rectangle supports defensible overlap evaluation; broader claims require new inputs/evaluation |
-| Final submission | Deferred to Team Owner | Roster/eligibility, terms and Submit for Judging remain owner responsibilities |
-
-Reports: [routes](../submission/routes-check-public.json), [analytical workflow](../submission/judging-check-public.json), [release identity](../submission/product-release.json), [resources](../submission/resource-check.json). Current challenge ambition exceeds the released five-year overlap: no multi-decade fused continuation or validated sensor handoff is claimed.
+Current official challenge/resources guidance could not previously be verified because the official pages returned 503. Do not infer an old deadline, slide cap, eligibility or submission success from documentation. The nine-slide local pitch and official Project Demonstration are separate deliverables. Team Owner confirms the current guide/media rules, human contributions/eligibility, accepts terms and personally completes submission.

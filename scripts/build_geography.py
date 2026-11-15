@@ -4,7 +4,8 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 INPUT=ROOT/'data/reference'
-EXTENT=(-66,-28,-47,-9)
+REGIONS=json.loads((ROOT/'data/region-definitions-v1.json').read_text())['regions']
+EXTENTS=[(r['bounds'][0]-3,r['bounds'][1]-3,r['bounds'][2]+3,r['bounds'][3]+3)for r in REGIONS]
 
 def coordinates(value):
     if not value:return
@@ -16,8 +17,7 @@ def intersects(feature):
     points=list(coordinates(feature['geometry']['coordinates']))
     if not points:return False
     xs,ys=zip(*[p[:2] for p in points])
-    w,s,e,n=EXTENT
-    return min(xs)<=e and max(xs)>=w and min(ys)<=n and max(ys)>=s
+    return any(min(xs)<=e and max(xs)>=w and min(ys)<=n and max(ys)>=s for w,s,e,n in EXTENTS)
 
 def main():
     sources=[]
@@ -30,8 +30,8 @@ def main():
     places=load('ne_50m_populated_places_simple','Natural Earth populated places, 1:50m')
     def collection(features,keys):
         return {'type':'FeatureCollection','features':[{'type':'Feature','properties':{k:f['properties'].get(k) for k in keys},'geometry':f['geometry']} for f in features if intersects(f)]}
-    result={'extent':EXTENT,'sources':sources,
-            'countries':collection(countries,['ADMIN','LABEL_X','LABEL_Y']),
+    result={'extents':EXTENTS,'sources':sources,
+            'countries':{'type':'FeatureCollection','features':[{'type':'Feature','properties':{k:f['properties'].get(k)for k in ['ADMIN','LABEL_X','LABEL_Y']},'geometry':f['geometry']}for f in countries]},
             'rivers':collection(rivers,['name','name_en']),
             'places':collection(places,['name'])}
     payload=json.dumps(result,separators=(',',':'))
