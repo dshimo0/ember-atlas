@@ -1,0 +1,37 @@
+[
+  {
+    "route": "/about",
+    "status": 200,
+    "sha256": "fc2eebf1ccaa30ed0a8e40cd05129dfce089eb76363c7bbcf4b582bc1c096f68",
+    "matches_local_source": true,
+    "signed_out": true
+  },
+  {
+    "route": "/",
+    "status": 200,
+    "sha256": "427164673b40aaac68d81ce402a4cd0c6481ec15a32a7326b5a000394927b9e5",
+    "matches_local_source": true,
+    "signed_out": true
+  },
+  {
+    "route": "/demo",
+    "status": 200,
+    "sha256": "427164673b40aaac68d81ce402a4cd0c6481ec15a32a7326b5a000394927b9e5",
+    "matches_local_source": true,
+    "signed_out": true
+  },
+  {
+    "route": "/pitch",
+    "status": 200,
+    "sha256": "427164673b40aaac68d81ce402a4cd0c6481ec15a32a7326b5a000394927b9e5",
+    "matches_local_source": true,
+    "signed_out": true
+  },
+  {
+    "route": "/data/regions.json",
+    "status": 200,
+    "sha256": "c1367d773a9f4952d2af8daa3711bc83cf6a20544e7e966409e973f34e73646c",
+    "matches_local_source": true,
+    "signed_out": true
+  }
+]

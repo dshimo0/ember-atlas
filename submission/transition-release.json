@@ -1390,5 +1390,11 @@
       "file": "regions-9e4c20518f99.json",
       "sha256": "9e4c20518f99fab08943a4ba365dbdd0e4b869595820ece07222fc7957ccdf30"
     }
+  },
+  "later_presentation_update": {
+    "source_commit": "c1c11f44172eb6cd93b1e954ba3b952972751036",
+    "deployment_id": "dpl_28hoTPfqfoAUE8H4B5PwHMJ4xg6Q",
+    "report": "about-release.json",
+    "change": "Sole-creator About page and navigation; scientific artifacts unchanged"
   }
 }

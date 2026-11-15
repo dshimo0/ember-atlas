@@ -1,0 +1,37 @@
+{
+  "source_commit": "c1c11f44172eb6cd93b1e954ba3b952972751036",
+  "branch": "work",
+  "url": "https://ember-atlas-opal.vercel.app/about",
+  "deployment_id": "dpl_28hoTPfqfoAUE8H4B5PwHMJ4xg6Q",
+  "ready_state": "READY",
+  "checked_utc": "2026-11-15T11:44:20.824306+00:00",
+  "creator": {
+    "name": "Diego Shimohama",
+    "team_size": 1,
+    "source": "Owner confirmation in conversation"
+  },
+  "checks": {
+    "python_tests": 25,
+    "node_test_modules": 5,
+    "signed_out_viewports": [
+      1440,
+      390,
+      320
+    ],
+    "direct_load_refresh": true,
+    "keyboard_navigation": true,
+    "browser_back_preserves_selection": true,
+    "static_page_without_javascript": true,
+    "public_routes_byte_match_local": true,
+    "scientific_registry_unchanged": true
+  },
+  "evidence": [
+    "about-check-public.json",
+    "about-public-assets.json"
+  ],
+  "visual_asset": {
+    "profile_treatment": "DS initials; no fabricated portrait",
+    "supplied_badge": "Preview received; original image file is not available in the execution workspace and has not been published"
+  },
+  "original_scientific_release": "transition-release.json"
+}

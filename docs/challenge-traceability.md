@@ -53,3 +53,7 @@ Continuation input: branch `work`, release `3e28f40`; the existing eight-region 
 
 Units: occupied cell-days/month; full named study rectangle, SP only. Inner choice uses 2022 after fitting 2020–2021; refit uses 2020–2022. Outer: 2023–2024, including the previously published September 2024; the artifact also reports the sensitivity excluding that month. Fresh: January 2025–July 2026, excluded from fitting and selection. Pantanal retains the original publication regardless of the new audit. A failed regional gate withholds adjustment. MODIS is the comparison reference, not ground truth.
 <!-- REGIONAL-EVALUATION:END -->
+
+## Creator and About page
+
+The owner confirmed **Diego Shimohama** as the sole creator. `/about` is linked from every shared header and the final pitch section. Public direct loads/refresh, keyboard navigation, desktop/mobile widths, browser-back analytical state and no-JavaScript rendering passed. [Executed About release](../submission/about-release.json) records the source and deployment. No additional members, professional credentials or partners are asserted. The supplied emblem preview has no accessible original asset in the workspace; it has not been substituted or published.

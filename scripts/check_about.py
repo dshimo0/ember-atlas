@@ -27,7 +27,7 @@ with sync_playwright() as p:
    page.go_back();page.wait_for_function("!document.querySelector('#download').disabled",timeout=120000)
    assert page.locator('#region').input_value()=='california'
    assert page.locator('#monthSelect').input_value()=='2024-09'
-   page.goto(BASE+'/pitch?slide=9');page.wait_for_function("document.querySelector('#pitchCounter').textContent==='Slide 9 of 9'",timeout=120000)
+   page.goto(BASE+'/pitch?slide=9');page.wait_for_function("document.querySelector('#pitchCounter')?.textContent==='Slide 9 of 9'",timeout=120000)
    assert page.locator('#pitchPage a[href="/about"]').count()==1
   assert not errors,errors
   checks.append({'viewport':name,'direct_load_refresh':True,'no_horizontal_overflow':True,'keyboard_skip_link':True,'analytical_state_preserved_by_browser_back':name!='small-mobile','unexpected_page_errors':errors});c.close()
