@@ -1,5 +1,9 @@
 # Product acceptance contract
 
+Next-release scope: [004-challenge-delivery.md](004-challenge-delivery.md) adds
+Chilecito as a ninth study area, analyst deliverables and release gates. Existing
+eight-region acceptance below describes the current release, not completed Chilecito support.
+
 English static application with shared Explore, Guided demo, Pitch and Methods & data navigation. Preserve root and existing data/media links; `/`, `/demo`, `/pitch` support direct load, refresh and browser history. No framework migration, authentication or visitor-supplied FIRMS key.
 
 | ID | Acceptance criterion |
@@ -17,3 +21,14 @@ English static application with shared Explore, Guided demo, Pitch and Methods &
 | P11 Pitch | Nine concise interactive sections tell sensor change → continuity replay → observed benchmark → scalar comparison → peak residual → eight-region evidence. Exact demo-state/evidence links, keyboard controls, notes, mobile scroll and readable print. |
 | P12 Access | Keyboard focus, native form controls, readable table alternative, touch targets and no document overflow. Desktop map beside comparison; mobile selected-month result before map. Compact introductory copy. |
 | P13 Verification | Test all eight bounds, real observations and matching CSV on deployed desktop/mobile; direct loads, refresh, filters, replay cutoff, map fallback, missing/zero and print. Report actual commit and unresolved datasets/calibration gaps. |
+
+### Regional browsing
+
+Explore and Guided Demo show eight region buttons with each region's actual
+archive dates. Archive and Recent use the selected region and their own coverage.
+On switches, the page hides the previous region's values until the new dataset
+loads. A failed dataset fetch can be retried from the region selector.
+
+Acceptance: display all eight region names on desktop and mobile, distinguish
+one-month archives from the longer record, restore the selected button from
+shared links, and show an actionable error without displaying stale results.

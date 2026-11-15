@@ -1,5 +1,9 @@
 # Data acceptance contract
 
+Regional expansion and new calibration must also satisfy
+[004-challenge-delivery.md](004-challenge-delivery.md). Local experiments use
+`scripts/regional_calibration.py`; outputs do not replace frozen published evidence.
+
 The implemented method and measured evidence are documented in [methodology.md](../docs/methodology.md). This specification governs publication, not a future feature plan.
 
 | ID | Acceptance criterion |

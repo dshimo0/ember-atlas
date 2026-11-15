@@ -1,5 +1,10 @@
 # Ember Atlas
 
+Challenge delivery targets, Chilecito case study and release gates:
+[spec 004](specs/004-challenge-delivery.md).
+Run local acquisition and regional calibration on your PC using
+[the local execution guide](docs/local-calibration.md).
+
 [Explore](https://ember-atlas-opal.vercel.app/) · [Sensor transition replay](https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&benchmark=1&month=2024-09) · [Pitch](https://ember-atlas-opal.vercel.app/pitch)
 
 Ember Atlas serves observed NASA FIRMS fire activity for eight explicitly bounded study areas. Pantanal is the default scientific walkthrough. All initial observations, daily summaries and exports are versioned snapshots; visitors do not supply a FIRMS key. The interactive OpenStreetMap basemap has an attributed local Natural Earth fallback.
@@ -65,3 +70,14 @@ Static HTML/CSS, native ES modules and locally vendored Leaflet 1.9.4; no new ba
 Ingestion requires `FIRMS_MAP_KEY` only in its environment. `scripts/acquire_regions.py` reuses the original bounded downloader and checksum manifests; `--history --respect-quota` resumes older Pantanal MODIS with quota backoff. Run `scripts/evaluate_replay.py`, `scripts/build_regions.py` and `scripts/build_geography.py` to reproduce public derivatives, then update coverage documentation. Original raw payload bytes and manifests are retained in deterministic `data/source-archives/` packages. `python scripts/source_archives.py unpack` restores their exact recorded paths; resumed ingestion and building do this automatically. Run `python scripts/source_archives.py pack` after new ingestion.
 
 Remaining scientific gaps: multi-year overlap and independent calibration for seven areas; expanded out-of-time evaluation; usable swath/cloud masks; ground truth; validated NRT/SP joining and a biome-mask analysis. Team roster, current official media requirements, human pitch rehearsal, terms and final submission remain Team Owner actions. The nine-slide presentation is separate from the unverified official Project Demonstration format.
+
+To extend the seven regional archives, run the acquisition command below in an
+environment with a FIRMS map key. Omit the region option to acquire all seven
+regions for the requested window. Rebuild the registry and run the regional
+browser checks before publishing.
+
+```sh
+python scripts/acquire_regions.py --region california --archive-start 2023-09-01 --archive-end 2023-09-30 --respect-quota
+python scripts/build_regions.py
+python scripts/write_coverage_docs.py
+```
