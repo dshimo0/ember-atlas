@@ -272,7 +272,7 @@ function guideView(){
  const active=currentRoute()==='/demo';$('walkthrough').hidden=!active;const disclosure=$('validationDisclosure');if(active)$('analysisPage').append(disclosure);else document.querySelector('.page-heading').after(disclosure);
  document.body.dataset.step=String(guideStep);
  // Reorder the same calendar, never create a second analytical state.
- const history=$('history'),explore=$('explore');if(currentRoute()==='/'||active)explore.insertBefore(history,explore.querySelector('.dashboard-grid'));else if(history.parentElement===explore)explore.after(history);
+ const history=$('history'),explore=$('explore');const calendarScroll=history.querySelector('.calendar-scroll');$('referenceScope').after(history.querySelector('.calendar-scale'));history.querySelector('.calendar-scale').after(calendarScroll);calendarScroll.after(history.querySelector('.coverage-legend'));if(currentRoute()==='/'||active)explore.insertBefore(history,explore.querySelector('.dashboard-grid'));else if(history.parentElement===explore)explore.after(history);
  if(!active)return;
  const scene=scenes[guideStep-1],s=state(),m=row(selected,s.mode==='nrt'?'MODIS_NRT':'MODIS_SP',s),v=row(selected,s.mode==='nrt'?'VIIRS_NOAA20_NRT':'VIIRS_NOAA20_SP',s),a=s.sensor==='MODIS_SP'?null:adjustment(v,s,validation);
  $('stepTitle').textContent=scene[0];$('stepDescription').textContent=scene[1];$('stepProgress').textContent=`Step ${guideStep} of 5`;$('stepBack').disabled=guideStep===1;$('stepNext').disabled=guideStep===5;
