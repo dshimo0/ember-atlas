@@ -1,3 +1,5 @@
+Current P2/P3 presentation evidence: [visual-release.json](../submission/visual-release.json).
+
 # Release verification checklist
 
 Current presentation identity: [experience-release.json](../submission/experience-release.json). Scientific executed identity: [transition-release.json](../submission/transition-release.json). Distinguish source commit from immutable data commit. The prior public Pantanal expansion at `a792e07` remains in history; current public execution is recorded after deployment.
@@ -21,3 +23,6 @@ Current presentation identity: [experience-release.json](../submission/experienc
 Scientific limits remain explicit: all reported thermal types, unverified reference-vintage homogeneity/VIIRS code interpretation, unknown usable observation opportunity, no ground-truth accuracy, no SP/NRT join, no factor transfer to smaller masks, and no pre-2020 archive outside Pantanal. These limits are not replaced by a generic banner.
 
 Commands: `python -m unittest discover -s tests`; `node --test tests/*.mjs`; `python scripts/verify_regional_artifacts.py`; `python scripts/check_release_integrity.py`; `BASE_URL=… python scripts/check_eight_regions.py`. Use `python scripts/serve.py --port 8930` for local route parity. Deployment procedure is in DEPLOYMENT.md. Owner portal actions are deliberately not automated.
+
+- [x] P2/P3 typography, reduced-motion behavior, eight-area attributed context atlas and direct pitch rail verified publicly.
+- [ ] Owner local Windows backfill folder reviewed after an accessible copy is supplied.

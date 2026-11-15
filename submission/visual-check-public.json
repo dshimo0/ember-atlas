@@ -1,0 +1,37 @@
+{
+  "url": "https://ember-atlas-opal.vercel.app",
+  "checked_utc": "2026-11-15T16:12:58.206278+00:00",
+  "image_hashes_and_extents_verified": 8,
+  "checks": [
+    {
+      "viewport": "desktop",
+      "atlas_links_open_real_observations": 8,
+      "pantanal_csv_rows": 125055,
+      "september_adjusted_reconciles": true,
+      "keyboard_section_selection": true,
+      "reduced_motion": true,
+      "no_document_overflow": true,
+      "page_errors": []
+    },
+    {
+      "viewport": "mobile",
+      "atlas_links_open_real_observations": 8,
+      "pantanal_csv_rows": 125055,
+      "september_adjusted_reconciles": true,
+      "keyboard_section_selection": true,
+      "reduced_motion": true,
+      "no_document_overflow": true,
+      "page_errors": []
+    }
+  ],
+  "unchanged_scientific_files": [
+    "web/model.mjs",
+    "web/analysis.mjs",
+    "web/replay.mjs",
+    "web/charts.mjs",
+    "scripts/harmonize.py",
+    "web/data/regions.json"
+  ],
+  "font_failure_keeps_content_readable": true,
+  "optional_motion_seconds": 0.18
+}

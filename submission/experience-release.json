@@ -101,5 +101,10 @@
     "No SP/NRT join or calibration transfer to subareas.",
     "Mobile testing used emulation; physical-device, screen-reader and human rehearsal checks remain.",
     "Official media, eligibility and final portal submission remain Team Owner actions."
-  ]
+  ],
+  "later_visual_update": {
+    "source_commit": "b58b7d16579de4579dcdd35be4ce620d00d6e7f2",
+    "report": "submission/visual-release.json",
+    "scope": "Typography, regional editorial atlas and pitch navigation; scientific identity preserved"
+  }
 }

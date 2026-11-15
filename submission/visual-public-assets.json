@@ -1,0 +1,92 @@
+{
+  "url": "https://ember-atlas-opal.vercel.app",
+  "anonymous": true,
+  "routes": {
+    "/": {
+      "status": 200,
+      "release_bytes_match": true
+    },
+    "/demo": {
+      "status": 200,
+      "release_bytes_match": true
+    },
+    "/methods": {
+      "status": 200,
+      "release_bytes_match": true
+    },
+    "/pitch": {
+      "status": 200,
+      "release_bytes_match": true
+    },
+    "/about": {
+      "status": 200,
+      "release_bytes_match": true
+    }
+  },
+  "assets": {
+    "experience.css": {
+      "bytes": 39129,
+      "sha256": "af78990c7e1fd5cb2f0f46a4858652ef8a0d600faba7b160c6bf929cd0a505dc"
+    },
+    "pitch.mjs": {
+      "bytes": 4279,
+      "sha256": "4530499ff0fbc714105c14b4616e0ef5f4d3c60a928306fb5b08c854d7ee8e02"
+    },
+    "assets/workflow-capture.mp4": {
+      "bytes": 795584,
+      "sha256": "ebcb5b59cc4a284488bf6ef266b2c3f767ce6a46c289d2e15b870b45aaaa191b"
+    },
+    "assets/ember-atlas-pitch.pdf": {
+      "bytes": 994575,
+      "sha256": "c8ae3c7b2faead3f4a8b55eccc3a1aa75881f7dbf7d8bec754a831f3c5f14f9a"
+    },
+    "assets/regional-imagery.json": {
+      "bytes": 5839,
+      "sha256": "e9e53dab0945f3acb0c1995c0e4d1d716617084051fab967032b5f312b27d010"
+    },
+    "assets/fonts/manrope-latin-variable.woff2": {
+      "bytes": 28252,
+      "sha256": "9344820e818ed2fc59b6605e222508ab62140cca15a05f9f2bf71a7e1efa2711"
+    },
+    "assets/fonts/OFL.txt": {
+      "bytes": 4387,
+      "sha256": "58172e0c0fac2cda8a37b348164bb55e44b0e69051e557e92b1d3f6910141f7b"
+    },
+    "assets/fonts/provenance.json": {
+      "bytes": 406,
+      "sha256": "73cc6340323e6826fafb9da54b167a0a2417613fa26086069ec5bc8df3a2a72d"
+    },
+    "assets/context-pantanal-2024-09-01.jpg": {
+      "bytes": 33306,
+      "sha256": "2a9b5d6f61367acafba010d4f08b1d875054185f70728d44e7f94c93d28e3f33"
+    },
+    "assets/context-southern-amazon-2024-09-01.jpg": {
+      "bytes": 29232,
+      "sha256": "52077b072562be8fb4554c908a1a241c3849f23464f08663a38176a2c834637f"
+    },
+    "assets/context-cerrado-2024-09-01.jpg": {
+      "bytes": 94296,
+      "sha256": "d3559e4a30b2ad3064798777d1573bc2961d7f79caa0857bd3de9df9d334f686"
+    },
+    "assets/context-gran-chaco-2024-09-01.jpg": {
+      "bytes": 40761,
+      "sha256": "0127f77cd2b8360de3c37c742bce6eede073e60c65597d8f769a7638e4f1b4ca"
+    },
+    "assets/context-california-2024-09-01.jpg": {
+      "bytes": 75135,
+      "sha256": "a4f0ff094d5e80fff01740875966d62c5b34b689faab79433cef2e711020edf1"
+    },
+    "assets/context-southeastern-australia-2024-09-01.jpg": {
+      "bytes": 76363,
+      "sha256": "b0f91551c72844e7f6caa23fad82326b3dc8da9333f506fed81f605b8083e3ad"
+    },
+    "assets/context-iberian-peninsula-2024-09-01.jpg": {
+      "bytes": 71023,
+      "sha256": "6dae29d58b546aba03d01f6f0c26e4a7e46a0f6e9b51ff749e5964a358bbb14f"
+    },
+    "assets/context-siberia-2024-09-01.jpg": {
+      "bytes": 33015,
+      "sha256": "48b65f81dba65500ecc31a8d66045de2172a5e0e3d0acb4db8c1e2d50b8e4ac6"
+    }
+  }
+}
