@@ -9,3 +9,7 @@ Scientific evidence remains: 1,021.7 raw, 175.3 scalar and 199.7 frozen-quarterl
 See [pitch.md](pitch.md) for the actual 395-word script and measured 176.2-second synthesized read. Human rehearsal is still unmeasured. The PDF and 30-second silent product recording are separate assets; neither establishes compliance with the current official Project Demonstration format.
 
 Actual execution, screenshots and deployed identity are recorded in the experience release report after verification. Automated accessibility checks are scoped evidence, not complete WCAG certification.
+
+## P2/P3 visual polish
+
+The same nine-section script and scientific figures are retained. A direct section rail supports presenters without autoplay; local typography, brief reduced-motion-aware transitions and a refreshed nine-page PDF refine delivery. The About atlas supplies separately dated geographic context for all eight study areas. The spoken notes are unchanged; this release does not imply a new human rehearsal or official media compliance.

@@ -30,3 +30,7 @@ Production verification: source `1018c678d7be5efb97efce5aaf221e155c6a8e24`, depl
 ## P0/P1 experience follow-up
 
 The subsequent visual audit confirmed numerical overflow, mobile navigation overlap, a buried guide, an anchor-only methodology section, stale mobile pitch progress, undersized detail targets and interactive-SVG semantics. The redesign addresses these with compact labels, a reflowing shared header, five early guide scenes, dedicated `/methods`, scroll-aware pitch state, minimum touch targets and grouped SVG links. About and Pitch use credited, dated NASA imagery; no measurement is fabricated. Scientific code and data remain unchanged. See `submission/experience-release.json` for the actual tested source and public acceptance results; do not infer verification from this description alone.
+
+## P2/P3 presentation follow-up
+
+Self-hosted typography, optional brief transitions, a dated eight-area NASA context atlas and a direct pitch section rail extend the prior fixes. Imagery retains visible clouds/swath gaps and is explicitly separate from monthly thermal activity. Exact queries, extents and hashes are public. Executed evidence is recorded in `submission/visual-release.json`; unavailable Windows backfill material is not claimed as reviewed. Physical-device and assistive-technology checks remain unresolved.

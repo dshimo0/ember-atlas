@@ -61,3 +61,7 @@ The owner confirmed **Diego Shimohama** as the sole creator. `/about` is linked 
 ## P0/P1 presentation release
 
 Shared navigation now includes a dedicated `/methods` route. The legacy methodology anchor remains compatible. Five guide scenes reuse the existing analytical components; compact heatmap labels, explicit intensity and progressive scientific detail improve exploration. Pitch opening/closing use credited NASA editorial imagery; all three candidate metrics, peak error, reference-version limits and publication domains remain visible in the evidence path. Mobile navigation, touch targets, world-map semantics and scroll progress have explicit regression checks. See [experience-redesign.md](experience-redesign.md) for actual execution status.
+
+## P2/P3 visual release
+
+The owner chose deeper presentation, not expanded science scope. Eight dated NASA true-color context cards link to the existing regional evidence; the pitch adds nine-section direct navigation. Local licensed typography and reduced-motion behavior improve readability without changing validation, data coverage or export calculations. See [visual-refinement.md](visual-refinement.md) and the executed `submission/visual-release.json`. The requested Windows-only backfill folder is unavailable here and remains an open review item pending accessible files.

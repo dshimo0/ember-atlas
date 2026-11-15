@@ -55,3 +55,7 @@ We invite a fire-monitoring team to review the seasonal evidence and define an o
 - **Are regions interchangeable?** No. Each new area has its own registered inner selection, fixed refit and outer/fresh gates. Factors do not transfer to subregions or NRT. Pantanal keeps its original publication domain.
 - **Is the imagery an analytical layer?** No. Blue Marble is a credited 2007 editorial composite. The Pantanal context image is MODIS Terra true color dated September 1, 2024. Both have local source/hash metadata and are separate from FIRMS occupancy.
 - **What remains for the owner?** Confirm official eligibility/media rules, portal roster and contribution wording; rehearse on a physical device, accept terms and submit for judging. No registration, partnership or operational impact is inferred from the product.
+
+## Presentation controls
+
+The nine-section rail selects the same shared slide state as Previous/Next and keyboard navigation. It remains usable on mobile, is omitted from print and does not autoplay. Self-hosted typography has a system fallback; reduced-motion preferences disable entry effects. The current PDF is generated from the actual route, with nine pages. About's eight-area atlas is dated editorial context, separate from analytical fire measurements.

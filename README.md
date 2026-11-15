@@ -205,3 +205,9 @@ The local three-minute pitch is separate from the official Project Demonstration
 Observations: [NASA FIRMS](https://www.earthdata.nasa.gov/data/tools/firms). Basemap: [OpenStreetMap contributors](https://www.openstreetmap.org/copyright). Local geography: [Natural Earth](https://www.naturalearthdata.com/about/terms-of-use/). Map controls: [Leaflet](web/vendor/leaflet/LICENSE). Product-specific sources, third-party attributions and AI assistance are documented in the [submission resource inventory](submission/RESOURCES.md) and [portal materials](submission/PROJECT-PAGE.md).
 
 The [P0/P1 experience release](docs/experience-redesign.md) introduces dedicated Methods & Data, a five-scene guide, a data-derived calendar heatmap and an editorial About/Pitch. NASA imagery is credited and dated separately from analytical layers in the [image inventory](web/assets/editorial-imagery.json). The scientific release remains unchanged.
+
+### Visual atlas and presentation controls
+
+[About → Study area atlas](https://ember-atlas-opal.vercel.app/about#study-areas) provides dated NASA MODIS Terra true-color context for all eight study rectangles, with image sources, bounds and links to the matching observations. The September 1, 2024 images are editorial context; clouds and swath gaps are retained and the images do not measure fire activity. [Image inventory](web/assets/regional-imagery.json).
+
+The pitch includes direct navigation across its nine sections. Typography uses a locally hosted, SIL OFL-licensed Manrope subset with a system fallback. Motion is brief, optional through the device's reduced-motion preference, and disabled for print. Scientific calculations and exported precision are unchanged. [Font provenance](web/assets/fonts/provenance.json).
