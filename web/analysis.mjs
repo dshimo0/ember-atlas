@@ -1,18 +1,15 @@
 import {aggregateMonth,adjustment,monthsBetween} from './model.mjs';
 export function evaluateValidation(v) {
-  const rows=v.monthly.filter(r=>v.holdout_years.includes(r.year)).map(r=>{
-    const value=r.viirs*v.factors[r.season],before=r.viirs-r.modis,after=value-r.modis;
-    return {...r,adjusted:value,before,after,underperforms:Math.abs(after)>Math.abs(before)};
-  });
-  function metrics(key){return {n:rows.length,mae:rows.reduce((s,r)=>s+Math.abs(r[key]),0)/rows.length,bias:rows.reduce((s,r)=>s+r[key],0)/rows.length,rmse:Math.sqrt(rows.reduce((s,r)=>s+r[key]**2,0)/rows.length)};}
-  const before=metrics('before'),after=metrics('after');
-  for(const [a,b] of [[before,v.unadjusted],[after,v.adjusted]])for(const key of ['n','mae','bias'])if(Math.abs(a[key]-b[key])>1e-7)throw new Error('Validation evidence does not reconcile');
-  return {before,after,rows,reduction:100*(1-after.mae/before.mae),underperforming:rows.filter(r=>r.underperforms)};
+ const rows=v.monthly.filter(r=>v.holdout_years.includes(r.year)).map(r=>{const factor=v.factors[r.season],value=Number.isFinite(factor)?r.viirs*factor:null,before=r.viirs-r.modis,after=value===null?null:value-r.modis;return {...r,adjusted:value,before,after,underperforms:after!==null&&Math.abs(after)>Math.abs(before)};});
+ function metrics(k){const values=rows.map(r=>r[k]).filter(x=>x!==null),n=values.length;return{n,mae:n?values.reduce((s,x)=>s+Math.abs(x),0)/n:null,bias:n?values.reduce((s,x)=>s+x,0)/n:null,rmse:n?Math.sqrt(values.reduce((s,x)=>s+x*x,0)/n):null};}
+ const before=metrics('before'),after=metrics('after');
+ for(const [a,b]of[[before,v.unadjusted],[after,v.adjusted]])for(const k of['n','mae','bias'])if((a[k]===null)!==(b[k]===null)||a[k]!==null&&Math.abs(a[k]-b[k])>1e-7)throw new Error('Validation evidence does not reconcile');
+ return{before,after,rows,reduction:before.mae>0&&after.mae!==null?100*(1-after.mae/before.mae):null,underperforming:rows.filter(r=>r.underperforms)};
 }
 export function referenceRows(index,s,v) {
   return monthsBetween(s.start,s.end).map(month=>{
     const m=aggregateMonth(index,month,s.mode==='nrt'?'MODIS_NRT':'MODIS_SP',s),r=aggregateMonth(index,month,s.mode==='nrt'?'VIIRS_NOAA20_NRT':'VIIRS_NOAA20_SP',s),a=adjustment(r,s,v);
-    return {month,reference:s.sensor!=='VIIRS_NOAA20_SP'&&m.retrieved?m.cells:null,viirs:s.sensor!=='MODIS_SP'&&r.retrieved?r.cells:null,adjusted:s.sensor!=='MODIS_SP'?(a?.value??null):null,status:!r.retrieved?'Data unavailable':!r.complete?'Partial month':a?'Supported':'Adjustment unavailable',phase:s.mode==='nrt'?'Partial NRT window':(s.region&&s.region!=='pantanal')||s.area!=='all'?'Observed SP window':v.train_years.includes(+month.slice(0,4))?'Training':v.holdout_years.includes(+month.slice(0,4))?'Holdout':'Archive context',source:'VIIRS_NOAA20_SP',reference_source:'MODIS_SP'};
+    return {month,reference:s.sensor!=='VIIRS_NOAA20_SP'&&m.retrieved?m.cells:null,viirs:s.sensor!=='MODIS_SP'&&r.retrieved?r.cells:null,adjusted:s.sensor!=='MODIS_SP'?(a?.value??null):null,status:!r.retrieved?'Data unavailable':!r.complete?'Partial month':a?'Supported':'Adjustment unavailable',phase:s.mode==='nrt'?'Partial NRT window':s.area!=='all'?'Observed SP window':v.train_years.includes(+month.slice(0,4))?'Training':v.holdout_years.includes(+month.slice(0,4))?'Holdout':+month.slice(0,4)>Math.max(...v.holdout_years)?'External evaluation':'Archive context',source:'VIIRS_NOAA20_SP',reference_source:'MODIS_SP'};
   });
 }
 export function sensitivitySummary(d) {

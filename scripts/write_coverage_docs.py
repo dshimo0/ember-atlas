@@ -6,7 +6,7 @@ p=json.loads((DATA/'regions.json').read_text());r=json.loads((DATA/p['file']).re
 rows=['| Study area (W/S/E/N) | Observed SP coverage | Recent NRT UTC window | Adjustment |','| --- | --- | --- | --- |']
 for region in r['regions']:
  s=json.loads((DATA/region['datasets']['sp']['file']).read_text());n=region['datasets']['nrt'];coverage='; '.join(f"{k}: {v['start']}–{v['end']} ({v['retrieved_days']} retrieved days)"for k,v in s['product_coverage'].items())
- rows.append(f"| {region['name']} ({', '.join(map(str,region['bounds']))}) | {coverage} | {n['coverage']['start']}–{n['coverage']['end']} | {'Evaluated full area, SP 2020–2024 only'if region['id']=='pantanal'else 'Unavailable; multi-year regional evaluation missing'} |")
+ rows.append(f"| {region['name']} ({', '.join(map(str,region['bounds']))}) | {coverage} | {n['coverage']['start']}–{n['coverage']['end']} | {'Evaluated full area, SP 2020–2024 only'if region['id']=='pantanal'else ('Evaluated '+str(s['calibration']['selected_method'])+', full area SP through '+s['calibration']['period']['end'] if s['calibration'].get('accepted') else s['calibration'].get('reason','Unavailable; regional evaluation pending'))} |")
 text='\n'.join(rows)
 for name in ['README.md','docs/challenge-traceability.md']:
  p=ROOT/name;s=p.read_text();start=s.index('<!-- COVERAGE:START -->')+len('<!-- COVERAGE:START -->');end=s.index('<!-- COVERAGE:END -->');p.write_text(s[:start]+'\n'+text+'\n'+s[end:])

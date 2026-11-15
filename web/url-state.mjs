@@ -3,7 +3,8 @@ export function defaultState(coverage={start:'2020-01-01',end:'2024-12-31'}) {re
 export function readURL(url,coverage) {
   const u=new URL(url,'https://ember-atlas-opal.vercel.app'),p=u.searchParams,s=defaultState(coverage);
   if(['pantanal','southern-amazon','cerrado','gran-chaco','california','southeastern-australia','iberian-peninsula','siberia'].includes(p.get('region')))s.region=p.get('region');
-  if(p.get('mode')==='nrt')s.mode='nrt';s.benchmark=p.get('benchmark')==='1';
+  if(p.get('mode')==='nrt'){s.mode='nrt';if(!p.has('start'))s.start=[new Date(Date.parse(s.end)-6*86400000).toISOString().slice(0,10),coverage?.start||s.start].sort().at(-1);}
+  s.benchmark=p.get('benchmark')==='1';
   if(['all','north','south'].includes(p.get('area')))s.area=p.get('area');
   if(['both','MODIS_SP','VIIRS_NOAA20_SP'].includes(p.get('sensor')))s.sensor=p.get('sensor');
   if(validDate(p.get('start')))s.start=p.get('start');if(validDate(p.get('end')))s.end=p.get('end');

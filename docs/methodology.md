@@ -49,3 +49,21 @@ Recent detections are separate NRT datasets with actual product names, UTC start
 ## Source archive packaging
 
 The new original CSVs and adjacent retrieval manifests are preserved byte-for-byte in deterministic archives under `data/source-archives/`, with a SHA-256 index covering every archive member. `python scripts/source_archives.py unpack` restores the exact `data/history/` and `data/regions/` paths recorded in observation provenance. Unpacking refuses to overwrite changed existing source files. Regional building and resumed ingestion invoke this reconstruction automatically. The original `data/matched` files and original snapshot are retained unchanged. Packaging keeps the Git review manageable without omitting raw evidence.
+
+## Registered regional expansion protocol
+
+The original Pantanal snapshot, factors and 2020–2024 publication domain remain immutable. Protocol commit `17403f3` preceded the new acquisition: [regional-evaluation-protocol-v1.json](../data/regional-evaluation-protocol-v1.json). New regions use the same 0.05° grid, UTC-day occupancy definition and unchanged study rectangles.
+
+For each new region, fit two candidates on 2020–2021: a through-origin least-squares scalar minimizing the sum of squared monthly residuals, and quarterly ratios of summed MODIS to VIIRS cell-days with the documented pooled fallback. Choose the smaller monthly MAE on 2022; ties within 1e-9 prefer the scalar. Refit that choice once on 2020–2022. Do not change the choice after inspecting outer results.
+
+Evaluate all three methods (unadjusted, scalar, quarterly) on identical complete paired months in 2023–2024, those months excluding the already published September 2024, and January 2025–July 2026. The latter 19 months are out-of-time evaluation, never training or selection. September 2024 was already observed in the previous release, so the entire outer partition is not claimed to be unseen. Publish a new regional adjustment only with 36 training, 24 outer and 19 external complete months, and lower MAE with no worse absolute signed bias than unadjusted VIIRS on each evaluation partition. Report every candidate and monthly residual even if publication is withheld. Rank the six most active months by observed MODIS activity, not candidate errors.
+
+Pantanal's 19 fresh months can audit extrapolation but do not meet the separately registered 24-fresh-month requirement to replace or extend its frozen publication. Additional observed months remain usable as raw sensor history.
+
+### Source-preserving covering queries
+
+[Acquisition amendment](../data/covering-acquisition-amendment-v1.json) reduces repeated South American source queries without changing any analytical mask or evaluation rule. Preserve the original covering CSV and its SHA-256. Derive each study area's missing date window using inclusive WGS84 bounds and UTC acquisition dates, retaining the original field values. Every derived manifest links the covering manifest and hash. Reapply that exact filter and compare bytes before aggregation. The original and filtered files are both packaged in the source archives. Empty filtered output is zero reported detections for a successfully retrieved area/time, not proof of usable satellite coverage.
+
+### SP/NRT availability audit
+
+[Processing-transition audit](../web/data/processing-transition.json) derives same-sensor temporal intersection from the captured NASA availability table. As captured, MODIS SP ends August 2026 and its NRT starts September; NOAA-20 SP ends July and NRT starts August. There is no coincident processing-class window. No empirical SP/NRT correction or joined series is supported. Preserve actual NRT retrieval vintages; when SP later covers those acquisition dates, retrieve the identical geometry and windows, evaluate each sensor/product pair, and define a new independent acceptance protocol before joining them. A temporal gap cannot be treated as paired evaluation.

@@ -1,5 +1,5 @@
 """Build immutable regional summaries/shards from verified extracts without changing the frozen fit."""
-import calendar,gzip,hashlib,json
+import calendar,gzip,hashlib,json,tempfile
 from collections import defaultdict
 from datetime import date,datetime,timezone
 from pathlib import Path
@@ -7,6 +7,8 @@ from firms import atomic_write,read_csv,DAY
 from build_calendar import grid_cell
 from build_dashboard import publish,encode
 from source_archives import unpack
+from stream_region import stream_inputs
+from evaluate_regions import evaluate,comparison_document
 
 ROOT=Path('web/data')
 def read_inputs(directory,bbox,expected_class):
@@ -32,51 +34,64 @@ def read_inputs(directory,bbox,expected_class):
   manifests.append(dict(m,reference=str(path)))
  return observations,manifests,covered
 
-def build(region,mode,base,validation_ref):
+def build(region,mode,base,validation_ref,previous=None,regional_validation=None):
  is_pantanal=region['id']=='pantanal';bbox=region['bounds']
- directory=Path('data/history') if is_pantanal and mode=='sp' else Path('data/regions')/region['id']/mode
- obs,manifests,covered=read_inputs(directory,bbox,mode.upper())
- if not covered and not(is_pantanal and mode=='sp'):return None
- inputs={'schema':'ember-region-evidence-1','region':region['id'],'bounds':bbox,'processing_class':mode.upper(),'grid_degrees':.05,'manifests':manifests,'normalization':'Deduplicate product/platform/UTC time/coordinates; retain source manifest; occupied globally anchored 0.05-degree WGS84 cells per UTC day.'}
- archive_index=Path('data/source-archives/index.json')
- if archive_index.exists():inputs['raw_archive_index']={'path':str(archive_index),'sha256':hashlib.sha256(archive_index.read_bytes()).hexdigest(),'url':'https://github.com/dshimo0/ember-atlas/blob/work/data/source-archives/index.json'}
- if is_pantanal and mode=='sp':inputs['base_snapshot']=base['snapshot']
- inventory=publish(region['id']+'-'+mode+'-evidence',inputs)
- counts=defaultdict(int);cells=defaultdict(set)
- for rows in obs.values():
-  for r in rows:
-   areas=['all', 'north'if r['latitude']>=-19 else 'south']if is_pantanal else ['all']
-   for area in areas:
-    key=(r['date_utc'],r['product'],area);counts[key]+=1;cells[key].add(grid_cell(str(r['latitude']),str(r['longitude'])))
- daily=[]
- for product,days in sorted(covered.items()):
-  for day in sorted(days):
-   for area in (['all','north','south']if is_pantanal else ['all']):
-    key=(day,product,area);daily.append({'day':day,'product':product,'area':area,'native':counts[key],'cells':len(cells[key])})
- # Publish even a successfully retrieved empty month, with an empty observation array.
- months=sorted({day[:7]for days in covered.values()for day in days})
- shards={month:dict(publish(region['id']+'-'+mode+'-observations-'+month,{'snapshot_sha256':inventory['sha256'],'month':month,'observations':obs[month]},True),dataset_sha256=inventory['sha256'])for month in months}
- observation_count=sum(map(len,obs.values()));manifest_count=len(manifests)
- latest=max((m['retrieved_at']for m in manifests),default=base['built_utc'])
- if is_pantanal and mode=='sp':
-  assert not any(r['day']>='2020-01-01'for r in daily),'History overlaps frozen release'
-  daily+=base['daily'];shards.update({m:dict(ref,dataset_sha256=base['snapshot']['sha256'])for m,ref in base['observation_shards'].items()})
-  observation_count+=base['observation_count'];manifest_count+=base['manifest_count']
- products=sorted({r['product']for r in daily});coverage={'start':min(r['day']for r in daily),'end':max(r['day']for r in daily)}
- product_coverage={product:{'start':min(r['day']for r in daily if r['product']==product),'end':max(r['day']for r in daily if r['product']==product),'retrieved_days':sum(1 for r in daily if r['product']==product and r['area']=='all')}for product in products}
- summary={'schema':'ember-regional-dashboard-1','region':region['id'],'name':region['name'],'bounds':bbox,'processing_class':mode.upper(),'metric_method':'ember-1','grid_degrees':.05,'snapshot':inventory,'validation':validation_ref,'built_utc':latest,'daily':sorted(daily,key=lambda r:(r['day'],r['product'],r['area'])),'observation_shards':dict(sorted(shards.items())),'observation_count':observation_count,'manifest_count':manifest_count,'coverage':coverage,'product_coverage':product_coverage,'products':products,'observation_coverage':'unknown; no usable swath/cloud masks','calibration':{'evaluated':is_pantanal and mode=='sp','geography':'Pantanal study area only','period':'2020-01-01/2024-12-31'if is_pantanal and mode=='sp'else None,'reason':None if is_pantanal and mode=='sp'else 'No independently evaluated regional SP calibration; NRT remains separate.'}}
- ref=publish(region['id']+'-'+mode+'-dashboard',summary)
- return dict(ref,coverage=coverage,products=products,observations=observation_count,last_retrieval_utc=latest)
+ directory=Path('data/regions')/region['id']/mode
+ directories=[Path('data/history'),directory]if is_pantanal and mode=='sp'else[directory]
+ with tempfile.TemporaryDirectory(prefix='ember-months-')as tmp:
+  spool=Path(tmp);daily,manifests,covered,observation_count=stream_inputs(directories,bbox,mode.upper(),spool,is_pantanal)
+  if not covered and not(is_pantanal and mode=='sp'):return None
+  inputs={'schema':'ember-region-evidence-2','region':region['id'],'bounds':bbox,'processing_class':mode.upper(),'grid_degrees':.05,'manifests':manifests,'normalization':'Deduplicate within nonoverlapping source windows by product/platform/UTC time/coordinates; preserve source; occupied global 0.05-degree cells/UTC day.'}
+  archive_index=Path('data/source-archives/index.json')
+  if archive_index.exists():
+   payload=archive_index.read_bytes();digest=hashlib.sha256(payload).hexdigest();version=archive_index.with_name('index-'+digest[:12]+'.json');atomic_write(version,payload)
+   inputs['raw_archive_index']={'path':str(version),'sha256':digest,'url':'https://github.com/dshimo0/ember-atlas/blob/work/'+str(version)}
+  if is_pantanal and mode=='sp':inputs['base_snapshot']=base['snapshot']
+  inventory=publish(region['id']+'-'+mode+'-evidence',inputs)
+  shards={};months=sorted({day[:7]for days in covered.values()for day in days})
+  for month in months:
+   path=spool/(month+'.jsonl');rows=[json.loads(line)for line in path.open()]if path.exists()else[]
+   obs_hash=hashlib.sha256(encode(rows)).hexdigest();old=previous.get('observation_shards',{}).get(month)if previous else None
+   if old:
+    old_hash=old.get('observations_sha256')
+    if not old_hash:
+     old_data=json.loads(gzip.decompress((ROOT/old['file']).read_bytes()));old_hash=hashlib.sha256(encode(old_data['observations'])).hexdigest()
+    if old_hash==obs_hash:
+     shards[month]=dict(old,observations_sha256=obs_hash);continue
+   shards[month]=dict(publish(region['id']+'-'+mode+'-observations-'+month,{'snapshot_sha256':inventory['sha256'],'month':month,'observations':rows},True),dataset_sha256=inventory['sha256'],observations_sha256=obs_hash)
+  manifest_count=len(manifests);latest=max((m['retrieved_at']for m in manifests),default=base['built_utc'])
+  if is_pantanal and mode=='sp':
+   occupied={(r['day'],r['product'],r['area'])for r in daily};assert not any((r['day'],r['product'],r['area'])in occupied for r in base['daily'])
+   daily+=base['daily'];shards.update({m:dict(ref,dataset_sha256=base['snapshot']['sha256'])for m,ref in base['observation_shards'].items()});observation_count+=base['observation_count'];manifest_count+=base['manifest_count']
+  products=sorted({r['product']for r in daily});coverage={'start':min(r['day']for r in daily),'end':max(r['day']for r in daily)}
+  product_coverage={p:{'start':min(r['day']for r in daily if r['product']==p),'end':max(r['day']for r in daily if r['product']==p),'retrieved_days':sum(1 for r in daily if r['product']==p and r['area']=='all')}for p in products}
+  audit_ref=None;comparison_ref=None;selected_ref=validation_ref;validation=None
+  if mode=='sp':
+   validation=evaluate(daily,region['id']);audit_ref=publish(region['id']+'-regional-validation',validation);comparison_ref=publish(region['id']+'-regional-comparison',comparison_document(validation))
+   if not is_pantanal:selected_ref=audit_ref
+  elif regional_validation:
+   selected_ref=regional_validation['validation'];audit_ref=regional_validation.get('external_audit');comparison_ref=regional_validation.get('comparison')
+  accepted=mode=='sp'and(is_pantanal or bool(validation and validation['accepted']))
+  calibration={'evaluated':accepted,'accepted':accepted,'geography':region['name']+' full study area only','period':{'start':'2020-01-01','end':'2024-12-31'}if is_pantanal and mode=='sp'else validation['publication_domain']if validation and validation['accepted']else None,'selected_method':'frozen seasonal'if is_pantanal else validation['selected_method']if validation else None,'reason':validation['reason']if validation else'SP calibration is not applied to NRT'}
+  summary={'schema':'ember-regional-dashboard-2','region':region['id'],'name':region['name'],'bounds':bbox,'processing_class':mode.upper(),'metric_method':'ember-1','grid_degrees':.05,'snapshot':inventory,'validation':selected_ref,'external_audit':audit_ref,'comparison':comparison_ref,'built_utc':latest,'daily':sorted(daily,key=lambda r:(r['day'],r['product'],r['area'])),'observation_shards':dict(sorted(shards.items())),'observation_count':observation_count,'manifest_count':manifest_count,'coverage':coverage,'product_coverage':product_coverage,'products':products,'observation_coverage':'unknown; no usable swath/cloud masks','calibration':calibration}
+  if is_pantanal:summary['comparison']=None
+  ref=publish(region['id']+'-'+mode+'-dashboard',summary)
+  compact=dict(ref,coverage=coverage,products=products,observations=observation_count,last_retrieval_utc=latest,calibration=calibration,validation=selected_ref,external_audit=audit_ref,comparison=summary['comparison'])
+  if validation:compact['evaluation_summary']={'selected_method':validation['selected_method'],'accepted':validation['accepted'],'outer':validation['partitions']['outer'],'external':validation['partitions']['external'],'gates':validation['gates']}
+  return compact
 
 def main():
  unpack()
  definitions=json.loads(Path('data/region-definitions-v1.json').read_text());p=json.loads((ROOT/'dashboard.json').read_text());base=json.loads((ROOT/p['file']).read_text());regions=[]
+ previous_registry=json.loads((ROOT/json.loads((ROOT/'regions.json').read_text())['file']).read_text())if (ROOT/'regions.json').exists()else{'regions':[]}
+ previous={r['id']:r for r in previous_registry['regions']}
  for region in definitions['regions']:
   r=dict(region,geometry_type='bounding box',source=definitions['geometry_source'],source_url=definitions['source_url'])
   w,s,e,n=r['bounds'];r['geometry']={'type':'Polygon','coordinates':[[[w,s],[e,s],[e,n],[w,n],[w,s]]]}
   r['datasets']={}
   for mode in ['sp','nrt']:
-   ref=build(region,mode,base,p['validation'])
+   old_ref=previous.get(region['id'],{}).get('datasets',{}).get(mode);old=json.loads((ROOT/old_ref['file']).read_text())if old_ref else None
+   ref=build(region,mode,base,p['validation'],old,r['datasets'].get('sp'))
    if ref:r['datasets'][mode]=ref
   r['available_products']=sorted({product for d in r['datasets'].values()for product in d['products']});regions.append(r)
   print(r['id'],{k:v['observations']for k,v in r['datasets'].items()},flush=True)

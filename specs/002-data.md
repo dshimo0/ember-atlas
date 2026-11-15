@@ -19,3 +19,12 @@ The implemented method and measured evidence are documented in [methodology.md](
 | D13 Integrity | Version/hash inventories, summaries, shards and evaluation. Keep original snapshot/validation immutable. Verify credentials are absent from repository, exports and decompressed public data. |
 
 Source availability: [FIRMS](https://firms.modaps.eosdis.nasa.gov/api/data_availability/) · [Area API](https://firms.modaps.eosdis.nasa.gov/api/area/) · [archive](https://firms.modaps.eosdis.nasa.gov/download/). Original frozen validation: [validation-ba55acfc7909.json](../web/data/validation-ba55acfc7909.json). Current regional release and scalar evaluation are addressed by `web/data/regions.json` and `web/data/replay-evaluation.json`.
+
+## Regional expansion acceptance
+
+- Keep the original Pantanal artifact and domain unchanged; 19 fresh months are an audit, not authorization to extend a 24-fresh-month gate.
+- Apply registered inner selection on 2022 only, then refit on 2020–2022. Require complete support and pass all independent outer, known-month-excluded and external gates before publishing a regional adjustment.
+- Preserve every original covering query and verify derived area/date masks against it before aggregation. Different study rectangles never share fitted factors.
+- Keep raw regional history available when a gate fails. Show the failed gate and candidate residuals; do not silently switch candidates.
+- Version and hash any externally served observation shard at an immutable repository commit. Integrity-check decompressed bytes before map/export use. Preserve previously published local URLs.
+- Publish an SP/NRT join only after actual same-sensor/window overlap and a separate evaluation protocol; availability adjacency alone is insufficient.

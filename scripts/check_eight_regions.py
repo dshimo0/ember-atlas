@@ -35,7 +35,7 @@ with sync_playwright()as p:
     assert not page.evaluate('document.documentElement.scrollWidth>innerWidth')
     bounds=json.loads(page.locator('#map').get_attribute('data-bounds'));west,south,east,north=r['bounds']
     assert bounds[0][0]<=south and bounds[0][1]<=west and bounds[1][0]>=north and bounds[1][1]>=east,(r['id'],bounds)
-    source=readref(summary['observation_shards'][month])['observations']
+    source=readref(summary['observation_shards'][month])['observations'];start=page.locator('#start').input_value();end=page.locator('#end').input_value();source=[x for x in source if start<=x['date_utc']<=end]
     rows=csvrows(download(page,'#download'));assert len(rows)==len(source)>0;assert ids(rows)==ids(source)
     assert all(west<=float(x['longitude'])<=east and south<=float(x['latitude'])<=north for x in rows)
     ag=csvrows(download(page,'#aggregateDownload'));selected=[x for x in ag if x['month']==month]
@@ -46,7 +46,7 @@ with sync_playwright()as p:
     assert int(page.locator('#map').get_attribute('data-cell-days'))==len(occupied)
     cells=csvrows(download(page,'#downloadCells'));assert sum(int(x['occupied_days'])for x in cells)==len(occupied)
     assert all(x['product']==product and x['region']==r['id']for x in cells)
-    if r['id']!='pantanal' or mode=='nrt':
+    if not ref.get('calibration',{}).get('accepted',r['id']=='pantanal'and mode=='sp'):
      assert page.locator('#comparison [data-series=adjusted]').count()==0
      assert page.locator('#downloadReplay').is_disabled()
      assert all(x['factor']==''and x['adjusted_modis_reference_cell_days']==''for x in ag)
@@ -58,7 +58,7 @@ with sync_playwright()as p:
     page.reload();stable(page,r['id']);assert page.locator('#dataMode').input_value()==mode
     if mode=='sp':
      page.locator('.map-panel').screenshot(path=str(ROOT/f'submission/region-{r["id"]}-{viewport}.png'))
-    report['checks'].append({'viewport':viewport,'region':r['id'],'mode':mode,'rows':len(rows),'csv_matches_full_snapshot':True,'bounds_fit':True,'map_product':product,'map_cell_days':len(occupied),'cell_csv_reconciles':True,'refresh':True,'adjustment_supported':r['id']=='pantanal'and mode=='sp'})
+    report['checks'].append({'viewport':viewport,'region':r['id'],'mode':mode,'rows':len(rows),'csv_matches_full_snapshot':True,'bounds_fit':True,'map_product':product,'map_cell_days':len(occupied),'cell_csv_reconciles':True,'refresh':True,'adjustment_supported':ref.get('calibration',{}).get('accepted',r['id']=='pantanal'and mode=='sp')})
   # Replay cutoff, optional benchmark, no future baseline and exact monthly export.
   page.goto(BASE+'/demo?region=pantanal&view=replay&month=2022-12');stable(page,'pantanal')
   assert page.locator('#calendar [data-month="2022-12"]').get_attribute('data-source')=='MODIS_SP'
@@ -74,7 +74,7 @@ with sync_playwright()as p:
   assert jan['source_product']=='VIIRS_NOAA20_SP'and dec['source_product']=='MODIS_SP'and dec['factor']=='1'
   assert abs(float(jan['reference_scale_cell_days'])-float(page.locator('#comparison [data-series=adjusted]').get_attribute('data-value')))<1e-8
   page.go_back();stable(page,'pantanal');page.go_forward();stable(page,'pantanal')
-  page.locator('#fullArchive').click();stable(page,'pantanal');assert page.locator('#calendar [data-month]').count()==290
+  page.locator('#fullArchive').click();stable(page,'pantanal');archive_months=page.locator('#calendar [data-month]').count();coverage=registry['regions'][0]['datasets']['sp']['coverage'];assert archive_months==(int(coverage['end'][:4])-int(coverage['start'][:4]))*12+int(coverage['end'][5:7])-int(coverage['start'][5:7])+1
   page.select_option('#monthSelect','2000-11');stable(page,'pantanal')
   assert page.locator('#calendar [data-month="2000-11"]').get_attribute('data-source')=='MODIS_SP'
   old=csvrows(download(page,'#download'));assert old and all(r['product']=='MODIS_SP'for r in old)
@@ -109,6 +109,6 @@ with sync_playwright()as p:
    assert int(f.locator('#map').get_attribute('data-observations'))>0
    assert f.locator('#map .leaflet-local-geography-pane canvas').count()>0
   fallback.close()
-  report['checks'].append({'viewport':viewport,'replay_cutoff_sources':True,'benchmark_shared_state':link,'replay_csv_matches_display':True,'new_export_manifest_hashes':True,'no_subarea_transfer':True,'zero_vs_missing':True,'full_modis_archive_months':290,'early_unavailable_viirs_blank':True,'unretrieved_map_sensor_not_zero':True,'world_map_links':8,'all_regions_tile_fallback':True,'javascript_errors':errors,'application_http_errors':http_errors})
+  report['checks'].append({'viewport':viewport,'replay_cutoff_sources':True,'benchmark_shared_state':link,'replay_csv_matches_display':True,'new_export_manifest_hashes':True,'no_subarea_transfer':True,'zero_vs_missing':True,'full_modis_archive_months':archive_months,'early_unavailable_viirs_blank':True,'unretrieved_map_sensor_not_zero':True,'world_map_links':8,'all_regions_tile_fallback':True,'javascript_errors':errors,'application_http_errors':http_errors})
  b.close()
 suffix='public'if BASE.startswith('https://')else'local';(ROOT/f'submission/eight-region-check-{suffix}.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))

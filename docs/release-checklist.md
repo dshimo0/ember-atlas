@@ -21,3 +21,16 @@ Authoritative identity and executed evidence: [transition-release.json](../submi
 The scalar outperforms seasonal on this existing evaluation; a replacement cannot be selected using the same holdout. Regional adjustment is unavailable wherever multi-year local evaluation is missing. NRT is not joined to SP. Source rectangles are not biome masks. Broader challenge ambitions remain explicit in [traceability](challenge-traceability.md).
 
 Run `python -m unittest discover -s tests`, `node --test tests/test_*.mjs`, and `BASE_URL=… python scripts/check_eight_regions.py`. Use `python scripts/serve.py` locally. Browser checks require Playwright, Chromium and pdfinfo. Official terms and final portal submission are deliberately not automated.
+
+## Expansion checks pending execution
+
+The regional protocol was registered at `17403f3`; source-preserving query amendment at `b13d46c`. Acquisition and implementation are in progress. Do not treat these entries as executed evidence.
+
+- [ ] Complete matched regional SP history and preserve raw archives.
+- [ ] Reproduce each regional inner choice and all independent gate outcomes.
+- [ ] Keep original Pantanal hashes/domain unchanged; inspect fresh-month audit.
+- [ ] Verify immutable public shard origin, CORS and SHA checks through signed-out browsers.
+- [ ] Reconcile selected dates, map cells and CSV for all eight regions on desktop/mobile.
+- [ ] Confirm failed regional gates, subareas and NRT cannot inherit any calibration.
+- [ ] Deploy and record the tested source/data commits and actual public route results.
+- [ ] Verify current official media requirements; owner retains terms and final submission.

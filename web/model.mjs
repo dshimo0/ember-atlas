@@ -36,9 +36,9 @@ export function aggregateMonth(index, month, product, state) {
 }
 export function adjustment(row, state, validation) {
   const released = validation.monthly.find(m => m.month === row.month);
-  if ((state.region&&state.region!=='pantanal') || state.mode==='nrt' || !validation.accepted || !released || !row.complete || state.area !== 'all' || row.product !== 'VIIRS_NOAA20_SP' || released.adjusted === null) return null;
+  if (((state.region||'pantanal')!==(validation.region||'pantanal')) || state.mode==='nrt' || !validation.accepted || !released || !row.complete || state.area !== 'all' || row.product !== 'VIIRS_NOAA20_SP' || released.adjusted === null) return null;
   const factor = validation.factors[Math.floor((+row.month.slice(5) - 1) / 3)];
-  return Number.isFinite(factor) ? {factor, value: row.cells * factor} : null;
+  return Number.isFinite(factor) ? {factor,value:row.cells*factor,method:validation.selected_method||'frozen seasonal'} : null;
 }
 export function historicalBaseline(index, month, product, state, validation) {
   // Within-sensor historical comparison uses the same spatial mask; it does not transfer calibration.

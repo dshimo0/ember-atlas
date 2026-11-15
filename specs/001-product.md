@@ -17,3 +17,7 @@ English static application with shared Explore, Guided demo, Pitch and Methods &
 | P11 Pitch | Nine concise interactive sections tell sensor change → continuity replay → observed benchmark → scalar comparison → peak residual → eight-region evidence. Exact demo-state/evidence links, keyboard controls, notes, mobile scroll and readable print. |
 | P12 Access | Keyboard focus, native form controls, readable table alternative, touch targets and no document overflow. Desktop map beside comparison; mobile selected-month result before map. Compact introductory copy. |
 | P13 Verification | Test all eight bounds, real observations and matching CSV on deployed desktop/mobile; direct loads, refresh, filters, replay cutoff, map fallback, missing/zero and print. Report actual commit and unresolved datasets/calibration gaps. |
+
+## Regional expansion interaction criteria
+
+The selected region's own validation artifact controls adjustment availability. The global evidence card names its region and SP scope, independently of a selected subregion or NRT view. A withheld adjustment leaves raw maps, calendars, historical comparisons and exports usable. External-evaluation months have a textual split label. The UI exposes inner selection, all candidate metrics, independent gate outcomes and fresh monthly residuals. Recent NRT opens on the last seven released UTC days; an explicitly shared date range takes precedence. Large pinned observation shards must pass the same integrity checks as local shards before any metrics or downloads are displayed.

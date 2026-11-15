@@ -37,3 +37,13 @@ test('regional masks are not the Pantanal bounding box and preserve NRT product 
  assert.equal(filterObservations([row],'2026-11',{...s,region:'california',mode:'nrt',sensor:'MODIS_SP',bounds:[-125,32,-114,42.5],start:'2026-11-08',end:'2026-11-14'}).length,1);
  assert.equal(filterObservations([row],'2026-11',{...s,start:'2026-11-08',end:'2026-11-14'}).length,0);
 });
+
+test('independent regional validation cannot transfer between masks, processing classes or domains',()=>{
+ const regional=structuredClone(v);regional.region='california';regional.selected_method='scalar';
+ const selected=aggregateMonth(index,'2024-09','VIIRS_NOAA20_SP',s);
+ assert(adjustment(selected,{...s,region:'california'},regional));
+ assert.equal(adjustment(selected,{...s,region:'siberia'},regional),null);
+ assert.equal(adjustment(selected,{...s,region:'california',area:'north'},regional),null);
+ assert.equal(adjustment(selected,{...s,region:'california',mode:'nrt'},regional),null);
+ regional.accepted=false;assert.equal(adjustment(selected,{...s,region:'california'},regional),null);
+});

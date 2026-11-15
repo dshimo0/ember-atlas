@@ -10,8 +10,8 @@ import {PRODUCTS, SENSOR_NAMES, AREAS, monthEnd, monthName, monthsBetween, selec
 const $ = id => document.getElementById(id);
 let summary, validation, index, geography, geographicMap, selected = '2024-09', observations = [], selectionToken = 0, loadedSelection = '', ready = false;
 const shardCache = new Map();
-const state = () => ({region:$('region').value||'pantanal',mode:$('dataMode').value,bounds:summary?.bounds,area: $('area').value, sensor: $('sensor').value, start: $('start').value, end: $('end').value});
-let datasetToken=0;
+const state = () => ({region:$('region').value||'pantanal',mode:$('dataMode').value,bounds:summary?.bounds,calibrationAvailable:!!validation?.accepted&&(validation.region||'pantanal')===summary?.region,area: $('area').value, sensor: $('sensor').value, start: $('start').value, end: $('end').value});
+let datasetToken=0,currentComparison,externalAudit;
 let view='replay',guideStep=1,pitchSlide=1,pitch,release,evaluation;
 const currentRoute=()=>location.pathname.replace(/\/$/,'')||'/';
 const allState=()=>({...state(),month:selected,view,benchmark:$('showBenchmark').checked,step:guideStep,slide:pitchSlide});
@@ -22,12 +22,12 @@ function publishedMetrics() {
   $('improvement').textContent = validation.accepted && improvement !== null ? `${number(improvement, 1)}%` : 'Unavailable';
   $('resultLabel').textContent = validation.accepted ? 'lower monthly MAE against MODIS' : 'Adjustment not supported by this release';
   $('mae').textContent = `${number(validation.unadjusted.mae, 1)} → ${number(validation.adjusted.mae, 1)} cell-days/month`;
-  $('split').textContent = `${validation.adjusted.n} holdout months · ${yearsLabel(validation.holdout_years)} · Pantanal only`;
+  $('split').textContent = `${validation.adjusted.n} holdout months · ${yearsLabel(validation.holdout_years)} · ${release.registry.regions.find(r=>r.id===(validation.region||'pantanal'))?.name||'Pantanal'} SP only`;
   $('validationLink').href = '/data/' + summary.validation.file;
   $('coverage').textContent = `Aggregate and observation coverage: ${summary.coverage.start} → ${summary.coverage.end} UTC`;
   $('validation').textContent = `The ${validation.adjusted.n} matched holdout months in ${yearsLabel(validation.holdout_years)} were excluded from fitting. Training: ${yearsLabel(validation.train_years)}. MAE and signed bias were evaluated against MODIS on the same occupied cell-day scale.`;
   $('bias').textContent = `Signed monthly bias (VIIRS minus MODIS) moved from ${signed(validation.unadjusted.bias)} to ${signed(validation.adjusted.bias)} occupied cell-days. A negative value means the adjusted estimate is lower than MODIS on average. Residuals vary by season; all seasonal results are in the validation JSON.`;
-  $('factors').textContent = 'Frozen quarter factors (VIIRS → MODIS reference): ' + Object.entries(validation.factors).map(([q, f]) => `Q${+q + 1}: ${number(f, 4)}`).join(' · ') + '.';
+  $('factors').textContent = (validation.selected_method==='scalar'?'Inner-selected scalar (repeated per quarter): ':'Frozen quarter factors (VIIRS → MODIS reference): ') + Object.entries(validation.factors).map(([q, f]) => `Q${+q + 1}: ${number(f, 4)}`).join(' · ') + '.';
   $('provenance').textContent = `Snapshot ${summary.snapshot.file}; SHA-256 ${summary.snapshot.sha256}. ${number(summary.observation_count)} observations, ${summary.manifest_count} raw window manifests. Built ${summary.built_utc}. UI aggregates and monthly observation shards are checksum-verified derivatives of this same snapshot. Both export types cover the same released dates.`;
   $('evidenceLinks').innerHTML = `<a href="/data/${summary.validation.file}">Versioned validation JSON ↗</a><a href="/data/${summary.snapshot.file}">Original pinned snapshot ↗</a><a href="/data/monthly_comparison.csv">Full-area monthly evidence CSV ↗</a><a href="/data/diagnostics.json">Sensitivity diagnostics ↗</a><a href="/data/dashboard.json">UI provenance index ↗</a>`;
 }
@@ -37,7 +37,7 @@ function calendar(s) {
   const header = ['<div class="calendar-corner"></div>', ...Array.from({length: 12}, (_, i) => `<div class="month-header">${new Date(Date.UTC(2024, i, 1)).toLocaleDateString('en-US', {month: 'short', timeZone: 'UTC'})}</div>`)];
   const selectedSensors = selectedProducts(s.sensor,s.mode);
   for (const [year, available] of byYear) {
-    const phase = !supportsReplay(s)?'Observed '+s.mode.toUpperCase():validation.train_years.includes(+year) ? 'Training' : validation.holdout_years.includes(+year) ? 'Holdout' : 'Archive context';
+    const phase = !supportsReplay(s)?'Observed '+s.mode.toUpperCase():validation.train_years.includes(+year) ? 'Training' : validation.holdout_years.includes(+year) ? 'Holdout' : +year>Math.max(...validation.holdout_years) ? 'External evaluation' : 'Archive context';
     header.push(`<div class="calendar-year"><div class="year-label"><strong>${year}</strong><small>${phase}</small></div>`);
     for (let n = 1; n <= 12; n++) {
       const m = `${year}-${String(n).padStart(2, '0')}`;
@@ -50,7 +50,7 @@ function calendar(s) {
       const unavailable = values.every(r => !r.retrieved), partial = !unavailable && values.some(r => !r.complete);
       const symbol = unavailable ? '—' : partial ? '◐' : '✓';
       const label = `${monthName(m)}. ${phase}. ${values.map(v => `${replay?SENSOR_NAMES[v.product]+' · '+replayed.adjustment:ref?'Adjusted VIIRS':SENSOR_NAMES[v.product]}: ${v.cells === null ? 'Data unavailable' : `${number(v.cells)} cell-days, ${v.status}`}`).join('. ')}`;
-      header.push(`<button class="month ${unavailable ? 'missing' : partial ? 'partial' : ''}" data-month="${m}" data-source="${replay?replayed.source:values.map(v=>v.product).join(',')}" data-adjustment="${replay?replayed.adjustment:ref?'seasonal':'none'}" aria-label="${label}" aria-pressed="${m === selected}"><em class="mobile-month">${new Date(m+'-01T00:00:00Z').toLocaleDateString('en-US',{month:'short',timeZone:'UTC'})}</em>${values.map(v => `<span class="${replay?(replayed.source==='MODIS_SP'?'m':'a'):ref?'a':v.product.startsWith('MODIS')?'m':'v'}">${replay?(replayed.source==='MODIS_SP'?'○ M':'▲ A'):ref?'▲ A':v.product.startsWith('MODIS')?'○ M':'◇ V'} <b>${compact(v.cells)}</b></span>`).join('')}<span class="coverage-symbol" aria-hidden="true">${symbol}</span></button>`);
+      header.push(`<button class="month ${unavailable ? 'missing' : partial ? 'partial' : ''}" data-month="${m}" data-source="${replay?replayed.source:values.map(v=>v.product).join(',')}" data-adjustment="${replay?replayed.adjustment:ref?(validation.selected_method||'frozen seasonal'):'none'}" aria-label="${label}" aria-pressed="${m === selected}"><em class="mobile-month">${new Date(m+'-01T00:00:00Z').toLocaleDateString('en-US',{month:'short',timeZone:'UTC'})}</em>${values.map(v => `<span class="${replay?(replayed.source==='MODIS_SP'?'m':'a'):ref?'a':v.product.startsWith('MODIS')?'m':'v'}">${replay?(replayed.source==='MODIS_SP'?'○ M':'▲ A'):ref?'▲ A':v.product.startsWith('MODIS')?'○ M':'◇ V'} <b>${compact(v.cells)}</b></span>`).join('')}<span class="coverage-symbol" aria-hidden="true">${symbol}</span></button>`);
     }
     header.push('</div>');
   }
@@ -71,7 +71,7 @@ function baselineView(s, values) {
    const r=replayMonth(index,selected,s,validation),b=replayBaseline(index,selected,s,validation);
    $('findingTitle').textContent='Earlier comparable months';
    $('takeaway').textContent=b?`${monthName(selected)}: reference-scale activity is ${number(Math.abs(b.percent??0),1)}% ${b.difference>=0?'above':'below'} its earlier same-month median (${yearsLabel(b.entries.map(e=>e.year))}, n = ${b.n}).`:'Reference-scale historical comparison requires a complete selected month and at least three complete earlier same-month values.';
-   $('baseline').innerHTML=b?`<div class="baseline-row"><strong>${number(r.value,1)} vs median ${number(b.median,1)} cell-days</strong><p>${signed(b.difference)} cell-days · ${b.n} complete prior months. Earlier complete matched-domain months only (2020–2024); older MODIS is archive context. Missing/partial periods excluded.</p><details><summary>Baseline ${yearsLabel(b.entries.map(e=>e.year))} · n = ${b.n} · sources</summary>${b.entries.map(e=>`${e.year}: ${number(e.value,1)} · ${e.source} · ${e.adjustment}`).join('<br>')}</details></div>`:'<p>Incomplete months and unavailable reference-scale values are excluded. No later years are used.</p>';
+   $('baseline').innerHTML=b?`<div class="baseline-row"><strong>${number(r.value,1)} vs median ${number(b.median,1)} cell-days</strong><p>${signed(b.difference)} cell-days · ${b.n} complete prior months. Earlier complete matched-domain months only (${Math.min(...validation.train_years)}–${validation.publication_domain?.end.slice(0,4)||'2024'}); older MODIS is archive context. Missing/partial periods excluded.</p><details><summary>Baseline ${yearsLabel(b.entries.map(e=>e.year))} · n = ${b.n} · sources</summary>${b.entries.map(e=>`${e.year}: ${number(e.value,1)} · ${e.source} · ${e.adjustment}`).join('<br>')}</details></div>`:'<p>Incomplete months and unavailable reference-scale values are excluded. No later years are used.</p>';
    return;
   }
   $('findingTitle').textContent='Historical comparison';
@@ -103,7 +103,7 @@ function comparison(s, values) {
     $('adjusted').textContent = `Adjusted VIIRS is ${number(Math.abs(delta), 1)} cell-days ${delta < 0 ? 'below' : 'above'} MODIS${pct !== null ? ` (${signed(pct)}%)` : ''} this month.`;
   } else $('adjusted').textContent = 'Adjustment unavailable for this selection.';
   $('scopeNotice').classList.toggle('warning', !supportsReplay(s));
-  $('scopeNotice').textContent = !supportsReplay(s) ? 'Adjustment unavailable: factors were evaluated only for the full Pantanal study area, SP 2020–2024.' : !v.complete ? 'No adjustment for a partial or missing month.' : s.sensor === 'MODIS_SP' ? 'MODIS reference observations.' : a ? `Quarter factor ${number(a.factor, 4)} · Training ${yearsLabel(validation.train_years)}` : 'Adjustment unavailable: this month is outside the accepted validation domain.';
+  $('scopeNotice').textContent = !supportsReplay(s) ? 'Adjustment unavailable: the selected processing level, region or mask has no published adjustment.' : !v.complete ? 'No adjustment for a partial or missing month.' : s.sensor === 'MODIS_SP' ? 'MODIS reference observations.' : a ? `${validation.selected_method==='scalar'?'Scalar':'Quarter'} factor ${number(a.factor, 4)} · Training ${yearsLabel(validation.train_years)}` : 'Adjustment unavailable: this month is outside the accepted validation domain.';
   $('nativeCounts').innerHTML = `<table><thead><tr><th>Product</th><th>Native detections</th><th>Retrieval</th></tr></thead><tbody>${values.map(r => `<tr><th>${SENSOR_NAMES[r.product]}</th><td>${number(r.native)}</td><td>${r.status}<br>${r.retrieved}/${r.expected} days</td></tr>`).join('')}</tbody></table>`;
 }
 function map(s, rows = []) {
@@ -162,7 +162,7 @@ function render() {
   if (selected < s.start.slice(0, 7) || selected > s.end.slice(0, 7)) selected = s.start.slice(0, 7);
   const values = selectedProducts(s.sensor,s.mode).map(p => row(selected, p, s)), available = values.some(v => v.retrieved), count = values.reduce((n, v) => n + (v.native ?? 0), 0), dates = scope(selected, s);
   $('monthTitle').textContent = monthName(selected);
-  $('monthPhase').textContent = !supportsReplay(s)?'Observed '+s.mode.toUpperCase()+' window':validation.holdout_years.includes(+selected.slice(0, 4)) ? 'Holdout year' : validation.train_years.includes(+selected.slice(0, 4)) ? 'Training year' : 'Archive context';
+  $('monthPhase').textContent = !supportsReplay(s)?'Observed '+s.mode.toUpperCase()+' window':validation.holdout_years.includes(+selected.slice(0, 4)) ? 'Holdout year' : validation.train_years.includes(+selected.slice(0, 4)) ? 'Training year' : +selected.slice(0,4)>Math.max(...validation.holdout_years) ? 'External evaluation' : 'Archive context';
   $('status').textContent = available ? `${count === 0 ? 'No detections recorded · ' : ''}${number(count)} observations · ${values.every(v => v.complete) ? 'Complete monthly retrieval' : 'Partial month / mixed retrieval'}` : 'Data unavailable · no retrieval for the selected month';
   $('selection').innerHTML = `<span>Month <strong>${monthName(selected)}</strong></span><span>Area <strong>${s.area==='all'?summary.name+' study area':AREAS[s.area]}</strong></span><span>Sensor <strong>${s.sensor === 'both' ? 'Both sensors' : SENSOR_NAMES[s.sensor]}</strong></span><span>Records <strong>${available ? number(count) : 'Unavailable'}</strong></span><span>UTC <strong>${dates.from} → ${dates.to}</strong></span>`;
   if(!supportsReplay(s)||s.sensor==='MODIS_SP')view='raw';
@@ -187,13 +187,14 @@ function datasetLabels(){
  $('area').querySelector('[value=all]').textContent=r.name+' study area';
  for(const option of $('area').querySelectorAll('option:not([value=all])'))option.disabled=r.id!=='pantanal';
  $('provenance').textContent=`Dataset ${summary.snapshot.file}; SHA-256 ${summary.snapshot.sha256}. ${number(summary.observation_count)} observations; ${summary.manifest_count} source manifests. Product coverage and retrieval inventory are linked below. Observation coverage remains unknown.`;
- $('evidenceLinks').innerHTML=`<a href="/data/${summary.snapshot.file}">Selected dataset manifests</a><a href="/data/${release.registryRef.file}">Versioned region registry</a><a href="/data/${release.pointer.validation.file}">Frozen Pantanal validation</a><a href="/data/${release.replayRef.file}">Three-method evaluation</a><a href="/data/replay-residuals.csv">Monthly residual CSV</a>`;
- $('validationLink').href='/data/'+release.replayRef.file;
+ $('evidenceLinks').innerHTML=`<a href="/data/${summary.snapshot.file}">Selected dataset manifests</a><a href="/data/${release.registryRef.file}">Versioned region registry</a><a href="/data/${summary.validation.file}">SP calibration evidence</a><a href="/data/${(summary.comparison||release.replayRef).file}">Three-method evaluation</a><a href="/data/replay-residuals.csv">Monthly residual CSV</a>`;
+ $('validationLink').href='/data/'+(summary.comparison||summary.validation).file;
+ $('processingTransition').innerHTML=`<p>${release.transitionAudit.status}. SP/NRT joining is disabled.</p><ul>${release.transitionAudit.sensors.map(x=>`<li>${x.sensor}: SP ends ${x.sp_end}; NRT starts ${x.nrt_start}; ${x.overlap_days} overlapping acquisition days.</li>`).join('')}</ul><p>${release.transitionAudit.unblock}</p><a href="/data/${release.transitionRef.file}">Versioned availability audit</a>`;
 }
 function replayView(s){
  const available=supportsReplay(s),r=replayMonth(index,selected,s,validation);
  $('replayIntro').hidden=!available||view!=='replay';
- $('replayDescription').textContent=`Scenario cutoff ${replayCutoff(validation)}: observed MODIS → seasonally adjusted VIIRS. Observed MODIS continues and can be revealed as a holdout benchmark.`;
+ $('replayDescription').textContent=`Scenario cutoff ${replayCutoff(validation)}: observed MODIS → ${validation.selected_method==='scalar'?'scalar-adjusted':'seasonally adjusted'} VIIRS. Observed MODIS continues and can be revealed as a holdout benchmark.`;
  $('selectedSource').textContent=available&&view==='replay'?`Replay: ${r.month<r.cutoff?'observed MODIS':'adjusted NOAA-20 VIIRS'} · cutoff ${r.cutoff}`:'';
  $('replaySource').textContent=`${monthName(selected)} · source ${r.source} · ${r.adjustment}${r.factor!==null?' · factor '+number(r.factor,4):''} · ${r.status}. Units: occupied cell-days.`;
  $('downloadReplay').disabled=!available||view!=='replay';
@@ -204,7 +205,7 @@ $('aggregateDownload').addEventListener('click', () => { const s = state(); down
 function historyView(s) {
  if(view==='replay'&&supportsReplay(s)){
  const rows=replayRows(index,s,validation);
- $('referenceScope').textContent=`Replay scenario · cutoff ${replayCutoff(validation)} · MODIS before; adjusted VIIRS after. Simulated transition, not actual source availability. Older MODIS is observed archive context; calibration was evaluated only in 2020–2024.`;
+ $('referenceScope').textContent=`Replay scenario · cutoff ${replayCutoff(validation)} · MODIS before; adjusted VIIRS after. Simulated transition, not actual source availability. Older MODIS is observed archive context; calibration publication ends ${validation.publication_domain?.end||'2024-12-31'}.`;
  $('timeSeries').innerHTML=timeSeries(rows.map(r=>({...r,replay_modis:r.source==='MODIS_SP'?r.value:null,replay_adjusted:r.source==='VIIRS_NOAA20_SP'?r.value:null,benchmark:$('showBenchmark').checked?r.benchmark:null})), 'replay',{cutoff:replayCutoff(validation)});
  $('seriesLegend').innerHTML='<span>○ Observed MODIS before cutoff</span><span>▲ Adjusted VIIRS after cutoff</span><span>Dashed: observed holdout MODIS benchmark (optional)</span>';
  $('seriesTable').innerHTML=`<table><thead><tr><th>Month / split</th><th>Source</th><th>Adjustment / factor</th><th>Cell-days</th><th>Retrieval</th></tr></thead><tbody>${rows.map(r=>`<tr><th>${r.month} · ${r.phase}</th><td>${r.source}</td><td>${r.adjustment} / ${number(r.factor,4)}</td><td>${number(r.value,1)}</td><td>${r.retrieved}/${r.expected} days · ${r.status}</td></tr>`).join('')}</tbody></table>`;return;}
@@ -215,19 +216,28 @@ function historyView(s) {
  $('seriesTable').innerHTML=`<table><thead><tr><th>Month / split</th><th>MODIS cell-days</th><th>VIIRS cell-days</th><th>Adjusted VIIRS</th><th>Adjustment status</th></tr></thead><tbody>${rows.map(r=>`<tr><th>${r.month} · ${r.phase}</th><td>${number(r.reference)}</td><td>${number(r.viirs)}</td><td>${number(r.adjusted,1)}</td><td>${r.status}</td></tr>`).join('')}</tbody></table><p class="unit">Source products: ${summary.products.join(' / ')}. Raw values cover the selected UTC dates; partial windows are labeled. No SP/NRT join. Adjustment is unavailable for partial or unsupported periods.</p>`;
 }
 function residualView() {
- const e=evaluation,methods=compareMethods(validation),artifact=release.replayEvaluation;
+ const e=evaluation,methods=compareMethods(validation),artifact=currentComparison||release.replayEvaluation;
  for(const k of ['unadjusted','scalar','seasonal'])for(const field of ['mae','bias','n'])if(Math.abs(methods.metrics[k][field]-artifact.metrics[k][field])>1e-7)throw new Error('Three-method evidence mismatch');
- $('scalarSummary').textContent=`Scalar MAE ${number(methods.metrics.scalar.mae,1)} vs seasonal ${number(methods.metrics.seasonal.mae,1)}; frozen method retained.`;
- $('methodComparison').innerHTML=`<table class="method-table"><caption>Identical 24 complete paired holdout months · Pantanal study area · occupied cell-days/month</caption><thead><tr><th>Method</th><th>MAE</th><th>Signed bias</th></tr></thead><tbody>${Object.entries(methods.metrics).map(([k,m])=>`<tr data-method="${k}"><th>${k==='unadjusted'?'Unadjusted common-grid VIIRS':k==='scalar'?'Training-only single scalar':'Frozen quarterly factors'}</th><td>${number(m.mae,1)}</td><td>${signed(m.bias)}</td></tr>`).join('')}</tbody></table><p>Scalar ${number(methods.scalar,6)} minimizes training sum of squared monthly residuals through the origin. Fit only on 2020–2022. It is an evaluation baseline; the seasonal publication rule is unchanged. Future method selection requires separate evaluation.</p>`;
+ $('scalarSummary').textContent=`Scalar MAE ${number(methods.metrics.scalar.mae,1)} vs seasonal ${number(methods.metrics.seasonal.mae,1)}; ${validation.selected_method?'inner-selected '+validation.selected_method:'frozen method retained'}.`;
+ $('methodComparison').innerHTML=`<table class="method-table"><caption>Identical ${methods.metrics.unadjusted.n} complete paired holdout months · ${summary.name} study area · occupied cell-days/month</caption><thead><tr><th>Method</th><th>MAE</th><th>Signed bias</th></tr></thead><tbody>${Object.entries(methods.metrics).map(([k,m])=>`<tr data-method="${k}"><th>${k==='unadjusted'?'Unadjusted common-grid VIIRS':k==='scalar'?'Training-only single scalar':'Quarterly training factors'}</th><td>${number(m.mae,1)}</td><td>${signed(m.bias)}</td></tr>`).join('')}</tbody></table><p>Scalar ${number(methods.scalar,6)} minimizes training sum of squared monthly residuals through the origin. Fit only on 2020–2022. ${validation.selected_method?"The method was chosen using 2022 only, after fitting 2020–2021, and refitted on 2020–2022. Outer and external results cannot switch this choice.":"It is an evaluation baseline; the Pantanal seasonal publication rule is unchanged. Future method selection requires separate evaluation."}</p>`;
  $('peakComparison').textContent=`Peak stress test: six holdout months ranked by observed MODIS activity (${methods.peak_months.join(', ')}), never by residual. MAE / bias: unadjusted ${number(methods.peak_metrics.unadjusted.mae,1)} / ${signed(methods.peak_metrics.unadjusted.bias)}; scalar ${number(methods.peak_metrics.scalar.mae,1)} / ${signed(methods.peak_metrics.scalar.bias)}; seasonal ${number(methods.peak_metrics.seasonal.mae,1)} / ${signed(methods.peak_metrics.seasonal.bias)} cell-days/month.`;
- $('residualSummary').textContent=`Holdout bias ${signed(e.before.bias)} → ${signed(e.after.bias)}; RMSE ${number(e.before.rmse,1)} → ${number(e.after.rmse,1)} cell-days/month. ${e.underperforming.length} of ${e.rows.length} months have larger absolute residual after adjustment (${e.underperforming.map(r=>r.month).join(', ')}). Positive residuals mean VIIRS exceeds MODIS. This validation is for the full study rectangle.`;
- const max=Math.max(...e.rows.flatMap(r=>[Math.abs(r.before),Math.abs(r.after)])),x=v=>450+v/max*400;
+ $('residualSummary').textContent=`Holdout bias ${signed(e.before.bias)} → ${signed(e.after.bias)}; RMSE ${number(e.before.rmse,1)} → ${number(e.after.rmse,1)} cell-days/month. ${e.underperforming.length} of ${e.rows.length} months have larger absolute residual after adjustment (${e.underperforming.map(r=>r.month).join(', ')}). Positive residuals mean VIIRS exceeds MODIS. This SP validation is for the full ${validation.region||'pantanal'} study area only.`;
+ const max=Math.max(1,...e.rows.flatMap(r=>[Math.abs(r.before||0),Math.abs(r.after||0)])),x=v=>450+v/max*400;
  $('residualChart').innerHTML=`<svg class="residual-svg" viewBox="0 0 920 ${e.rows.length*20+28}" role="img" aria-label="Monthly holdout residuals in occupied cell-days; cyan unadjusted, purple adjusted; left of zero is below MODIS"><path d="M450 0V${e.rows.length*20}" stroke="#aebdb7"/>${e.rows.map((r,i)=>`<text x="0" y="${i*20+14}" fill="#b4c2bd" font-size="11">${r.month}${r.underperforms?' *':''}</text>${[['before','#86d6d1'],['after','#c8b5ed']].map(([k,c],j)=>`<rect x="${Math.min(450,x(r[k]))}" y="${i*20+j*7+2}" width="${Math.max(1,Math.abs(x(r[k])-450))}" height="5" fill="${c}"><title>${r.month}: ${k} ${number(r[k],1)} cell-days</title></rect>`).join('')}`).join('')}<text x="260" y="${e.rows.length*20+19}" fill="#b4c2bd" font-size="11">Below MODIS ← 0 → Above MODIS · cyan unadjusted / purple adjusted · * underperforms</text></svg>`;
- $('residualTable').innerHTML=`<table><thead><tr><th>Month</th><th>MODIS benchmark</th><th>Unadjusted residual</th><th>Scalar residual</th><th>Seasonal residual</th></tr></thead><tbody>${methods.rows.map(r=>`<tr><th><a data-route href="${stateURL('/demo',{...defaultState(),month:r.month,view:'replay',benchmark:true})}">${r.month}</a></th><td>${number(r.modis)}</td><td>${signed(r.residuals.unadjusted)}</td><td>${signed(r.residuals.scalar)}</td><td>${signed(r.residuals.seasonal)}</td></tr>`).join('')}</tbody></table>`;
+ $('residualTable').innerHTML=`<table><thead><tr><th>Month</th><th>MODIS benchmark</th><th>Unadjusted residual</th><th>Scalar residual</th><th>Seasonal residual</th></tr></thead><tbody>${methods.rows.map(r=>`<tr><th><a data-route href="${stateURL('/demo',{...allState(),month:r.month,view:supportsReplay(state())?'replay':'raw',benchmark:true})}">${r.month}</a></th><td>${number(r.modis)}</td><td>${signed(r.residuals.unadjusted)}</td><td>${signed(r.residuals.scalar)}</td><td>${signed(r.residuals.seasonal)}</td></tr>`).join('')}</tbody></table>`;
  const sensitivity=sensitivitySummary(release.diagnostics);
+ $('sensitivity').parentElement.hidden=summary.region!=='pantanal';
  $('sensitivity').innerHTML=`<p>Descriptive count sensitivity across the full released period; no alternate calibration was selected on holdout.</p><table><thead><tr><th>Product</th><th>0.025° vs 0.05°</th><th>0.1° vs 0.05°</th><th>High-confidence share at 0.05°</th></tr></thead><tbody>${sensitivity.map(r=>`<tr><th>${SENSOR_NAMES[r.product]}</th><td>${signed(r.finerPercent)}%</td><td>${signed(r.coarserPercent)}%</td><td>${number(r.highConfidencePercent,1)}%</td></tr>`).join('')}</tbody></table><p>High confidence: MODIS ≥80; VIIRS h. Thresholds are sensor-specific. Cell-area latitude dependence, timing and cloud effects remain.</p>`;
 }
-const steps=[['Select area and month','Choose the study rectangle or a fixed half, and inspect the real observations for a month.'],['Compare common support','Both products use the same 0.05° grid and UTC-day aggregation. Native detections remain separate.'],['Inspect the transition replay','The scenario switches from observed MODIS to VIIRS scaled to the MODIS reference using training-only quarterly factors.'],['Compare prior years','Each sensor uses its own complete prior years for the same month and same regional mask.'],['Export evidence','Export the selected month, selected-period aggregates and a provenance manifest. Share the same state.']];
+function externalView(){
+ const panel=$('externalEvidence');panel.hidden=!externalAudit;
+ const scope=release.registry.regions.find(r=>r.id===(validation.region||'pantanal'))?.name||'Pantanal';
+ $('residualSection').querySelector('h2').textContent=scope+' SP validation: three methods';
+ $('methodContract').textContent=validation.region?'Regional selection uses 2022 after fitting 2020–2021, then refits on 2020–2022. Publication requires complete support and lower MAE with no worse absolute bias on 2023–2024, on those years excluding the previously published September 2024, and on January 2025–July 2026. MODIS is a comparison reference, not ground truth. Full study area and complete SP months only.': 'The frozen Pantanal rule requires lower monthly MAE and no worse absolute signed bias on 24 holdout months in 2023–2024 after fitting 36 months in 2020–2022. The publication domain remains 2020–2024, full study area and complete SP months only. MODIS is a comparison reference, not ground truth.';
+ if(!externalAudit)return;const a=externalAudit,metrics=a.partitions.external;
+ panel.innerHTML=`<h3>New out-of-time evidence · ${summary.name}</h3><p>January 2025–July 2026 · ${metrics.unadjusted.n} complete paired SP months · excluded from fitting and method selection.</p><table><thead><tr><th>Method</th><th>MAE</th><th>Signed bias</th></tr></thead><tbody>${Object.entries(metrics).map(([name,m])=>`<tr><th>${name}</th><td>${number(m.mae,1)}</td><td>${signed(m.bias)}</td></tr>`).join('')}</tbody></table><p>Inner selection: ${a.selected_method}, using 2022 after fitting 2020–2021. Publication: ${a.accepted?'all regional gates passed':a.reason}. Gate results: ${Object.entries(a.gates).map(([k,p])=>k+': '+(p?'passed':'failed')).join('; ')}.</p><details><summary>All external monthly residuals</summary><table><thead><tr><th>Month</th><th>Unadjusted</th><th>Scalar</th><th>Quarterly</th></tr></thead><tbody>${a.residuals.external.map(r=>`<tr><th>${r.month}</th><td>${signed(r.residuals.unadjusted)}</td><td>${signed(r.residuals.scalar)}</td><td>${signed(r.residuals.seasonal)}</td></tr>`).join('')}</tbody></table></details><p><a href="/data/${summary.external_audit.file}">Versioned regional audit</a> · <a href="https://github.com/dshimo0/ember-atlas/blob/work/data/regional-evaluation-protocol-v1.json">Preregistered protocol</a></p>`;
+}
+const steps=[['Select area and month','Choose a study area (or a supported Pantanal half), and inspect the real observations for a month.'],['Compare common support','Both products use the same 0.05° grid and UTC-day aggregation. Native detections remain separate.'],['Inspect the transition replay','The scenario switches from observed MODIS to VIIRS scaled to the MODIS reference using the region’s training-only factors.'],['Compare prior years','Each sensor uses its own complete prior years for the same month and same regional mask.'],['Export evidence','Export the selected month, selected-period aggregates and a provenance manifest. Share the same state.']];
 function guideView() {
  const active=currentRoute()==='/demo';$('walkthrough').hidden=!active;
  if(!active)return;
@@ -265,7 +275,7 @@ async function applyLocation(scroll=false) {
  $('region').value=region.id;$('dataMode').value=preliminary.mode;
  $('download').disabled=true;$('downloadCells').disabled=true;$('aggregateDownload').disabled=true;$('downloadReplay').disabled=true;$('downloadManifest').disabled=true;$('status').textContent='Loading selected dataset…';selectionToken++;
  try{
-  const data=await loadDataset(region.id,preliminary.mode);if(token!==datasetToken)return;summary=data;index=makeIndex(summary);
+  const data=await loadDataset(region.id,preliminary.mode);const [v,c,a]=await Promise.all([verifiedJSON(data.validation),data.comparison?verifiedJSON(data.comparison):Promise.resolve(release.replayEvaluation),data.external_audit?verifiedJSON(data.external_audit):Promise.resolve(null)]);if(token!==datasetToken)return;summary=data;validation=v;currentComparison=c;externalAudit=a;evaluation=evaluateValidation(validation);index=makeIndex(summary);publishedMetrics();residualView();externalView();
   const s=readURL(location.href,summary.coverage);selected=s.month;view=s.view;guideStep=s.step;pitchSlide=s.slide;$('showBenchmark').checked=s.benchmark;
   for(const id of ['area','sensor','start','end'])$(id).value=s[id];if(region.id!=='pantanal')$('area').value='all';
   const isPitch=currentRoute()==='/pitch';document.documentElement.dataset.route=isPitch?'pitch':'analysis';document.body.dataset.page=currentRoute().slice(1)||'explore';
@@ -276,10 +286,11 @@ async function applyLocation(scroll=false) {
   if(location.hash&&!isPitch)requestAnimationFrame(()=>document.getElementById(location.hash.slice(1))?.scrollIntoView());
  }catch(error){if(token!==datasetToken)return;console.error(error);$('error').hidden=false;$('error').textContent='Selected regional dataset unavailable. No replacement observations are shown.';}
 }
+function recentStart(coverage){return[new Date(Date.parse(coverage.end)-6*86400000).toISOString().slice(0,10),coverage.start].sort().at(-1);}
 function switchDataset(){
  const region=release.registry.regions.find(r=>r.id===$('region').value),mode=$('dataMode').value,ref=region.datasets[mode];
- const s={...defaultState(ref.coverage),region:region.id,mode,view:region.id==='pantanal'&&mode==='sp'?'replay':'raw',area:'all'};
- history.pushState(null,'',stateURL(currentRoute(),s));applyLocation();
+ const s={...defaultState(ref.coverage),region:region.id,mode,view:mode==='sp'&&(ref.calibration?.accepted||region.id==='pantanal')?'replay':'raw',area:'all'};
+ if(mode==='nrt')s.start=recentStart(ref.coverage);history.pushState(null,'',stateURL(currentRoute(),s));applyLocation();
 }
 $('region').onchange=switchDataset;$('dataMode').onchange=switchDataset;
 $('showBenchmark').onchange=commitSelection;
@@ -302,10 +313,10 @@ $('downloadManifest').onclick=async()=>{
  const cells=obs!==null&&aggregateMonth(selectedIndex,month,product,s).retrieved>0?cellCSV(selectedRows,product,{...s,from:dates.from,to:dates.to},dataset.snapshot.sha256):null;
  const replay=view==='replay'&&supportsReplay(s)?replayCSV(selectedIndex,s,validation,dataset.snapshot.sha256):null;
  const manifest={schema:'ember-evidence-2',selection,url:new URL(stateURL(currentRoute(),selection),location.origin).href,
-  snapshot:dataset.snapshot,validation:dataset.validation,evaluation:release.replayRef,products:selectedProducts(s.sensor,s.mode),
+  snapshot:dataset.snapshot,validation:dataset.validation,evaluation:dataset.comparison||release.replayRef,external_evaluation:dataset.external_audit,products:selectedProducts(s.sensor,s.mode),
   geography:{study_rectangle_wsen:dataset.bounds,mask:s.area,geometry_type:'project-defined bounding box'},
   metric:{name:'occupied cell-days',grid_degrees:.05,origin:'globally anchored WGS84',utc:true},
-  calibration:{geography:'Pantanal study area only; SP 2020–2024',applies_to_selection:supportsReplay(s)&&s.sensor!=='MODIS_SP'&&!!adjustment(aggregateMonth(selectedIndex,month,'VIIRS_NOAA20_SP',s),s,validation),training_years:validation.train_years,holdout_years:validation.holdout_years,source_transition:view==='replay'?'replay scenario; '+replayCutoff(validation):'none'},
+  calibration:{geography:(validation.region||'pantanal')+' full study area only; SP' ,publication_domain:validation.publication_domain||{start:'2020-01-01',end:'2024-12-31'},applies_to_selection:supportsReplay(s)&&s.sensor!=='MODIS_SP'&&!!adjustment(aggregateMonth(selectedIndex,month,'VIIRS_NOAA20_SP',s),s,validation),training_years:validation.train_years,holdout_years:validation.holdout_years,source_transition:view==='replay'?'replay scenario; '+replayCutoff(validation):'none'},
   aggregate_export:{sha256:await sha256(new TextEncoder().encode(aggregate)),months:monthsBetween(s.start,s.end)},
   observation_export:obs!==null?{sha256:await sha256(new TextEncoder().encode(obs)),rows:selectedRows.length,source_shard:dataset.observation_shards[month]}:null,
   cell_export:cells!==null?{sha256:await sha256(new TextEncoder().encode(cells)),product,from_utc:dates.from,through_utc:dates.to}:null,

@@ -36,12 +36,12 @@ class RegionalReleaseTests(unittest.TestCase):
 class SourceArchiveTests(unittest.TestCase):
  def test_roundtrip_preserves_bytes_and_is_deterministic(self):
   with tempfile.TemporaryDirectory()as t:
-   root=Path(t);path=root/'data/history/bbox/MODIS_SP/2000-11-01_2000-11-05.csv';path.parent.mkdir(parents=True);original=b'latitude,longitude\r\n-19,-55\r\n';path.write_bytes(original)
+   root=Path(t);path=root/'data/history/bbox/MODIS_SP/2000-11-01_2000-11-05.csv';path.parent.mkdir(parents=True);original=b'latitude,longitude\r\n-19,-55\r\n';path.write_bytes(original);path.with_suffix('.json').write_text('{}')
    with patch.object(source_archives,'ROOT',root),patch.object(source_archives,'INDEX',root/'data/source-archives/index.json'):
     source_archives.pack();first=next((root/'data/source-archives').glob('*.tar.gz')).read_bytes();source_archives.pack();self.assertEqual(first,next((root/'data/source-archives').glob('*.tar.gz')).read_bytes());path.unlink();source_archives.unpack();self.assertEqual(path.read_bytes(),original)
  def test_unpack_refuses_to_overwrite_changed_existing_work(self):
   with tempfile.TemporaryDirectory()as t:
-   root=Path(t);path=root/'data/history/bbox/MODIS_SP/2000-11-01_2000-11-05.csv';path.parent.mkdir(parents=True);path.write_bytes(b'original')
+   root=Path(t);path=root/'data/history/bbox/MODIS_SP/2000-11-01_2000-11-05.csv';path.parent.mkdir(parents=True);path.write_bytes(b'original');path.with_suffix('.json').write_text('{}')
    with patch.object(source_archives,'ROOT',root),patch.object(source_archives,'INDEX',root/'data/source-archives/index.json'):
     source_archives.pack();path.write_bytes(b'existing changed work')
     with self.assertRaises(AssertionError):source_archives.unpack()

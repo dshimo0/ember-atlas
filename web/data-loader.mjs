@@ -4,7 +4,9 @@ export async function sha256(bytes) {
   return [...new Uint8Array(hash)].map(v=>v.toString(16).padStart(2,'0')).join('');
 }
 export async function verifiedJSON(ref,compressed=false) {
-  const response=await fetch('/data/'+ref.file);
+  let url='/data/'+ref.file;
+  if(ref.url){const u=new URL(ref.url);if(u.protocol!=='https:'||u.hostname!=='raw.githubusercontent.com'||!/^\/dshimo0\/ember-atlas\/[a-f0-9]{40}\/web\/data\/[a-zA-Z0-9._-]+$/.test(u.pathname)||u.search||u.hash)throw new Error('Invalid pinned data origin');url=u.href;}
+  const response=await fetch(url);
   if(!response.ok)throw new Error('Data file unavailable');
   const bytes=compressed?await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer():await response.arrayBuffer();
   if(await sha256(bytes)!==ref.sha256)throw new Error('Data integrity check failed');
@@ -13,10 +15,10 @@ export async function verifiedJSON(ref,compressed=false) {
 export function loadRelease() {
   if(!releasePromise)releasePromise=(async()=>{
     const pointer=await(await fetch('/data/dashboard.json')).json();
-    const [registryRef,replayRef]=await Promise.all([fetch('/data/regions.json').then(r=>r.json()),fetch('/data/replay-evaluation.json').then(r=>r.json())]);
-    const [summary,validation,geography,diagnostics,registry,replayEvaluation]=await Promise.all([verifiedJSON(pointer),verifiedJSON(pointer.validation),fetch('/assets/local-geography.json').then(r=>r.json()),fetch('/data/diagnostics.json').then(r=>r.json()),verifiedJSON(registryRef),verifiedJSON(replayRef)]);
+    const [registryRef,replayRef,transitionRef]=await Promise.all([fetch('/data/regions.json').then(r=>r.json()),fetch('/data/replay-evaluation.json').then(r=>r.json()),fetch('/data/processing-transition.json').then(r=>r.json())]);
+    const [summary,validation,geography,diagnostics,registry,replayEvaluation,transitionAudit]=await Promise.all([verifiedJSON(pointer),verifiedJSON(pointer.validation),fetch('/assets/local-geography.json').then(r=>r.json()),fetch('/data/diagnostics.json').then(r=>r.json()),verifiedJSON(registryRef),verifiedJSON(replayRef),verifiedJSON(transitionRef)]);
     if(summary.snapshot.sha256!==pointer.snapshot.sha256)throw new Error('Release index mismatch');
-    return {pointer,summary,validation,geography,diagnostics,registry,replayEvaluation,registryRef,replayRef};
+    return {pointer,summary,validation,geography,diagnostics,registry,replayEvaluation,registryRef,replayRef,transitionAudit,transitionRef};
   })();
   return releasePromise;
 }
