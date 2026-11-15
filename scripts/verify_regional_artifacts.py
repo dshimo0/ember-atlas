@@ -14,13 +14,15 @@ def main():
   for mode,ref in r['datasets'].items():
    s=read(ref);count=0;daily={(x['day'],x['product']):x for x in s['daily']if x['area']=='all'}
    for month,shard in s['observation_shards'].items():
-    native=defaultdict(int);cells=defaultdict(set)
+    native=defaultdict(int);cells=defaultdict(set);versions=defaultdict(lambda:defaultdict(int));types=defaultdict(lambda:defaultdict(int))
     for x in read(shard)['observations']:
      assert month==x['date_utc'][:7];w,so,e,n=r['bounds'];assert w<=x['longitude']<=e and so<=x['latitude']<=n
-     assert x['product'].endswith('_'+mode.upper());key=(x['date_utc'],x['product']);native[key]+=1;count+=1
+     assert x['product'].endswith('_'+mode.upper());key=(x['date_utc'],x['product']);native[key]+=1;count+=1;versions[key][x.get('source_version')or'not provided']+=1;types[key][x.get('detection_type')or'not provided']+=1
      cells[key].add(tuple(int((Decimal(str(x[k]))/Decimal('.05')).to_integral_value(rounding=ROUND_FLOOR))for k in ['latitude','longitude']))
     for key,x in daily.items():
-     if key[0][:7]==month:assert x['native']==native[key]and x['cells']==len(cells[key]),(r['id'],key)
+     if key[0][:7]==month:
+      assert x['native']==native[key]and x['cells']==len(cells[key]),(r['id'],key)
+      if s.get('schema')=='ember-regional-dashboard-3':assert x['source_versions']==dict(versions[key])and x['detection_types']==dict(types[key])
    assert count==s['observation_count']
    if mode=='sp'and s.get('external_audit'):
     audit=read(s['external_audit']);assert json.loads(json.dumps(evaluate(s['daily'],r['id'])))==audit

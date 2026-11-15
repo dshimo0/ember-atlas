@@ -20,18 +20,22 @@ The map's primary analytical layer is observed occupied UTC days per 0.05° cell
 | Study area (W/S/E/N) | Observed SP coverage | Recent NRT UTC window | Adjustment |
 | --- | --- | --- | --- |
 | Pantanal (-59, -23, -54, -15) | MODIS_SP: 2000-11-01–2026-07-31 (9404 retrieved days); VIIRS_NOAA20_SP: 2020-01-01–2026-07-31 (2404 retrieved days) | MODIS_NRT: 2026-09-01–2026-11-14 (75 retrieved days); VIIRS_NOAA20_NRT: 2026-08-01–2026-11-14 (106 retrieved days) | Evaluated full area, SP 2020–2024 only |
-| Southern Amazon (-65, -13, -48, -5) | MODIS_SP: 2024-09-01–2024-09-30 (30 retrieved days); VIIRS_NOAA20_SP: 2024-09-01–2024-09-30 (30 retrieved days) | MODIS_NRT: 2026-11-08–2026-11-14 (7 retrieved days); VIIRS_NOAA20_NRT: 2026-11-08–2026-11-14 (7 retrieved days) | No independently evaluated regional SP calibration; NRT remains separate. |
-| Cerrado (-55, -20, -44, -8) | MODIS_SP: 2024-09-01–2024-09-30 (30 retrieved days); VIIRS_NOAA20_SP: 2024-09-01–2024-09-30 (30 retrieved days) | MODIS_NRT: 2026-11-08–2026-11-14 (7 retrieved days); VIIRS_NOAA20_NRT: 2026-11-08–2026-11-14 (7 retrieved days) | No independently evaluated regional SP calibration; NRT remains separate. |
-| Gran Chaco (-66, -32, -57, -17) | MODIS_SP: 2024-09-01–2024-09-30 (30 retrieved days); VIIRS_NOAA20_SP: 2024-09-01–2024-09-30 (30 retrieved days) | MODIS_NRT: 2026-11-08–2026-11-14 (7 retrieved days); VIIRS_NOAA20_NRT: 2026-11-08–2026-11-14 (7 retrieved days) | No independently evaluated regional SP calibration; NRT remains separate. |
-| California (-125, 32, -114, 42.5) | MODIS_SP: 2024-09-01–2024-09-30 (30 retrieved days); VIIRS_NOAA20_SP: 2024-09-01–2024-09-30 (30 retrieved days) | MODIS_NRT: 2026-11-08–2026-11-14 (7 retrieved days); VIIRS_NOAA20_NRT: 2026-11-08–2026-11-14 (7 retrieved days) | No independently evaluated regional SP calibration; NRT remains separate. |
-| Southeastern Australia (140, -44, 154, -28) | MODIS_SP: 2024-09-01–2024-09-30 (30 retrieved days); VIIRS_NOAA20_SP: 2024-09-01–2024-09-30 (30 retrieved days) | MODIS_NRT: 2026-11-08–2026-11-14 (7 retrieved days); VIIRS_NOAA20_NRT: 2026-11-08–2026-11-14 (7 retrieved days) | No independently evaluated regional SP calibration; NRT remains separate. |
-| Iberian Peninsula (-10, 35, 4, 44.5) | MODIS_SP: 2024-09-01–2024-09-30 (30 retrieved days); VIIRS_NOAA20_SP: 2024-09-01–2024-09-30 (30 retrieved days) | MODIS_NRT: 2026-11-08–2026-11-14 (7 retrieved days); VIIRS_NOAA20_NRT: 2026-11-08–2026-11-14 (7 retrieved days) | No independently evaluated regional SP calibration; NRT remains separate. |
-| Siberia (60, 50, 140, 72) | MODIS_SP: 2024-09-01–2024-09-30 (30 retrieved days); VIIRS_NOAA20_SP: 2024-09-01–2024-09-30 (30 retrieved days) | MODIS_NRT: 2026-11-08–2026-11-14 (7 retrieved days); VIIRS_NOAA20_NRT: 2026-11-08–2026-11-14 (7 retrieved days) | No independently evaluated regional SP calibration; NRT remains separate. |
+| Southern Amazon (-65, -13, -48, -5) | MODIS_SP: 2020-01-01–2026-07-31 (2404 retrieved days); VIIRS_NOAA20_SP: 2020-01-01–2026-07-31 (2404 retrieved days) | MODIS_NRT: 2026-09-01–2026-11-14 (75 retrieved days); VIIRS_NOAA20_NRT: 2026-08-01–2026-11-14 (106 retrieved days) | Evaluated seasonal, full area SP through 2026-07-31 |
+| Cerrado (-55, -20, -44, -8) | MODIS_SP: 2020-01-01–2026-07-31 (2404 retrieved days); VIIRS_NOAA20_SP: 2020-01-01–2026-07-31 (2404 retrieved days) | MODIS_NRT: 2026-09-01–2026-11-14 (75 retrieved days); VIIRS_NOAA20_NRT: 2026-08-01–2026-11-14 (106 retrieved days) | Evaluated seasonal, full area SP through 2026-07-31 |
+| Gran Chaco (-66, -32, -57, -17) | MODIS_SP: 2020-01-01–2026-07-31 (2404 retrieved days); VIIRS_NOAA20_SP: 2020-01-01–2026-07-31 (2404 retrieved days) | MODIS_NRT: 2026-09-01–2026-11-14 (75 retrieved days); VIIRS_NOAA20_NRT: 2026-08-01–2026-11-14 (106 retrieved days) | Evaluated seasonal, full area SP through 2026-07-31 |
+| California (-125, 32, -114, 42.5) | MODIS_SP: 2020-01-01–2026-07-31 (2404 retrieved days); VIIRS_NOAA20_SP: 2020-01-01–2026-07-31 (2404 retrieved days) | MODIS_NRT: 2026-09-01–2026-11-14 (75 retrieved days); VIIRS_NOAA20_NRT: 2026-08-01–2026-11-14 (106 retrieved days) | Evaluated seasonal, full area SP through 2026-07-31 |
+| Southeastern Australia (140, -44, 154, -28) | MODIS_SP: 2020-01-01–2026-07-31 (2404 retrieved days); VIIRS_NOAA20_SP: 2020-01-01–2026-07-31 (2404 retrieved days) | MODIS_NRT: 2026-09-01–2026-11-14 (75 retrieved days); VIIRS_NOAA20_NRT: 2026-08-01–2026-11-14 (106 retrieved days) | Evaluated seasonal, full area SP through 2026-07-31 |
+| Iberian Peninsula (-10, 35, 4, 44.5) | MODIS_SP: 2020-01-01–2026-07-31 (2404 retrieved days); VIIRS_NOAA20_SP: 2020-01-01–2026-07-31 (2404 retrieved days) | MODIS_NRT: 2026-09-01–2026-11-14 (75 retrieved days); VIIRS_NOAA20_NRT: 2026-08-01–2026-11-14 (106 retrieved days) | Evaluated seasonal, full area SP through 2026-07-31 |
+| Siberia (60, 50, 140, 72) | MODIS_SP: 2020-01-01–2026-07-31 (2404 retrieved days); VIIRS_NOAA20_SP: 2020-01-01–2026-07-31 (2404 retrieved days) | MODIS_NRT: 2026-09-01–2026-11-14 (75 retrieved days); VIIRS_NOAA20_NRT: 2026-08-01–2026-11-14 (106 retrieved days) | Evaluated seasonal, full area SP through 2026-07-31 |
 <!-- COVERAGE:END -->
 
 Each preset is a project-defined WGS84 rectangle called a **study area**, not an official biome/state mask. The [versioned registry](https://ember-atlas-opal.vercel.app/data/regions.json) links to exact geometries, sources, products, observation counts and immutable SP/NRT datasets. Broad Siberia means 60–140°E, 50–72°N; Southeastern Australia means 140–154°E, 44–28°S, including Tasmania. Full bounds appear in the application and registry.
 
-Pantanal's older MODIS backfill extends observational history only. The paired calibration domain remains **2020–2024**. The seven other areas currently publish one complete matched SP month and no independently evaluated adjustment; expanded matched extraction is still in progress. Pantanal raw SP history now reaches July 2026, while its published adjustment still ends in 2024. NRT is separate and product-specific; its default selection is the last seven released UTC days, never spliced into SP. Missing or incomplete archive periods remain blank where a complete monthly reference-scale value is required.
+Pantanal MODIS observations span November 2000–July 2026; NOAA-20 SP spans January 2020–July 2026. Each other preset now has the same 79 complete paired SP months in 2020–July 2026. Each new region passed its own registered inner-selection and independent evaluation gates. Pantanal retains its frozen 2020–2024 adjustment; new regional factors apply only to their full evaluated rectangles through July 2026. Subregions and NRT inherit no adjustment.
+
+NRT remains separate: MODIS September 1–November 14, 2026; NOAA-20 August 1–November 14. The default recent selection is November 8–14 UTC. The full archive and selected-period exports expose the actual product windows and missingness.
+
+Reported MODIS labels are `6.03` in training and `61.03` in holdout. Source-vintage homogeneity is unverified. The measured gains describe agreement with MODIS_SP as delivered, without isolating sensor effects. All reported thermal types remain included. Current observation/monthly exports retain literal versions and types; the source split is linked beside the headline. See [methods](docs/methodology.md) and [regional results](submission/regional-evaluation.md).
 
 ## Three-method evidence
 
@@ -73,3 +77,20 @@ New regional method selection is registered in [regional-evaluation-protocol-v1.
 The new Pantanal audit covers 19 complete paired SP months in January 2025–July 2026. MAE is 399.4 unadjusted, 89.7 scalar and 70.8 frozen quarterly cell-days/month; quarterly signed bias is +67.4. These are diagnostic candidate results outside the original publication domain. The 2020–2024 published adjustment is unchanged; the registered extension gate requires 24 fresh complete months. [Versioned audit](web/data/pantanal-regional-validation-247ee21cc4ce.json).
 
 The captured availability table has no same-sensor SP/NRT overlap. [Availability audit](web/data/processing-transition.json) records why the series remain separate and the evidence required before joining them.
+
+## Regional evaluation
+
+<!-- REGIONAL-EVALUATION:START -->
+| Study area | Inner choice | Outer MAE: raw → choice (n) | Fresh MAE: raw → choice (n) | Fresh signed bias | Published adjustment |
+| --- | --- | ---: | ---: | ---: | --- |
+| Pantanal | seasonal | 1,021.7 → 199.7 (24) | 399.4 → 70.8 (19) | 67.4 | frozen seasonal through 2024-12-31 |
+| Southern Amazon | seasonal | 4,584.5 → 567.5 (24) | 1,428.4 → 168.7 (19) | 61.5 | seasonal through 2026-07-31 |
+| Cerrado | seasonal | 3,826.8 → 506.5 (24) | 2,641.7 → 322.1 (19) | 116.5 | seasonal through 2026-07-31 |
+| Gran Chaco | seasonal | 3,941.8 → 405.8 (24) | 2,923.7 → 213.9 (19) | 97.5 | seasonal through 2026-07-31 |
+| California | seasonal | 945.1 → 124.1 (24) | 977.7 → 146.0 (19) | 124.9 | seasonal through 2026-07-31 |
+| Southeastern Australia | seasonal | 1,453.3 → 228.9 (24) | 1,604.0 → 147.8 (19) | 13.8 | seasonal through 2026-07-31 |
+| Iberian Peninsula | seasonal | 738.9 → 71.5 (24) | 794.6 → 123.0 (19) | -72.8 | seasonal through 2026-07-31 |
+| Siberia | seasonal | 5,521.3 → 824.5 (24) | 5,080.4 → 850.0 (19) | 303.9 | seasonal through 2026-07-31 |
+
+Units: occupied cell-days/month; full named study rectangle, SP only. Inner choice uses 2022 after fitting 2020–2021; refit uses 2020–2022. Outer: 2023–2024, including the previously published September 2024; the artifact also reports the sensitivity excluding that month. Fresh: January 2025–July 2026, excluded from fitting and selection. Pantanal retains the original publication regardless of the new audit. A failed regional gate withholds adjustment. MODIS is the comparison reference, not ground truth.
+<!-- REGIONAL-EVALUATION:END -->

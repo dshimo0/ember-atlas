@@ -9,7 +9,7 @@ export function evaluateValidation(v) {
 export function referenceRows(index,s,v) {
   return monthsBetween(s.start,s.end).map(month=>{
     const m=aggregateMonth(index,month,s.mode==='nrt'?'MODIS_NRT':'MODIS_SP',s),r=aggregateMonth(index,month,s.mode==='nrt'?'VIIRS_NOAA20_NRT':'VIIRS_NOAA20_SP',s),a=adjustment(r,s,v);
-    return {month,reference:s.sensor!=='VIIRS_NOAA20_SP'&&m.retrieved?m.cells:null,viirs:s.sensor!=='MODIS_SP'&&r.retrieved?r.cells:null,adjusted:s.sensor!=='MODIS_SP'?(a?.value??null):null,status:!r.retrieved?'Data unavailable':!r.complete?'Partial month':a?'Supported':'Adjustment unavailable',phase:evaluationPhase(month,s,v),source:'VIIRS_NOAA20_SP',reference_source:'MODIS_SP'};
+    return {reference_versions:m.source_versions,viirs_versions:r.source_versions,month,reference:s.sensor!=='VIIRS_NOAA20_SP'&&m.retrieved?m.cells:null,viirs:s.sensor!=='MODIS_SP'&&r.retrieved?r.cells:null,adjusted:s.sensor!=='MODIS_SP'?(a?.value??null):null,status:!r.retrieved?'Data unavailable':!r.complete?'Partial month':a?'Supported':'Adjustment unavailable',phase:evaluationPhase(month,s,v),source:'VIIRS_NOAA20_SP',reference_source:'MODIS_SP'};
   });
 }
 export function sensitivitySummary(d) {

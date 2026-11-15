@@ -37,3 +37,9 @@ The actual 30-second silent recording is at `/assets/workflow-capture.mp4`; the 
 ## Selective reproducible update
 
 `python scripts/source_archives.py unpack` restores preserved original and derived source files. `python scripts/build_regions.py --regions pantanal` rebuilds only Pantanal while retaining other published registry references. A full rebuild evaluates all available regional source windows. Publication gates stay separate from raw retrieval coverage. Acquisition progress files are temporary and excluded from commits.
+
+## Expanded snapshot hosting
+
+Large observation shards are pinned to a full public Git commit in the same repository. The browser allows only that exact repository/commit path and checks uncompressed SHA-256 before using a shard. Current metadata and the default September 2024 Pantanal case remain local on Vercel. Earlier published local data URLs remain served; a monotonic path catalog protects them. Unpublished superseded files stay in Git and are excluded from the constrained static upload. No visitor API key or live FIRMS call is used.
+
+Publish the complete data commit first, then run `python scripts/pin_release_data.py FULL_DATA_COMMIT`, rebuild the coverage/evaluation documents, verify the actual upload size with Vercel's dry run, commit the pinned metadata/configuration and deploy that source commit. `data/pinned-data-release.json` records the immutable data commit and current registry. A failed external shard leaves observation occupancy unavailable, while local aggregate evidence and provenance remain usable.

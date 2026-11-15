@@ -8,6 +8,8 @@ from build_calendar import grid_cell
 from build_dashboard import publish,encode
 from source_archives import unpack
 from stream_region import stream_inputs
+from source_attributes import hydrate,add_attributes
+from update_source_metadata import apply as source_context
 from evaluate_regions import evaluate,comparison_document,publish_residuals
 
 ROOT=Path('web/data')
@@ -46,16 +48,20 @@ def build(region,mode,base,validation_ref,previous=None,regional_validation=None
  with tempfile.TemporaryDirectory(prefix='ember-months-')as tmp:
   spool=Path(tmp);daily,manifests,covered,observation_count=stream_inputs(directories,bbox,mode.upper(),spool,is_pantanal)
   if not covered and not(is_pantanal and mode=='sp'):return None
-  inputs={'schema':'ember-region-evidence-2','region':region['id'],'bounds':bbox,'processing_class':mode.upper(),'grid_degrees':.05,'manifests':manifests,'normalization':'Deduplicate within nonoverlapping source windows by product/platform/UTC time/coordinates; preserve source; occupied global 0.05-degree cells/UTC day.'}
+  inputs={'schema':'ember-region-evidence-3','region':region['id'],'bounds':bbox,'processing_class':mode.upper(),'grid_degrees':.05,'manifests':manifests,'normalization':'Deduplicate within nonoverlapping source windows by product/platform/UTC time/coordinates; preserve source, literal version and reported type (all types retained); occupied global 0.05-degree cells/UTC day.'}
   archive_index=Path('data/source-archives/index.json')
   if archive_index.exists():
    payload=archive_index.read_bytes();digest=hashlib.sha256(payload).hexdigest();version=archive_index.with_name('index-'+digest[:12]+'.json');atomic_write(version,payload)
    inputs['raw_archive_index']={'path':str(version),'sha256':digest,'url':'https://github.com/dshimo0/ember-atlas/blob/work/'+str(version)}
   if is_pantanal and mode=='sp':inputs['base_snapshot']=base['snapshot']
   inventory=publish(region['id']+'-'+mode+'-evidence',inputs)
-  shards={};months=sorted({day[:7]for days in covered.values()for day in days})
+  if is_pantanal and mode=='sp':
+   for month,ref in base['observation_shards'].items():
+    payload=gzip.decompress((ROOT/ref['file']).read_bytes());assert hashlib.sha256(payload).hexdigest()==ref['sha256'];original=json.loads(payload)['observations'];rows=hydrate(original);path=spool/(month+'.jsonl');assert not path.exists();path.write_text(''.join(json.dumps(r,separators=(',',':'))+'\n'for r in rows))
+  attributes={};shards={};months=sorted({day[:7]for days in covered.values()for day in days}|(set(base['observation_shards'])if is_pantanal and mode=='sp'else set()))
   for month in months:
    path=spool/(month+'.jsonl');rows=[json.loads(line)for line in path.open()]if path.exists()else[]
+   add_attributes(rows,attributes,is_pantanal)
    obs_hash=hashlib.sha256(encode(rows)).hexdigest();old=previous.get('observation_shards',{}).get(month)if previous else None
    if old:
     old_hash=old.get('observations_sha256')
@@ -67,7 +73,9 @@ def build(region,mode,base,validation_ref,previous=None,regional_validation=None
   manifest_count=len(manifests);latest=max((m['retrieved_at']for m in manifests),default=base['built_utc'])
   if is_pantanal and mode=='sp':
    occupied={(r['day'],r['product'],r['area'])for r in daily};assert not any((r['day'],r['product'],r['area'])in occupied for r in base['daily'])
-   daily+=base['daily'];shards.update({m:dict(ref,dataset_sha256=base['snapshot']['sha256'])for m,ref in base['observation_shards'].items()});observation_count+=base['observation_count'];manifest_count+=base['manifest_count']
+   daily+=base['daily'];observation_count+=base['observation_count'];manifest_count+=base['manifest_count']
+  daily=[dict(r,**attributes.get((r['day'],r['product'],r['area']),{'source_versions':{},'detection_types':{}}))for r in daily]
+  assert all(sum(r['source_versions'].values())==r['native']and sum(r['detection_types'].values())==r['native']for r in daily)
   products=sorted({r['product']for r in daily});coverage={'start':min(r['day']for r in daily),'end':max(r['day']for r in daily)}
   product_coverage={p:{'start':min(r['day']for r in daily if r['product']==p),'end':max(r['day']for r in daily if r['product']==p),'retrieved_days':sum(1 for r in daily if r['product']==p and r['area']=='all')}for p in products}
   audit_ref=None;comparison_ref=None;residual_ref=None;selected_ref=validation_ref;validation=None
@@ -78,10 +86,12 @@ def build(region,mode,base,validation_ref,previous=None,regional_validation=None
    residual_ref=regional_validation.get('residual_csv');selected_ref=regional_validation['validation'];audit_ref=regional_validation.get('external_audit');comparison_ref=regional_validation.get('comparison')
   accepted=mode=='sp'and(is_pantanal or bool(validation and validation['accepted']))
   calibration={'evaluated':mode=='sp'and validation is not None,'accepted':accepted,'geography':region['name']+' full study area only','period':{'start':'2020-01-01','end':'2024-12-31'}if is_pantanal and mode=='sp'else validation['publication_domain']if validation and validation['accepted']else None,'selected_method':'frozen seasonal'if is_pantanal else validation['selected_method']if validation else None,'reason':validation['reason']if validation else'SP calibration is not applied to NRT'}
-  summary={'schema':'ember-regional-dashboard-2','region':region['id'],'name':region['name'],'bounds':bbox,'processing_class':mode.upper(),'metric_method':'ember-1','grid_degrees':.05,'snapshot':inventory,'validation':selected_ref,'external_audit':audit_ref,'comparison':comparison_ref,'residual_csv':residual_ref,'built_utc':latest,'daily':sorted(daily,key=lambda r:(r['day'],r['product'],r['area'])),'observation_shards':dict(sorted(shards.items())),'observation_count':observation_count,'manifest_count':manifest_count,'coverage':coverage,'product_coverage':product_coverage,'products':products,'observation_coverage':'unknown; no usable swath/cloud masks','calibration':calibration}
+  summary={'schema':'ember-regional-dashboard-3','region':region['id'],'name':region['name'],'bounds':bbox,'processing_class':mode.upper(),'metric_method':'ember-1','grid_degrees':.05,'snapshot':inventory,'validation':selected_ref,'external_audit':audit_ref,'comparison':comparison_ref,'residual_csv':residual_ref,'built_utc':latest,'daily':sorted(daily,key=lambda r:(r['day'],r['product'],r['area'])),'observation_shards':dict(sorted(shards.items())),'observation_count':observation_count,'manifest_count':manifest_count,'coverage':coverage,'product_coverage':product_coverage,'products':products,'observation_coverage':'unknown; no usable swath/cloud masks','calibration':calibration}
+  if mode=='sp':source_context(summary)
+  elif regional_validation:summary['source_field_audit']=regional_validation.get('source_field_audit');summary['calibration']['reference_versions']=regional_validation['calibration'].get('reference_versions',{})
   if is_pantanal:summary['comparison']=None
   ref=publish(region['id']+'-'+mode+'-dashboard',summary)
-  compact=dict(ref,coverage=coverage,products=products,observations=observation_count,last_retrieval_utc=latest,calibration=calibration,validation=selected_ref,external_audit=audit_ref,comparison=summary['comparison'],residual_csv=residual_ref)
+  compact=dict(ref,coverage=coverage,products=products,observations=observation_count,last_retrieval_utc=latest,calibration=calibration,validation=selected_ref,external_audit=audit_ref,comparison=summary['comparison'],residual_csv=residual_ref,source_field_audit=summary.get('source_field_audit'))
   if validation:compact['evaluation_summary']={'selected_method':validation['selected_method'],'accepted':validation['accepted'],'outer':validation['partitions']['outer'],'external':validation['partitions']['external'],'gates':validation['gates']}
   return compact
 

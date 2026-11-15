@@ -29,8 +29,9 @@ def stream_inputs(directories,bbox,processing,spool,pantanal=False):
    key=(r['satellite'],r['acq_date'],t,lat,lon)
    if key in seen:continue
    seen.add(key);total+=1
-   out={'latitude':lat,'longitude':lon,'date_utc':r['acq_date'],'time_utc':t,'product':m['source'],'platform':r['satellite'],'confidence':r.get('confidence',''),'frp_mw':r.get('frp',''),'daynight':r.get('daynight',''),'source':str(path)}
-   month_rows[r['acq_date'][:7]].append(json.dumps(out,separators=(',',':')))
+   if spool is not None:
+    out={'latitude':lat,'longitude':lon,'date_utc':r['acq_date'],'time_utc':t,'product':m['source'],'platform':r['satellite'],'confidence':r.get('confidence',''),'frp_mw':r.get('frp',''),'daynight':r.get('daynight',''),'source':str(path),'source_version':r.get('version',''),'detection_type':r.get('type','')}
+    month_rows[r['acq_date'][:7]].append(json.dumps(out,separators=(',',':')))
    for area in (['all','north'if lat>=-19 else'south']if pantanal else['all']):
     k=(r['acq_date'],area);counts[k]+=1;cells[k].add(grid_cell(str(lat),str(lon)))
   assert delivered==m['rows'],path

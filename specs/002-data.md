@@ -28,3 +28,7 @@ Source availability: [FIRMS](https://firms.modaps.eosdis.nasa.gov/api/data_avail
 - Keep raw regional history available when a gate fails. Show the failed gate and candidate residuals; do not silently switch candidates.
 - Version and hash any externally served observation shard at an immutable repository commit. Integrity-check decompressed bytes before map/export use. Preserve previously published local URLs.
 - Publish an SP/NRT join only after actual same-sensor/window overlap and a separate evaluation protocol; availability adjacency alone is insufficient.
+
+## Source-field preservation
+
+Preserve each reported `version` and `type` string in current observation shards/CSVs, while retaining immutable legacy files. Enrich frozen records only by joining their exact source manifest and observation identity, checking the source SHA and original normalized fields. Current daily version/type counts must sum to the same native counts and follow the same date/area mask. Include source versions in monthly/replay exports and benchmark versions separately. Do not infer uniform MODIS processing vintage from the source name, or treat all thermal types as independently classified vegetation fires. MODIS type-code definitions have a verified NASA source; VIIRS code interpretation remains explicitly unverified. Keep all types in the frozen metric and do not silently refit or filter the accepted record.

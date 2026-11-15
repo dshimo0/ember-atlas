@@ -31,7 +31,7 @@ class RegionalProtocolTests(unittest.TestCase):
    root=Path(t);path=root/'source';path.mkdir();spool=root/'spool';spool.mkdir();payload=b'latitude,longitude,acq_date,acq_time,satellite\n38,-120,2020-01-01,0030,Terra\n38,-120,2020-01-01,0030,Terra\n';(path/'a.csv').write_bytes(payload)
    (path/'a.json').write_text(json.dumps({'source':'MODIS_SP','processing_class':'SP','bbox':'-125,32,-114,42.5','start':'2020-01-01','end':'2020-01-02','sha256':hashlib.sha256(payload).hexdigest(),'rows':2,'retrieved_at':'2026-11-15T00:00:00Z'}))
    daily,manifests,covered,total=stream_inputs([path],[-125,32,-114,42.5],'SP',spool)
-   self.assertEqual(total,1);self.assertEqual([r['native']for r in daily],[1,0]);self.assertEqual(len((spool/'2020-01.jsonl').read_text().splitlines()),1)
+   self.assertEqual(stream_inputs([path],[-125,32,-114,42.5],'SP',None),(daily,manifests,covered,total));self.assertEqual(total,1);self.assertEqual([r['native']for r in daily],[1,0]);self.assertEqual(len((spool/'2020-01.jsonl').read_text().splitlines()),1)
  def test_covering_query_preserves_original_fields_and_filters_only_analysis_mask(self):
   from source_masks import subset
   payload=b'latitude,longitude,acq_date,acq_time,satellite,frp\n38,-120,2020-01-01,0030,Terra,12.50\n10,-60,2020-01-01,0030,Terra,8.2\n'

@@ -2,6 +2,7 @@
 import csv,gzip,hashlib,io,json,os,math
 from datetime import datetime,timezone
 from decimal import Decimal,ROUND_FLOOR
+from collections import Counter
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 ROOT=Path(__file__).resolve().parents[1];BASE=os.environ.get('BASE_URL','http://127.0.0.1:8930').rstrip('/')
@@ -36,10 +37,13 @@ with sync_playwright()as p:
     bounds=json.loads(page.locator('#map').get_attribute('data-bounds'));west,south,east,north=r['bounds']
     assert bounds[0][0]<=south and bounds[0][1]<=west and bounds[1][0]>=north and bounds[1][1]>=east,(r['id'],bounds)
     source=readref(summary['observation_shards'][month])['observations'];start=page.locator('#start').input_value();end=page.locator('#end').input_value();source=[x for x in source if start<=x['date_utc']<=end]
-    rows=csvrows(download(page,'#download'));assert len(rows)==len(source)>0;assert ids(rows)==ids(source)
+    rows=csvrows(download(page,'#download'));assert len(rows)==len(source)>0;assert ids(rows)==ids(source);assert Counter((x['product'],x.get('source_version',''),x.get('detection_type',''))for x in rows)==Counter((x['product'],x.get('source_version',''),x.get('detection_type',''))for x in source)
     assert all(west<=float(x['longitude'])<=east and south<=float(x['latitude'])<=north for x in rows)
     ag=csvrows(download(page,'#aggregateDownload'));selected=[x for x in ag if x['month']==month]
     assert sum(int(x['native_detections'])for x in selected)==len(rows)
+    if summary.get('schema')=='ember-regional-dashboard-3':
+     for x in selected:
+      matching=[o for o in rows if o['product']==x['product']];assert json.loads(x['reported_source_versions'])==dict(Counter(o.get('source_version')or'not provided'for o in matching));assert json.loads(x['reported_detection_types'])==dict(Counter(o.get('detection_type')or'not provided'for o in matching))
     product=page.locator('#map').get_attribute('data-grid-product')
     product_rows=[x for x in rows if x['product']==product]
     occupied={(x['date_utc'],int((Decimal(str(x['latitude']))/Decimal('.05')).to_integral_value(rounding=ROUND_FLOOR)),int((Decimal(str(x['longitude']))/Decimal('.05')).to_integral_value(rounding=ROUND_FLOOR)))for x in product_rows}
@@ -64,7 +68,7 @@ with sync_playwright()as p:
    summary=readref(r['datasets']['sp'])
    if summary['coverage']['end']<'2025-01-31':continue
    page.goto(BASE+'/demo?region='+r['id']+'&month=2025-01&start=2025-01-01&end=2025-01-31&view=replay');stable(page,r['id'])
-   source=readref(summary['observation_shards']['2025-01'])['observations'];rows=csvrows(download(page,'#download'));assert ids(rows)==ids(source)
+   source=readref(summary['observation_shards']['2025-01'])['observations'];rows=csvrows(download(page,'#download'));assert ids(rows)==ids(source);assert Counter((x['product'],x.get('source_version',''),x.get('detection_type',''))for x in rows)==Counter((x['product'],x.get('source_version',''),x.get('detection_type',''))for x in source)
    ag=csvrows(download(page,'#aggregateDownload'));assert sum(int(x['native_detections'])for x in ag)==len(rows)
    v=readref(summary['validation']);month=next((x for x in v['monthly']if x['month']=='2025-01'),None);supported=bool(v['accepted']and month and month['adjusted']is not None)
    assert bool(page.locator('#comparison [data-series=adjusted]').count())==supported
@@ -129,6 +133,8 @@ with sync_playwright()as p:
    assert int(f.locator('#map').get_attribute('data-observations'))>0
    assert f.locator('#map .leaflet-local-geography-pane canvas').count()>0
   fallback.close()
-  report['checks'].append({'viewport':viewport,'replay_cutoff_sources':True,'benchmark_shared_state':link,'replay_csv_matches_display':True,'new_export_manifest_hashes':True,'no_subarea_transfer':True,'zero_vs_missing':True,'full_modis_archive_months':archive_months,'early_unavailable_viirs_blank':True,'unretrieved_map_sensor_not_zero':True,'world_map_links':8,'world_map_keyboard_links_navigate':8,'all_regions_tile_fallback':True,'javascript_errors':errors,'application_http_errors':http_errors,'unexpected_console_errors':console_errors})
+  if registry['regions'][0]['datasets']['sp']['coverage']['end']>='2025-01-31':
+   unavailable=b.new_context(viewport={'width':w,'height':h});unavailable.route('**/raw.githubusercontent.com/**',lambda route:route.abort());unavailable.route('**/data/*observations-2025-01*.gz',lambda route:route.abort());u=unavailable.new_page();u.goto(BASE+'/?region=pantanal&month=2025-01&start=2025-01-01&end=2025-01-31');u.wait_for_function("document.querySelector('#mapLoading').textContent.includes('Observation file unavailable')",timeout=60000);assert u.locator('#map').get_attribute('data-grid-available')=='false';assert u.locator('#map').get_attribute('data-cell-days')=='';assert u.locator('#download').is_disabled()and u.locator('#downloadCells').is_disabled();assert not u.locator('#aggregateDownload').is_disabled();unavailable.close()
+  report['checks'].append({'viewport':viewport,'replay_cutoff_sources':True,'benchmark_shared_state':link,'replay_csv_matches_display':True,'new_export_manifest_hashes':True,'no_subarea_transfer':True,'zero_vs_missing':True,'full_modis_archive_months':archive_months,'early_unavailable_viirs_blank':True,'unretrieved_map_sensor_not_zero':True,'world_map_links':8,'world_map_keyboard_links_navigate':8,'all_regions_tile_fallback':True,'unavailable_shard_is_not_zero':True,'javascript_errors':errors,'application_http_errors':http_errors,'unexpected_console_errors':console_errors})
  b.close()
 suffix='public'if BASE.startswith('https://')else'local';(ROOT/f'submission/eight-region-check-{suffix}.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))

@@ -4,9 +4,9 @@
 
 The versioned registry derives from `data/region-definitions-v1.json`. All eight presets are explicit WGS84 rectangles. The Pantanal study area preserves `[-59,-23,-54,-15]` in west/south/east/north order. Definitions and actual bounds are displayed rather than implying official biome or administrative boundaries. A different mask requires recomputation and evaluation.
 
-Raw FIRMS CSVs retain byte hashes, requested product/bbox/window, retrieval UTC, delivered rows and processing class in adjacent manifests. The normalizer verifies checksums, requested dates, coordinates, acquisition times and row counts. It deduplicates product/platform/UTC time/coordinates while preserving each source-manifest reference. Public dataset inventories link those inputs; monthly observation shards and daily summaries are immutable checksum-verified derivatives. An original 2020–2024 Pantanal shard retains its original source dataset hash inside the expanded inventory.
+Raw FIRMS CSVs retain byte hashes, requested product/bbox/window, retrieval UTC, delivered rows and processing class in adjacent manifests. The normalizer verifies checksums, requested dates, coordinates, acquisition times and row counts. It deduplicates product/platform/UTC time/coordinates while preserving each source-manifest reference. Public dataset inventories link those inputs; monthly observation shards and daily summaries are immutable checksum-verified derivatives. Original files stay immutable. Current enriched shards preserve every frozen record and add literal source fields through verified joins to the original CSVs.
 
-Products are MODIS C6.1 SP (Terra/Aqua pooled), NOAA-20 VIIRS 375 m SP, and separate MODIS/NOAA-20 NRT snapshots. The source availability table is preserved in `data/source-availability-2026-11-15.csv` (UTC). Earliest service availability and published retrieval completeness are different facts. The SP archive release ends in 2024 even where NASA currently serves later data.
+Products are FIRMS MODIS_SP (Terra/Aqua pooled; literal reported versions retained), NOAA-20 VIIRS 375 m SP, and separate MODIS/NOAA-20 NRT snapshots. The source availability table is preserved in `data/source-availability-2026-11-15.csv` (UTC). Earliest service availability and published retrieval completeness are different facts. The original adjustment domain ends in 2024; raw SP coverage is listed independently in the current regional registry.
 
 ## Quantities and missingness
 
@@ -38,17 +38,17 @@ The scenario cutoff is derived from the end of the verified training window: **J
 
 Every replay CSV month retains source, adjustment, factor, cutoff/scenario, value, separate benchmark, dates, retrieval status and dataset hash. Missing post-cutoff calibration remains unavailable. There is no sum or average of overlapping products. Native observations and spatial occupancy remain sensor-specific.
 
-Replay historical context uses complete earlier same-calendar-month values in the paired evaluation domain (2020–2024), excluding the target and future years and requiring at least three. Before the cutoff the baseline entries are observed MODIS; after it they use adjusted VIIRS where supported. Factors are trained before the scenario cutoff. The as-of rule concerns acquisition-month chronology. All values use the current retrieved SP processing vintage; the replay does not reconstruct historical publication latency or past processing revisions. Older MODIS is observational archive context, not additional evidence for cross-era comparability. Platform mix and usable observation conditions can differ in the older archive. Raw sensor medians are descriptive within-product comparisons and show their actual years/n; they are not causal attribution.
+Replay historical context uses complete earlier same-calendar-month values in the published evaluation domain (2020–2024 for Pantanal; through July 2026 for the newly evaluated regions), excluding the target and future years and requiring at least three. Before the cutoff the baseline entries are observed MODIS; after it they use adjusted VIIRS where supported. Factors are trained before the scenario cutoff. The as-of rule concerns acquisition-month chronology. All values use the current retrieved SP records; uniform processing vintage is unverified; the replay does not reconstruct historical publication latency or past processing revisions. Older MODIS is observational archive context, not additional evidence for cross-era comparability. Platform mix and usable observation conditions can differ in the older archive. Raw sensor medians are descriptive within-product comparisons and show their actual years/n; they are not causal attribution.
 
 ## Other regions and NRT
 
-The seven additional study areas have verified common-grid MODIS/NOAA-20 SP comparison for their published matched window. They have no multi-year regional fit/holdout, so adjustment and continuity replay are disabled. Pantanal north/south masks retain their own raw activity and prior-year medians but do not inherit full-area calibration. Arbitrary custom polygons and biome masks are not published.
+The seven additional study areas have 79 complete paired SP months, January 2020–July 2026. Each independently met the registered local fit/evaluation gates and publishes its own selected quarterly factors, never the Pantanal factors. Pantanal north/south masks retain their own raw activity and prior-year medians but do not inherit full-area calibration. Arbitrary custom polygons and biome masks are not published.
 
 Recent detections are separate NRT datasets with actual product names, UTC start/end, last retrieval and partial-month status. Do not compare seven NRT days against an entire historical month. NRT historical comparison is withheld. Joining NRT and SP requires matched revisions/overlap, identical geometry/grid/windows, quality and duplicate/revision handling, and independent evaluation of the processing-level transition. None of those joins is assumed here.
 
 ## Source archive packaging
 
-The new original CSVs and adjacent retrieval manifests are preserved byte-for-byte in deterministic archives under `data/source-archives/`, with a SHA-256 index covering every archive member. `python scripts/source_archives.py unpack` restores the exact `data/history/` and `data/regions/` paths recorded in observation provenance. Unpacking refuses to overwrite changed existing source files. Regional building and resumed ingestion invoke this reconstruction automatically. The original `data/matched` files and original snapshot are retained unchanged. Packaging keeps the Git review manageable without omitting raw evidence.
+The new original CSVs and adjacent retrieval manifests are preserved byte-for-byte in deterministic archives under `data/source-archives/`, with a SHA-256 index covering every archive member. `python scripts/source_archives.py unpack` restores the exact `data/history/`, `data/regions/` and original covering-query paths recorded in observation provenance. Unpacking refuses to overwrite changed existing source files. Regional building and resumed ingestion invoke this reconstruction automatically. The original `data/matched` files and original snapshot are retained unchanged. Packaging keeps the Git review manageable without omitting raw evidence.
 
 ## Registered regional expansion protocol
 
@@ -67,3 +67,32 @@ Pantanal's 19 fresh months can audit extrapolation but do not meet the separatel
 ### SP/NRT availability audit
 
 [Processing-transition audit](../web/data/processing-transition.json) derives same-sensor temporal intersection from the captured NASA availability table. As captured, MODIS SP ends August 2026 and its NRT starts September; NOAA-20 SP ends July and NRT starts August. There is no coincident processing-class window. No empirical SP/NRT correction or joined series is supported. Preserve actual NRT retrieval vintages; when SP later covers those acquisition dates, retrieve the identical geometry and windows, evaluate each sensor/product pair, and define a new independent acceptance protocol before joining them. A temporal gap cannot be treated as paired evaluation.
+
+## Literal source versions and thermal-source flags
+
+The NASA download page advertises MODIS Collection 6.1, but observed API rows include literal version strings such as `6.03` and `61.03`. They are retained without rewriting or inferring that these labels establish a uniform processing vintage. Independent interpretation/normalization of reported version transitions remains unverified. The comparison reference is the actual MODIS_SP archive as delivered, not an independently established homogeneous collection or ground truth.
+
+All reported thermal-source types remain in the frozen count/grid metric. NASA documents MODIS flags 0 presumed vegetation fire, 1 active volcano, 2 other static land source and 3 offshore. VIIRS raw codes are retained without asserting an independently validated mapping. Missing NRT type fields stay blank. These flags do not establish fire-event identity. Source counts by type are native-detection counts, not additive shares of occupied cell-days.
+
+For the frozen September 2024 Pantanal case, raw MODIS flags are 23,368 type 0 and 28 type 2; VIIRS reports 101,263 type 0, 4 type 2 and 392 type 3. Totals remain 23,396/101,659; the published 5,819/8,809 cell-days and frozen factors are unchanged. Additional source fields are joined back to each original frozen record using its exact source manifest and observation identity, with SHA and original-field checks. No existing snapshot or factor file is overwritten. Every current observation CSV, daily attribute total and monthly export retains literal source information.
+
+Verified source definitions (HTTP 200, 2026-11-15 UTC): [NASA attributes](https://www.earthdata.nasa.gov/data/tools/firms/active-fire-data-attributes-modis-viirs), [FIRMS FAQ](https://www.earthdata.nasa.gov/data/tools/firms/faq), [NASA archive](https://firms.modaps.eosdis.nasa.gov/download/). Historical statistics describe reported activity and do not independently remove processing-vintage or source-type effects.
+
+## Regional evaluation
+
+<!-- REGIONAL-EVALUATION:START -->
+| Study area | Inner choice | Outer MAE: raw → choice (n) | Fresh MAE: raw → choice (n) | Fresh signed bias | Published adjustment |
+| --- | --- | ---: | ---: | ---: | --- |
+| Pantanal | seasonal | 1,021.7 → 199.7 (24) | 399.4 → 70.8 (19) | 67.4 | frozen seasonal through 2024-12-31 |
+| Southern Amazon | seasonal | 4,584.5 → 567.5 (24) | 1,428.4 → 168.7 (19) | 61.5 | seasonal through 2026-07-31 |
+| Cerrado | seasonal | 3,826.8 → 506.5 (24) | 2,641.7 → 322.1 (19) | 116.5 | seasonal through 2026-07-31 |
+| Gran Chaco | seasonal | 3,941.8 → 405.8 (24) | 2,923.7 → 213.9 (19) | 97.5 | seasonal through 2026-07-31 |
+| California | seasonal | 945.1 → 124.1 (24) | 977.7 → 146.0 (19) | 124.9 | seasonal through 2026-07-31 |
+| Southeastern Australia | seasonal | 1,453.3 → 228.9 (24) | 1,604.0 → 147.8 (19) | 13.8 | seasonal through 2026-07-31 |
+| Iberian Peninsula | seasonal | 738.9 → 71.5 (24) | 794.6 → 123.0 (19) | -72.8 | seasonal through 2026-07-31 |
+| Siberia | seasonal | 5,521.3 → 824.5 (24) | 5,080.4 → 850.0 (19) | 303.9 | seasonal through 2026-07-31 |
+
+Units: occupied cell-days/month; full named study rectangle, SP only. Inner choice uses 2022 after fitting 2020–2021; refit uses 2020–2022. Outer: 2023–2024, including the previously published September 2024; the artifact also reports the sensitivity excluding that month. Fresh: January 2025–July 2026, excluded from fitting and selection. Pantanal retains the original publication regardless of the new audit. A failed regional gate withholds adjustment. MODIS is the comparison reference, not ground truth.
+<!-- REGIONAL-EVALUATION:END -->
+
+The literal MODIS label split is systematic in this archive: 6.03 for training, 61.03 for outer/fresh evaluation. Source-field audit files record native counts by product/version/type and split. Factors target the as-delivered training MODIS_SP scale; holdout comparison uses the as-delivered later reference. Numerical agreement does not isolate sensor effects or establish homogeneous processing continuity. The monthly replay remains an explicitly labeled scenario.

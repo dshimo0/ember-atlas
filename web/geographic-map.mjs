@@ -90,7 +90,7 @@ export function createGeographicMap(element, geography) {
         if(!(modis?document.getElementById('layerModis').checked:document.getElementById('layerViirs').checked))continue;
         const marker=(modis?L.circleMarker:(latlng,options)=>new DiamondMarker(latlng,options));
         const tooltip=document.createElement('div');
-        for(const [label,value] of [['Product',r.product],['Platform',r.platform],['Acquired',r.date_utc+' '+r.time_utc.slice(0,2)+':'+r.time_utc.slice(2)+' UTC'],['FRP (MW)',r.frp_mw],['Confidence',r.confidence],['Day/night',r.daynight],['Coordinates',r.latitude+', '+r.longitude],['Source',r.source]]){const line=document.createElement('div');line.textContent=label+': '+(value??'Unavailable');tooltip.append(line);}
+        for(const [label,value] of [['Product',r.product],['Platform',r.platform],['Acquired',r.date_utc+' '+r.time_utc.slice(0,2)+':'+r.time_utc.slice(2)+' UTC'],['FRP (MW)',r.frp_mw],['Confidence',r.confidence],['Reported source version',r.source_version||'Not provided'],['Reported thermal type',r.detection_type||'Not provided'],['Day/night',r.daynight],['Coordinates',r.latitude+', '+r.longitude],['Source',r.source]]){const line=document.createElement('div');line.textContent=label+': '+(value??'Unavailable');tooltip.append(line);}
         marker([r.latitude, r.longitude], {renderer:sensorRenderer,radius: modis ? 2.7 : 3.5, color: modis ? '#6e3b16' : '#15677c', weight: modis ? .6 : 1.1, fillColor: modis ? '#e6802a' : '#66c9da', fillOpacity: modis ? .85 : .28, product: r.product})
           .bindTooltip(tooltip,{className:'observation-tooltip'}).bindPopup(tooltip.cloneNode(true)).addTo(pointLayer);
       }

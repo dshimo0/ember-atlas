@@ -31,7 +31,9 @@ export function aggregateMonth(index, month, product, state) {
   const complete = expected > 0 && rows.length === expected && from === month + '-01' && to === monthEnd(month);
   const native = available ? rows.reduce((n, r) => n + r.native, 0) : null;
   const cells = available ? rows.reduce((n, r) => n + r.cells, 0) : null;
-  return {month, product, from, to, expected, retrieved: rows.length, native, cells, complete,
+  const source_versions={},detection_types={};
+  for(const r of rows)for(const [field,out]of [['source_versions',source_versions],['detection_types',detection_types]])for(const [key,n]of Object.entries(r[field]||{}))out[key]=(out[key]||0)+n;
+  return {source_versions,detection_types,month, product, from, to, expected, retrieved: rows.length, native, cells, complete,
     status: !available ? 'Data unavailable' : !complete ? 'Partial month' : native === 0 ? 'No detections recorded' : 'Complete month'};
 }
 export function adjustment(row, state, validation) {
@@ -51,7 +53,7 @@ export function historicalBaseline(index, month, product, state, validation) {
   for (const year of years.filter(y => y < +month.slice(0, 4))) {
     const m = year + month.slice(4);
     const r = aggregateMonth(index, m, product, {...state, start: m + '-01', end: monthEnd(m)});
-    if (r.complete) entries.push({year, value: r.cells});
+    if (r.complete) entries.push({year, value: r.cells,source_versions:r.source_versions});
   }
   if (entries.length < 3) return null;
   const sorted = entries.map(e => e.value).sort((a, b) => a - b);
@@ -65,14 +67,14 @@ export function filterObservations(rows, month, state) {
 }
 export function gridCell(value) { return Math.floor(Math.round(value * 1e6) / 50000); }
 export function csv(headers, rows) { return [headers, ...rows].map(row => row.map(v => '"' + String(v ?? '').replaceAll('"', '""') + '"').join(',')).join('\r\n'); }
-export const OBSERVATION_COLUMNS = ['latitude', 'longitude', 'date_utc', 'time_utc', 'product', 'platform', 'confidence', 'frp_mw', 'daynight', 'source', 'snapshot_sha256'];
+export const OBSERVATION_COLUMNS = ['latitude', 'longitude', 'date_utc', 'time_utc', 'product', 'platform', 'confidence', 'frp_mw', 'daynight', 'source', 'snapshot_sha256','source_version','detection_type'];
 export function observationCSV(rows, snapshot) { return csv(OBSERVATION_COLUMNS, rows.map(r => OBSERVATION_COLUMNS.map(k => k === 'snapshot_sha256' ? snapshot : r[k]))); }
 export function aggregateCSV(index, state, validation, snapshot) {
-  const columns = ['month','area','product','from_utc','through_utc','native_detections','occupied_cell_days','retrieved_days','selected_days','retrieval_status','complete_month','metric','unit','method','observation_coverage','calibration','factor','adjusted_modis_reference_cell_days','snapshot_sha256','region','processing_class','calibration_method'];
+  const columns = ['month','area','product','from_utc','through_utc','native_detections','occupied_cell_days','retrieved_days','selected_days','retrieval_status','complete_month','metric','unit','method','observation_coverage','calibration','factor','adjusted_modis_reference_cell_days','snapshot_sha256','region','processing_class','calibration_method','reported_source_versions','reported_detection_types'];
   const rows = [];
   for (const month of monthsBetween(state.start, state.end)) for (const product of selectedProducts(state.sensor,state.mode)) {
     const r = aggregateMonth(index, month, product, state), a = adjustment(r, state, validation);
-    rows.push([month,state.area,product,r.from,r.to,r.native,r.cells,r.retrieved,r.expected,r.status,r.complete,'occupied cells per UTC day summed over selected dates','cell-days','ember-1','unknown',a ? 'supported full study area' : 'unavailable',a?.factor,a?.value,snapshot,state.region||'pantanal',(state.mode||'sp').toUpperCase(),a?.method]);
+    rows.push([month,state.area,product,r.from,r.to,r.native,r.cells,r.retrieved,r.expected,r.status,r.complete,'occupied cells per UTC day summed over selected dates','cell-days','ember-1','unknown',a ? 'supported full study area' : 'unavailable',a?.factor,a?.value,snapshot,state.region||'pantanal',(state.mode||'sp').toUpperCase(),a?.method,r.native===null?null:JSON.stringify(r.source_versions),r.native===null?null:JSON.stringify(r.detection_types)]);
   }
   return csv(columns, rows);
 }

@@ -1,30 +1,26 @@
 # Scientific and product release review
 
-[Explore](https://ember-atlas-opal.vercel.app/) · [Pantanal replay](https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&benchmark=1&month=2024-09) · [Pitch](https://ember-atlas-opal.vercel.app/pitch)
+[Explore](https://ember-atlas-opal.vercel.app/) · [Replay](https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&benchmark=1&month=2024-09&start=2020-01-01&end=2024-12-31) · [Pitch](https://ember-atlas-opal.vercel.app/pitch)
 
-Input branch `work` at `f695d77`. The release retains static native modules, Leaflet, the existing host and original frozen scientific inputs. Tested source/deployment identity is recorded in [transition-release.json](../submission/transition-release.json).
+The continuation preserves branch `work`, the existing static/Leaflet stack and every original frozen scientific file. [Release identity](../submission/transition-release.json) records the tested source/data commits and actual deployment. Documentation is not used as implementation proof.
 
-| Finding | Implemented result | Verification |
+| Finding | Current implementation | Executed / pending evidence |
 | --- | --- | --- |
-| No explicit continuity exhibit | January 2023 replay; observed MODIS before and frozen adjusted VIIRS after; separate observed holdout benchmark | Cutoff source/table/CSV and toggle restoration checks |
-| Seasonal only compared with unadjusted | Training-only scalar baseline, identical area/months, MAE/bias/monthly residuals and peak-six test | Python/JS cross-recomputation and immutable evaluation |
-| Better scalar could be hidden | Explicit scalar MAE 175.3 versus seasonal 199.7; no holdout-based method reselection | First validation card, methods table and pitch |
-| Map was a sampled point layer | Full-data occupied days/cell for named sensor; optional sampled points | Cell CSV sum equals map and common-grid totals |
-| One observed study area | Eight ordered presets with actual geometry and source-specific SP/NRT snapshots | All eight bounds, observations and matching CSVs on desktop/mobile |
-| No older public MODIS | Full requested November 2000–December 2019 backfill combined with unchanged 2020–2024 inputs | 1,400 retrieved windows; MODIS 8,827 retrieved days through 2024-12-31 |
-| Processing-level ambiguity | Separate NRT UTC window, retrieval time and partial-month view; no join | Product suffix, clipped dates and unsupported calibration checks |
-| Historical hindsight | Replay baseline uses earlier complete matched-domain months only; target/future excluded | Source-tagged prior entries and model regression cases |
-| Regional calibration leakage | Seven new regions and Pantanal subareas remain raw; no factor without local multi-year evaluation | Model and browser withholding checks |
-| Pitch lacked the scientific transition story | Replay → independent fitting-period benchmark → scalar comparison → peak error → eight-area world map | Direct slide links, eight Explore links and nine-page print |
+| Seven areas had one SP month | All eight now have 79 complete paired SP months; Pantanal MODIS extends to November 2000 | Full snapshot/native/grid/type/version reconciliation; current coverage inventory |
+| Calibration could leak between masks | Each new region has its own registered inner choice and fixed refit; all three independent gates passed | Protocol and regenerated regional artifacts; subarea/NRT withholding checks |
+| Scalar comparison could be hidden | All three candidates and every residual remain visible, including stronger alternatives in some evaluation periods | Artifact/browser metric reconciliation; no outcome-based method switch |
+| Implicit source continuity | Explicit January 2023 replay and actual continuing MODIS benchmark | Cutoff fields/CSV, URL restoration and benchmark toggle |
+| Source metadata was lost in normalized rows | Literal version/type restored from original CSVs, preserving all original fields and counts | SHA/identity joins; 25 Python tests; source-field verification artifact |
+| Uniform reference label was not established | Training reports 6.03, holdout/fresh 61.03; split audit is beside the headline | Native counts by label and split; physical vintage homogeneity remains unverified |
+| Thermal records could be read as fire events | All reported types remain in the frozen metric; source flags and native counts are accessible | Point CSV/tooltips, monthly source fields; independent classification remains unavailable |
+| Loading failure could resemble zero | Unavailable observation files leave occupancy blank/unavailable; aggregates and provenance remain usable | Forced-shard-failure browser check, distinct from actual retrieved zero |
+| Maps and exports could diverge | Shared region/mask/UTC/product filters; full-data occupied days/cell | Point identity, row counts, cell sums and CSV/manifest hashes |
+| World-map SVG links were fragile | Native href extraction supports SVG keyboard activation | All eight links exercised on desktop/mobile |
+| First screen was crowded | Compact header/controls; selected result precedes map on mobile; geography and comparison share desktop row | Desktop/mobile screenshots and first-viewport map measurement |
+| Pitch lacked evidence | Same frozen figures, eight-area coverage/status, all candidate results, peak residuals and source-version qualification | Keyboard/direct loads, nine-page print and actual recording |
 
-The scalar is a stronger baseline on the existing holdout, which is evaluation evidence. Seasonal remains the frozen publication rule. Six peak months are selected by observed MODIS activity, not residuals. Their scalar/seasonal MAE is 404.6/534.6 cell-days/month. September seasonal replay remains 16.2% below MODIS. No result is global, ground-truth or detection accuracy.
+Pantanal remains 80.5% lower MAE versus unadjusted common-grid VIIRS on 24 holdout months: 1,021.7 → 199.7. The scalar is stronger there at 175.3. September 2024 seasonal output is 4,879.1 versus MODIS 5,819, 16.2% below the reference. The 19 fresh months give raw/scalar/seasonal MAE 399.4/89.7/70.8; seasonal bias +67.4. The original 2020–2024 publication domain remains unchanged.
 
-New source inputs are stored in 35 deterministic archives containing 3,032 original CSV/manifest files. Member hashes and refusal to overwrite changed inputs preserve provenance and a reviewable Git diff. Dataset summaries, shards, registry and evaluation are versioned. The original snapshot, validation, daily fit input and factors remain unchanged.
+[Regional results](../submission/regional-evaluation.md) record each area's distinct fit and actual gates. All are agreement against the MODIS_SP archive as delivered, not ground-truth accuracy or isolated sensor effects. Source labels change across the split; all reported thermal types remain included. Current source-vintage interpretation, usable observation opportunity, pre-2020 history outside Pantanal, physical-device testing and human rehearsal remain open.
 
-Execution evidence: [eight-region local checks](../submission/eight-region-check-local.json), [public checks](../submission/eight-region-check-public.json), [coverage](../submission/eight-region-coverage.md), [integrity](../submission/integrity-check.json), and screenshots named `region-…-desktop/mobile.png` plus `transition-demo/pitch/calendar-…png`. Fifteen Python tests and nineteen Node model cases cover the pipeline, scalar protocol, replay source, missingness, grid reconciliation and source archive recovery. Mobile is touch/viewport emulation. HTTPS uses system CA validation and system-validated proxy leaf pins for Chromium automation; production code includes no certificate bypass.
-
-Remaining open items: multi-year SP archive and independent regional calibration for seven areas; new outer evaluation for method selection; usable observation masks; ground truth; SP/NRT transition validation; arbitrary polygons/biome mask; physical-device testing; human roster/rehearsal and current official guide/media acceptance. Final terms and portal submission remain Team Owner responsibilities.
-
-## Pantanal expansion retest
-
-The added Pantanal SP source window is January 2025–July 2026: 19 complete paired months. Unadjusted/scalar/frozen-seasonal MAE is 399.4/89.7/70.8 cell-days/month; seasonal signed bias is +67.4. These diagnostic outputs do not extend the 2020–2024 adjustment domain. The registered requirement is 24 fresh complete months. All released observations and daily grid/native totals were reconciled against monthly shards; the evaluation was recomputed from daily evidence. The browser suite additionally checks the new January 2025 shard, sensor filtering, clipped manual dates and missing adjustment. See the current regional-artifact and browser reports for execution identity. Other regional matched histories are still being acquired and are not represented as completed evaluation.
+Full archive reconciliation covers 16 region/processing datasets and all eight regional evaluations. Public workflow results must be checked in the current executed report after deployment. Official pages returned HTTP 503; media-format/eligibility/roster/terms/final submission remain Team Owner actions. No winning, operational-impact or partnership claim is made.

@@ -42,9 +42,13 @@ def main():
      derived={'source':product,'bbox':region_box,'start':str(first),'end':str(last),'retrieved_at':meta['retrieved_at'],'sha256':hashlib.sha256(content).hexdigest(),'rows':n,'pipeline_version':'ember-covering-mask-1','processing_class':mode.upper(),'derived_from':{'reference':str(parent),'sha256':meta['sha256'],'server_bbox':meta['bbox'],'source_delivered_rows':meta['rows']},'rule':'Inclusive WGS84 bbox/date filter; original field values retained; original covering CSV preserved.'}
      atomic_write(target,content);atomic_write(target.with_suffix('.json'),json.dumps(derived,indent=2).encode())
   time.sleep(.6);return None
+ def safe_run(job):
+  try:return run(job)
+  except Exception as error:
+   failure={'id':job[0],'product':job[1],'start':str(job[3]),'end':str(job[4]),'error':type(error).__name__+': '+str(error).replace(os.environ['FIRMS_MAP_KEY'],'[redacted]')};print('Window failed safely:',json.dumps(failure),flush=True);return failure
  print('Planned missing covering/direct windows:',len(jobs),flush=True);failures=[]
  with concurrent.futures.ThreadPoolExecutor(max_workers=a.workers)as pool:
-  for i,result in enumerate(pool.map(run,jobs),1):
+  for i,result in enumerate(pool.map(safe_run,jobs),1):
    if result:failures.append(result)
    if i%25==0:
     status={'planned':len(jobs),'completed':i,'failed':failures,'shared_query_masks':SOUTH};atomic_write(Path('data/shared-acquisition-progress.json'),json.dumps(status,indent=2).encode());print('Completed',i,'of',len(jobs),'failed',len(failures),flush=True)
