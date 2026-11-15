@@ -1,0 +1,49 @@
+{
+  "url": "https://ember-atlas-opal.vercel.app",
+  "routes": {
+    "/": 200,
+    "/demo": 200,
+    "/methods": 200,
+    "/about": 200,
+    "/pitch": 200
+  },
+  "assets": {
+    "app.js": {
+      "bytes": 57547,
+      "sha256": "eafe14d6993952ed3bf2c3d2e3fa87a84cdb1dc832ff07af23b77aeaade48256"
+    },
+    "presentation.mjs": {
+      "bytes": 3266,
+      "sha256": "18ca4346bb05f6f57dcc6d9064458548706ed01fae67aeafc75f7f2a58e108e0"
+    },
+    "locale-pt.mjs": {
+      "bytes": 59089,
+      "sha256": "f1e44b915ae4aa490ff3558e7b9cd2aa64bed3f6d2b4ab57c89eb5c372aacc55"
+    },
+    "evidence-charts.mjs": {
+      "bytes": 6897,
+      "sha256": "883ded5844e477512edbf812983f153570472fc1efc9bbced72d591f07d9fd8d"
+    },
+    "workspace-ui.css": {
+      "bytes": 19680,
+      "sha256": "f3882753d2995b2685d621fad64c93afc922c5ae46bbb5d1f5cfa8e9e27bb5c7"
+    },
+    "pitch-content.mjs": {
+      "bytes": 11204,
+      "sha256": "005983a93ff77832a5170a7d024c00bd12bb6a248305684b3a84a172a2a853bb"
+    },
+    "assets/ember-atlas-pitch.pdf": {
+      "bytes": 1125585,
+      "sha256": "6b23ac508462d543caf4000ff909b5ef18bfc8e24a256d6b86a952f734909322"
+    },
+    "assets/workflow-capture.mp4": {
+      "bytes": 857570,
+      "sha256": "90f6876bd057c801a303fec5837a8cc91d5a1a970132157f846376cb58166768"
+    },
+    "data/regions.json": {
+      "bytes": 112,
+      "sha256": "c1367d773a9f4952d2af8daa3711bc83cf6a20544e7e966409e973f34e73646c"
+    }
+  },
+  "anonymous": true
+}

@@ -89,5 +89,9 @@
     "No new data acquisition, calibration or ground-truth validation.",
     "Physical-device, assistive-technology and human rehearsal checks remain.",
     "Official submission/media/eligibility checks remain owner actions."
-  ]
+  ],
+  "later_workspace_update": {
+    "source_commit": "0ef44972f2433bc8651773f5849e72bfe2931f70",
+    "report": "submission/workspace-release.json"
+  }
 }

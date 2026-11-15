@@ -65,3 +65,7 @@ Shared navigation now includes a dedicated `/methods` route. The legacy methodol
 ## P2/P3 visual release
 
 The owner chose deeper presentation, not expanded science scope. Eight dated NASA true-color context cards link to the existing regional evidence; the pitch adds nine-section direct navigation. Local licensed typography and reduced-motion behavior improve readability without changing validation, data coverage or export calculations. See [visual-refinement.md](visual-refinement.md) and the executed `submission/visual-release.json`. The requested Windows-only backfill folder is unavailable here and remains an open review item pending accessible files.
+
+## Evidence workspace and bilingual presentation
+
+Actual holdout scatter, three-method residuals, interactive monthly history and common-axis selected-month comparison expose the existing evidence. Light/dark and EN/PT-BR settings support exploration without changing analytical state or raw exports. Public verification: `submission/workspace-release.json`. Canonical scientific artifacts and English submission materials remain authoritative. Portuguese domain review, physical devices and inaccessible owner backfill files remain open checks.

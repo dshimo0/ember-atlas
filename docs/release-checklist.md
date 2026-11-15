@@ -1,3 +1,5 @@
+Current evidence workspace: [workspace-release.json](../submission/workspace-release.json).
+
 Current P2/P3 presentation evidence: [visual-release.json](../submission/visual-release.json).
 
 # Release verification checklist
@@ -26,3 +28,6 @@ Commands: `python -m unittest discover -s tests`; `node --test tests/*.mjs`; `py
 
 - [x] P2/P3 typography, reduced-motion behavior, eight-area attributed context atlas and direct pitch rail verified publicly.
 - [ ] Owner local Windows backfill folder reviewed after an accessible copy is supplied.
+
+- [x] Five routes, two themes, two interface languages and two viewport sizes checked publicly; plot/month/map/export synchronization and language-invariant CSV verified.
+- [ ] Portuguese scientific wording reviewed by a native domain reviewer.
