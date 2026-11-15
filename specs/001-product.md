@@ -1,6 +1,6 @@
 # Product acceptance contract
 
-English static application with shared Explore, Guided demo, Pitch and Methods & data navigation. Preserve root and existing data/media links; `/`, `/demo`, `/pitch` support direct load, refresh and browser history. No framework migration, authentication or visitor-supplied FIRMS key.
+English static application with shared Explore, Guided demo, Pitch and Methods & data navigation. Preserve root and existing data/media links; `/`, `/demo`, `/methods`, `/about`, `/pitch` support direct load, refresh and browser history. No framework migration, authentication or visitor-supplied FIRMS key.
 
 | ID | Acceptance criterion |
 | --- | --- |
@@ -29,3 +29,14 @@ Source flags are one click from the selected comparison and present in observati
 ## About the team
 
 `/about` identifies Diego Shimohama as the sole creator, as confirmed by the owner. Main navigation and the final pitch section link to it. The creator card links to the owner-provided personal website, https://dshimo.vercel.app/, alongside GitHub and the project repository. The page has direct-load/refresh support, keyboard-accessible links, responsive layout and source/data credits. It makes no claim of additional members, credentials, partners or NASA affiliation. About content remains readable without JavaScript or loading analytical snapshots. Adding a supplied visual requires its original accessible asset; no substitute logo or portrait is fabricated.
+
+## P0/P1 experience redesign
+
+- P14 Navigation: primary links are Explore, Guided demo, Methods & data, About, Pitch. Mobile header height follows wrapped content; tap targets cannot overlap the page title. Direct `/methods` and legacy `/#methodology` preserve analytical selection.
+- P15 Guided journey: five source-backed scenes explain place, history, instruments, adjustment and evidence. Progress precedes the workspace; named steps, Previous/Next, keyboard arrows, restart, independent exploration and methods links are available. The same calendar moves into the historical scene; no independent calculation tree or synthetic measurement is introduced.
+- P16 Progressive detail: Explore opens on map/month/comparison, with extra filters and validation detail disclosed on demand. Scientific detail restores through `detail=scientific` and exposes existing metadata, tables and validation.
+- P17 Calendar: activity intensity is derived from the maximum currently displayed value, with a labeled scale. Compact display rounds numerical labels only; full export precision remains unchanged. Zero, unavailable, partial and unsupported adjustment retain distinct semantics.
+- P18 Methods: a separate experience presents acquisition, verification, aggregation, training-only adjustment, independent evaluation and historical context. Source dates come from the same selected registry entry; MAE, bias, residuals, factors, source flags and manifests remain inspectable.
+- P19 Pitch: nine sections use the same release artifacts, opening/closing editorial imagery, actual selected-month evidence, all three candidates and remaining peak error. Desktop uses a 16:9 stage; mobile scroll updates slide counter, navigation and URL. The regional map uses group semantics with individually accessible links.
+- P20 Imagery: local NASA editorial assets have source URLs, SHA-256, date/context and credits. Blue Marble is labeled a 2007 composite; the Pantanal true-color image is dated 2024-09-01 and never overlaid with synthetic detections or represented as the monthly metric. Other regions do not inherit Pantanal imagery.
+- P21 Verification: capture all five experiences at 375, 768 and 1440 px, all guide scenes, pitch evidence/closing, and a nine-page PDF. Test the audited navigation, number overflow, touch targets, semantic and scroll-progress defects, plus the established eight-region data/export suite. Automated accessibility checks do not establish complete WCAG conformance.

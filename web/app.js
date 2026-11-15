@@ -1,3 +1,4 @@
+import {scenes,sourceCards} from './experience.mjs';
 import {replayCutoff,supportsReplay,replayMonth,replayRows,replayBaseline,replayCSV,compareMethods} from './replay.mjs';
 import {loadRelease,loadDataset,verifiedJSON,sha256} from './data-loader.mjs';
 import {number,signed,yearsLabel,escapeHTML,compact} from './format.mjs';
@@ -12,13 +13,14 @@ let summary, validation, index, geography, geographicMap, selected = '2024-09', 
 const shardCache = new Map();
 const state = () => ({region:$('region').value||'pantanal',mode:$('dataMode').value,bounds:summary?.bounds,calibrationAvailable:!!validation?.accepted&&(validation.region||'pantanal')===summary?.region,area: $('area').value, sensor: $('sensor').value, start: $('start').value, end: $('end').value});
 let datasetToken=0,currentComparison,externalAudit;
-let view='replay',guideStep=1,pitchSlide=1,pitch,release,evaluation;
+let view='replay',guideStep=1,pitchSlide=1,pitch,release,evaluation,detail='general';
 const currentRoute=()=>location.pathname.replace(/\/$/,'')||'/';
-const allState=()=>({...state(),month:selected,view,benchmark:$('showBenchmark').checked,step:guideStep,slide:pitchSlide});
+const allState=()=>({...state(),month:selected,view,benchmark:$('showBenchmark').checked,step:guideStep,slide:pitchSlide,detail});
 const selectionKey = s => [s.region,s.mode,selected, s.area, s.sensor, s.start, s.end].join('|');
 function row(month, product, s = state()) { return aggregateMonth(index, month, product, s); }
 function publishedMetrics() {
   const improvement = evaluation.reduction;
+  $('validationQuick').innerHTML=`<strong>${validation.accepted&&improvement!==null?number(improvement,1)+'% lower monthly MAE vs raw VIIRS':'Adjustment unavailable'}</strong><span>Against MODIS · ${validation.adjusted.n} holdout months · ${yearsLabel(validation.holdout_years)} · ${release.registry.regions.find(r=>r.id===(validation.region||'pantanal'))?.name||'Pantanal'} full study area, SP</span>`;
   const versions=summary.calibration?.reference_versions;$('referenceVersions').href=summary.source_field_audit?'/data/'+summary.source_field_audit.file:'#methodology';$('referenceVersions').title='Reported training → holdout version labels. Uniform reference processing and isolated sensor effects are unverified.';$('referenceVersions').textContent=versions?`MODIS version: ${Object.keys(versions.training||{}).join(', ')} → ${Object.keys(versions.outer||{}).join(', ')}; continuity unverified.`:'';
   $('improvement').textContent = validation.accepted && improvement !== null ? `${number(improvement, 1)}%` : 'Unavailable';
   $('resultLabel').textContent = validation.accepted ? 'lower monthly MAE against MODIS' : 'Adjustment not supported by this release';
@@ -30,13 +32,14 @@ function publishedMetrics() {
   $('bias').textContent = `Signed monthly bias (VIIRS minus MODIS) moved from ${signed(validation.unadjusted.bias)} to ${signed(validation.adjusted.bias)} occupied cell-days. A negative value means the adjusted estimate is lower than MODIS on average. Residuals vary by season; all seasonal results are in the validation JSON.`;
   $('factors').textContent = (validation.selected_method==='scalar'?'Inner-selected scalar (repeated per quarter): ':validation.region?(validation.selected_method==='seasonal'?'Inner-selected quarter factors: ':'Regional fit unavailable: '):'Frozen quarter factors (VIIRS → MODIS reference): ') + Object.entries(validation.factors).map(([q, f]) => `Q${+q + 1}: ${number(f, 4)}`).join(' · ') + '.';
   $('provenance').textContent = `Snapshot ${summary.snapshot.file}; SHA-256 ${summary.snapshot.sha256}. ${number(summary.observation_count)} observations, ${summary.manifest_count} raw window manifests. Built ${summary.built_utc}. UI aggregates and monthly observation shards are checksum-verified derivatives of this same snapshot. Both export types cover the same released dates.`;
-  $('evidenceLinks').innerHTML = `<a href="/data/${summary.validation.file}">Versioned validation JSON ↗</a><a href="/data/${summary.snapshot.file}">Original pinned snapshot ↗</a><a href="/data/monthly_comparison.csv">Full-area monthly evidence CSV ↗</a><a href="/data/diagnostics.json">Sensitivity diagnostics ↗</a><a href="/data/dashboard.json">UI provenance index ↗</a>`;
+  $('evidenceLinks').innerHTML = `<a href="/data/${summary.validation.file}">Versioned validation JSON →</a><a href="/data/${summary.snapshot.file}">Original pinned snapshot →</a><a href="/data/monthly_comparison.csv">Full-area monthly evidence CSV →</a><a href="/data/diagnostics.json">Sensitivity diagnostics →</a><a href="/data/dashboard.json">UI provenance index →</a>`;
 }
 function calendar(s) {
   const months = monthsBetween(s.start, s.end), byYear = new Map();
   for (const m of months) { const y = m.slice(0, 4); if (!byYear.has(y)) byYear.set(y, []); byYear.get(y).push(m); }
   const header = ['<div class="calendar-corner"></div>', ...Array.from({length: 12}, (_, i) => `<div class="month-header">${new Date(Date.UTC(2024, i, 1)).toLocaleDateString('en-US', {month: 'short', timeZone: 'UTC'})}</div>`)];
   const selectedSensors = selectedProducts(s.sensor,s.mode);
+  const activityMax=Math.max(1,...months.flatMap(m=>{if(view==='replay'&&supportsReplay(s))return[replayMonth(index,m,s,validation).value??0];if(view==='reference')return[adjustment(row(m,'VIIRS_NOAA20_SP',s),s,validation)?.value??0];return selectedSensors.map(p=>row(m,p,s).cells??0);}));
   for (const [year, available] of byYear) {
     const phase=evaluationPhase(year+'-01',s,validation);
     header.push(`<div class="calendar-year"><div class="year-label"><strong>${year}</strong><small>${phase}</small></div>`);
@@ -51,8 +54,8 @@ function calendar(s) {
       const unavailable = values.every(r => !r.retrieved), partial = !unavailable && values.some(r => !r.complete);
       const unsupported=!unavailable&&!partial&&values.every(v=>v.cells===null);
       const symbol = unavailable ? '—' : partial ? '◐' : unsupported?'⊘':'✓';
-      const label = `${monthName(m)}. ${phase}. ${values.map(v => `${replay?SENSOR_NAMES[v.product]+' · '+replayed.adjustment:ref?'Adjusted VIIRS':SENSOR_NAMES[v.product]}: ${v.cells === null ? (v.retrieved?'Adjustment unavailable; source data retrieved':'Data unavailable') : `${number(v.cells)} cell-days, ${v.status}`}`).join('. ')}`;
-      header.push(`<button class="month ${unavailable ? 'missing' : partial ? 'partial' : ''}" data-month="${m}" data-source="${replay?replayed.source:values.map(v=>v.product).join(',')}" data-adjustment="${replay?replayed.adjustment:ref?(validation.selected_method||'frozen seasonal'):'none'}" aria-label="${label}" aria-pressed="${m === selected}"><em class="mobile-month">${new Date(m+'-01T00:00:00Z').toLocaleDateString('en-US',{month:'short',timeZone:'UTC'})}</em>${values.map(v => `<span class="${replay?(replayed.source==='MODIS_SP'?'m':'a'):ref?'a':v.product.startsWith('MODIS')?'m':'v'}">${replay?(replayed.source==='MODIS_SP'?'○ M':'▲ A'):ref?'▲ A':v.product.startsWith('MODIS')?'○ M':'◇ V'} <b>${compact(v.cells)}</b></span>`).join('')}<span class="coverage-symbol" aria-hidden="true">${symbol}</span></button>`);
+      const label = `${monthName(m)}. ${phase}. ${values.map(v => `${replay?SENSOR_NAMES[v.product]+' · '+replayed.adjustment:ref?'Adjusted VIIRS':SENSOR_NAMES[v.product]}: ${v.cells === null ? (v.retrieved?'Adjustment unavailable; source data retrieved':'Data unavailable') : `${number(v.cells,v.cells%1?1:0)} cell-days, ${v.status}`}`).join('. ')}`;
+      header.push(`<button class="month ${unavailable ? 'missing' : partial ? 'partial' : ''}" data-month="${m}" data-source="${replay?replayed.source:values.map(v=>v.product).join(',')}" data-adjustment="${replay?replayed.adjustment:ref?(validation.selected_method||'frozen seasonal'):'none'}" title="${label}" style="--activity:${Math.max(0,...values.map(v=>(v.cells??0)/activityMax))}" aria-label="${label}" aria-pressed="${m === selected}"><em class="mobile-month">${new Date(m+'-01T00:00:00Z').toLocaleDateString('en-US',{month:'short',timeZone:'UTC'})}</em>${values.map(v => `<span class="${replay?(replayed.source==='MODIS_SP'?'m':'a'):ref?'a':v.product.startsWith('MODIS')?'m':'v'}">${replay?(replayed.source==='MODIS_SP'?'○ M':'▲ A'):ref?'▲ A':v.product.startsWith('MODIS')?'○ M':'◇ V'} <b>${compact(v.cells)}</b></span>`).join('')}<span class="coverage-symbol" aria-hidden="true">${symbol}</span></button>`);
     }
     header.push('</div>');
   }
@@ -112,6 +115,7 @@ function comparison(s, values) {
 }
 function map(s, rows = []) {
   if (!geographicMap) return;
+  document.querySelector('.occupancy-key').hidden=loadedSelection!==selectionKey(s);
   const shown = geographicMap.update(rows, {...s, month:selected,retrieved_products:loadedSelection===selectionKey(s)?selectedProducts('both',s.mode).filter(p=>row(selected,p,s).retrieved>0):[],period_days:Math.round((Date.parse(scope(selected,s).to)-Date.parse(scope(selected,s).from))/86400000)+1,mapProduct:$('mapProduct').value});
   $('mapMonth').textContent = `${monthName(selected)} · ${s.area === 'all' ? summary.name+' study area' : AREAS[s.area]}`;
 
@@ -177,10 +181,10 @@ function render() {
   else if(view==='replay')$('mapProduct').value=selected<replayCutoff(validation)?'MODIS_SP':'VIIRS_NOAA20_SP';
   for(const o of $('mapProduct').options)o.disabled=s.sensor!=='both'&&o.value!==s.sensor;
   $('monthSelect').innerHTML=monthsBetween(s.start,s.end).map(m=>`<option value="${m}" ${m===selected?'selected':''}>${monthName(m)}</option>`).join('');
-  datasetLabels();replayView(s);baselineView(s, values); comparison(s, values); calendar(s); historyView(s); guideView();
+  datasetLabels();replayView(s);baselineView(s, values); comparison(s, values); calendar(s); historyView(s); guideView();experienceView(s);
   $('aggregateDownload').disabled = false;
   $('aggregateScope').textContent = `${s.start} → ${s.end} UTC · ${monthsBetween(s.start, s.end).length} months · selected area & sensors · missing values stay blank`;
-  if(currentRoute()!=='/pitch')loadObservations(s, values);
+  if(['/', '/demo'].includes(currentRoute()))loadObservations(s, values);
 }
 function datasetLabels(){
  const r=release.registry.regions.find(r=>r.id===state().region),mode=state().mode;
@@ -244,23 +248,40 @@ function externalView(){
  if(!externalAudit)return;const a=externalAudit,metrics=a.partitions.external;
  panel.innerHTML=`<h3>New out-of-time evidence · ${summary.name}</h3><p>January 2025–July 2026 · ${metrics.unadjusted.n} complete paired SP months · excluded from fitting and method selection.</p><table><thead><tr><th>Method</th><th>MAE</th><th>Signed bias</th></tr></thead><tbody>${Object.entries(metrics).map(([name,m])=>`<tr><th>${name}</th><td>${number(m.mae,1)}</td><td>${signed(m.bias)}</td></tr>`).join('')}</tbody></table><p>Complete paired support: ${a.monthly.filter(r=>a.train_years.includes(r.year)).length}/36 training months; ${a.selection.metrics.scalar.n}/12 inner-selection months; ${a.partitions.outer.unadjusted.n}/24 outer months; ${metrics.unadjusted.n}/19 fresh months.</p><p>Inner selection: ${a.selected_method||'unavailable (incomplete inner support)'}, using 2022 after fitting 2020–2021. Publication: ${a.accepted?'all regional gates passed':a.reason}. Gate results: ${Object.entries(a.gates).map(([k,p])=>k+': '+(p?'passed':'failed')).join('; ')}.</p><details><summary>All external monthly residuals</summary><table><thead><tr><th>Month</th><th>Unadjusted</th><th>Scalar</th><th>Quarterly</th></tr></thead><tbody>${a.residuals.external.map(r=>`<tr><th>${r.month}</th><td>${signed(r.residuals.unadjusted)}</td><td>${signed(r.residuals.scalar)}</td><td>${signed(r.residuals.seasonal)}</td></tr>`).join('')}</tbody></table></details><p><a href="/data/${summary.external_audit.file}">Versioned regional audit</a> · <a href="https://github.com/dshimo0/ember-atlas/blob/work/data/regional-evaluation-protocol-v1.json">Preregistered protocol</a></p>`;
 }
-const steps=[['Select area and month','Choose a study area (or a supported Pantanal half), and inspect the real observations for a month.'],['Compare common support','Both products use the same 0.05° grid and UTC-day aggregation. Native detections remain separate.'],['Inspect the transition replay','The scenario switches from observed MODIS to VIIRS scaled to the MODIS reference using the region’s training-only factors.'],['Compare prior years','Each sensor uses its own complete prior years for the same month and same regional mask.'],['Export evidence','Export the selected month, selected-period aggregates and a provenance manifest. Share the same state.']];
-function guideView() {
- const active=currentRoute()==='/demo';$('walkthrough').hidden=!active;
- if(!active)return;
- $('stepTitle').textContent=steps[guideStep-1][0];$('stepDescription').textContent=steps[guideStep-1][1];
- $('stepProgress').textContent=`Step ${guideStep} of 5`;$('stepBack').disabled=guideStep===1;$('stepNext').disabled=guideStep===5;
- $('stepRail').innerHTML=steps.map((s,i)=>`<button data-guide-step="${i+1}" aria-label="Step ${i+1}: ${s[0]}" aria-current="${i+1===guideStep?'step':'false'}"><b>${i+1}</b><span>${s[0]}</span></button>`).join('');
- for(const b of $('stepRail').querySelectorAll('button'))b.onclick=()=>goStep(+b.dataset.guideStep);
- $('useFullArea').hidden=!(guideStep===3&&!supportsReplay(state()));
- document.querySelectorAll('.guide-target').forEach(e=>e.classList.remove('guide-target'));
- const target=['.controls','.comparison-panel','.comparison-panel','#baseline','.observation-export'][guideStep-1];document.querySelector(target)?.classList.add('guide-target');
- if(guideStep===4)for(const d of $('baseline').querySelectorAll('details'))d.open=true;
+function experienceView(s){
+ const months=monthsBetween(s.start,s.end),position=months.indexOf(selected);
+ $('activeScope').textContent=`${s.area==='all'?summary.name+' study area':AREAS[s.area]} · ${s.sensor==='both'?'Both sensors':SENSOR_NAMES[selectedProducts(s.sensor,s.mode)[0]]} · UTC`;
+ $('monthScrubber').max=String(Math.max(0,months.length-1));$('monthScrubber').value=String(Math.max(0,position));$('monthScrubber').setAttribute('aria-valuetext',monthName(selected));$('scrubberMonth').textContent=monthName(selected);$('previousMonth').disabled=position<=0;$('nextMonth').disabled=position>=months.length-1;
+ document.body.dataset.detail=detail;$('scientificMode').setAttribute('aria-pressed',String(detail==='scientific'));$('scientificMode').textContent=detail==='scientific'?'Scientific detail: on':'Scientific detail';
+ if(currentRoute()!=='/methods')$('methodsPage').hidden=detail!=='scientific';
+ $('methodsScope').textContent=`${summary.name} study area · ${s.mode.toUpperCase()} · selected ${monthName(selected)} · full-area SP calibration is separately scoped below.`;
+ $('sourceCards').innerHTML=sourceCards(summary);$('methodExplore').href=stateURL('/',allState());
+ const v=row(selected,s.mode==='nrt'?'VIIRS_NOAA20_NRT':'VIIRS_NOAA20_SP',s),a=s.sensor==='MODIS_SP'?null:adjustment(v,s,validation);
+ $('methodSelectedAdjustment').innerHTML=`<div><small>Observed VIIRS · common grid</small><strong>${number(v.cells)}</strong><span>occupied cell-days</span></div><div><small>${a?'Training-only factor':'Adjustment'}</small><strong>${a?'× '+number(a.factor,4):'Unavailable'}</strong><span>${a?'applied to this complete month':'selected scope is unsupported'}</span></div><div><small>Adjusted VIIRS · MODIS scale</small><strong>${number(a?.value??null,1)}</strong><span>occupied cell-days · derived estimate</span></div>`;
 }
-function goStep(n) {
+function guideView(){
+ const active=currentRoute()==='/demo';$('walkthrough').hidden=!active;const disclosure=$('validationDisclosure');if(active)$('analysisPage').append(disclosure);else document.querySelector('.page-heading').after(disclosure);
+ document.body.dataset.step=String(guideStep);
+ // Reorder the same calendar, never create a second analytical state.
+ const history=$('history'),explore=$('explore');if(active&&guideStep===2)explore.insertBefore(history,explore.querySelector('.dashboard-grid'));else if(history.parentElement===explore)explore.after(history);
+ if(!active)return;
+ const scene=scenes[guideStep-1],s=state(),m=row(selected,s.mode==='nrt'?'MODIS_NRT':'MODIS_SP',s),v=row(selected,s.mode==='nrt'?'VIIRS_NOAA20_NRT':'VIIRS_NOAA20_SP',s),a=s.sensor==='MODIS_SP'?null:adjustment(v,s,validation);
+ $('stepTitle').textContent=scene[0];$('stepDescription').textContent=scene[1];$('stepProgress').textContent=`Step ${guideStep} of 5`;$('stepBack').disabled=guideStep===1;$('stepNext').disabled=guideStep===5;
+ $('stepRail').innerHTML=scenes.map((x,i)=>`<button data-guide-step="${i+1}" aria-label="Step ${i+1}: ${x[0]}" aria-current="${i+1===guideStep?'step':'false'}"><b>${i+1}</b><span>${x[0]}</span></button>`).join('');
+ for(const b of $('stepRail').querySelectorAll('button')){b.onclick=()=>goStep(+b.dataset.guideStep);b.onkeydown=e=>{const n={ArrowRight:guideStep+1,ArrowLeft:guideStep-1,Home:1,End:5}[e.key];if(n){e.preventDefault();goStep(n);$('stepRail').querySelector(`[data-guide-step="${guideStep}"]`)?.focus();}};}
+ $('sceneImage').hidden=guideStep!==1;const image=$('sceneImage').querySelector('img'),pantanal=s.region==='pantanal';image.src=pantanal?'/assets/pantanal-modis-2024-09-01.jpg':'/assets/earth-nasa.jpg';image.alt=pantanal?'MODIS Terra true-color Pantanal context, September 1, 2024':'NASA Blue Marble composite, released October 2007';$('sceneImageCredit').textContent=pantanal?'NASA GIBS / MODIS Terra · Sep 1, 2024. Editorial context; not the monthly analytical layer.':'NASA/GSFC/Reto Stöckli · Blue Marble, 2007. Editorial Earth context; not the selected region’s observations.';
+ const evidence=[`${summary.name} study area · ${monthName(selected)} · ${s.mode.toUpperCase()} observations`,`${monthName(selected)} · earlier same-month years and sample size are available with the selected comparison.`,`MODIS ${number(m.cells)} · VIIRS ${number(v.cells)} occupied cell-days on the common grid.`,a?`Adjusted VIIRS ${number(a.value,1)} cell-days · factor ${number(a.factor,4)}. MODIS remains a comparison reference, not ground truth.`:'No published adjustment for this selection. Real sensor-specific values remain available.',`${scope(selected,s).from} → ${scope(selected,s).to} UTC · selected region, mask and sensors. Missing retrieval is not zero.`];
+ const sensorExplanation=guideStep===3?'<div class="scene-sensors"><div><span class="sensor-dot modis"></span><strong>MODIS · nominal 1 km</strong><small>Terra + Aqua reference</small></div><div><span class="sensor-dot viirs"></span><strong>VIIRS · nominal 375 m</strong><small>NOAA-20 comparison</small></div><div><span class="sensor-dot adjusted"></span><strong>Shared 0.05° grid</strong><small>Count each cell once per product per UTC day</small></div></div>':'';
+ const sceneMetrics=guideStep===4&&a?`<p class="scene-validation"><strong>${number(evaluation.reduction,1)}% lower monthly MAE vs raw common-grid VIIRS</strong><br>${validation.adjusted.n} holdout months · ${yearsLabel(validation.holdout_years)} · full ${summary.name} SP area. Scalar MAE ${number(compareMethods(validation).metrics.scalar.mae,1)}; quarterly ${number(compareMethods(validation).metrics.seasonal.mae,1)} cell-days/month. All candidates and remaining bias are in Methods & data.<br>Reference-processing continuity and ground truth remain unverified.</p>`:'';
+ $('sceneEvidence').innerHTML=`${sensorExplanation}<p>${escapeHTML(evidence[guideStep-1])}</p>${sceneMetrics}<button id="sceneJump">${scene[2]} ↓</button>`;
+ const target=['.map-panel','#history','.comparison-panel','.comparison-panel','.observation-export'][guideStep-1];$('sceneJump').onclick=()=>document.querySelector(target)?.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});
+ $('skipDemo').href=stateURL('/',allState());$('guideMethods').href=stateURL('/methods',allState());$('useFullArea').hidden=!(guideStep===4&&!supportsReplay(s));
+ if(guideStep===5)for(const d of $('baseline').querySelectorAll('details'))d.open=true;
+}
+function goStep(n){
  guideStep=Math.max(1,Math.min(5,n));
- if(guideStep===2)$('sensor').value='both';
- if(guideStep===3&&supportsReplay(state()))view='replay';
+ if(guideStep===3){$('sensor').value='both';view='raw';}
+ if(guideStep===4&&supportsReplay(state())){view='replay';$('showBenchmark').checked=true;}
  commitSelection();
 }
 function updateLinks() {
@@ -278,17 +299,19 @@ function commitSelection() {
 }
 async function applyLocation(scroll=false) {
  if(!ready)return;const token=++datasetToken;
+ if(currentRoute()==='/'&&location.hash==='#methodology')history.replaceState(null,'','/methods'+location.search+'#methodology');
  const preliminary=readURL(location.href),region=release.registry.regions.find(r=>r.id===preliminary.region)||release.registry.regions[0];
  $('region').value=region.id;$('dataMode').value=preliminary.mode;
  $('download').disabled=true;$('downloadCells').disabled=true;$('aggregateDownload').disabled=true;$('downloadReplay').disabled=true;$('downloadManifest').disabled=true;$('status').textContent='Loading selected dataset…';selectionToken++;
  try{
   const data=await loadDataset(region.id,preliminary.mode);const [v,c,a]=await Promise.all([verifiedJSON(data.validation),data.comparison?verifiedJSON(data.comparison):Promise.resolve(release.replayEvaluation),data.external_audit?verifiedJSON(data.external_audit):Promise.resolve(null)]);if(token!==datasetToken)return;summary=data;validation=v;currentComparison=c;externalAudit=a;evaluation=evaluateValidation(validation);index=makeIndex(summary);publishedMetrics();residualView();externalView();
-  const s=readURL(location.href,summary.coverage),defaults=datasetDefaults(region.datasets[preliminary.mode],region.id,preliminary.mode),query=new URL(location.href).searchParams;if(!['start','end','month'].some(k=>query.has(k))){s.start=defaults.start;s.end=defaults.end;}selected=s.month;view=s.view;guideStep=s.step;pitchSlide=s.slide;$('showBenchmark').checked=s.benchmark;
-  for(const id of ['area','sensor','start','end'])$(id).value=s[id];if(region.id!=='pantanal')$('area').value='all';
-  const isPitch=currentRoute()==='/pitch';document.documentElement.dataset.route=isPitch?'pitch':'analysis';document.body.dataset.page=currentRoute().slice(1)||'explore';
-  $('analysisPage').hidden=isPitch;$('pitchPage').hidden=!isPitch;$('filterFold').open=!matchMedia('(max-width:700px)').matches;
-  document.title=`Ember Atlas · ${isPitch?'Pitch':region.name+' study area'}`;
-  if(isPitch)pitch.setSlide(pitchSlide,scroll);else{if(!geographicMap)geographicMap=createGeographicMap($('map'),geography);geographicMap.resize?.();render();}
+  const s=readURL(location.href,summary.coverage),defaults=datasetDefaults(region.datasets[preliminary.mode],region.id,preliminary.mode),query=new URL(location.href).searchParams;if(!['start','end','month'].some(k=>query.has(k))){s.start=defaults.start;s.end=defaults.end;}selected=s.month;view=s.view;guideStep=s.step;pitchSlide=s.slide;detail=s.detail;$('showBenchmark').checked=s.benchmark;
+  for(const id of ['area','sensor','start','end'])$(id).value=s[id];for(const d of document.querySelectorAll('.native-details,.source-flags,.series-table'))d.open=detail==='scientific';if(region.id!=='pantanal')$('area').value='all';
+  const isPitch=currentRoute()==='/pitch',isMethods=currentRoute()==='/methods';document.documentElement.dataset.route=isPitch?'pitch':'analysis';document.body.dataset.page=currentRoute().slice(1)||'explore';
+  document.querySelector('.skip').href=isPitch?'#pitchPage':isMethods?'#methodsPage':currentRoute()==='/demo'?'#walkthrough':'#explore';
+  $('analysisPage').hidden=isPitch||isMethods;$('pitchPage').hidden=!isPitch;$('methodsPage').hidden=!isMethods;document.body.dataset.detail=detail;$('filterFold').open=false;
+  document.title=`Ember Atlas · ${isPitch?'Pitch':isMethods?'Methods & data':region.name+' study area'}`;
+  if(isPitch)pitch.setSlide(pitchSlide,scroll);else{if(!isMethods&&!geographicMap)geographicMap=createGeographicMap($('map'),geography);geographicMap?.resize?.();render();}
   history.replaceState(null,'',stateURL(currentRoute(),allState(),location.hash));updateLinks();
   if(location.hash&&!isPitch)requestAnimationFrame(()=>document.getElementById(location.hash.slice(1))?.scrollIntoView());
  }catch(error){if(token!==datasetToken)return;console.error(error);$('error').hidden=false;$('error').textContent='Selected regional dataset unavailable. No replacement observations are shown.';}
@@ -301,6 +324,13 @@ function switchDataset(){
 }
 $('region').onchange=switchDataset;$('dataMode').onchange=switchDataset;
 $('showBenchmark').onchange=commitSelection;
+$('scientificMode').onclick=()=>{detail=detail==='scientific'?'general':'scientific';$('validationDisclosure').open=detail==='scientific';for(const d of document.querySelectorAll('.native-details,.source-flags,.series-table'))d.open=detail==='scientific';commitSelection();};
+$('monthScrubber').oninput=e=>{selected=monthsBetween(state().start,state().end)[+e.target.value];commitSelection();};
+for(const [id,delta]of [['previousMonth',-1],['nextMonth',1]])$(id).onclick=()=>{const ms=monthsBetween(state().start,state().end);selected=ms[Math.max(0,Math.min(ms.length-1,ms.indexOf(selected)+delta))];commitSelection();};
+$('mapFullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.querySelector('.map-panel').requestFullscreen();}catch{$('mapFullscreen').textContent='Fullscreen unavailable';}};
+document.addEventListener('fullscreenchange',()=>{$('mapFullscreen').textContent=document.fullscreenElement===document.querySelector('.map-panel')?'Exit fullscreen':'Expand map';});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.fullscreenElement===document.querySelector('.map-panel'))document.exitFullscreen();});
+$('layerOpacity').oninput=e=>{$('opacityValue').textContent=e.target.value+'%';document.querySelector('#map .leaflet-observations-pane').style.opacity=String(+e.target.value/100);};
 $('fullArchive').onclick=()=>{$('start').value=summary.coverage.start;$('end').value=summary.coverage.end;commitSelection();};
 $('downloadReplay').onclick=()=>download(replayCSV(index,state(),validation,summary.snapshot.sha256),`ember-replay-${state().region}-${state().start}_${state().end}.csv`);
 $('downloadCells').onclick=()=>{const s=state(),dates=scope(selected,s),product=$('mapProduct').value.replace('_SP',s.mode==='nrt'?'_NRT':'_SP');download(cellCSV(observations,product,{...s,from:dates.from,to:dates.to},summary.snapshot.sha256),`ember-cells-${s.region}-${selected}-${product}.csv`);};
@@ -310,7 +340,7 @@ $('calendarView').onchange=e=>{view=e.target.value;commitSelection();};
 $('stepBack').onclick=()=>goStep(guideStep-1);$('stepNext').onclick=()=>goStep(guideStep+1);
 $('resetDemo').onclick=()=>{const ref=release.registry.regions[0].datasets.sp;history.pushState(null,'',stateURL('/demo',datasetDefaults(ref,'pantanal')));$('layerModis').checked=true;$('layerViirs').checked=true;$('showGrid').checked=true;$('showPoints').checked=false;$('mapProduct').value='VIIRS_NOAA20_SP';applyLocation().then(()=>$('fitStudyArea').click());};
 $('useFullArea').onclick=()=>{$('region').value='pantanal';$('dataMode').value='sp';switchDataset();};
-$('map').addEventListener('mapdisplaychange',e=>{if(loadedSelection===selectionKey(state())){$('mapLoading').textContent=!e.detail.gridAvailable?`${e.detail.product}: occupancy unavailable; no retrieval. ${number(e.detail.total)} records from other selected products.`:`${number(e.detail.gridCells)} occupied cells · ${number(e.detail.cellDays)} cell-days · ${number(e.detail.shown)} sampled detections shown / ${number(e.detail.total)} matching observations.`;$('downloadCells').disabled=!e.detail.gridAvailable;$('gridLegend').textContent=!e.detail.gridAvailable?`${e.detail.product}: occupancy unavailable; no retrieval for this sensor/window.`:`${e.detail.product} · occupied UTC days per 0.05° cell · ${e.detail.periodDays} selected UTC days; darker = more occupied days.`;}});
+$('map').addEventListener('mapdisplaychange',e=>{if(loadedSelection===selectionKey(state())){$('mapLoading').textContent=!e.detail.gridAvailable?`${e.detail.product}: occupancy unavailable; no retrieval. ${number(e.detail.total)} records from other selected products.`:`${number(e.detail.gridCells)} occupied cells · ${number(e.detail.cellDays)} cell-days · ${number(e.detail.shown)} sampled detections shown / ${number(e.detail.total)} matching observations.`;$('downloadCells').disabled=!e.detail.gridAvailable;$('gridLegend').textContent=!e.detail.gridAvailable?`${e.detail.product}: occupancy unavailable; no retrieval for this sensor/window.`:`${e.detail.product} · occupied UTC days per 0.05° cell · ${e.detail.periodDays} selected UTC days; darker = more occupied days.`;$('occupancyMax').textContent=`${e.detail.periodDays} selected UTC days`;document.querySelector('.occupancy-key').hidden=!e.detail.gridAvailable;document.querySelector('.occupancy-key').dataset.sensor=e.detail.product.startsWith('MODIS')?'modis':'viirs';}});
 $('shareSelection').onclick=async()=>{const url=new URL(stateURL(currentRoute(),allState()),location.origin).href;try{await navigator.clipboard.writeText(url);$('shareStatus').textContent='Selection link copied.';}catch{$('shareStatus').innerHTML=`<a href="${url}">${escapeHTML(url)}</a>`;}};
 $('downloadManifest').onclick=async()=>{
  const s=state(),selection=allState(),dataset=summary,month=selected,selectedRows=observations,selectedIndex=index;
@@ -342,7 +372,7 @@ document.addEventListener('click',event=>{
   release=await loadRelease();({summary,validation,geography}=release);evaluation=evaluateValidation(validation);index=makeIndex(summary);ready=true;
   $('region').innerHTML=release.registry.regions.map(r=>`<option value="${r.id}">${r.name}</option>`).join('');
   $('start').value=summary.coverage.start;$('end').value=summary.coverage.end;
-  pitch=createPitch($('pitchPage'),release,n=>{pitchSlide=n;history.pushState(null,'',stateURL('/pitch',allState()));pitch.setSlide(n,true);updateLinks();});
+  pitch=createPitch($('pitchPage'),release,n=>{pitchSlide=n;history.pushState(null,'',stateURL('/pitch',allState()));pitch.setSlide(n,true);updateLinks();},n=>{pitchSlide=n;history.replaceState(null,'',stateURL('/pitch',allState()));updateLinks();});
   publishedMetrics();residualView();applyLocation();
  }catch(error){console.error('Release load failed',error);$('error').hidden=false;$('error').textContent='Release data could not be loaded. Reload to retry.';$('status').textContent='Data unavailable';$('pitchPage').textContent='Presentation evidence unavailable. Reload to retry.';}
 })();

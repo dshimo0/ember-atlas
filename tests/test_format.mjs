@@ -19,3 +19,9 @@ test('literal source version/type counts follow UTC clipping; type zero is retai
  assert.deepEqual(aggregateMonth(index,'2024-09','MODIS_SP',s).source_versions,{'61.03':1});
  const csv=observationCSV([{source_version:'6.03',detection_type:'0'}],'sha');assert(csv.includes('"source_version","detection_type"'));assert(csv.endsWith('"6.03","0"'));
 });
+
+import {compact} from '../web/format.mjs';
+test('compact calendar values never expose machine decimals; missing and real zero differ',()=>{
+ assert.equal(compact(366.7358145210494),'366.7');
+ assert.equal(compact(0),'0');assert.equal(compact(null),'—');assert.equal(compact(5819),'5.8k');
+});

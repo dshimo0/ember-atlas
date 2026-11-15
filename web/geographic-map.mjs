@@ -41,10 +41,12 @@ export function createGeographicMap(element, geography) {
     return L.circleMarker(latlng, {pane: 'local-geography', radius: 2, color: '#344e58', weight: 1, fillOpacity: 1})
       .bindTooltip(feature.properties.name, {permanent: true, pane: 'local-labels', direction: 'right', className: 'local-place-label'});
   }}).addTo(map);
-  const sensorRenderer=new DiamondCanvas({padding:.2});
+  map.createPane('observations');map.getPane('observations').style.zIndex=450;
+  map.createPane('study-bounds');map.getPane('study-bounds').style.zIndex=470;
+  const sensorRenderer=new DiamondCanvas({padding:.2,pane:'observations'});
   let lastRows=[],lastSelection=null;
   let studyBounds=STUDY;
-  const study = L.rectangle(STUDY, {color: '#8e3a19', weight: 2.5, dashArray: '8 4', fill: false, interactive: false}).addTo(map);
+  const study = L.rectangle(STUDY, {pane:'study-bounds',color: '#8e3a19', weight: 2.5, dashArray: '8 4', fill: false, interactive: false}).addTo(map);
   let areaLayer = null, pointLayer = L.layerGroup().addTo(map), tileLayer = null, timer = null, generation = 0, lastArea = 'pantanal|all';
   const modeSelect = document.getElementById('basemapMode'), status = document.getElementById('basemapStatus');
   function local(unavailable = false) {
@@ -103,7 +105,7 @@ export function createGeographicMap(element, geography) {
       }
       if (areaLayer) {map.removeLayer(areaLayer);areaLayer=null;}
       const selectedBounds=selection.area==='all'?studyBounds:AREA_BOUNDS[selection.area];
-      if(selection.area!=='all')areaLayer=L.rectangle(selectedBounds,{color:'#183d6a',weight:2.5,fill:false,interactive:false}).addTo(map);
+      if(selection.area!=='all')areaLayer=L.rectangle(selectedBounds,{pane:'study-bounds',color:'#183d6a',weight:2.5,fill:false,interactive:false}).addTo(map);
       study.bringToFront();const areaKey=(selection.region||'pantanal')+'|'+selection.area;
       if(areaKey!==lastArea){map.fitBounds(selectedBounds,{padding:[25,25],animate:false});lastArea=areaKey;}
       const layers = pointLayer.getLayers(), first = pointCount?layers[0]:null;

@@ -3,4 +3,4 @@ export const signed=(value,decimals=1)=>value===null||value===undefined||!Number
 export const yearsLabel=years=>years.length>1?`${years[0]}–${years.at(-1)}`:String(years[0]);
 export const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-export const compact=value=>value===null?'—':value>=1000?(value/1000).toFixed(1)+'k':String(value);
+export const compact=value=>value===null||value===undefined||!Number.isFinite(value)?'—':new Intl.NumberFormat('en-US',{notation:'compact',maximumFractionDigits:1}).format(value).toLowerCase();

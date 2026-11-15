@@ -1,16 +1,16 @@
 # Project demonstration
 
-[Actual silent screen recording](https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4) · [Interactive replay](https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&benchmark=1&month=2024-09)
+[Actual silent screen recording](https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4) · [Interactive guide](https://ember-atlas-opal.vercel.app/demo) · [Methods](https://ember-atlas-opal.vercel.app/methods)
 
-The current recording captures the actual English interface and versioned observations. It contains no people or audio. It shows the selected Pantanal map and September comparison, source-change replay calendar, observed MODIS benchmark, January 2023 source, another study area and the eight-area world map. Runtime and anonymous playback are recorded in transition-release.json/media-check.json.
+The current 30.0-second recording captures the actual English application. It contains no people, narration or audio. Editorial NASA imagery is explicitly labeled separately from quantitative evidence.
 
-| Approximate time | Observed screen |
+| Approximate time | Actual recorded view |
 | --- | --- |
-| 0–6 s | September 2024 map, source and comparison |
-| 6–12 s | Reference-scale replay calendar/time series |
-| 12–16 s | Observed holdout MODIS revealed separately |
-| 16–21 s | January 2023, the first post-cutoff scenario month |
-| 21–25 s | California study area with actual observations |
-| 25–30 s | Eight-region world map with actual coverage |
+| 0–5 s | Pitch opening with credited NASA Blue Marble context |
+| 5–11 s | Pantanal September 2024 observed/adjusted comparison |
+| 11–17 s | Source-labeled replay calendar and historical series |
+| 17–23 s | Methods: three-candidate evaluation and remaining error |
+| 23–27 s | California observed map and actual CSV download action |
+| 27–30 s | Closing, verified creator and next pilot |
 
-The nine-slide pitch and spoken script are separate presentation materials. Current official Project Demonstration duration, slide count, eligibility and media restrictions still require Team Owner confirmation; official pages returned 503. No format compliance or final submission is inferred from a working public video link.
+The nine-section local pitch is separate. Its notes have 395 words and a measured 176.2-second synthesized read, not a human rehearsal. Current official demonstration runtime/slide count, eligibility and media restrictions still require Team Owner confirmation; earlier official checks returned 503. No compliance or final submission is inferred from a working media URL.

@@ -1,17 +1,11 @@
-# Sensor transition exploration
+# Guided exploration
 
-Default: https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&month=2024-09
+The `/demo` experience uses the same region registry, analytical state, map, calendar, comparison and exports as Explore. Five scenes introduce the selected study area, historical record, sensor differences, training-only adjustment and evidence. Progress is visible before the workspace, with named steps, Previous/Next, restart, keyboard arrows and links to independent exploration and methods.
 
-The primary Pantanal calendar and time series replay observed MODIS before January 2023 and frozen seasonal VIIRS afterward. The cutoff is a scenario. Toggle observed holdout MODIS as a separate benchmark; select December 2022 and January 2023 to verify the source change. Each month/table/CSV retains source and adjustment. The selected-month comparison remains real sensor evidence.
+The historical scene moves the existing calendar before the map. The sensor scene selects both products on the raw common grid. The harmonization scene enables the replay and separate observed benchmark only where supported. Every scene retains free region/month exploration; unsupported regions, masks and dates keep raw observations and their explicit unavailable state.
 
-The ordered eight-region selector loads immutable source-specific SP or separate NRT snapshots. Full available archive selection exposes older MODIS and missing periods. Dates bound the calendar/period export, while the selected month bounds observations and map cells. Area/sensor/month/processing changes use the same mask and invalidate stale asynchronous responses. URLs preserve the complete selection and benchmark state.
+Pantanal remains the default September 2024 case. Scene 1 uses a real dated MODIS Terra true-color context image. Other regions use the labeled global Blue Marble editorial composite; no selected-region event is implied. Imagery is separate from observed occupancy and sampled detections.
 
-The map retains OSM, attribution, pan/zoom/scale/fit and a global local Natural Earth fallback. Its primary analytical layer uses all observations for occupied UTC days/cell and a named sensor. Optional sampled detections and sensor visibility controls are under Map inspection layers. They affect display only. Cells and observations have separate CSVs; cell occupancies sum to common-grid totals. Monthly factors never modify spatial coordinates or occupancy.
+Sources, factors and all scientific limits remain available at `/methods`, with the same URL selection. Detailed method comparison still exposes the stronger Pantanal scalar, signed bias, peak errors, source-version transitions and every holdout residual. No method was selected using the existing holdout.
 
-Reference-scale historical context uses complete earlier same-month entries in the published matched domain (2020–2024 for Pantanal), with n/years/source exposed and a minimum of three. Older MODIS is observational context. Missing, partial and zero retrieval states remain distinct; NRT is not joined to SP or compared against entire historical months.
-
-The five inline exploration steps remain available after the analytical row. Free exploration and reset remain available. Mobile uses compact region/data controls, collapsible detailed filters and a readable month/table alternative. Validation names its own evaluated full study area. Until a new region has its own complete evaluation, the existing Pantanal result remains explicitly labeled Pantanal SP evidence and supplies no regional adjustment. Single-sensor selection leaves the two-source replay. Missing adjustment and missing retrieval have different calendar labels.
-
-Verification: submission/eight-region-check-public.json records desktop/touch-emulated mobile direct loads, refresh, all eight geometries/observations/CSVs, SP/NRT separation, replay cutoff, filter state, cell reconciliation and forced tile fallback. No physical-device verification is implied.
-
-The default Pantanal replay period remains the published 2020–2024 domain. Show full available archive exposes observed MODIS from November 2000 and raw paired observations through July 2026; post-2024 adjusted values remain unavailable. The additional 19-month audit is separate from published output.
+Acceptance and executed checks are tracked in [experience-redesign.md](experience-redesign.md) and the release evidence.

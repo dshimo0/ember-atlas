@@ -1,5 +1,5 @@
 {
-  "url": "http://127.0.0.1:8931/about",
+  "url": "http://127.0.0.1:8932/about",
   "checks": [
     {
       "viewport": "desktop",

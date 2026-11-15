@@ -12,7 +12,7 @@ with sync_playwright() as p:
  for name,width,height in [('desktop',1440,1000),('mobile',390,844),('small-mobile',320,740)]:
   c=b.new_context(viewport={'width':width,'height':height});page=c.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
   assert page.goto(BASE+'/about').status==200
-  assert page.locator('h1').inner_text()=='About the team'
+  assert 'The planet' in page.locator('h1').inner_text()
   assert page.locator('#creator-name').inner_text()=='Diego Shimohama'
   assert page.locator('nav [aria-current=page]').inner_text()=='About'
   assert not page.evaluate('document.documentElement.scrollWidth>innerWidth')

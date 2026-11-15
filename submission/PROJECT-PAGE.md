@@ -24,7 +24,7 @@ Literal source-version/type fields are exported. MODIS reported labels differ be
 
 Map occupancy uses full matching observations: occupied UTC days per 0.05° cell for a named sensor. Sampled detections are optional. NRT stays separate from Standard Processing. Retrieval completeness does not establish usable satellite observation; thermal anomalies and cell-days are not unique fires or burned area.
 
-Project Demonstration: the current silent screen recording is https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4 . It shows the actual replay, observed benchmark, region change and eight-area world map. The Team Owner must verify the current official demonstration format and choose or update the compliant asset. The nine-slide pitch is separate and is not asserted to meet an official cap.
+Project Demonstration: the current silent screen recording is https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4 . It shows the redesigned opening, actual Pantanal comparison and replay, three-method evidence, California map and CSV action, and closing. The Team Owner must verify the current official demonstration format and choose or update the compliant asset. The nine-slide pitch is separate and is not asserted to meet an official cap.
 
 Use of Artificial Intelligence:
 

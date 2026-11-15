@@ -4,7 +4,7 @@
 
 Ember Atlas is a geographic dashboard for the NASA Space Apps Challenge, **“Harmonization of MODIS and VIIRS Hot Spots.”** It combines real NASA FIRMS observations, a source-labeled activity calendar and reproducible downloads across eight study areas.
 
-[Explore the app](https://ember-atlas-opal.vercel.app/) · [Guided demo](https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&benchmark=1&month=2024-09) · [Pitch](https://ember-atlas-opal.vercel.app/pitch) · [About](https://ember-atlas-opal.vercel.app/about)
+[Explore the app](https://ember-atlas-opal.vercel.app/) · [Guided demo](https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&benchmark=1&month=2024-09) · [Pitch](https://ember-atlas-opal.vercel.app/pitch) · [Methods & data](https://ember-atlas-opal.vercel.app/methods) · [About](https://ember-atlas-opal.vercel.app/about)
 
 [Run locally](#run-locally) · [Validation](#measured-sensor-agreement) · [Coverage](#regions-and-released-coverage) · [Methodology](docs/methodology.md)
 
@@ -16,10 +16,10 @@ Ember Atlas is a geographic dashboard for the NASA Space Apps Challenge, **“Ha
 
 - Explore eight study areas on an interactive, attributed map with zoom, pan, scale and a local geographic fallback.
 - Select a month, area and sensor; inspect the matching calendar, comparison, historical context and observations.
-- Replay a source change, then reveal the continuing MODIS observations as a separate benchmark.
+- Follow five guided scenes, replay a source change and reveal continuing MODIS observations as a separate benchmark.
 - Inspect full-data grid occupancy or a clearly labeled sample of individual detections.
 - Download observations, monthly aggregates, occupied-day cells, reference-scale months and a provenance manifest.
-- Share the selected analytical state through its URL.
+- Share the selected analytical state through its URL, including optional scientific detail.
 
 The public app reads versioned snapshots. Visitors need no account, FIRMS key or live FIRMS connection. All sixteen initial SP/NRT observation views and aggregate history are served locally; additional historical observation shards use immutable public GitHub URLs with SHA-256 verification. External map tiles have an attributed local fallback.
 
@@ -131,7 +131,7 @@ cd ember-atlas
 python scripts/serve.py --port 8000
 ```
 
-Open [localhost:8000](http://localhost:8000). The server handles direct loads and refreshes of `/`, `/demo`, `/pitch` and `/about`. Branch `work` contains the published implementation; [PR #2](https://github.com/dshimo0/ember-atlas/pull/2) remains open against `main`. The repository includes the versioned observation data and source archives.
+Open [localhost:8000](http://localhost:8000). The server handles direct loads and refreshes of `/`, `/demo`, `/methods`, `/pitch` and `/about`. Branch `work` contains the published implementation; [PR #2](https://github.com/dshimo0/ember-atlas/pull/2) remains open against `main`. The repository includes the versioned observation data and source archives.
 
 ### Verify the release
 
@@ -144,11 +144,12 @@ python scripts/check_release_integrity.py
 
 The first two commands run the Python tests and JavaScript tests; Node is only needed for JavaScript checks. The artifact check recomputes regional evaluations and reconciles every shard with its native/grid totals. The integrity check verifies original frozen files and scans for credential patterns; when an ingestion key is present in the environment, it also checks that value without printing it.
 
-Optional Linux browser acceptance checks require the Playwright Python package and Chromium at `/usr/bin/chromium`. Chromium also generates the presentation PDF during the workflow check. Start the server in another terminal, then run:
+Optional Linux browser acceptance checks use the pinned packages in `requirements-dev.txt` and Chromium at `/usr/bin/chromium`. Install the packages with `python -m pip install -r requirements-dev.txt`. Chromium also generates the presentation PDF during the workflow check. Start the server in another terminal, then run:
 
 ```sh
 BASE_URL=http://127.0.0.1:8000 python scripts/check_eight_regions.py
 BASE_URL=http://127.0.0.1:8000 python scripts/check_about.py
+BASE_URL=http://127.0.0.1:8000 python scripts/check_experience.py
 ```
 
 The recorded scientific release passed **25 Python tests, five JavaScript test modules and 50 signed-out desktop/mobile browser groups**; 16 processing/region datasets and eight evaluations were reconciled. Later About-page and personal-site updates have their own checks. The linked reports identify the tested source commits. Mobile testing used emulation.
@@ -202,3 +203,5 @@ The local three-minute pitch is separate from the official Project Demonstration
 [Personal website](https://dshimo.vercel.app/) · [GitHub](https://github.com/dshimo0) · [About the project and creator](https://ember-atlas-opal.vercel.app/about)
 
 Observations: [NASA FIRMS](https://www.earthdata.nasa.gov/data/tools/firms). Basemap: [OpenStreetMap contributors](https://www.openstreetmap.org/copyright). Local geography: [Natural Earth](https://www.naturalearthdata.com/about/terms-of-use/). Map controls: [Leaflet](web/vendor/leaflet/LICENSE). Product-specific sources, third-party attributions and AI assistance are documented in the [submission resource inventory](submission/RESOURCES.md) and [portal materials](submission/PROJECT-PAGE.md).
+
+The [P0/P1 experience release](docs/experience-redesign.md) introduces dedicated Methods & Data, a five-scene guide, a data-derived calendar heatmap and an editorial About/Pitch. NASA imagery is credited and dated separately from analytical layers in the [image inventory](web/assets/editorial-imagery.json). The scientific release remains unchanged.

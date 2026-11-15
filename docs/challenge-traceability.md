@@ -57,3 +57,7 @@ Units: occupied cell-days/month; full named study rectangle, SP only. Inner choi
 ## Creator and About page
 
 The owner confirmed **Diego Shimohama** as the sole creator. `/about` is linked from every shared header and the final pitch section. Public direct loads/refresh, keyboard navigation, desktop/mobile widths, browser-back analytical state and no-JavaScript rendering passed. [Executed About release](../submission/about-release.json) records the source and deployment. No additional members, professional credentials or partners are asserted. The supplied emblem preview has no accessible original asset in the workspace; it has not been substituted or published.
+
+## P0/P1 presentation release
+
+Shared navigation now includes a dedicated `/methods` route. The legacy methodology anchor remains compatible. Five guide scenes reuse the existing analytical components; compact heatmap labels, explicit intensity and progressive scientific detail improve exploration. Pitch opening/closing use credited NASA editorial imagery; all three candidate metrics, peak error, reference-version limits and publication domains remain visible in the evidence path. Mobile navigation, touch targets, world-map semantics and scroll progress have explicit regression checks. See [experience-redesign.md](experience-redesign.md) for actual execution status.

@@ -1,59 +1,57 @@
-# Presentation: sensor transition replay
+# Pitch: comparable observations with inspectable evidence
 
-[Live pitch](https://ember-atlas-opal.vercel.app/pitch) · [Exact benchmark state](https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&benchmark=1&month=2024-09&start=2020-01-01&end=2024-12-31) · [Evaluation](https://ember-atlas-opal.vercel.app/data/replay-evaluation.json)
+[Live presentation](https://ember-atlas-opal.vercel.app/pitch) · [Guided case](https://ember-atlas-opal.vercel.app/demo?region=pantanal&month=2024-09&view=replay&benchmark=1) · [Methods & data](https://ember-atlas-opal.vercel.app/methods)
 
-Nine sections follow the sensor change, continuity replay, observed holdout MODIS benchmark, scalar comparison, peak-activity residuals and actual evidence across eight study areas. Charts use the same versioned artifacts as /demo. The world map links to each region; coverage and publication status come from the registry.
+Nine sections follow the measurement problem, observed September case, continuity replay, independent evaluation, working workflow, eight local study areas, demonstrated scope and next pilot. All figures come from the same versioned artifacts used by the app. The scalar comparison, peak errors and MODIS version limitation remain visible.
 
-Previous/Next, keyboard navigation, slide URLs, optional fullscreen, hidden notes and print/PDF are available. Mobile uses a scroll presentation. The local three-minute target is separate from the official Project Demonstration format, which remains unverified because current official pages return HTTP 503.
+Desktop uses a 16:9 stage with Previous/Next, keyboard navigation, optional fullscreen, hidden notes and print/PDF. Mobile scroll updates the counter and shareable slide URL. The regional world map remains on slide 7, with individually accessible study-area links and separate text alternatives.
 
-Measured synthesized English read: **406 words, 184.1 seconds**, eSpeak NG at 180 wpm, from the actual route notes. This is measured audio duration, not human rehearsal, and excludes navigation. Timing audio is not published. The Team Owner must rehearse and confirm the current official format and eligibility.
+Actual English notes contain **395 words**. Measured synthesized read: **176.2 seconds**, eSpeak NG at 180 wpm. This is synthesized audio duration, not human rehearsal; navigation time is excluded. Timing audio is not published. The three-minute local target is separate from the official Project Demonstration format, whose current guidance remains unverified.
 
 ## Spoken script
 
-### 1. Ember Atlas
+### 1. See the fire. Understand the past.
 
-Fire-monitoring analysts need comparable seasonal activity. Ember Atlas replays a satellite-source change in the Pantanal study area. This actual interface opens on September twenty twenty-four, with a geographic map, a source-labeled calendar, sensor comparison and matching evidence exports.
+An analyst comparing seasons needs to understand changes in both activity and instruments. Ember Atlas connects a real Pantanal case, geographic map and historical calendar to source-tagged evidence exports.
 
-### 2. Different sensors record different activity
+### 2. The instrument changes what gets reported.
 
-MODIS and VIIRS differ in resolution, sensitivity and acquisition time. We aggregate both onto the same globally anchored point zero five degree grid. A cell counts once per product per UTC day; monthly activity sums those cell-days. Native detections, cell-days, independent fires and burned area are different quantities.
+MODIS and VIIRS have different resolution, sensitivity and acquisition times. A native detection count is therefore not automatically comparable across instruments. We retain the raw records, but also count occupied cells on one globally anchored point zero five degree grid per UTC day. Monthly activity sums those cell-days.
 
-### 3. Replay the switch at 2023-01
+### 3. Same month. Different reported activity.
 
-The replay switches in January twenty twenty-three, after training ends. It uses observed MODIS before the cutoff and frozen seasonal VIIRS on the MODIS reference scale afterward. MODIS actually continues. Its observations remain a separate benchmark. Missing months stay unavailable; the transition date is a scenario.
+September twenty twenty-four has 5,819 MODIS cell-days and 8,809 common-grid VIIRS cell-days. Quarterly adjustment gives 4,879.1, still about sixteen percent below the reference. The comparison supports investigation of measurement differences. It does not identify independent fires or establish ground-truth accuracy.
 
-### 4. Reveal observed holdout MODIS
+### 4. Replay a source change. Keep an observed benchmark.
 
-Reveal that benchmark. September has 5,819 MODIS cell-days and 8,809 unadjusted VIIRS cell-days. The seasonal replay gives 4,879.1, approximately sixteen percent below MODIS. These are sensor-agreement results. Ground-truth accuracy and usable satellite observation coverage remain unmeasured.
+The replay changes source in January twenty twenty-three, immediately after training ends. It uses observed MODIS beforehand and adjusted VIIRS afterward. MODIS actually continues, so we can reveal its holdout observations as a separate benchmark. Every exported month records the source, adjustment and factor. Missing values stay unavailable.
 
-### 5. A scalar is a stronger holdout baseline
+### 5. Lower error. Remaining bias.
 
-All three methods fit twenty twenty through twenty twenty-two and use the same twenty-four holdout months in twenty twenty-three and twenty twenty-four. Monthly mean absolute error is 1,021.7 unadjusted, 175.3 for the training-only least-squares scalar, and 199.7 for frozen seasonal factors. The scalar is stronger here; the frozen method stays. MODIS version labels change across the split, limiting sensor-only interpretation.
+All three methods use twenty twenty through twenty twenty-two for training and the same twenty-four separate holdout months. MAE is 1,021.7 raw, 175.3 scalar and 199.7 quarterly. The scalar is stronger there. We retain the frozen method and expose peak errors and bias. Reported MODIS version labels change across the split, limiting sensor-only interpretation.
 
-### 6. Remaining error during active months
+### 6. Move from place and time to reproducible evidence.
 
-Peak activity remains difficult. Rank the six most active holdout months by observed MODIS, never by candidate errors. Scalar peak MAE is 404.6; seasonal MAE is 534.6 cell-days per month. Every residual is inspectable, including months where adjustment is worse.
+Region and month selection update the map, calendar, comparison and CSV. Earlier complete same-month values provide historical context with explicit years and sample sizes. Inspect full grid occupancy or sampled detections, then download observations, aggregates and provenance. Visitors need no API key.
 
-### 7. Explore the released evidence
+### 7. One workflow. Local evidence.
 
-Eight explicitly bounded study areas open from this world map. Each has real precomputed source observations, date selection and CSV export. Product-specific coverage is visible. New regional factors require local training and independent evaluation. A factor is never transferred to another region or a smaller mask.
+Eight explicitly bounded study areas share this workflow. Each opens real source observations and exports, with local coverage and evaluation evidence. New regional methods use an inner selection period, fixed refitting and separate outer and fresh gates. Full-area factors never transfer to another region, a smaller mask or near-real-time products.
 
-### 8. Inspect sources before extending the series
+### 8. Published today. What still needs evidence.
 
-The older Pantanal MODIS archive remains observed context. Earlier complete comparable months define each historical baseline, with exact years and sample size. New out-of-time evidence is reported separately. Recent NRT stays separate from Standard Processing because current availability provides no same-sensor overlap for evaluating a join.
+Today the application provides source-tagged comparisons and independently evaluated local adjustments. Pantanal retains its frozen twenty twenty through twenty twenty-four domain. The nineteen later months are an audit below its extension gate. Usable observation opportunity, homogeneous reference processing and ground truth remain unverified. Recent products stay separate from Standard Processing.
 
-### 9. Check independent regional evidence
+### 9. See the fire. Understand the past.
 
-Regional method selection uses twenty twenty-two only, followed by a fixed refit. Outer and fresh periods evaluate that choice; any failed gate withholds adjustment. Pantanal keeps its frozen publication domain. We invite a fire-monitoring team to review the source-tagged comparisons and define an observation-coverage validation pilot.
+We invite a fire-monitoring team to review the seasonal evidence and define an observation-coverage validation pilot. The product, source and methods are public. Diego Shimohama created Ember Atlas for the NASA Space Apps challenge.
 
 ## Likely judge questions
 
-- **Why retain seasonal factors if the scalar has lower holdout MAE?** The Pantanal method was frozen before that comparison. The observed 2023–2024 holdout is evaluation evidence, not a new selection set. Its 19-month later audit favors seasonal on MAE but does not meet the registered 24-fresh-month extension gate.
-- **What is being fitted?** Transparent VIIRS-to-MODIS monthly scale factors, not a fire detector or ground-truth prediction model. The scalar minimizes training squared monthly residuals through the origin; quarterly factors preserve training-quarter totals with a documented pooled fallback.
-- **Do factors transfer between areas?** No. New regions require their own inner selection, fixed refit and independent gates. Subregions and NRT do not inherit full-area SP calibration.
-- **Is the source transition real?** No. January 2023 is a labeled replay scenario derived from training end. Observed MODIS continues and supplies a separate benchmark.
-- **Does a retrieved zero mean no fire?** No. It means no reported detections in the retrieved source window. Usable swath/cloud coverage, independent fire events and burned area are unmeasured.
-- **Can NRT and SP be joined?** Current same-sensor availability has zero overlap. Preserve NRT vintages and later retrieve coincident SP windows before independent processing-transition evaluation.
-- **What remains for the Team Owner?** Human roster/contributions, rehearsal, current portal/media/eligibility checks, terms and final submission. No completed partnership, interview or operational impact is asserted.
-
-Reported MODIS versions differ across the registered split (6.03 training, 61.03 holdout). The headline measures agreement with the as-delivered reference; isolated sensor effects and processing-vintage continuity remain unverified. The global source-field audit is linked beside the headline and in monthly exports.
+- **Why keep quarterly factors if the scalar is better on the Pantanal holdout?** Its 2020–2024 publication rule was frozen. The already observed holdout is evaluation evidence, not a replacement-selection set. New methods or extensions require a separate registered evaluation protocol.
+- **What does 80.5% measure?** Reduction in monthly MAE relative to unadjusted common-grid VIIRS, against observed MODIS, on 24 full-Pantanal holdout months in 2023–2024. It is not detection accuracy.
+- **What remains at peak activity?** The six months ranked by observed MODIS have scalar/quarterly MAE 404.6/534.6 cell-days per month. September 2024 quarterly output remains 16.2% below MODIS.
+- **Are the source versions homogeneous?** Unverified. Reported MODIS labels change from 6.03 in training to 61.03 in evaluation. Results measure agreement with the delivered MODIS_SP archive without isolating sensor effects.
+- **Are regions interchangeable?** No. Each new area has its own registered inner selection, fixed refit and outer/fresh gates. Factors do not transfer to subregions or NRT. Pantanal keeps its original publication domain.
+- **Is the imagery an analytical layer?** No. Blue Marble is a credited 2007 editorial composite. The Pantanal context image is MODIS Terra true color dated September 1, 2024. Both have local source/hash metadata and are separate from FIRMS occupancy.
+- **What remains for the owner?** Confirm official eligibility/media rules, portal roster and contribution wording; rehearse on a physical device, accept terms and submit for judging. No registration, partnership or operational impact is inferred from the product.

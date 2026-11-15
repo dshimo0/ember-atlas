@@ -75,7 +75,7 @@ with sync_playwright()as p:
    if supported:
     shown=float(page.locator('#comparison [data-series=adjusted]').get_attribute('data-value'));assert abs(shown-month['adjusted'])<1e-7
    page.reload();stable(page,r['id']);assert page.locator('#monthSelect').input_value()=='2025-01'
-   if viewport=='mobile':page.locator('#filterFold').evaluate('(e)=>e.open=true')
+   if not page.locator('#filterFold').evaluate('(e)=>e.open'):page.locator('#filterFold > summary').click()
    page.select_option('#sensor','VIIRS_NOAA20_SP');stable(page,r['id']);filtered=csvrows(download(page,'#download'));assert all(x['product']=='VIIRS_NOAA20_SP'for x in filtered);assert page.locator('#calendarView').input_value()!='replay';assert page.locator('#downloadReplay').is_disabled()
    page.select_option('#sensor','both');page.evaluate("()=>{document.querySelector('#start').value='2025-01-02';document.querySelector('#end').dispatchEvent(new Event('change',{bubbles:true}))}");stable(page,r['id']);partial=csvrows(download(page,'#download'));assert all(x['date_utc']>='2025-01-02'for x in partial);assert page.locator('#comparison [data-series=adjusted]').count()==0
    report['checks'].append({'viewport':viewport,'region':r['id'],'new_sp_month':'2025-01','rows':len(rows),'source_url':summary['observation_shards']['2025-01'].get('url'),'csv_matches_new_shard':True,'adjustment_supported_in_new_month':supported,'single_sensor_no_replay':True,'manual_date_clipped_and_adjustment_disabled':True,'refresh':True})
@@ -101,7 +101,7 @@ with sync_playwright()as p:
   full=csvrows(download(page,'#aggregateDownload'));early_viirs=next(r for r in full if r['month']=='2000-11'and r['product']=='VIIRS_NOAA20_SP');assert early_viirs['native_detections']==''and early_viirs['retrieved_days']=='0'
   page.select_option('#calendarView','raw');stable(page,'pantanal');page.select_option('#mapProduct','VIIRS_NOAA20_SP');assert page.locator('#map').get_attribute('data-grid-available')=='false';assert page.locator('#map').get_attribute('data-cell-days')=='';assert page.locator('#downloadCells').is_disabled();page.select_option('#calendarView','replay');stable(page,'pantanal')
   page.select_option('#monthSelect','2023-01');stable(page,'pantanal')
-  if viewport=='mobile':page.locator('#filterFold').evaluate('(e)=>e.open=true')
+  if not page.locator('#filterFold').evaluate('(e)=>e.open'):page.locator('#filterFold > summary').click()
   page.select_option('#area','north');stable(page,'pantanal');assert page.locator('#downloadReplay').is_disabled();assert page.locator('#comparison [data-series=adjusted]').count()==0
   page.select_option('#area','all');page.select_option('#sensor','MODIS_SP');stable(page,'pantanal');assert page.locator('#map').get_attribute('data-grid-product')=='MODIS_SP'
   # Missing values stay blank; the real zero-detection day remains exportable zero.

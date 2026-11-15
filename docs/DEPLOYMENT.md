@@ -1,12 +1,12 @@
 # Vercel deployment
 
-Production: https://ember-atlas-opal.vercel.app/ · /demo · /pitch
+Production: https://ember-atlas-opal.vercel.app/ · /demo · /methods · /about · /pitch
 
 Authoritative source/deployment identity, HTTP checks and public execution reports are in `submission/transition-release.json`. Branch `work`; PR #2 remains open. Git auto-deployment is not configured; authorized CLI production deployment is the established workflow.
 
 ## Architecture
 
-Static English HTML/CSS and native modules, locally vendored Leaflet 1.9.4, output `web`, no build/install command or new backend. `vercel.json` preserves root/asset paths and rewrites `/demo` and `/pitch` to the same index, with trailing slashes removed. Shared state/loaders/models/charts restore direct URLs and browser history.
+Static English HTML/CSS and native modules, locally vendored Leaflet 1.9.4, output `web`, no build/install command or new backend. `vercel.json` preserves root/asset paths and rewrites `/demo`, `/methods` and `/pitch` to the same index; `/about` uses its static editorial document, with trailing slashes removed. Shared state/loaders/models/charts restore direct URLs and browser history.
 
 Visitors load versioned regional SP/NRT snapshots from versioned release files and never supply a FIRMS key or contact FIRMS. OpenStreetMap supplies interactive raster tiles; local Natural Earth geography covers all eight extents if tiles fail. No offline OSM tile cache is included. Original snapshots and frozen validation remain available at existing paths.
 

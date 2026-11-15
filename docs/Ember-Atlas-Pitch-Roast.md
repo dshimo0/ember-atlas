@@ -1,14 +1,11 @@
-# Presentation review and walkthrough
+# Pitch review after the P0/P1 redesign
 
-Start with the Pantanal map and September 2024 evidence. MODIS records 5,819 occupied cell-days; common-grid VIIRS 8,809; frozen seasonal VIIRS 4,879.1, or 16.2% below MODIS. These are occupied cell-days, not native hotspot counts or burned area.
+The earlier audit identified an opening dominated by a reduced dashboard screenshot, a tabular closing, a mobile counter that did not follow reading, and semantic problems in the interactive SVG. The implementation now opens and closes on credited NASA editorial imagery, presents the September observation before the method, keeps the full three-candidate comparison, and closes with a verified creator and a concrete pilot request.
 
-1. Open [/demo](https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&benchmark=1&month=2024-09&start=2020-01-01&end=2024-12-31). Show the selected study rectangle, UTC month and observed map layer.
-2. Follow the source-labeled calendar across December 2022 and January 2023. Explain that the cutoff is a replay scenario. Reveal continuing observed MODIS as the separate benchmark.
-3. Compare the three methods on identical holdout months. Raw/scalar/frozen-seasonal MAE is 1,021.7/175.3/199.7 cell-days/month. The headline's 80.5% reduction compares seasonal against raw VIIRS, not against the stronger scalar baseline.
-4. Inspect every monthly residual and the six most active MODIS-selected months. Peak scalar/seasonal MAE is 404.6/534.6. Agreement with MODIS is not ground-truth accuracy.
-5. Inspect the separate January 2025–July 2026 Pantanal audit: n=19; raw/scalar/seasonal MAE 399.4/89.7/70.8; seasonal bias +67.4. Keep the published adjustment domain at 2020–2024 until its registered extension gate is met.
-6. Open the eight-area world map. Follow a region link and inspect its actual source coverage and independent adjustment status. Export the selected observations, aggregates, occupied-day cells and provenance.
+The regional world map remains a functional entry point on slide 7. Detailed regional tables and all monthly residuals are retained in Methods & Data, rather than occupying the closing slide. Mobile scroll and button navigation share one counter and inspectable URL.
 
-The [route script and judge questions](pitch.md) are the presentation source of truth. Its synthesized read is measured at 184.1 seconds; human delivery remains unmeasured. The nine-section pitch and local three-minute target do not establish compliance with the official Project Demonstration media format. Current official guidance remains an owner check after HTTP 503 responses.
+Scientific evidence remains: 1,021.7 raw, 175.3 scalar and 199.7 frozen-quarterly holdout MAE; 24 months in 2023–2024, full Pantanal SP study area. The quarterly reduction of 80.5% is against the unadjusted common-grid baseline. The scalar is stronger on that holdout. September remains 16.2% below MODIS after quarterly adjustment; peak-six scalar/quarterly MAE is 404.6/534.6. All limitations remain in the evidence path.
 
-The reference-version change (6.03 → 61.03 across train/holdout) is a visible qualification. Explain the numerical agreement against MODIS_SP as delivered, without claiming isolated sensor correction or wildfire-event accuracy.
+See [pitch.md](pitch.md) for the actual 395-word script and measured 176.2-second synthesized read. Human rehearsal is still unmeasured. The PDF and 30-second silent product recording are separate assets; neither establishes compliance with the current official Project Demonstration format.
+
+Actual execution, screenshots and deployed identity are recorded in the experience release report after verification. Automated accessibility checks are scoped evidence, not complete WCAG certification.

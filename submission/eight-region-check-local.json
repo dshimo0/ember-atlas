@@ -1,9 +1,9 @@
 {
-  "url": "http://127.0.0.1:8930",
-  "checked_utc": "2026-11-15T07:26:56.821542+00:00",
+  "url": "http://127.0.0.1:8932",
+  "checked_utc": "2026-11-15T15:09:17.441731+00:00",
   "registry": {
-    "file": "regions-f75a35d90649.json",
-    "sha256": "f75a35d9064906434aaa1aa6e88b94ad995f5f1feae460edc9c99ae8e6817b2e"
+    "file": "regions-c06212509a51.json",
+    "sha256": "c06212509a517c5c91377bd2cdc40442559896168ad887a5218214e4e36a5942"
   },
   "checks": [
     {
@@ -313,7 +313,7 @@
     {
       "viewport": "desktop",
       "replay_cutoff_sources": true,
-      "benchmark_shared_state": "http://127.0.0.1:8930/demo?region=pantanal&mode=sp&benchmark=1&month=2023-01&area=all&sensor=both&start=2020-01-01&end=2026-07-31&view=replay&step=1",
+      "benchmark_shared_state": "http://127.0.0.1:8932/demo?region=pantanal&mode=sp&benchmark=1&month=2023-01&area=all&sensor=both&start=2020-01-01&end=2026-07-31&view=replay&step=1",
       "replay_csv_matches_display": true,
       "new_export_manifest_hashes": true,
       "no_subarea_transfer": true,
@@ -636,7 +636,7 @@
     {
       "viewport": "mobile",
       "replay_cutoff_sources": true,
-      "benchmark_shared_state": "http://127.0.0.1:8930/demo?region=pantanal&mode=sp&benchmark=1&month=2023-01&area=all&sensor=both&start=2020-01-01&end=2026-07-31&view=replay&step=1",
+      "benchmark_shared_state": "http://127.0.0.1:8932/demo?region=pantanal&mode=sp&benchmark=1&month=2023-01&area=all&sensor=both&start=2020-01-01&end=2026-07-31&view=replay&step=1",
       "replay_csv_matches_display": true,
       "new_export_manifest_hashes": true,
       "no_subarea_transfer": true,

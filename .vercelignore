@@ -943,3 +943,5 @@ data-availability.csv
 /web/data/southern-amazon-sp-observations-2026-05-c146e1ef8464.json.gz
 /web/data/southern-amazon-sp-observations-2026-06-14421672cec0.json.gz
 /web/data/southern-amazon-sp-observations-2026-07-efdb728a570b.json.gz
+
+requirements-dev.txt
