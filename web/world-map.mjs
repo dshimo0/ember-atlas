@@ -1,6 +1,6 @@
 import {datasetDefaults,stateURL} from './url-state.mjs';
 import {escapeHTML,number} from './format.mjs';
-export function regionURL(r){return stateURL('/',datasetDefaults(r.datasets.sp,r.id));}
+export function regionURL(r){return stateURL('/explore',datasetDefaults(r.datasets.sp,r.id));}
 export function worldMap(registry,geography){
  const x=lon=>(lon+180)*960/360,y=lat=>(90-lat)*440/180;
  const ring=coordinates=>coordinates.map((c,i)=>`${i?'L':'M'}${x(c[0]).toFixed(1)},${y(c[1]).toFixed(1)}`).join(' ')+'Z';

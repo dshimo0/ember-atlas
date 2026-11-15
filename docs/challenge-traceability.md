@@ -73,3 +73,7 @@ Actual holdout scatter, three-method residuals, interactive monthly history and 
 ## Marina and continuity requirements
 
 The timestamped owner-supplied video transcript is mapped in [spec 006](../specs/006-marina-challenge.md). Calendar-first acceptance and experimental publication gates are in [spec 007](../specs/007-calendar-backfill.md). Historical continuity remains partial: observed archive context and evaluated replay are available, but a validated 2000–present multi-platform fused series is not claimed. Backfill source Parquets/manifests and audiovisual verification remain open.
+
+## Discover / map-first delivery
+
+Spec 008 supersedes the calendar-first route composition following owner approval. Discover explains the sensor problem; Explore retains the common-grid/replay workflow and reproducible exports. Methods remains `/methods` under the Science navigation label. Four guide scenes and seven pitch frames preserve the held-out comparison, stronger scalar baseline, bias and peak limitations. Smoothed density and swipe remain deferred to separately tested cartographic work. Source/artifacts stay unchanged.

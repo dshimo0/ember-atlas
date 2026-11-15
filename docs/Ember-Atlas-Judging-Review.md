@@ -44,3 +44,7 @@ Dark/light and EN/PT-BR controls are available across routes. English remains th
 ## Calendar continuity revision
 
 Calendar-first layout and shareable activity/anomaly colour modes reuse released observations. Backfill review exposed unverified inputs and unsupported intervals; generators are blocked and no experimental result is deployed. Current run evidence is recorded in submission/calendar-continuity-check.json. Translation and physical assistive-technology review remain separate checks.
+
+## Discover and map-first revision
+
+The new home has an attributed NASA Earth image, live observed comparison, real monthly calendar links and artifact-derived validation. `/explore` separates analytical controls from the entry narrative; legacy root selection links migrate. Before/after captures and executed route/state/accessibility checks are stored under `submission/discover-*`. Original social/hero artwork and approved logo files are absent; no invented substitute or NASA endorsement is used. Official portal rules, human Portuguese copy review and physical assistive-technology checks remain unresolved.

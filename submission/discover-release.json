@@ -1,0 +1,37 @@
+{
+  "base_source": "d9270fc",
+  "architecture_spec": "specs/008-discover-explore.md",
+  "routes": [
+    "/",
+    "/explore",
+    "/demo",
+    "/methods",
+    "/about",
+    "/pitch"
+  ],
+  "legacy_root_selection_migration": true,
+  "guide_scenes": 4,
+  "pitch_frames": 7,
+  "public_pdf_language": "en",
+  "pdf_pages_per_language": 7,
+  "presenter_words": 357,
+  "human_rehearsal_measured": false,
+  "video_duration_seconds": 30,
+  "python_tests": 26,
+  "node_modules": 6,
+  "scientific_artifacts_changed": false,
+  "local_route_checks": 12,
+  "local_light_pt_checks": 6,
+  "local_region_checks": 16,
+  "open_items": [
+    "Original approved logo and three named hero/social assets not supplied",
+    "Independent official current portal deadline/media requirements",
+    "Physical screen-reader/device review and human Portuguese science copy review",
+    "Backfill source Parquets/manifests and independent scientific evaluation",
+    "Default main branch remains older; source is public on work with PR #2 open"
+  ],
+  "deferred": [
+    "Smoothed density: requires full-data smoothing and independent legend/scale tests",
+    "Swipe comparison: retain common-unit charts and sensor selection for this release"
+  ]
+}

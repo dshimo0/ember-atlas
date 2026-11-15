@@ -4,19 +4,19 @@
 
 Ember Atlas is a geographic dashboard for the NASA Space Apps Challenge, **“Harmonization of MODIS and VIIRS Hot Spots.”** It combines real NASA FIRMS observations, a source-labeled activity calendar and reproducible downloads across eight study areas.
 
-[Explore the app](https://ember-atlas-opal.vercel.app/) · [Guided demo](https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&benchmark=1&month=2024-09) · [Pitch](https://ember-atlas-opal.vercel.app/pitch) · [Methods & data](https://ember-atlas-opal.vercel.app/methods) · [About](https://ember-atlas-opal.vercel.app/about)
+[Discover](https://ember-atlas-opal.vercel.app/) · [Explore the map](https://ember-atlas-opal.vercel.app/explore) · [Guided demo](https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&benchmark=1&month=2024-09) · [Pitch](https://ember-atlas-opal.vercel.app/pitch) · [Methods & data](https://ember-atlas-opal.vercel.app/methods) · [About](https://ember-atlas-opal.vercel.app/about)
 
 [Run locally](#run-locally) · [Validation](#measured-sensor-agreement) · [Coverage](#regions-and-released-coverage) · [Methodology](docs/methodology.md)
 
 [![Ember Atlas: Pantanal map and September 2024 sensor comparison](web/assets/dashboard-view.png)](https://ember-atlas-opal.vercel.app/demo?region=pantanal&view=replay&benchmark=1&month=2024-09)
 
-*Actual product view using released observations. The map shows occupied UTC days per grid cell; the comparison uses monthly occupied cell-days.*
+*Actual map-first workspace using released observations. The map shows occupied UTC days per grid cell; expand the sensor comparison and calendar to inspect monthly occupied cell-days.*
 
 ## What you can do
 
 - Explore eight study areas on an interactive, attributed map with zoom, pan, scale and a local geographic fallback.
 - Select a month, area and sensor; inspect the matching calendar, comparison, historical context and observations.
-- Follow five guided scenes, replay a source change and reveal continuing MODIS observations as a separate benchmark.
+- Follow four guided scenes, replay a source change and reveal continuing MODIS observations as a separate benchmark.
 - Inspect full-data grid occupancy or a clearly labeled sample of individual detections.
 - Download observations, monthly aggregates, occupied-day cells, reference-scale months and a provenance manifest.
 - Share the selected analytical state through its URL, including optional scientific detail.
@@ -51,7 +51,7 @@ Peak-month residuals also remain visible. The six most active holdout months are
 
 ## Regions and released coverage
 
-Presets appear in this order: [Pantanal](https://ember-atlas-opal.vercel.app/?region=pantanal), [Southern Amazon](https://ember-atlas-opal.vercel.app/?region=southern-amazon), [Cerrado](https://ember-atlas-opal.vercel.app/?region=cerrado), [Gran Chaco](https://ember-atlas-opal.vercel.app/?region=gran-chaco), [California](https://ember-atlas-opal.vercel.app/?region=california), [Southeastern Australia](https://ember-atlas-opal.vercel.app/?region=southeastern-australia), [Iberian Peninsula](https://ember-atlas-opal.vercel.app/?region=iberian-peninsula) and [Siberia](https://ember-atlas-opal.vercel.app/?region=siberia).
+Presets appear in this order: [Pantanal](https://ember-atlas-opal.vercel.app/explore?region=pantanal), [Southern Amazon](https://ember-atlas-opal.vercel.app/explore?region=southern-amazon), [Cerrado](https://ember-atlas-opal.vercel.app/explore?region=cerrado), [Gran Chaco](https://ember-atlas-opal.vercel.app/explore?region=gran-chaco), [California](https://ember-atlas-opal.vercel.app/explore?region=california), [Southeastern Australia](https://ember-atlas-opal.vercel.app/explore?region=southeastern-australia), [Iberian Peninsula](https://ember-atlas-opal.vercel.app/explore?region=iberian-peninsula) and [Siberia](https://ember-atlas-opal.vercel.app/explore?region=siberia).
 
 | Released view | Products | Observed UTC coverage |
 | --- | --- | --- |
@@ -131,7 +131,7 @@ cd ember-atlas
 python scripts/serve.py --port 8000
 ```
 
-Open [localhost:8000](http://localhost:8000). The server handles direct loads and refreshes of `/`, `/demo`, `/methods`, `/pitch` and `/about`. Branch `work` contains the published implementation; [PR #2](https://github.com/dshimo0/ember-atlas/pull/2) remains open against `main`. The repository includes the versioned observation data and source archives.
+Open [localhost:8000](http://localhost:8000). The server handles direct loads and refreshes of `/`, `/explore`, `/demo`, `/methods`, `/pitch` and `/about`. Branch `work` contains the published implementation; [PR #2](https://github.com/dshimo0/ember-atlas/pull/2) remains open against `main`. The repository includes the versioned observation data and source archives.
 
 ### Verify the release
 
@@ -183,7 +183,7 @@ The [methodology](docs/methodology.md) documents the scientific contract. The [d
 ## Demonstration and submission materials
 
 - [Guided exploration](docs/demo-experience.md) and [challenge traceability](docs/challenge-traceability.md).
-- [Nine-section pitch and script](docs/pitch.md), [public PDF](https://ember-atlas-opal.vercel.app/assets/ember-atlas-pitch.pdf) and [actual silent screen recording](https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4).
+- [Seven-section pitch and script](docs/pitch.md), [public PDF](https://ember-atlas-opal.vercel.app/assets/ember-atlas-pitch.pdf) and [actual silent screen recording](https://ember-atlas-opal.vercel.app/assets/workflow-capture.mp4).
 - [English portal copy](submission/PROJECT-PAGE.md), [resource inventory](submission/RESOURCES.md) and [release checklist](docs/release-checklist.md).
 
 The local three-minute pitch is separate from the official Project Demonstration format. Current official guidance returned HTTP 503 during verification. Eligibility, media requirements, human rehearsal, terms and final submission remain Team Owner actions.
@@ -204,13 +204,13 @@ The local three-minute pitch is separate from the official Project Demonstration
 
 Observations: [NASA FIRMS](https://www.earthdata.nasa.gov/data/tools/firms). Basemap: [OpenStreetMap contributors](https://www.openstreetmap.org/copyright). Local geography: [Natural Earth](https://www.naturalearthdata.com/about/terms-of-use/). Map controls: [Leaflet](web/vendor/leaflet/LICENSE). Product-specific sources, third-party attributions and AI assistance are documented in the [submission resource inventory](submission/RESOURCES.md) and [portal materials](submission/PROJECT-PAGE.md).
 
-The [P0/P1 experience release](docs/experience-redesign.md) introduces dedicated Methods & Data, a five-scene guide, a data-derived calendar heatmap and an editorial About/Pitch. NASA imagery is credited and dated separately from analytical layers in the [image inventory](web/assets/editorial-imagery.json). The scientific release remains unchanged.
+The [P0/P1 experience release](docs/experience-redesign.md) introduces dedicated Methods & Data, the earlier five-scene guide (now four), a data-derived calendar heatmap and an editorial About/Pitch. NASA imagery is credited and dated separately from analytical layers in the [image inventory](web/assets/editorial-imagery.json). The scientific release remains unchanged.
 
 ### Visual atlas and presentation controls
 
 [About → Study area atlas](https://ember-atlas-opal.vercel.app/about#study-areas) provides dated NASA MODIS Terra true-color context for all eight study rectangles, with image sources, bounds and links to the matching observations. The September 1, 2024 images are editorial context; clouds and swath gaps are retained and the images do not measure fire activity. [Image inventory](web/assets/regional-imagery.json).
 
-The pitch includes direct navigation across its nine sections. Typography uses a locally hosted, SIL OFL-licensed Manrope subset with a system fallback. Motion is brief, optional through the device's reduced-motion preference, and disabled for print. Scientific calculations and exported precision are unchanged. [Font provenance](web/assets/fonts/provenance.json).
+The pitch includes direct navigation across its seven sections. Typography uses a locally hosted, SIL OFL-licensed Manrope subset with a system fallback. Motion is brief, optional through the device's reduced-motion preference, and disabled for print. Scientific calculations and exported precision are unchanged. [Font provenance](web/assets/fonts/provenance.json).
 
 ### Evidence workspace · EN / PT-BR · dark / light
 
@@ -221,3 +221,7 @@ The header provides language and appearance controls across Explore, Guided demo
 Choose a region and month, inspect the monthly calendar, switch Activity / Difference from earlier median, then inspect the map and sensor comparison. Expand the time series for source history. Download evidence from its selected scope. [Marina requirements](specs/006-marina-challenge.md) · [Backfill gates](specs/007-calendar-backfill.md) · [Research status](backfill/README.md). Experimental backfill inputs remain unavailable; no new adjusted history is published.
 
 The [backfill integration review](docs/backfill-review.md) separates adopted presentation ideas from unpublished scientific experiments. The availability attachment is archived with its own provenance and does not extend the public registry automatically.
+
+## Discover and Explore
+
+[Discover](https://ember-atlas-opal.vercel.app/) explains the measurement problem with observed September evidence and a clickable calendar preview. [Explore](https://ember-atlas-opal.vercel.app/explore) opens the map-first workspace; expand Monthly calendar & history to investigate another month. [Guided demo](https://ember-atlas-opal.vercel.app/demo) has four scenes; [Pitch](https://ember-atlas-opal.vercel.app/pitch) has seven frames. Legacy root selection URLs redirect to Explore with filters preserved. The frontend remains static HTML/ES modules with Vercel rewrites; current implementation and evidence are on the `work` branch, not the stale default branch. See [spec 008](specs/008-discover-explore.md).

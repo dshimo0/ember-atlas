@@ -191,7 +191,7 @@ function render() {
   datasetLabels();replayView(s);baselineView(s, values); comparison(s, values); calendar(s); historyView(s); guideView();experienceView(s);
   $('aggregateDownload').disabled = false;
   $('aggregateScope').textContent = `${s.start} → ${s.end} UTC · ${monthsBetween(s.start, s.end).length} months · selected area & sensors · missing values stay blank`;
-  if(['/', '/demo'].includes(currentRoute()))loadObservations(s, values);
+  if(['/explore','/', '/demo'].includes(currentRoute()))loadObservations(s, values);
 }
 function datasetLabels(){
  const r=release.registry.regions.find(r=>r.id===state().region),mode=state().mode;
@@ -264,7 +264,7 @@ function experienceView(s){
  document.body.dataset.detail=detail;$('scientificMode').setAttribute('aria-pressed',String(detail==='scientific'));$('scientificMode').textContent=detail==='scientific'?'Scientific detail: on':'Scientific detail';
  if(currentRoute()!=='/methods')$('methodsPage').hidden=detail!=='scientific';
  $('methodsScope').textContent=`${summary.name} study area · ${s.mode.toUpperCase()} · selected ${monthName(selected)} · full-area SP calibration is separately scoped below.`;
- $('sourceCards').innerHTML=sourceCards(summary);$('methodExplore').href=stateURL('/',allState());
+ $('sourceCards').innerHTML=sourceCards(summary);$('methodExplore').href=stateURL('/explore',allState());
  const v=row(selected,s.mode==='nrt'?'VIIRS_NOAA20_NRT':'VIIRS_NOAA20_SP',s),a=s.sensor==='MODIS_SP'?null:adjustment(v,s,validation);
  $('methodSelectedAdjustment').innerHTML=`<div><small>Observed VIIRS · common grid</small><strong>${number(v.cells)}</strong><span>occupied cell-days</span></div><div><small>${a?'Training-only factor':'Adjustment'}</small><strong>${a?'× '+number(a.factor,4):'Unavailable'}</strong><span>${a?'applied to this complete month':'selected scope is unsupported'}</span></div><div><small>Adjusted VIIRS · MODIS scale</small><strong>${number(a?.value??null,1)}</strong><span>occupied cell-days · derived estimate</span></div>`;
 }
@@ -272,24 +272,24 @@ function guideView(){
  const active=currentRoute()==='/demo';$('walkthrough').hidden=!active;const disclosure=$('validationDisclosure');if(active)$('analysisPage').append(disclosure);else document.querySelector('.page-heading').after(disclosure);
  document.body.dataset.step=String(guideStep);
  // Reorder the same calendar, never create a second analytical state.
- const history=$('history'),explore=$('explore');const calendarScroll=history.querySelector('.calendar-scroll');$('referenceScope').after(history.querySelector('.calendar-scale'));history.querySelector('.calendar-scale').after(calendarScroll);calendarScroll.after(history.querySelector('.coverage-legend'));if(currentRoute()==='/'||active)explore.insertBefore(history,explore.querySelector('.dashboard-grid'));else if(history.parentElement===explore)explore.after(history);
+ const history=$('history'),explore=$('explore');const calendarScroll=history.querySelector('.calendar-scroll');$('referenceScope').after(history.querySelector('.calendar-scale'));history.querySelector('.calendar-scale').after(calendarScroll);calendarScroll.after(history.querySelector('.coverage-legend'));if(history.parentElement!==explore)explore.append(history);if(active)history.open=guideStep===3;
  if(!active)return;
  const scene=scenes[guideStep-1],s=state(),m=row(selected,s.mode==='nrt'?'MODIS_NRT':'MODIS_SP',s),v=row(selected,s.mode==='nrt'?'VIIRS_NOAA20_NRT':'VIIRS_NOAA20_SP',s),a=s.sensor==='MODIS_SP'?null:adjustment(v,s,validation);
- $('stepTitle').textContent=scene[0];$('stepDescription').textContent=scene[1];$('stepProgress').textContent=`Step ${guideStep} of 5`;$('stepBack').disabled=guideStep===1;$('stepNext').disabled=guideStep===5;
+ $('stepTitle').textContent=scene[0];$('stepDescription').textContent=scene[1];$('stepProgress').textContent=`Step ${guideStep} of 4`;$('stepBack').disabled=guideStep===1;$('stepNext').disabled=guideStep===4;
  $('stepRail').innerHTML=scenes.map((x,i)=>`<button data-guide-step="${i+1}" aria-label="Step ${i+1}: ${x[0]}" aria-current="${i+1===guideStep?'step':'false'}"><b>${i+1}</b><span>${x[0]}</span></button>`).join('');
- for(const b of $('stepRail').querySelectorAll('button')){b.onclick=()=>goStep(+b.dataset.guideStep);b.onkeydown=e=>{const n={ArrowRight:guideStep+1,ArrowLeft:guideStep-1,Home:1,End:5}[e.key];if(n){e.preventDefault();goStep(n);$('stepRail').querySelector(`[data-guide-step="${guideStep}"]`)?.focus();}};}
+ for(const b of $('stepRail').querySelectorAll('button')){b.onclick=()=>goStep(+b.dataset.guideStep);b.onkeydown=e=>{const n={ArrowRight:guideStep+1,ArrowLeft:guideStep-1,Home:1,End:4}[e.key];if(n){e.preventDefault();goStep(n);$('stepRail').querySelector(`[data-guide-step="${guideStep}"]`)?.focus();}};}
  $('sceneImage').hidden=guideStep!==1;const image=$('sceneImage').querySelector('img'),pantanal=s.region==='pantanal';image.src=pantanal?'/assets/pantanal-modis-2024-09-01.jpg':'/assets/earth-nasa.jpg';image.alt=pantanal?'MODIS Terra true-color Pantanal context, September 1, 2024':'NASA Blue Marble composite, released October 2007';$('sceneImageCredit').textContent=pantanal?'NASA GIBS / MODIS Terra · Sep 1, 2024. Editorial context; not the monthly analytical layer.':'NASA/GSFC/Reto Stöckli · Blue Marble, 2007. Editorial Earth context; not the selected region’s observations.';
  const evidence=[`${summary.name} study area · ${monthName(selected)} · ${s.mode.toUpperCase()} observations`,`${monthName(selected)} · earlier same-month years and sample size are available with the selected comparison.`,`MODIS ${number(m.cells)} · VIIRS ${number(v.cells)} occupied cell-days on the common grid.`,a?`Adjusted VIIRS ${number(a.value,1)} cell-days · factor ${number(a.factor,4)}. MODIS remains a comparison reference, not ground truth.`:'No published adjustment for this selection. Real sensor-specific values remain available.',`${scope(selected,s).from} → ${scope(selected,s).to} UTC · selected region, mask and sensors. Missing retrieval is not zero.`];
- const sensorExplanation=guideStep===3?'<div class="scene-sensors"><div><span class="sensor-dot modis"></span><strong>MODIS · nominal 1 km</strong><small>Terra + Aqua reference</small></div><div><span class="sensor-dot viirs"></span><strong>VIIRS · nominal 375 m</strong><small>NOAA-20 comparison</small></div><div><span class="sensor-dot adjusted"></span><strong>Shared 0.05° grid</strong><small>Count each cell once per product per UTC day</small></div></div>':'';
+ const sensorExplanation=guideStep===1?'<div class="scene-sensors"><div><span class="sensor-dot modis"></span><strong>MODIS · nominal 1 km</strong><small>Terra + Aqua reference</small></div><div><span class="sensor-dot viirs"></span><strong>VIIRS · nominal 375 m</strong><small>NOAA-20 comparison</small></div><div><span class="sensor-dot adjusted"></span><strong>Shared 0.05° grid</strong><small>Count each cell once per product per UTC day</small></div></div>':'';
  const sceneMetrics=guideStep===4&&a?`<p class="scene-validation"><strong>${number(evaluation.reduction,1)}% lower monthly MAE vs raw common-grid VIIRS</strong><br>${validation.adjusted.n} holdout months · ${yearsLabel(validation.holdout_years)} · full ${summary.name} SP area. Scalar MAE ${number(compareMethods(validation).metrics.scalar.mae,1)}; quarterly ${number(compareMethods(validation).metrics.seasonal.mae,1)} cell-days/month. All candidates and remaining bias are in Methods & data.<br>Reference-processing continuity and ground truth remain unverified.</p>`:'';
- $('sceneEvidence').innerHTML=`${sensorExplanation}<p>${escapeHTML(evidence[guideStep-1])}</p>${sceneMetrics}<button id="sceneJump">${scene[2]} ↓</button>`;
- const target=['.map-panel','#history','.comparison-panel','.comparison-panel','.observation-export'][guideStep-1];$('sceneJump').onclick=()=>document.querySelector(target)?.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});
- $('skipDemo').href=stateURL('/',allState());$('guideMethods').href=stateURL('/methods',allState());$('useFullArea').hidden=!(guideStep===4&&!supportsReplay(s));
- if(guideStep===5)for(const d of $('baseline').querySelectorAll('details'))d.open=true;
+ $('sceneEvidence').innerHTML=`${sensorExplanation}<p>${escapeHTML(evidence[[2,0,1,3][guideStep-1]])}</p>${sceneMetrics}<button id="sceneJump">${scene[2]} ↓</button>`;
+ const target=['.comparison-panel','.map-panel','#history','.observation-export'][guideStep-1];$('sceneJump').onclick=()=>{if(target==='#history')$('history').open=true;document.querySelector(target)?.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});};
+ $('skipDemo').href=stateURL('/explore',allState());$('guideMethods').href=stateURL('/methods',allState());$('useFullArea').hidden=!(guideStep===4&&!supportsReplay(s));
+ if(guideStep===4)for(const d of $('baseline').querySelectorAll('details'))d.open=true;
 }
 function goStep(n){
- guideStep=Math.max(1,Math.min(5,n));
- if(guideStep===3){$('sensor').value='both';view='raw';}
+ guideStep=Math.max(1,Math.min(4,n));
+ if(guideStep===2){$('sensor').value='both';view='raw';}if(guideStep===3&&supportsReplay(state()))view='replay';
  if(guideStep===4&&supportsReplay(state())){view='replay';$('showBenchmark').checked=true;}
  commitSelection();
 }
@@ -322,6 +322,7 @@ async function applyLocation(scroll=false) {
   document.title=`Ember Atlas · ${isPitch?'Pitch':isMethods?'Methods & data':region.name+' study area'}`;
   if(isPitch)pitch.setSlide(pitchSlide,scroll);else{if(!isMethods&&!geographicMap)geographicMap=createGeographicMap($('map'),geography);geographicMap?.resize?.();render();}
   history.replaceState(null,'',stateURL(currentRoute(),allState(),location.hash));updateLinks();
+  if(location.hash==='#history')$('history').open=true;
   if(location.hash&&!isPitch)requestAnimationFrame(()=>document.getElementById(location.hash.slice(1))?.scrollIntoView());
  }catch(error){if(token!==datasetToken)return;console.error(error);$('error').hidden=false;$('error').textContent='Selected regional dataset unavailable. No replacement observations are shown.';}
 }

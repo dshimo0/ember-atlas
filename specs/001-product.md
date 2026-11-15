@@ -59,3 +59,7 @@ Source flags are one click from the selected comparison and present in observati
 ## Calendar-first continuity
 
 Explore and Guided demo prioritize the selected month, takeaway and monthly calendar before the map/comparison. Activity/anomaly encoding restores from URLs. Time series and monthly source table are expandable. See [spec 007](007-calendar-backfill.md) and [Marina traceability](006-marina-challenge.md). This supersedes earlier map-first ordering criteria.
+
+## Discover / Explore architecture
+
+[Spec 008](008-discover-explore.md) supersedes prior landing placement and guide/pitch counts. Discover occupies `/`; the map-first dashboard lives at `/explore`, with four guide scenes and seven pitch frames. Scientific publication gates remain unchanged.

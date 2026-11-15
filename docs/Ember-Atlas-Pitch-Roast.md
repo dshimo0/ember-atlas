@@ -13,3 +13,7 @@ Actual execution, screenshots and deployed identity are recorded in the experien
 ## P2/P3 visual polish
 
 The same nine-section script and scientific figures are retained. A direct section rail supports presenters without autoplay; local typography, brief reduced-motion-aware transitions and a refreshed nine-page PDF refine delivery. The About atlas supplies separately dated geographic context for all eight study areas. The spoken notes are unchanged; this release does not imply a new human rehearsal or official media compliance.
+
+## Current seven-frame walkthrough
+
+Open Discover to explain comparability, then Explore on September 2024. Show the map, expand the calendar and inspect the common-unit comparison. The seven-frame Pitch walks through product, replay and held-out error, including the stronger scalar and peak limitations. It makes no prediction or avoided-fire claim. Official media requirements remain separate from this presentation.

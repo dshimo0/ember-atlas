@@ -12,7 +12,7 @@ export function readURL(url,coverage) {
   if(/^\d{4}-(0[1-9]|1[0-2])$/.test(p.get('month')||''))s.month=p.get('month');
   if(s.month<s.start.slice(0,7)||s.month>s.end.slice(0,7))s.month=s.start.slice(0,7);
   if(['raw','reference','replay'].includes(p.get('view')))s.view=p.get('view');
-  s.step=Math.max(1,Math.min(5,parseInt(p.get('step'),10)||1));s.slide=Math.max(1,Math.min(9,parseInt(p.get('slide'),10)||1));
+  s.step=Math.max(1,Math.min(4,parseInt(p.get('step'),10)||1));s.slide=Math.max(1,Math.min(7,parseInt(p.get('slide'),10)||1));
   return s;
 }
 export function stateURL(path,s,hash='') {

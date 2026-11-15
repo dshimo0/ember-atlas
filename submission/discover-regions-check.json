@@ -1,0 +1,143 @@
+{
+  "base": "http://127.0.0.1:8940",
+  "checks": [
+    {
+      "viewport": "desktop",
+      "region": "pantanal",
+      "month": "2024-09",
+      "csv_rows": 125055,
+      "matches_snapshot_count": true,
+      "geometry_fit": true
+    },
+    {
+      "viewport": "desktop",
+      "region": "southern-amazon",
+      "month": "2024-09",
+      "csv_rows": 393318,
+      "matches_snapshot_count": true,
+      "geometry_fit": true
+    },
+    {
+      "viewport": "desktop",
+      "region": "cerrado",
+      "month": "2024-09",
+      "csv_rows": 287585,
+      "matches_snapshot_count": true,
+      "geometry_fit": true
+    },
+    {
+      "viewport": "desktop",
+      "region": "gran-chaco",
+      "month": "2024-09",
+      "csv_rows": 185771,
+      "matches_snapshot_count": true,
+      "geometry_fit": true
+    },
+    {
+      "viewport": "desktop",
+      "region": "california",
+      "month": "2024-09",
+      "csv_rows": 9643,
+      "matches_snapshot_count": true,
+      "geometry_fit": true
+    },
+    {
+      "viewport": "desktop",
+      "region": "southeastern-australia",
+      "month": "2024-09",
+      "csv_rows": 9252,
+      "matches_snapshot_count": true,
+      "geometry_fit": true
+    },
+    {
+      "viewport": "desktop",
+      "region": "iberian-peninsula",
+      "month": "2024-09",
+      "csv_rows": 15373,
+      "matches_snapshot_count": true,
+      "geometry_fit": true
+    },
+    {
+      "viewport": "desktop",
+      "region": "siberia",
+      "month": "2024-09",
+      "csv_rows": 42711,
+      "matches_snapshot_count": true,
+      "geometry_fit": true
+    },
+    {
+      "viewport": "desktop",
+      "separate_nrt": true,
+      "single_sensor_csv": true
+    },
+    {
+      "viewport": "mobile",
+      "region": "pantanal",
+      "month": "2024-09",
+      "csv_rows": 125055,
+      "matches_snapshot_count": true,
+      "geometry_fit": true
+    },
+    {
+      "viewport": "mobile",
+      "region": "southern-amazon",
+      "month": "2024-09",
+      "csv_rows": 393318,
+      "matches_snapshot_count": true,
+      "geometry_fit": true
+    },
+    {
+      "viewport": "mobile",
+      "region": "cerrado",
+      "month": "2024-09",
+      "csv_rows": 287585,
+      "matches_snapshot_count": true,
+      "geometry_fit": true
+    },
+    {
+      "viewport": "mobile",
+      "region": "gran-chaco",
+      "month": "2024-09",
+      "csv_rows": 185771,
+      "matches_snapshot_count": true,
+      "geometry_fit": true
+    },
+    {
+      "viewport": "mobile",
+      "region": "california",
+      "month": "2024-09",
+      "csv_rows": 9643,
+      "matches_snapshot_count": true,
+      "geometry_fit": true
+    },
+    {
+      "viewport": "mobile",
+      "region": "southeastern-australia",
+      "month": "2024-09",
+      "csv_rows": 9252,
+      "matches_snapshot_count": true,
+      "geometry_fit": true
+    },
+    {
+      "viewport": "mobile",
+      "region": "iberian-peninsula",
+      "month": "2024-09",
+      "csv_rows": 15373,
+      "matches_snapshot_count": true,
+      "geometry_fit": true
+    },
+    {
+      "viewport": "mobile",
+      "region": "siberia",
+      "month": "2024-09",
+      "csv_rows": 42711,
+      "matches_snapshot_count": true,
+      "geometry_fit": true
+    },
+    {
+      "viewport": "mobile",
+      "separate_nrt": true,
+      "single_sensor_csv": true
+    }
+  ]
+}

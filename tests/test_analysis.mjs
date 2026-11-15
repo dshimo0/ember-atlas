@@ -34,7 +34,7 @@ test('share URL roundtrips area/month/sensor/dates/view/step/slide and rejects i
  const selected={...s,area:'north',month:'2024-08',sensor:'MODIS_SP',step:4,slide:6,view:'raw'};
  assert.deepEqual(readURL(stateURL('/demo',selected),summary.coverage),{...selected,slide:1,encoding:'activity'});
  assert.equal(readURL(stateURL('/pitch',selected),summary.coverage).slide,6);
- const invalid=readURL('/demo?area=bogus&start=2024-02-31&month=2025-99&step=100',summary.coverage);assert.equal(invalid.area,'all');assert.equal(invalid.start,s.start);assert.equal(invalid.month,'2024-09');assert.equal(invalid.step,5);
+ const invalid=readURL('/demo?area=bogus&start=2024-02-31&month=2025-99&step=100',summary.coverage);assert.equal(invalid.area,'all');assert.equal(invalid.start,s.start);assert.equal(invalid.month,'2024-09');assert.equal(invalid.step,4);
 });
 test('sensitivity summary uses real product-specific confidence and grid diagnostics',()=>{
  const d=JSON.parse(fs.readFileSync('web/data/diagnostics.json')),rows=sensitivitySummary(d);
@@ -42,3 +42,5 @@ test('sensitivity summary uses real product-specific confidence and grid diagnos
 });
 
 test('calendar encoding roundtrips independently of analytical filters',()=>{const a={...s,month:'2024-09',view:'replay',encoding:'anomaly'};const restored=readURL(stateURL('/',a),summary.coverage);assert.equal(restored.encoding,'anomaly');assert.equal(restored.sensor,a.sensor);assert.equal(readURL('/?encoding=invalid').encoding,'activity');});
+
+test('legacy route progress clamps to the four-scene and seven-frame journeys',()=>{assert.equal(readURL('/demo?step=5').step,4);assert.equal(readURL('/pitch?slide=9').slide,7);});
